@@ -1,202 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Proposal Day 💍</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Propose Day 💍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
       margin: 0;
       height: 100vh;
-      background: radial-gradient(circle at top, #ffb6c1, #ff5f9e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ffd1dc, #ff8fb1);
       overflow: hidden;
-      transition: background 0.5s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #5a2a3a;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
-      border-radius: 25px;
-      padding: 40px 30px;
-      width: 90%;
-      max-width: 420px;
+    .petal {
+      position: absolute;
+      top: -10%;
+      font-size: 20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+      }
+    }
+
+    .content {
       text-align: center;
-      color: white;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-      animation: popIn 0.8s ease;
+      padding: 30px;
+      max-width: 320px;
+      animation: fadeIn 1.2s ease;
     }
 
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       margin-bottom: 10px;
     }
 
     p {
-      font-size: 1.05rem;
-      opacity: 0.95;
-      margin-bottom: 30px;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
     }
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    .ring {
+      font-size: 3.5rem;
+      margin: 20px 0;
+      animation: float 2s ease-in-out infinite;
     }
 
-    button {
-      padding: 14px;
-      font-size: 1.05rem;
+    @keyframes float {
+      50% { transform: translateY(-12px); }
+    }
+
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 22px;
+      border-radius: 25px;
       border: none;
-      border-radius: 30px;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    #yesBtn {
-      background: #ffffff;
-      color: #ff3b8d;
-      font-weight: bold;
-    }
-
-    #thinkBtn {
-      background: rgba(255,255,255,0.25);
+    .yes {
+      background: #ff5d8f;
       color: white;
+      font-weight: 600;
     }
 
-    #noBtn {
-      background: rgba(0,0,0,0.25);
-      color: white;
-      position: relative;
-    }
-
-    button:hover {
-      transform: scale(1.05);
+    .no {
+      background: #ffe5ec;
+      color: #5a2a3a;
     }
 
     .final {
       display: none;
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .ring {
-      font-size: 4rem;
-      animation: float 2s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card" id="mainCard">
-    <h1>Hey… 💖</h1>
+  <!-- floating petals -->
+  <script>
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.textContent = Math.random() > 0.5 ? "🌸" : "🌹";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = 6 + Math.random() * 6 + "s";
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <div class="content" id="main">
+    <h1>Hey… 💕</h1>
     <p>
-      I’ve been thinking about this for a while.<br>
-      So tell me honestly…
+      I’ve kinda been holding this in.<br>
+      So let me ask properly…
     </p>
 
-    <h1>Will you be mine? 💍</h1>
+    <div class="ring">💍</div>
 
-    <div class="buttons">
-      <button id="yesBtn">YES (duh 🙄💘)</button>
-      <button id="thinkBtn">Let me think… 🤔</button>
-      <button id="noBtn">No 🙃</button>
-    </div>
+    <h1>Will you be mine?</h1>
+
+    <button class="btn yes" id="yesBtn">Say yes 😌💘</button>
+    <button class="btn no" id="noBtn">Be difficult 🙃</button>
   </div>
 
-  <div class="card final" id="finalCard">
+  <div class="content final" id="final">
     <div class="ring">💍</div>
-    <h1>SHE SAID YES 😭💖</h1>
+    <h1>Good choice 💖</h1>
     <p>
-      Congrats to me for having the cutest, smartest,
-      most annoying (in a good way) person ever 🫶
-      <br><br>
-      Happy Proposal Day 💕
+      I already knew the answer.<br>
+      I just wanted to hear it from *you*.
     </p>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    const thinkBtn = document.getElementById("thinkBtn");
     const yesBtn = document.getElementById("yesBtn");
+    const main = document.getElementById("main");
+    const final = document.getElementById("final");
 
-    const mainCard = document.getElementById("mainCard");
-    const finalCard = document.getElementById("finalCard");
-
-    let noCount = 0;
-    let thinkCount = 0;
+    let count = 0;
 
     const noTexts = [
-      "No 🙃",
-      "Are you sure? 😐",
-      "That hurts bro 💔",
-      "Okay now you’re just lying",
-      "Stop pressing this 😭",
-      "Nah this button is revoked"
+      "Be difficult 🙃",
+      "Really?",
+      "Don’t do this 😭",
+      "Why are you like this",
+      "Okay you’re annoying",
+      "Yeah nah, no choice"
     ];
 
-    const thinkTexts = [
-      "Let me think… 🤔",
-      "Still thinking?",
-      "Wow suspense 😭",
-      "Thinking for THIS long?",
-      "Okay Einstein",
-      "Yeah… that’s a yes"
-    ];
+    noBtn.onclick = () => {
+      count++;
+      noBtn.textContent = noTexts[Math.min(count, noTexts.length - 1)];
+      noBtn.style.transform = `scale(${1 - count * 0.1})`;
+      yesBtn.style.transform = `scale(${1 + count * 0.1})`;
 
-    noBtn.addEventListener("click", () => {
-      noCount++;
+      if (count >= 5) noBtn.style.display = "none";
+    };
 
-      if (noCount < noTexts.length) {
-        noBtn.textContent = noTexts[noCount];
-        noBtn.style.transform = `translateX(${Math.random()*100 - 50}px)`;
-        yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
-      } else {
-        noBtn.style.display = "none";
-      }
-    });
-
-    thinkBtn.addEventListener("click", () => {
-      thinkCount++;
-
-      if (thinkCount < thinkTexts.length) {
-        thinkBtn.textContent = thinkTexts[thinkCount];
-        document.body.style.background =
-          "radial-gradient(circle at top, #ffd1dc, #ff6fae)";
-      } else {
-        thinkBtn.textContent = "Yeah… it’s a yes 😌";
-        thinkBtn.disabled = true;
-        thinkBtn.style.opacity = 0.6;
-      }
-    });
-
-    yesBtn.addEventListener("click", () => {
-      mainCard.style.display = "none";
-      finalCard.style.display = "block";
-    });
+    yesBtn.onclick = () => {
+      main.style.display = "none";
+      final.style.display = "block";
+    };
   </script>
 
 </body>
