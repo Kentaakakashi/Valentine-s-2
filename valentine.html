@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="valentine-day">
+    <!-- Page Transition -->
+    <div class="page-transition"></div>
+    
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    <div class="confetti-container" id="confettiContainer"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <!-- Grand Header -->
+        <div class="valentine-header">
+            <div class="heart-burst">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Happy Valentine's Day!</h1>
+            <p class="valentine-subtitle">February 14</p>
+            <p class="valentine-tagline">The culmination of our 7-day love journey</p>
+        </div>
+        
+        <!-- Grand Reveal -->
+        <div class="grand-reveal">
+            <h2><i class="fas fa-gift"></i> Grand Reveal of Our Journey</h2>
+            <p class="reveal-subtitle">All our memories come together today</p>
+            
+            <div class="journey-summary">
+                <div class="summary-card" style="background: linear-gradient(135deg, #ffb6c1, #ff8fa3);">
+                    <div class="summary-icon">🌹</div>
+                    <h3>Rose Day</h3>
+                    <p>Messages of love bloomed</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">
+                    <div class="summary-icon">💍</div>
+                    <h3>Propose Day</h3>
+                    <p>Promises were made</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #8B4513, #A0522D);">
+                    <div class="summary-icon">🍫</div>
+                    <h3>Chocolate Day</h3>
+                    <p>Sweet moments shared</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #8B7355, #A0522D);">
+                    <div class="summary-icon">🧸</div>
+                    <h3>Teddy Day</h3>
+                    <p>Comfort and warmth</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #32CD32, #228B22);">
+                    <div class="summary-icon">🤝</div>
+                    <h3>Promise Day</h3>
+                    <p>Commitments renewed</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
+                    <div class="summary-icon">🤗</div>
+                    <h3>Hug Day</h3>
+                    <p>Embraces remembered</p>
+                </div>
+                
+                <div class="summary-card" style="background: linear-gradient(135deg, #ff4081, #ff79b0);">
+                    <div class="summary-icon">💋</div>
+                    <h3>Kiss Day</h3>
+                    <p>Affection celebrated</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Love Letter -->
+        <div class="love-letter-section">
+            <h2><i class="fas fa-heart"></i> My Heart's Letter to You</h2>
+            
+            <div class="love-letter">
+                <div class="letter-envelope">
+                    <div class="envelope-heart">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p>To My Forever Valentine</p>
+                </div>
+                
+                <div class="letter-content">
+                    <p class="letter-date">My Dearest Love,</p>
+                    
+                    <p>As we reach Valentine's Day, the culmination of our 7-day journey, I find myself overwhelmed with love and gratitude for having you in my life.</p>
+                    
+                    <p>Each day of this journey was crafted with you in mind - every rose, every promise, every chocolate, every hug, and every kiss represents a piece of my heart that belongs to you.</p>
+                    
+                    <p>You are the reason I smile in the morning and the last thought on my mind at night. Your love has transformed my world in ways I never imagined possible.</p>
+                    
+                    <p>Today, on Valentine's Day, I want to renew all my promises to you:</p>
+                    
+                    <div class="valentine-promises">
+                        <div class="valentine-promise">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <span>To love you more with each passing day</span>
+                        </div>
+                        <div class="valentine-promise">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <span>To be your safe haven in any storm</span>
+                        </div>
+                        <div class="valentine-promise">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <span>To grow old with you, creating countless memories</span>
+                        </div>
+                        <div class="valentine-promise">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <span>To choose you, every single day, forever</span>
+                        </div>
+                    </div>
+                    
+                    <p>You are my greatest adventure, my most beautiful dream come true, and my forever Valentine.</p>
+                    
+                    <p class="letter-closing">
+                        With all my love, now and always,<br>
+                        <span class="signature">[Your Name]</span>
+                    </p>
+                    
+                    <div class="letter-seal">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="letter-btn" id="openLetterBtn">
+                <i class="fas fa-envelope-open"></i> Open This Love Letter
+            </button>
+        </div>
+        
+        <!-- Photo Collage -->
+        <div class="photo-collage-section">
+            <h2><i class="fas fa-images"></i> Our Story in Pictures</h2>
+            <p class="collage-subtitle">Moments that define our love</p>
+            
+            <div class="photo-collage" id="photoCollage">
+                <!-- Photos will be added by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Our Story Timeline -->
+        <div class="story-timeline-section">
+            <h2><i class="fas fa-history"></i> Our Love Story Timeline</h2>
+            
+            <div class="love-timeline">
+                <!-- Timeline will be added by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Future Together Visualization -->
+        <div class="future-visualization">
+            <h2><i class="fas fa-crystal-ball"></i> Our Future Together</h2>
+            
+            <div class="future-scenes">
+                <div class="future-scene">
+                    <div class="future-icon">🏠</div>
+                    <h3>Building Our Home</h3>
+                    <p>A place filled with love, laughter, and our dreams</p>
+                </div>
+                
+                <div class="future-scene">
+                    <div class="future-icon">🌍</div>
+                    <h3>Exploring the World</h3>
+                    <p>Hand in hand, discovering new adventures</p>
+                </div>
+                
+                <div class="future-scene">
+                    <div class="future-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Growing Our Family</h3>
+                    <p>Creating beautiful memories together</p>
+                </div>
+                
+                <div class="future-scene">
+                    <div class="future-icon">👵👴</div>
+                    <h3>Growing Old Together</h3>
+                    <p>Still holding hands, still in love</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Final Celebration -->
+        <div class="final-celebration">
+            <h2><i class="fas fa-glass-cheers"></i> To Us!</h2>
+            
+            <div class="celebration-content">
+                <div class="champagne-glass">
+                    <div class="glass">
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                    </div>
+                    <div class="stem"></div>
+                    <div class="base"></div>
+                </div>
+                
+                <div class="celebration-toast">
+                    <h3>Here's to our love!</h3>
+                    <p>May it continue to grow stronger with each passing day. Thank you for being my everything.</p>
+                </div>
+            </div>
+            
+            <button class="celebration-btn" id="celebrateBtn">
+                <i class="fas fa-fireworks"></i> Celebrate Our Love!
+            </button>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="kiss-day.html"><i class="fas fa-arrow-left"></i> Previous: Kiss Day</a>
+        <a href="apology.html" class="next-day">Special Message <i class="fas fa-envelope"></i></a>
+    </nav>
+    
+    <!-- Fireworks Container -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="celebrationSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-crowd-laugh-464.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script src="js/page-scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create photo collage
+            const photos = [
+                { emoji: '🌹', title: 'First Rose', description: 'The beginning of our journey' },
+                { emoji: '💍', title: 'Promises Made', description: 'Commitments for forever' },
+                { emoji: '🍫', title: 'Sweet Moments', description: 'Shared happiness' },
+                { emoji: '🧸', title: 'Comfort Zone', description: 'Feeling safe in your arms' },
+                { emoji: '🤝', title: 'Stronger Together', description: 'Growing side by side' },
+                { emoji: '🤗', title: 'Warm Embraces', description: 'Love that heals' },
+                { emoji: '💋', title: 'Affection', description: 'Kisses that speak volumes' },
+                { emoji: '❤️', title: 'Our Love', description: 'The greatest gift' }
+            ];
+            
+            PageScripts.createPhotoCollage('photoCollage', photos);
+            
+            // Create love timeline
+            PageScripts.createLoveTimeline();
+            
+            // Open letter button
+            const openLetterBtn = document.getElementById('openLetterBtn');
+            const letterContent = document.querySelector('.letter-content');
+            
+            openLetterBtn.addEventListener('click', function() {
+                letterContent.style.display = 'block';
+                letterContent.style.animation = 'fadeIn 1s ease';
+                this.style.display = 'none';
+                
+                // Animate promises
+                const promises = document.querySelectorAll('.valentine-promise');
+                promises.forEach((promise, index) => {
+                    setTimeout(() => {
+                        promise.style.animation = 'fadeInLeft 0.5s ease forwards';
+                    }, index * 300);
+                });
+                
+                // Play romantic sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-romantic-heartbeat-1160.mp3');
+                sound.volume = 0.3;
+                sound.play();
+            });
+            
+            // Celebration button
+            const celebrateBtn = document.getElementById('celebrateBtn');
+            const fireworksContainer = document.getElementById('fireworksContainer');
+            
+            celebrateBtn.addEventListener('click', function() {
+                // Create fireworks
+                createFireworks();
+                
+                // Play celebration sound
+                const celebrationSound = document.getElementById('celebrationSound');
+                celebrationSound.volume = 0.5;
+                celebrationSound.play();
+                
+                // Change button
+                this.innerHTML = '<i class="fas fa-heart"></i> 🎉 Celebrating Our Love! 🎉';
+                this.style.background = 'linear-gradient(135deg, #ff0066, #ff4081)';
+                this.style.animation = 'pulse 0.5s infinite';
+                
+                // Show celebration message
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>🎆 HAPPY VALENTINE'S DAY! 🎆</h3>
+                    <p>Our love story continues forever!</p>
+                    <p>Thank you for this beautiful journey together! 💝</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '40px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 3000);
+            });
+            
+            // Create fireworks function
+            function createFireworks() {
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createFirework();
+                    }, i * 100);
+                }
+            }
+            
+            function createFirework() {
+                const firework = document.createElement('div');
+                firework.style.position = 'fixed';
+                firework.style.left = `${Math.random() * 80 + 10}%`;
+                firework.style.top = `${Math.random() * 80 + 10}%`;
+                firework.style.zIndex = '9999';
+                firework.style.pointerEvents = 'none';
+                
+                const colors = ['#ff4081', '#ff79b0', '#ffb6c1', '#ffd700', '#00bcd4', '#32CD32'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'absolute';
+                    particle.style.width = '8px';
+                    particle.style.height = '8px';
+                    particle.style.background = color;
+                    particle.style.borderRadius = '50%';
+                    particle.style.boxShadow = `0 0 15px ${color}`;
+                    
+                    const angle = (i / 20) * Math.PI * 2;
+                    const distance = Math.random() * 60 + 40;
+                    
+                    particle.animate([
+                        {
+                            transform: 'translate(0, 0) scale(1)',
+                            opacity: 1
+                        },
+                        {
+                            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+                            opacity: 0
+                        }
+                    ], {
+                        duration: 1500,
+                        easing: 'ease-out'
+                    });
+                    
+                    firework.appendChild(particle);
+                }
+                
+                fireworksContainer.appendChild(firework);
+                
+                setTimeout(() => {
+                    firework.remove();
+                }, 1500);
+            }
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            pageMusic.volume = 0.3;
+            setTimeout(() => {
+                pageMusic.play().catch(e => console.log('Music play prevented'));
+            }, 1000);
+            
+            // Create initial confetti
+            createConfetti();
+        });
+        
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.backgroundColor = i % 7 === 0 ? '#ff4081' : 
+                                               i % 7 === 1 ? '#ff79b0' : 
+                                               i % 7 === 2 ? '#ffb6c1' : 
+                                               i % 7 === 3 ? '#ffd700' : 
+                                               i % 7 === 4 ? '#00bcd4' : 
+                                               i % 7 === 5 ? '#32CD32' : '#ff85a2';
+                confetti.style.width = `${Math.random() * 15 + 5}px`;
+                confetti.style.height = `${Math.random() * 15 + 5}px`;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear infinite ${Math.random() * 5}s`;
+                
+                container.appendChild(confetti);
+            }
+        }
+        
+        // Additional styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .valentine-header {
+                text-align: center;
+                margin-bottom: 60px;
+                animation: fadeInDown 1s ease;
+            }
+            
+            .heart-burst {
+                font-size: 5rem;
+                color: #ff4081;
+                margin-bottom: 20px;
+                animation: heartbeat 1s infinite, pulse 2s infinite;
+            }
+            
+            .valentine-header h1 {
+                font-family: 'Dancing Script', cursive;
+                font-size: 5rem;
+                color: #ff4081;
+                margin-bottom: 10px;
+                background: linear-gradient(45deg, #ff4081, #ff79b0, #ff0066);
+                -webkit-background-clip: text; transparent;
+                text-shadow: 3px 3px 0 rgba(255, 182, 193, 0.3);
+            }
+            
+            .valentine-subtitle {
+                font-size: 1.5rem;
+                color: #666;
+                margin-bottom: 10px;
+            }
+            
+            .valentine-tagline {
+                font-size: 1.3rem;
+                color: #ff79b0;
+                font-style: italic;
+            }
+            
+            .grand-reveal, .love-letter-section, .photo-collage-section,
+            .story-timeline-section, .future-visualization, .final-celebration {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 30px;
+                padding: 40px;
+                margin-bottom: 50px;
+                box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+                animation: fadeInUp 1s ease;
+            }
+            
+            .reveal-subtitle, .collage-subtitle {
+                color: #666;
+                margin-bottom: 30px;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+            
+            .journey-summary {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+            
+            .summary-card {
+                padding: 25px 15px;
+                border-radius: 20px;
+                text-align: center;
+                color: white;
+                transition: all 0.3s ease;
+            }
+            
+            .summary-card:hover {
+                transform: translateY(-10px) rotate(5deg);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+            
+            .summary-icon {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .summary-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+            }
+            
+            .love-letter {
+                background: #fffef0;
+                border-radius: 20px;
+                padding: 40px;
+                margin: 30px 0;
+                border: 2px solid #ffd1dc;
+                position: relative;
+            }
+            
+            .letter-envelope {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            
+            .envelope-heart {
+                width: 70px;
+                height: 70px;
+                background: linear-gradient(135deg, #ff4081, #ff0066);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2rem;
+                margin: 0 auto 15px;
+                animation: pulse 2s infinite;
+            }
+            
+            .letter-content {
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.8rem;
+                line-height: 2;
+                color: #5d001e;
+                display: none;
+            }
+            
+            .letter-date {
+                font-size: 2.2rem;
+                color: #ff4081;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            
+            .valentine-promises {
+                margin: 30px 0;
+            }
+            
+            .valentine-promise {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 15px;
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            
+            .valentine-promise i {
+                color: #ff4081;
+                font-size: 1.5rem;
+            }
+            
+            .letter-closing {
+                margin-top: 40px;
+                text-align: center;
+            }
+            
+            .signature {
+                font-size: 2.5rem;
+                color: #ff4081;
+                font-weight: 700;
+                display: block;
+                margin-top: 10px;
+            }
+            
+            .letter-seal {
+                position: absolute;
+                bottom: -30px;
+                right: -30px;
+                width: 100px;
+                height: 100px;
+                background: linear-gradient(135deg, #ff4081, #ff0066);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2.5rem;
+                box-shadow: 0 10px 30px rgba(255, 64, 129, 0.3);
+                animation: pulse 3s infinite;
+            }
+            
+            .letter-btn {
+                background: linear-gradient(135deg, #ff4081, #ff79b0);
+                color: white;
+                border: none;
+                padding: 18px 35px;
+                border-radius: 30px;
+                font-size: 1.2rem;
+                font-weight: 600;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(255, 64, 129, 0.4);
+                margin-top: 20px;
+            }
+            
+            .letter-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(255, 64, 129, 0.6);
+            }
+            
+            .future-scenes {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+                margin-top: 30px;
+            }
+            
+            .future-scene {
+                background: linear-gradient(135deg, #ffeff6, #ffe6f0);
+                border-radius: 20px;
+                padding: 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .future-scene:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(255, 64, 129, 0.2);
+            }
+            
+            .future-icon {
+                font-size: 3.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .future-scene h3 {
+                color: #ff4081;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+            }
+            
+            .final-celebration {
+                text-align: center;
+            }
+            
+            .celebration-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 50px;
+                margin: 40px 0;
+                flex-wrap: wrap;
+            }
+            
+            .champagne-glass {
+                position: relative;
+                width: 100px;
+                height: 150px;
+            }
+            
+            .glass {
+                position: absolute;
+                top: 0;
+                left: 25px;
+                width: 50px;
+                height: 80px;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+                border-radius: 0 0 25px 25px;
+                overflow: hidden;
+            }
+            
+            .bubble {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                animation: bubble-rise 2s infinite;
+            }
+            
+            .bubble:nth-child(1) {
+                left: 15px;
+                bottom: 10px;
+                animation-delay: 0s;
+            }
+            
+            .bubble:nth-child(2) {
+                left: 30px;
+                bottom: 20px;
+                animation-delay: 0.5s;
+            }
+            
+            .bubble:nth-child(3) {
+                left: 20px;
+                bottom: 30px;
+                animation-delay: 1s;
+            }
+            
+            .stem {
+                position: absolute;
+                top: 80px;
+                left: 45px;
+                width: 10px;
+                height: 50px;
+                background: rgba(255, 255, 255, 0.8);
+            }
+            
+            .base {
+                position: absolute;
+                top: 130px;
+                left: 35px;
+                width: 30px;
+                height: 10px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 5px;
+            }
+            
+            .celebration-toast h3 {
+                color: #ff4081;
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .celebration-btn {
+                background: linear-gradient(135deg, #ff0066, #ff4081);
+                color: white;
+                border: none;
+                padding: 20px 45px;
+                border-radius: 30px;
+                font-size: 1.3rem;
+                font-weight: 600;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(255, 0, 102, 0.4);
+                margin-top: 20px;
+            }
+            
+            .celebration-btn:hover {
+                transform: translateY(-5px) scale(1.05);
+                box-shadow: 0 15px 40px rgba(255, 0, 102, 0.6);
+            }
+            
+            @keyframes bubble-rise {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 0;
+                }
+                50% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-70px) scale(0.5);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes fadeInLeft {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .valentine-header h1 {
+                    font-size: 3.5rem;
+                }
+                
+                .journey-summary {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                
+                .celebration-content {
+                    flex-direction: column;
+                    gap: 30px;
+                }
+                
+                .letter-seal {
+                    position: relative;
+                    bottom: auto;
+                    right: auto;
+                    margin: 30px auto 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
+    
