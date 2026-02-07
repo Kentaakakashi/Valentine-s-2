@@ -146,38 +146,42 @@
     
     <script src="js/main.js"></script>
     <script>
-const pageLocks = {
-  rose: '2026-02-07',
-  propose: '2026-02-08',
-  chocolate: '2026-02-09',
-  teddy: '2026-02-10',
-  promise: '2026-02-11',
-  hug: '2026-02-12',
-  kiss: '2026-02-13',
-  valentine: '2026-02-14'
+const pageDays = {
+  rose: 7,
+  propose: 8,
+  chocolate: 9,
+  teddy: 10,
+  promise: 11,
+  hug: 12,
+  kiss: 13,
+  valentine: 14
 };
 
-function getLocalDate() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-function canOpen(page) {
-  const today = getLocalDate();
-  return today >= pageLocks[page];
-}
-
 function openPage(page) {
-  if (!canOpen(page)) {
-    alert('⏳ Not yet! Come back on ' + pageLocks[page] + ' 💖');
+  // Special page – always open
+  if (page === "apology") {
+    window.location.href = "apology.html";
     return;
   }
-  window.location.href = page + '.html';
+
+  const now = new Date();
+  const month = now.getMonth(); // Feb = 1
+  const today = now.getDate();
+
+  // Only allow in February
+  if (month !== 1) {
+    alert("⏳ Valentine week hasn’t started yet 💖");
+    return;
+  }
+
+  if (today < pageDays[page]) {
+    alert("⏳ Not yet! Come back on Feb " + pageDays[page] + " 💕");
+    return;
+  }
+
+  window.location.href = page + ".html";
 }
-    </script>
+</script>
 </body>
 </body>
 </html>
