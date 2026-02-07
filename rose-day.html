@@ -16,7 +16,6 @@
       color: #3a0d1d;
     }
 
-    /* floating petals */
     .petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
     .petal {
       position: absolute;
@@ -64,11 +63,7 @@
 
     .hint { font-size: 0.8rem; opacity: 0.7; margin-bottom: 14px; }
 
-    .message {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
+    .message { font-size: 0.95rem; line-height: 1.7; margin-bottom: 18px; min-height: 60px; }
 
     .choice {
       display: none;
@@ -88,30 +83,33 @@
       background: linear-gradient(135deg, #ff4b6e, #ff7a8a);
       color: white;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
     }
 
-    button.secondary {
-      background: rgba(255,255,255,0.8);
-      color: #a1163c;
-    }
+    button.secondary { background: rgba(255,255,255,0.85); color: #a1163c; }
 
     button:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.35); }
 
-    .reveal {
-      display: none;
-      margin-top: 20px;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      animation: fadeUp 0.8s ease;
+    .reveal, .final { display: none; margin-top: 20px; font-size: 0.95rem; line-height: 1.6; animation: fadeUp 0.8s ease; }
+
+    .shake { animation: shake 0.4s; }
+    @keyframes shake {
+      0%{transform:translateX(0)}
+      25%{transform:translateX(-4px)}
+      50%{transform:translateX(4px)}
+      75%{transform:translateX(-4px)}
+      100%{transform:translateX(0)}
     }
 
-    .final {
-      display: none;
-      margin-top: 20px;
-      font-size: 1rem;
-      font-weight: 600;
-      animation: fadeUp 0.8s ease;
+    .heart {
+      position: fixed;
+      font-size: 1.4rem;
+      animation: pop 1s forwards ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes pop {
+      to { transform: translateY(-80px) scale(1.8); opacity: 0; }
     }
 
     audio { display: none; }
@@ -177,7 +175,7 @@
       document.getElementById('choice').style.display = 'none';
       const r = document.getElementById('reveal');
       r.style.display = 'block';
-      r.innerHTML = "YIPPYYYYYYYY!!! LOVE YA SO MUCH DIIIIIIII MWAHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!";
+      r.innerHTML = "YIPPYYYYYYYYY!!!!!! MWAHHHHHHHHHHHHHHHHH LOVE YOU SO MUCH DI BUJJUUUUUUUU!!!!! ";
       setTimeout(()=>{
         const f = document.getElementById('final');
         f.style.display = 'block';
@@ -186,26 +184,61 @@
     }
 
     let teaseCount = 0;
+    let teaseCount = 0;
     function tease() {
       teaseCount++;
       const r = document.getElementById('reveal');
       const whyBtn = document.querySelector('button.secondary');
       const takeBtn = document.querySelector('#choice button:not(.secondary)');
+      const card = document.querySelector('.card');
 
       const messages = [
         "Because… it’s Rose Day 😌🌹",
         "Hey stop clicking that 😠💕",
         "Okay now you’re just teasing me 😤🌸",
         "Bruh. Just take the rose already 😳🌹",
-        "Last warning 😠💖 TAKE. THE. ROSE."
+        "LAST WARNING 😠💖 TAKE. THE. ROSE."
       ];
 
+      // typing effect
       r.style.display = 'block';
-      r.innerHTML = messages[Math.min(teaseCount - 1, messages.length - 1)];
+      r.innerHTML = '';
+      const text = messages[Math.min(teaseCount - 1, messages.length - 1)];
+      let i = 0;
+      const type = setInterval(() => {
+        r.innerHTML += text[i];
+        i++;
+        if (i >= text.length) clearInterval(type);
+      }, 35);
+
+      // shake card
+      card.classList.add('shake');
+      setTimeout(()=>card.classList.remove('shake'),400);
 
       // shrink wrong button
       const scale = Math.max(0, 1 - teaseCount * 0.2);
       whyBtn.style.transform = `scale(${scale})`;
+      whyBtn.style.opacity = scale;
+
+      // grow correct button
+      takeBtn.style.transform = `scale(${1 + teaseCount * 0.18})`;
+
+      // heart pops
+      for (let h = 0; h < 3; h++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerText = '💖';
+        heart.style.left = (50 + (Math.random()*60-30)) + 'vw';
+        heart.style.top = '60vh';
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1000);
+      }
+
+      if (teaseCount >= 5) {
+        whyBtn.style.display = 'none';
+        takeBtn.style.transform = 'scale(1.7)';
+      }
+    })`;
       whyBtn.style.opacity = scale;
 
       // grow correct button
