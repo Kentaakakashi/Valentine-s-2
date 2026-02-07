@@ -1,478 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 2: Propose Day - 7 Days of Love</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Proposal Day 💍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ffb6c1, #ff5f9e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background 0.5s ease;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+      animation: popIn 0.8s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ffffff;
+      color: #ff3b8d;
+      font-weight: bold;
+    }
+
+    #thinkBtn {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    #noBtn {
+      background: rgba(0,0,0,0.25);
+      color: white;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .final {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .ring {
+      font-size: 4rem;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
 </head>
-<body class="propose-day">
-    <!-- Animated Background -->
-    <div class="floating-hearts"></div>
-    <div class="sparkles"></div>
-    
-    <!-- Back Button -->
-    <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Back to Journey
-    </a>
-    
-    <!-- Main Content -->
-    <div class="page-container">
-        <div class="day-header">
-            <div class="day-icon-large">💍</div>
-            <h1>Propose Day</h1>
-            <p class="day-subtitle">Day 2 - February 8</p>
-            <p class="day-tagline">A promise of forever starts with a single question</p>
-        </div>
-        
-        <!-- Virtual Ring Showcase -->
-        <div class="feature-section">
-            <h2><i class="fas fa-gem"></i> Virtual Ring Showcase</h2>
-            <p class="section-subtitle">Choose the ring that represents our love</p>
-            
-            <div class="ring-showcase">
-                <div class="ring" data-message="Classic love - timeless and true">
-                    <div class="ring-inner ring-spin">
-                        <div class="ring-band"></div>
-                        <div class="diamond"></div>
-                    </div>
-                    <p class="ring-name">Classic Diamond</p>
-                </div>
-                
-                <div class="ring" data-message="Our love shines like a thousand stars">
-                    <div class="ring-inner ring-spin" style="animation-delay: 1s">
-                        <div class="ring-band" style="background: linear-gradient(45deg, #ff4081, #ff79b0)"></div>
-                        <div class="diamond" style="background: linear-gradient(45deg, #ff4081, #ff79b0); box-shadow: 0 0 30px rgba(255, 64, 129, 0.8)"></div>
-                    </div>
-                    <p class="ring-name">Pink Sapphire</p>
-                </div>
-                
-                <div class="ring" data-message="Eternal bond, unbreakable love">
-                    <div class="ring-inner ring-spin" style="animation-delay: 2s">
-                        <div class="ring-band" style="background: linear-gradient(45deg, #00bcd4, #0097a7)"></div>
-                        <div class="diamond" style="background: linear-gradient(45deg, #00bcd4, #0097a7); box-shadow: 0 0 30px rgba(0, 188, 212, 0.8)"></div>
-                    </div>
-                    <p class="ring-name">Blue Diamond</p>
-                </div>
-            </div>
-            
-            <div class="ring-message">
-                <p id="ringMessage">Click on a ring to see its special meaning</p>
-            </div>
-        </div>
-        
-        
-        
-        <!-- Our Future Vision Board -->
-        <div class="feature-section">
-            <h2><i class="fas fa-binoculars"></i> Our Future Vision Board</h2>
-            <p class="section-subtitle">Dreaming of our life together</p>
-            
-            <div class="vision-board">
-                <div class="vision-item">
-                    <div class="vision-icon">🏠</div>
-                    <h3>Home Together</h3>
-                    <p>A place filled with love and laughter</p>
-                </div>
-                
-                <div class="vision-item">
-                    <div class="vision-icon">🌍</div>
-                    <h3>Travel Adventures</h3>
-                    <p>Exploring the world hand in hand</p>
-                </div>
-                
-                <div class="vision-item">
-                    <div class="vision-icon">🎉</div>
-                    <h3>Celebrations</h3>
-                    <p>Every milestone together</p>
-                </div>
-                
-                <div class="vision-item">
-                    <div class="vision-icon">🌅</div>
-                    <h3>Sunset Moments</h3>
-                    <p>Quiet evenings together</p>
-                </div>
-                
-                <div class="vision-item">
-                    <div class="vision-icon">🤝</div>
-                    <h3>Growing Together</h3>
-                    <p>Supporting each other's dreams</p>
-                </div>
-                
-                <div class="vision-item">
-                    <div class="vision-icon">❤️</div>
-                    <h3>Endless Love</h3>
-                    <p>A lifetime of happiness</p>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!-- Mini Proposal Scene -->
-        <div class="feature-section">
-            <h2><i class="fas fa-ring"></i> Will You Continue This Journey With Me?</h2>
-            
-            <div class="proposal-scene">
-                <div class="proposal-content">
-                    <p class="proposal-text">Every day with you feels like a dream come true. As we continue this journey together...</p>
-                    
-                    <div class="proposal-question">
-                        <div class="question-mark">?</div>
-                        <h3>Will you be my Valentine through all the days to come?</h3>
-                    </div>
-                    
-                    <div class="proposal-buttons">
-                        <button id="yesBtn" class="proposal-btn yes-btn">
-                            <i class="fas fa-heart"></i> YES! Always
-                        </button>
-                        <button id="maybeBtn" class="proposal-btn maybe-btn">
-                            <i class="fas fa-star"></i> Show me more
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<body>
+
+  <div class="card" id="mainCard">
+    <h1>Hey… 💖</h1>
+    <p>
+      I’ve been thinking about this for a while.<br>
+      So tell me honestly…
+    </p>
+
+    <h1>Will you be mine? 💍</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">YES (duh 🙄💘)</button>
+      <button id="thinkBtn">Let me think… 🤔</button>
+      <button id="noBtn">No 🙃</button>
     </div>
-    
-    <!-- Navigation -->
-    <nav class="page-nav">
-        <a href="rose-day.html"><i class="fas fa-arrow-left"></i> Previous: Rose Day</a>
-        <a href="chocolate-day.html" class="next-day">Next: Chocolate Day <i class="fas fa-arrow-right"></i></a>
-    </nav>
-    
-    <!-- Confetti Container -->
-    <div class="confetti-container" id="confettiContainer"></div>
-    
-    <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ring interactions
-            const rings = document.querySelectorAll('.ring');
-            const ringMessage = document.getElementById('ringMessage');
-            
-            rings.forEach(ring => {
-                ring.addEventListener('click', function() {
-                    const message = this.getAttribute('data-message');
-                    ringMessage.textContent = message;
-                    ringMessage.style.animation = 'text-reveal 0.5s ease';
-                    
-                    // Add sparkle effect
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle-effect';
-                    sparkle.style.position = 'absolute';
-                    sparkle.style.left = '50%';
-                    sparkle.style.top = '50%';
-                    sparkle.style.width = '100px';
-                    sparkle.style.height = '100px';
-                    sparkle.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)';
-                    sparkle.style.borderRadius = '50%';
-                    sparkle.style.transform = 'translate(-50%, -50%)';
-                    sparkle.style.animation = 'sparkle 1s ease-out';
-                    this.appendChild(sparkle);
-                    
-                    setTimeout(() => {
-                        sparkle.remove();
-                    }, 1000);
-                });
-            });
-            
-            // Heart rate animation
-            const heartRate = document.getElementById('heartRate');
-            let rate = 72;
-            setInterval(() => {
-                // Simulate heartbeat increase when interacted with
-                rate = 72 + Math.floor(Math.random() * 20);
-                heartRate.textContent = rate;
-                heartRate.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    heartRate.style.transform = 'scale(1)';
-                }, 200);
-            }, 3000);
-            
-            // Proposal buttons
-            const yesBtn = document.getElementById('yesBtn');
-            const maybeBtn = document.getElementById('maybeBtn');
-            const confettiContainer = document.getElementById('confettiContainer');
-            
-            yesBtn.addEventListener('click', function() {
-                createConfetti();
-                this.innerHTML = '<i class="fas fa-heart"></i> 💝 YES! I DO! 💝';
-                this.style.background = 'linear-gradient(135deg, #ff4081, #ff0066)';
-                this.style.animation = 'pulse 0.5s infinite';
-                
-                // Show celebration message
-                const celebration = document.createElement('div');
-                celebration.className = 'celebration-message';
-                celebration.innerHTML = `
-                    <h3>🎉 You've made me the happiest person! 🎉</h3>
-                    <p>Our journey continues with even more love!</p>
-                `;
-                celebration.style.position = 'fixed';
-                celebration.style.top = '50%';
-                celebration.style.left = '50%';
-                celebration.style.transform = 'translate(-50%, -50%)';
-                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
-                celebration.style.padding = '40px';
-                celebration.style.borderRadius = '20px';
-                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
-                celebration.style.zIndex = '10000';
-                celebration.style.textAlign = 'center';
-                celebration.style.animation = 'fadeIn 0.5s ease';
-                
-                document.body.appendChild(celebration);
-                
-                setTimeout(() => {
-                    celebration.remove();
-                }, 3000);
-            });
-            
-            maybeBtn.addEventListener('click', function() {
-                this.innerHTML = '<i class="fas fa-heart"></i> The best is yet to come...';
-                this.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-                
-                // Show sneak peek of next day
-                const sneakPeek = document.createElement('div');
-                sneakPeek.className = 'sneak-peek';
-                sneakPeek.innerHTML = `
-                    <h3>🍫 Coming Tomorrow: Chocolate Day! 🍫</h3>
-                    <p>Get ready for sweet memories and virtual chocolates!</p>
-                `;
-                sneakPeek.style.position = 'fixed';
-                sneakPeek.style.bottom = '100px';
-                sneakPeek.style.left = '50%';
-                sneakPeek.style.transform = 'translateX(-50%)';
-                sneakPeek.style.background = 'linear-gradient(135deg, #8B4513, #A0522D)';
-                sneakPeek.style.color = 'white';
-                sneakPeek.style.padding = '20px 30px';
-                sneakPeek.style.borderRadius = '15px';
-                sneakPeek.style.boxShadow = '0 10px 30px rgba(139, 69, 19, 0.5)';
-                sneakPeek.style.zIndex = '10000';
-                sneakPeek.style.textAlign = 'center';
-                sneakPeek.style.animation = 'fadeInUp 0.5s ease';
-                
-                document.body.appendChild(sneakPeek);
-                
-                setTimeout(() => {
-                    sneakPeek.style.animation = 'fadeOut 0.5s ease forwards';
-                    setTimeout(() => {
-                        sneakPeek.remove();
-                    }, 500);
-                }, 2000);
-            });
-            
-            // Create confetti function
-            function createConfetti() {
-                const container = confettiContainer;
-                container.innerHTML = '';
-                
-                for (let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = `${Math.random() * 100}%`;
-                    confetti.style.backgroundColor = i % 5 === 0 ? '#ff4081' : 
-                                                   i % 5 === 1 ? '#ff79b0' : 
-                                                   i % 5 === 2 ? '#ffb6c1' : 
-                                                   i % 5 === 3 ? '#ffd700' : '#ff85a2';
-                    confetti.style.width = `${Math.random() * 15 + 5}px`;
-                    confetti.style.height = `${Math.random() * 15 + 5}px`;
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2}s linear forwards`;
-                    
-                    container.appendChild(confetti);
-                }
-                
-                // Play celebration sound
-                const celebrationSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
-                celebrationSound.volume = 0.5;
-                celebrationSound.play();
-            }
-            
-            // Save progress
-            if (window.VDay && VDay.saveProgress) {
-                VDay.saveProgress(2, 'proposed');
-            }
-        });
-    </script>
-    <style>
-        .feature-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-            animation: fadeInUp 1s ease;
-        }
-        
-        .section-subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        
-        .heartbeat-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            height: 100px;
-            margin: 30px 0;
-        }
-        
-        .heart-rate {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ff4081;
-        }
-        
-        .promise-wall {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .promise-card {
-            background: linear-gradient(135deg, #ffeff6, #ffe6f0);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .promise-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(255, 64, 129, 0.2);
-        }
-        
-        .promise-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ff4081;
-            margin-bottom: 10px;
-        }
-        
-        .proposal-scene {
-            background: linear-gradient(135deg, #ff4081, #ff79b0);
-            border-radius: 30px;
-            padding: 50px;
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-        }
-        
-        .proposal-text {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .proposal-question {
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .question-mark {
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        
-        .proposal-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        
-        .proposal-btn {
-            padding: 20px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .yes-btn {
-            background: white;
-            color: #ff4081;
-        }
-        
-        .maybe-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .proposal-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .sparkle-effect {
-            pointer-events: none;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        }
-        
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-        }
-        
-        .confetti {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #f00;
-            top: 0;
-            opacity: 0;
-            pointer-events: none;
-            animation: confetti-fall linear forwards;
-        }
-        
-        @keyframes confetti-fall {
-            0% {
-                top: -50px;
-                opacity: 1;
-                transform: rotate(0deg);
-            }
-            100% {
-                top: 100vh;
-                opacity: 0;
-                transform: rotate(720deg);
-            }
-        }
-    </style>
+  </div>
+
+  <div class="card final" id="finalCard">
+    <div class="ring">💍</div>
+    <h1>SHE SAID YES 😭💖</h1>
+    <p>
+      Congrats to me for having the cutest, smartest,
+      most annoying (in a good way) person ever 🫶
+      <br><br>
+      Happy Proposal Day 💕
+    </p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const thinkBtn = document.getElementById("thinkBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    const mainCard = document.getElementById("mainCard");
+    const finalCard = document.getElementById("finalCard");
+
+    let noCount = 0;
+    let thinkCount = 0;
+
+    const noTexts = [
+      "No 🙃",
+      "Are you sure? 😐",
+      "That hurts bro 💔",
+      "Okay now you’re just lying",
+      "Stop pressing this 😭",
+      "Nah this button is revoked"
+    ];
+
+    const thinkTexts = [
+      "Let me think… 🤔",
+      "Still thinking?",
+      "Wow suspense 😭",
+      "Thinking for THIS long?",
+      "Okay Einstein",
+      "Yeah… that’s a yes"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      noCount++;
+
+      if (noCount < noTexts.length) {
+        noBtn.textContent = noTexts[noCount];
+        noBtn.style.transform = `translateX(${Math.random()*100 - 50}px)`;
+        yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
+      } else {
+        noBtn.style.display = "none";
+      }
+    });
+
+    thinkBtn.addEventListener("click", () => {
+      thinkCount++;
+
+      if (thinkCount < thinkTexts.length) {
+        thinkBtn.textContent = thinkTexts[thinkCount];
+        document.body.style.background =
+          "radial-gradient(circle at top, #ffd1dc, #ff6fae)";
+      } else {
+        thinkBtn.textContent = "Yeah… it’s a yes 😌";
+        thinkBtn.disabled = true;
+        thinkBtn.style.opacity = 0.6;
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      mainCard.style.display = "none";
+      finalCard.style.display = "block";
+    });
+  </script>
+
 </body>
 </html>
