@@ -1,1 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="apology-page">
+    <!-- Page Transition -->
+    <div class="page-transition"></div>
+    
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    <div class="tear-container"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="letter-container">
+            <!-- Envelope -->
+            <div class="envelope" id="envelope">
+                <div class="envelope-front">
+                    <div class="heart-seal">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="recipient">
+                        <p>To My Dearest Love,</p>
+                    </div>
+                </div>
+                <div class="envelope-back"></div>
+            </div>
+            
+            <!-- Open Envelope Button -->
+            <button class="open-envelope-btn" id="openEnvelopeBtn">
+                <i class="fas fa-envelope-open-text"></i> Open This Special Letter
+            </button>
+            
+            <!-- The Letter -->
+            <div class="handwritten-letter" id="letter" style="display: none;">
+                <div class="letter-content">
+                    <div class="letter-header">
+                        <p class="letter-date">February 14, 2025</p>
+                        <p class="letter-salutation">My Dearest Love,</p>
+                    </div>
+                    
+                    <div class="letter-body">
+                        <p>If you're reading this, it means you've found this special message I prepared for you.</p>
+                        
+                        <p>First, I want to thank you from the bottom of my heart for being part of this 7-day love journey with me. Every moment creating this was filled with thoughts of you, of us, and of the beautiful love we share.</p>
+                        
+                        <p>I know I'm not perfect. There may have been times when I've disappointed you, when I haven't been the partner you deserved, or when I've let small things come between us. For all those moments, I am truly sorry.</p>
+                        
+                        <p>You deserve the world, and I promise to keep trying every day to give you even a fraction of the happiness you bring into my life. Your smile is my sunrise, your laughter is my favorite melody, and your love is the greatest gift I've ever received.</p>
+                        
+                        <p>This journey we've taken together through these 7 days represents my commitment to you - to keep trying, to keep loving, to keep growing together. Each day was crafted with love, hoping to bring a smile to your face and warmth to your heart.</p>
+                        
+                        <p>Please know that no matter what challenges we face, my love for you remains constant and true. You are my forever, my always, my everything.</p>
+                        
+                        <p>With all my love and deepest apologies for any hurt I've ever caused,</p>
+                    </div>
+                    
+                    <div class="letter-footer">
+                        <div class="signature">
+                            <p>Yours always and forever,</p>
+                            <p class="signature-name">[Your Name]</p>
+                        </div>
+                        <div class="wax-seal">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive Elements -->
+                <div class="letter-interactions">
+                    <button class="letter-btn" id="forgiveBtn">
+                        <i class="fas fa-heart-circle-check"></i> I Forgive You
+                    </button>
+                    <button class="letter-btn" id="hugBtn">
+                        <i class="fas fa-hands"></i> Virtual Hug
+                    </button>
+                    <button class="letter-btn" id="loveBtn">
+                        <i class="fas fa-heart"></i> I Love You Too
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Heartbeat Monitor -->
+        <div class="heartbeat-monitor">
+            <div class="monitor-title">
+                <i class="fas fa-heart-pulse"></i> My Heart When I Think of You
+            </div>
+            <div class="heartbeat-visualization">
+                <div class="heartbeat-line" style="animation-delay: 0s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.1s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.2s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.3s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.4s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.5s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.6s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.7s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.8s"></div>
+                <div class="heartbeat-line" style="animation-delay: 0.9s"></div>
+            </div>
+            <div class="heart-rate">
+                <span id="heartRate">💓</span> Beating Only For You
+            </div>
+        </div>
+        
+        <!-- Memory Lane -->
+        <div class="memory-lane">
+            <h2><i class="fas fa-memory"></i> Memories That Matter</h2>
+            <div class="memory-grid">
+                <div class="memory-card">
+                    <div class="memory-icon">😊</div>
+                    <h3>Your Smile</h3>
+                    <p>The one that brightens my darkest days</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-icon">🤗</div>
+                    <h3>Your Hugs</h3>
+                    <p>That make everything feel right</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-icon">💭</div>
+                    <h3>Our Conversations</h3>
+                    <p>That last into the early hours</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-icon">🌟</div>
+                    <h3>Your Strength</h3>
+                    <p>That inspires me every day</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Promise Renewal -->
+        <div class="promise-renewal">
+            <h2><i class="fas fa-handshake"></i> Renewing My Promises</h2>
+            <div class="promises-grid">
+                <div class="promise-item">
+                    <div class="promise-number">1</div>
+                    <h3>To Listen More</h3>
+                    <p>To truly hear what's in your heart</p>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-number">2</div>
+                    <h3>To Try Harder</h3>
+                    <p>To be the partner you deserve</p>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-number">3</div>
+                    <h3>To Love Deeper</h3>
+                    <p>With every fiber of my being</p>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-number">4</div>
+                    <h3>To Never Give Up</h3>
+                    <p>On us, on our love, on our future</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Back to Journey</a>
+        <a href="valentine.html" class="next-day">To Valentine's Day <i class="fas fa-arrow-right"></i></a>
+    </nav>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-sad-and-emotional-666.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="heartbeatSound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-990.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create tear drops
+            PageScripts.createTearDrops(15);
+            
+            // Envelope opening
+            const envelope = document.getElementById('envelope');
+            const openBtn = document.getElementById('openEnvelopeBtn');
+            const letter = document.getElementById('letter');
+            
+            openBtn.addEventListener('click', function() {
+                envelope.classList.add('envelope-open');
+                
+                // Play envelope sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-paper-whoosh-1100.mp3');
+                sound.volume = 0.5;
+                sound.play();
+                
+                // Show letter after delay
+                setTimeout(() => {
+                    envelope.style.display = 'none';
+                    openBtn.style.display = 'none';
+                    letter.style.display = 'block';
+                    letter.style.animation = 'fadeIn 1s ease';
+                    
+                    // Start heartbeat sound
+                    const heartbeat = document.getElementById('heartbeatSound');
+                    heartbeat.volume = 0.3;
+                    heartbeat.play();
+                }, 1000);
+            });
+            
+            // Letter interactions
+            const forgiveBtn = document.getElementById('forgiveBtn');
+            const hugBtn = document.getElementById('hugBtn');
+            const loveBtn = document.getElementById('loveBtn');
+            
+            forgiveBtn.addEventListener('click', function() {
+                createHeartExplosion();
+                this.innerHTML = '<i class="fas fa-heart-circle-check"></i> 💝 Forgiveness Accepted 💝';
+                this.style.background = 'linear-gradient(135deg, #32CD32, #228B22)';
+                this.style.animation = 'pulse 0.5s infinite';
+                
+                showMessage('Your forgiveness means the world to me. Thank you for your beautiful heart. 💖');
+            });
+            
+            hugBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-hands"></i> 🤗 Hugging You Tight 🤗';
+                this.style.background = 'linear-gradient(135deg, #ff4081, #ff79b0)';
+                
+                // Create warmth effect
+                document.body.style.background = 'linear-gradient(135deg, #ffafbd, #ffc3a0)';
+                setTimeout(() => {
+                    document.body.style.background = '';
+                }, 2000);
+                
+                showMessage('I can feel your warmth. Thank you for this virtual hug. It means everything. 🥰');
+            });
+            
+            loveBtn.addEventListener('click', function() {
+                createLoveRain();
+                this.innerHTML = '<i class="fas fa-heart"></i> 💕 I Love You More 💕';
+                this.style.background = 'linear-gradient(135deg, #ff0066, #ff4081)';
+                this.style.animation = 'pulse 0.5s infinite';
+                
+                showMessage('Hearing those words fills my heart with joy. I love you more than words can express. 💞');
+            });
+            
+            // Heart rate animation
+            const heartRate = document.getElementById('heartRate');
+            setInterval(() => {
+                heartRate.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    heartRate.style.transform = 'scale(1)';
+                }, 200);
+            }, 1500);
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            pageMusic.volume = 0.2;
+            setTimeout(() => {
+                pageMusic.play().catch(e => console.log('Music play prevented'));
+            }, 1000);
+            
+            // Helper functions
+            function createHeartExplosion() {
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '❤';
+                        heart.style.position = 'fixed';
+                        heart.style.left = `${Math.random() * 100}%`;
+                        heart.style.top = `${Math.random() * 100}%`;
+                        heart.style.fontSize = `${Math.random() * 30 + 20}px`;
+                        heart.style.color = '#ff4081';
+                        heart.style.opacity = '0';
+                        heart.style.zIndex = '10000';
+                        heart.style.pointerEvents = 'none';
+                        
+                        document.body.appendChild(heart);
+                        
+                        // Animate
+                        heart.animate([
+                            {
+                                opacity: 0,
+                                transform: 'translateY(0) scale(0)'
+                            },
+                            {
+                                opacity: 1,
+                                transform: 'translateY(-20px) scale(1)'
+                            },
+                            {
+                                opacity: 0,
+                                transform: 'translateY(-100px) scale(0)'
+                            }
+                        ], {
+                            duration: 2000,
+                            easing: 'ease-out'
+                        });
+                        
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 2000);
+                    }, i * 100);
+                }
+            }
+            
+            function createLoveRain() {
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const love = document.createElement('div');
+                        love.innerHTML = ['❤', '💖', '💗', '💓', '💞', '💕'][Math.floor(Math.random() * 6)];
+                        love.style.position = 'fixed';
+                        love.style.left = `${Math.random() * 100}%`;
+                        love.style.top = '-50px';
+                        love.style.fontSize = `${Math.random() * 25 + 15}px`;
+                        love.style.color = '#ff4081';
+                        love.style.zIndex = '10000';
+                        love.style.pointerEvents = 'none';
+                        
+                        document.body.appendChild(love);
+                        
+                        // Animate falling
+                        love.animate([
+                            {
+                                transform: 'translateY(0) rotate(0deg)',
+                                opacity: 1
+                            },
+                            {
+                                transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`,
+                                opacity: 0
+                            }
+                        ], {
+                            duration: Math.random() * 3000 + 2000,
+                            easing: 'linear'
+                        });
+                        
+                        setTimeout(() => {
+                            love.remove();
+                        }, 5000);
+                    }, i * 100);
+                }
+            }
+            
+            function showMessage(text) {
+                const message = document.createElement('div');
+                message.className = 'floating-message';
+                message.textContent = text;
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'rgba(255, 255, 255, 0.95)';
+                message.style.padding = '25px 35px';
+                message.style.borderRadius = '20px';
+                message.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                message.style.zIndex = '10000';
+                message.style.textAlign = 'center';
+                message.style.fontSize = '1.2rem';
+                message.style.color = '#ff4081';
+                message.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 500);
+                }, 3000);
+            }
+        });
+        
+        // Additional styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .letter-container {
+                text-align: center;
+                margin-bottom: 50px;
+            }
+            
+            .envelope {
+                width: 300px;
+                height: 200px;
+                background: linear-gradient(135deg, #ffb6c1, #ff8fa3);
+                margin: 0 auto 40px;
+                position: relative;
+                border-radius: 10px;
+                cursor: pointer;
+                transform-style: preserve-3d;
+                transition: transform 1s ease;
+                box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+            }
+            
+            .envelope-front {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #ffb6c1, #ff8fa3);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                backface-visibility: hidden;
+            }
+            
+            .heart-seal {
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, #ff4081, #ff0066);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                animation: pulse 2s infinite;
+            }
+            
+            .recipient {
+                color: white;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+            
+            .open-envelope-btn {
+                background: linear-gradient(135deg, #ff4081, #ff79b0);
+                color: white;
+                border: none;
+                padding: 18px 35px;
+                border-radius: 30px;
+                font-size: 1.2rem;
+                font-weight: 600;
+               cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(255, 64, 129, 0.4);
+                margin-top: 30px;
+            }
+            
+            .open-envelope-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(255, 64, 129, 0.6);
+            }
+            
+            .handwritten-letter {
+                background: #fffef0;
+                padding: 50px;
+                border-radius: 20px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+                position: relative;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.8rem;
+                line-height: 2;
+                color: #5d001e;
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: left;
+                border: 1px solid #ffd1dc;
+            }
+            
+            .letter-header {
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            .letter-date {
+                font-size: 1.2rem;
+                color: #666;
+                margin-bottom: 10px;
+                font-family: 'Poppins', sans-serif;
+            }
+            
+            .letter-salutation {
+                font-size: 2.2rem;
+                color: #ff4081;
+                font-weight: 700;
+            }
+            
+            .letter-body {
+                margin-bottom: 40px;
+            }
+            
+            .letter-body p {
+                margin-bottom: 25px;
+            }
+            
+            .letter-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 60px;
+                padding-top: 30px;
+                border-top: 2px dashed #ffb6c1;
+            }
+            
+            .signature {
+                font-family: 'Dancing Script', cursive;
+                font-size: 2rem;
+            }
+            
+            .signature-name {
+                font-size: 2.5rem;
+                color: #ff4081;
+                font-weight: 700;
+                margin-top: 10px;
+            }
+            
+            .letter-interactions {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 40px;
+                flex-wrap: wrap;
+            }
+            
+            .letter-btn {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 25px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                transition: all 0.3s ease;
+                font-family: 'Poppins', sans-serif;
+            }
+            
+            .letter-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            }
+            
+            .heartbeat-monitor {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 30px;
+                padding: 40px;
+                margin: 50px 0;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+            }
+            
+            .monitor-title {
+                font-size: 1.5rem;
+                color: #ff4081;
+                margin-bottom: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .heartbeat-visualization {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                height: 100px;
+                margin: 30px 0;
+            }
+            
+            .heart-rate {
+                font-size: 1.3rem;
+                color: #ff4081;
+                font-weight: 600;
+            }
+            
+            .memory-lane, .promise-renewal {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 30px;
+                padding: 40px;
+                margin: 50px 0;
+                box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+            }
+            
+            .memory-lane h2, .promise-renewal h2 {
+                color: #ff4081;
+                margin-bottom: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                font-size: 2rem;
+                text-align: center;
+            }
+            
+            .memory-grid, .promises-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+            }
+            
+            .memory-card, .promise-item {
+                background: linear-gradient(135deg, #ffeff6, #ffe6f0);
+                border-radius: 20px;
+                padding: 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .memory-card:hover, .promise-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(255, 64, 129, 0.2);
+            }
+            
+            .memory-icon {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            
+            .promise-number {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #ff4081;
+                margin-bottom: 15px;
+            }
+            
+            .memory-card h3, .promise-item h3 {
+                color: #ff4081;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+            }
+            
+            .memory-card p, .promise-item p {
+                color: #666;
+                line-height: 1.6;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes fadeOut {
+                to { opacity: 0; }
+            }
+            
+            @media (max-width: 768px) {
+                .handwritten-letter {
+                    padding: 30px;
+                    font-size: 1.5rem;
+                }
+                
+                .letter-interactions {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .letter-btn {
+                    width: 100%;
+                    max-width: 300px;
+                }
+                
+                .envelope {
+                    width: 250px;
+                    height: 150px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
 
