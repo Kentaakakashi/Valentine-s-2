@@ -1,166 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Propose Day 💍</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proposal Day 💍</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #ffd1dc, #ff8fb1);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #5a2a3a;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap');
 
-    .petal {
-      position: absolute;
-      top: -10%;
-      font-size: 20px;
-      animation: fall linear infinite;
-      opacity: 0.8;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    @keyframes fall {
-      to {
-        transform: translateY(120vh) rotate(360deg);
-      }
-    }
+body {
+  height: 100vh;
+  background: linear-gradient(180deg, #ffd1dc, #ff9fbf);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  color: #5a2a3c;
+}
 
-    .content {
-      text-align: center;
-      padding: 30px;
-      max-width: 320px;
-      animation: fadeIn 1.2s ease;
-    }
+/* ===== FLOATING PETALS ===== */
+.petal {
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.7;
+  animation: floatDown linear infinite;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes floatDown {
+  from { transform: translateY(-10vh) rotate(0deg); }
+  to { transform: translateY(110vh) rotate(360deg); }
+}
 
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
+/* ===== CENTER WRAPPER ===== */
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  transition: opacity 1.5s ease;
+}
 
-    p {
-      font-size: 0.95rem;
-      margin-bottom: 25px;
-    }
+/* ===== TEXT ===== */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
 
-    .ring {
-      font-size: 3.5rem;
-      margin: 20px 0;
-      animation: float 2s ease-in-out infinite;
-    }
+.subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
 
-    @keyframes float {
-      50% { transform: translateY(-12px); }
-    }
+/* ===== RING ===== */
+.ring {
+  font-size: 48px;
+  margin: 20px 0;
+  opacity: 0.85;
+  animation: pulse 3s ease-in-out infinite;
+}
 
-    .btn {
-      display: block;
-      margin: 10px auto;
-      padding: 12px 22px;
-      border-radius: 25px;
-      border: none;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
 
-    .yes {
-      background: #ff5d8f;
-      color: white;
-      font-weight: 600;
-    }
+/* ===== HEART DROP ZONE ===== */
+.heart-zone {
+  width: 200px;
+  height: 180px;
+  margin: 30px auto;
+  border: 2px dashed rgba(255,255,255,0.5);
+  border-radius: 50%;
+  position: relative;
+  display: none;
+}
 
-    .no {
-      background: #ffe5ec;
-      color: #5a2a3a;
-    }
+/* ===== DRAG PETALS ===== */
+.drag-petal {
+  position: absolute;
+  font-size: 22px;
+  cursor: grab;
+}
 
-    .final {
-      display: none;
-    }
-  </style>
+/* ===== HOLD CIRCLE ===== */
+.hold {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.6);
+  margin: 30px auto;
+  position: relative;
+  display: none;
+}
+
+.hold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 4s linear;
+}
+
+/* ===== WORDS ===== */
+.words {
+  display: none;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.word {
+  padding: 10px 18px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.word:hover {
+  transform: scale(1.08);
+}
+
+/* ===== FINAL BOX ===== */
+.final {
+  display: none;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.final h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.final button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  background: #ff5c8a;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.final button:hover {
+  transform: scale(1.1);
+}
+</style>
 </head>
 
 <body>
 
-  <!-- floating petals -->
-  <script>
-    for (let i = 0; i < 18; i++) {
-      const p = document.createElement("div");
-      p.className = "petal";
-      p.textContent = Math.random() > 0.5 ? "🌸" : "🌹";
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = 6 + Math.random() * 6 + "s";
-      document.body.appendChild(p);
-    }
-  </script>
+<!-- FLOATING BACKGROUND PETALS -->
+<script>
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = '🌸';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = 12 + Math.random() * 10 + 's';
+  p.style.fontSize = 14 + Math.random() * 12 + 'px';
+  document.body.appendChild(p);
+}
+</script>
 
-  <div class="content" id="main">
-    <h1>Hey… 💕</h1>
-    <p>
-      I’ve kinda been holding this in.<br>
-      So let me ask properly…
-    </p>
+<div class="center" id="scene1">
+  <div class="title">Proposal Day 💕</div>
+  <div class="subtitle">This isn’t about asking.<br>It’s about meaning it.</div>
+  <div class="ring">💍</div>
+  <div class="subtitle">Unlock this.</div>
+</div>
 
-    <div class="ring">💍</div>
+<div class="center" id="scene2" style="opacity:0;">
+  <div class="title">Bring the pieces together</div>
+  <div class="subtitle">Like we always do.</div>
+  <div class="heart-zone" id="heartZone"></div>
+</div>
 
-    <h1>Will you be mine?</h1>
+<div class="center" id="scene3" style="opacity:0;">
+  <div class="title">Some things need patience</div>
+  <div class="subtitle">Don’t rush this.</div>
+  <div class="hold" id="hold"></div>
+</div>
 
-    <button class="btn yes" id="yesBtn">Say yes 😌💘</button>
-    <button class="btn no" id="noBtn">Be difficult 🙃</button>
+<div class="center" id="scene4" style="opacity:0;">
+  <div class="title">If you said yes…</div>
+  <div class="subtitle">What would it sound like?</div>
+  <div class="words" id="words">
+    <div class="word">Forever</div>
+    <div class="word">Mine</div>
+    <div class="word">Us</div>
   </div>
+</div>
 
-  <div class="content final" id="final">
-    <div class="ring">💍</div>
-    <h1>Good choice 💖</h1>
-    <p>
-      I already knew the answer.<br>
-      I just wanted to hear it from *you*.
-    </p>
-  </div>
+<div class="center final" id="final">
+  <h2>You just built<br>what I’ve been wanting to say.</h2>
+  <p>So let me ask you…</p>
+  <h2>Will you be mine? 💍</h2>
+  <button>Yes. It’s always you.</button>
+</div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const main = document.getElementById("main");
-    const final = document.getElementById("final");
+<script>
+let stage = 1;
 
-    let count = 0;
+/* ==== SCENE 1 → 2 ==== */
+setTimeout(() => {
+  document.getElementById('scene1').style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById('scene1').style.display = 'none';
+    const s2 = document.getElementById('scene2');
+    s2.style.opacity = 1;
+    s2.querySelector('.heart-zone').style.display = 'block';
+    spawnDragPetals();
+  }, 1500);
+}, 3500);
 
-    const noTexts = [
-      "Be difficult 🙃",
-      "Really?",
-      "Don’t do this 😭",
-      "Why are you like this",
-      "Okay you’re annoying",
-      "Yeah nah, no choice"
-    ];
-
-    noBtn.onclick = () => {
-      count++;
-      noBtn.textContent = noTexts[Math.min(count, noTexts.length - 1)];
-      noBtn.style.transform = `scale(${1 - count * 0.1})`;
-      yesBtn.style.transform = `scale(${1 + count * 0.1})`;
-
-      if (count >= 5) noBtn.style.display = "none";
+/* ==== DRAG PETALS ==== */
+let placed = 0;
+function spawnDragPetals() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.createElement('div');
+    d.className = 'drag-petal';
+    d.textContent = '🌸';
+    d.style.left = 20 + i*60 + 'px';
+    d.style.top = '60%';
+    d.draggable = true;
+    d.ondragend = () => {
+      placed++;
+      d.style.display = 'none';
+      if (placed === 4) nextScene();
     };
+    document.body.appendChild(d);
+  }
+}
 
-    yesBtn.onclick = () => {
-      main.style.display = "none";
-      final.style.display = "block";
-    };
-  </script>
+function nextScene() {
+  document.getElementById('scene2').style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById('scene2').style.display = 'none';
+    const s3 = document.getElementById('scene3');
+    s3.style.opacity = 1;
+    const hold = document.getElementById('hold');
+    hold.style.display = 'block';
+    hold.addEventListener('mousedown', () => {
+      hold.querySelector('::after');
+      hold.style.setProperty('--fill','1');
+      hold.classList.add('filling');
+      setTimeout(scene4, 4000);
+    });
+  }, 1500);
+}
+
+/* ==== SCENE 4 ==== */
+function scene4() {
+  document.getElementById('scene3').style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById('scene3').style.display = 'none';
+    const s4 = document.getElementById('scene4');
+    s4.style.opacity = 1;
+    document.getElementById('words').style.display = 'flex';
+
+    let taps = 0;
+    document.querySelectorAll('.word').forEach(w => {
+      w.onclick = () => {
+        w.style.opacity = 0.4;
+        taps++;
+        if (taps === 3) finalScene();
+      };
+    });
+  }, 1500);
+}
+
+/* ==== FINAL ==== */
+function finalScene() {
+  document.getElementById('scene4').style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById('scene4').style.display = 'none';
+    document.getElementById('final').style.display = 'block';
+  }, 1500);
+}
+</script>
 
 </body>
 </html>
