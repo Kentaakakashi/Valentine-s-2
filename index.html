@@ -147,5 +147,31 @@
     </div>
     
     <script src="js/main.js"></script>
+    <script>
+const pageLocks = {
+  rose: '2026-02-07',
+  propose: '2026-02-08',
+  chocolate: '2026-02-09',
+  teddy: '2026-02-10',
+  promise: '2026-02-11',
+  hug: '2026-02-12',
+  kiss: '2026-02-13',
+  valentine: '2026-02-14'
+};
+
+function canOpen(page) {
+  const today = new Date().toISOString().split('T')[0];
+  return today >= pageLocks[page];
+}
+
+function openPage(page) {
+  if (!canOpen(page)) {
+    alert('⏳ Not yet! Come back on ' + pageLocks[page] + ' 💖');
+    return;
+  }
+  window.location.href = page + '.html';
+}
+</script>
+</body>
 </body>
 </html>
