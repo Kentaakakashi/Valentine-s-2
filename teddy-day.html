@@ -1,1 +1,1458 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4: Teddy Day - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="teddy-day">
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="day-header">
+            <div class="day-icon-large">🧸</div>
+            <h1>Teddy Day</h1>
+            <p class="day-subtitle">Day 4 - February 10</p>
+            <p class="day-tagline">Soft hugs and warm memories</p>
+        </div>
+        
+        <!-- Interactive Virtual Teddy Bear -->
+        <div class="teddy-section">
+            <h2><i class="fas fa-paw"></i> Interactive Virtual Teddy Bear</h2>
+            <p class="section-subtitle">Click, hug, and interact with your virtual teddy</p>
+            
+            <div class="teddy-container">
+                <div class="virtual-teddy" id="virtualTeddy">
+                    <div class="teddy-body">
+                        <div class="teddy-head">
+                            <div class="teddy-ear left-ear"></div>
+                            <div class="teddy-ear right-ear"></div>
+                            <div class="teddy-face">
+                                <div class="teddy-eye left-eye"></div>
+                                <div class="teddy-eye right-eye"></div>
+                                <div class="teddy-nose"></div>
+                                <div class="teddy-mouth"></div>
+                            </div>
+                        </div>
+                        <div class="teddy-arm left-arm"></div>
+                        <div class="teddy-arm right-arm"></div>
+                        <div class="teddy-leg left-leg"></div>
+                        <div class="teddy-leg right-leg"></div>
+                    </div>
+                </div>
+                
+                <div class="teddy-controls">
+                    <div class="teddy-stats">
+                        <div class="stat">
+                            <span class="stat-label">Happiness:</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" id="happinessBar" style="width: 75%"></div>
+                            </div>
+                            <span class="stat-value" id="happinessValue">75%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Warmth:</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" id="warmthBar" style="width: 60%"></div>
+                            </div>
+                            <span class="stat-value" id="warmthValue">60%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="teddy-actions">
+                        <button id="hugTeddy" class="teddy-btn">
+                            <i class="fas fa-hands"></i> Give a Hug
+                        </button>
+                        <button id="feedTeddy" class="teddy-btn">
+                            <i class="fas fa-cookie-bite"></i> Feed Honey
+                        </button>
+                        <button id="playTeddy" class="teddy-btn">
+                            <i class="fas fa-gamepad"></i> Play Together
+                        </button>
+                        <button id="sleepTeddy" class="teddy-btn">
+                            <i class="fas fa-moon"></i> Put to Sleep
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hug Simulator -->
+        <div class="hug-simulator-section">
+            <h2><i class="fas fa-hands"></i> Virtual Hug Simulator</h2>
+            <p class="section-subtitle">Press and hold for a warm, comforting hug</p>
+            
+            <div class="hug-simulator" id="hugSimulator">
+                <div class="hug-circle">
+                    <div class="hug-icon">🤗</div>
+                    <p class="hug-instruction">Press & Hold to Hug</p>
+                </div>
+                <div class="hug-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Hug Duration:</span>
+                        <span class="metric-value" id="hugDuration">0.00s</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Hug Warmth:</span>
+                        <div class="warmth-indicator" id="warmthIndicator">
+                            <div class="warmth-fill"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Heartbeat:</span>
+                        <span class="metric-value" id="hugHeartbeat">72 BPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Teddy Memory Bank -->
+        <div class="memory-bank-section">
+            <h2><i class="fas fa-memory"></i> Teddy Memory Bank</h2>
+            <p class="section-subtitle">Store and revisit our special comfort moments</p>
+            
+            <div class="memory-bank">
+                <div class="memory-card" data-memory="That time we cuddled during the thunderstorm">
+                    <div class="memory-icon">⛈️</div>
+                    <h3>Stormy Comfort</h3>
+                    <p>You made me feel safe and warm</p>
+                    <button class="recall-btn">Recall Memory</button>
+                </div>
+                
+                <div class="memory-card" data-memory="Our movie marathon with endless snacks">
+                    <div class="memory-icon">🎬</div>
+                    <h3>Movie Nights</h3>
+                    <p>Cozy evenings together</p>
+                    <button class="recall-btn">Recall Memory</button>
+                </div>
+                
+                <div class="memory-card" data-memory="When you surprised me with breakfast in bed">
+                    <div class="memory-icon">🍳</div>
+                    <h3>Morning Surprise</h3>
+                    <p>The sweetest wake-up call</p>
+                    <button class="recall-btn">Recall Memory</button>
+                </div>
+                
+                <div class="memory-card" data-memory="Quiet evenings just talking for hours">
+                    <div class="memory-icon">💭</div>
+                    <h3>Heart-to-Heart</h3>
+                    <p>Conversations that never end</p>
+                    <button class="recall-btn">Recall Memory</button>
+                </div>
+            </div>
+            
+            <div class="memory-display">
+                <div class="memory-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p id="memoryDisplay">Click "Recall Memory" to see a special moment</p>
+                    <i class="fas fa-quote-right"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Our Comfort Moments Gallery -->
+        <div class="comfort-gallery-section">
+            <h2><i class="fas fa-images"></i> Our Comfort Moments Gallery</h2>
+            <p class="section-subtitle">Visual memories of warmth and comfort</p>
+            
+            <div class="comfort-gallery">
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background: linear-gradient(135deg, #ffb6c1, #ff8fa3);">
+                        <div class="img-emoji">🛋️</div>
+                    </div>
+                    <h3>Cozy Sofa Days</h3>
+                    <p>Lazy Sundays together</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background: linear-gradient(135deg, #a8e6cf, #dcedc1);">
+                        <div class="img-emoji">🌿</div>
+                    </div>
+                    <h3>Park Picnics</h3>
+                    <p>Sunny afternoons in nature</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background: linear-gradient(135deg, #ffd3b6, #ffaaa5);">
+                        <div class="img-emoji">☕</div>
+                    </div>
+                    <h3>Coffee Mornings</h3>
+                    <p>Warm cups and warm hearts</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background: linear-gradient(135deg, #d4a5a5, #ff8fa3);">
+                        <div class="img-emoji">📚</div>
+                    </div>
+                    <h3>Reading Together</h3>
+                    <p>Quiet moments of shared stories</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Build-a-Teddy Mini Game -->
+        <div class="build-teddy-section">
+            <h2><i class="fas fa-gamepad"></i> Build-a-Teddy Mini Game</h2>
+            <p class="section-subtitle">Customize your perfect teddy bear</p>
+            
+            <div class="build-game">
+                <div class="teddy-customizer">
+                    <div class="customizer-preview" id="teddyPreview">
+                        <div class="preview-teddy">
+                            <div class="preview-body" id="teddyBody">
+                                <div class="preview-head" id="teddyHead">
+                                    <div class="preview-ears" id="teddyEars"></div>
+                                    <div class="preview-face" id="teddyFace"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customizer-options">
+                        <div class="option-group">
+                            <h4>Fur Color</h4>
+                            <div class="color-options">
+                                <button class="color-btn" data-color="brown" data-part="fur">🧸 Brown</button>
+                                <button class="color-btn" data-color="cream" data-part="fur">🤍 Cream</button>
+                                <button class="color-btn" data-color="pink" data-part="fur">🎀 Pink</button>
+                                <button class="color-btn" data-color="blue" data-part="fur">💙 Blue</button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Accessories</h4>
+                            <div class="accessory-options">
+                                <button class="accessory-btn" data-accessory="bow">🎀 Bow Tie</button>
+                                <button class="accessory-btn" data-accessory="scarf">🧣 Scarf</button>
+                                <button class="accessory-btn" data-accessory="hat">🎩 Hat</button>
+                                <button class="accessory-btn" data-accessory="glasses">👓 Glasses</button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Expression</h4>
+                            <div class="expression-options">
+                                <button class="expression-btn" data-expression="happy">😊 Happy</button>
+                                <button class="expression-btn" data-expression="sleepy">😴 Sleepy</button>
+                                <button class="expression-btn" data-expression="loving">🥰 Loving</button>
+                                <button class="expression-btn" data-expression="playful">😄 Playful</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="teddy-result">
+                    <button id="createTeddy" class="action-btn">
+                        <i class="fas fa-magic"></i> Create My Teddy!
+                    </button>
+                    <p class="teddy-name-label">Name your teddy:</p>
+                    <input type="text" id="teddyName" placeholder="e.g., Cuddles" maxlength="20">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="chocolate-day.html"><i class="fas fa-arrow-left"></i> Previous: Chocolate Day</a>
+        <a href="promise-day.html" class="next-day">Next: Promise Day <i class="fas fa-arrow-right"></i></a>
+    </nav>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-little-birds-singing-in-the-trees-34.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hugSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cute-little-girl-hug-1902.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Teddy stats
+            let happiness = 75;
+            let warmth = 60;
+            let teddyIsSleeping = false;
+            
+            const teddy = document.getElementById('virtualTeddy');
+            const happinessBar = document.getElementById('happinessBar');
+            const happinessValue = document.getElementById('happinessValue');
+            const warmthBar = document.getElementById('warmthBar');
+            const warmthValue = document.getElementById('warmthValue');
+            
+            function updateStats() {
+                happiness = Math.min(Math.max(happiness, 0), 100);
+                warmth = Math.min(Math.max(warmth, 0), 100);
+                
+                happinessBar.style.width = `${happiness}%`;
+                happinessValue.textContent = `${happiness}%`;
+                warmthBar.style.width = `${warmth}%`;
+                warmthValue.textContent = `${warmth}%`;
+                
+                // Change color based on happiness
+                if (happiness < 30) {
+                    happinessBar.style.background = '#ff6b6b';
+                } else if (happiness < 60) {
+                    happinessBar.style.background = '#ffd166';
+                } else if (happiness < 85) {
+                    happinessBar.style.background = '#06d6a0';
+                } else {
+                    happinessBar.style.background = '#118ab2';
+                }
+                
+                // Change color based on warmth
+                if (warmth < 30) {
+                    warmthBar.style.background = '#a8e6cf';
+                } else if (warmth < 60) {
+                    warmthBar.style.background = '#ffd3b6';
+                } else if (warmth < 85) {
+                    warmthBar.style.background = '#ffaaa5';
+                } else {
+                    warmthBar.style.background = '#ff8b94';
+                }
+            }
+            
+            // Teddy interactions
+            document.getElementById('hugTeddy').addEventListener('click', function() {
+                if (teddyIsSleeping) {
+                    alert('🤫 Shhh... Teddy is sleeping!');
+                    return;
+                }
+                
+                teddy.classList.add('teddy-hug');
+                happiness += 10;
+                warmth += 15;
+                updateStats();
+                
+                // Play hug sound
+                const hugSound = document.getElementById('hugSound');
+                hugSound.currentTime = 0;
+                hugSound.play();
+                
+                // Show heart effect
+                createHeartEffect();
+                
+                setTimeout(() => {
+                    teddy.classList.remove('teddy-hug');
+                }, 2000);
+            });
+            
+            document.getElementById('feedTeddy').addEventListener('click', function() {
+                if (teddyIsSleeping) {
+                    alert('🤫 Shhh... Teddy is sleeping!');
+                    return;
+                }
+                
+                teddy.classList.add('teddy-eat');
+                happiness += 5;
+                updateStats();
+                
+                // Show honey effect
+                createHoneyEffect();
+                
+                setTimeout(() => {
+                    teddy.classList.remove('teddy-eat');
+                }, 1000);
+            });
+            
+            document.getElementById('playTeddy').addEventListener('click', function() {
+                if (teddyIsSleeping) {
+                    alert('🤫 Shhh... Teddy is sleeping!');
+                    return;
+                }
+                
+                teddy.classList.add('teddy-play');
+                happiness += 8;
+                updateStats();
+                
+                // Show play effect
+                createPlayEffect();
+                
+                setTimeout(() => {
+                    teddy.classList.remove('teddy-play');
+                }, 1500);
+            });
+            
+            document.getElementById('sleepTeddy').addEventListener('click', function() {
+                teddyIsSleeping = !teddyIsSleeping;
+                
+                if (teddyIsSleeping) {
+                    teddy.classList.add('teddy-sleep');
+                    this.innerHTML = '<i class="fas fa-sun"></i> Wake Up';
+                    this.classList.add('sleeping');
+                    
+                    // Add Zzz effect
+                    createSleepEffect();
+                } else {
+                    teddy.classList.remove('teddy-sleep');
+                    this.innerHTML = '<i class="fas fa-moon"></i> Put to Sleep';
+                    this.classList.remove('sleeping');
+                    happiness += 5; // Happiness from good sleep
+                    updateStats();
+                }
+            });
+            
+            // Hug simulator
+            const hugSimulator = document.getElementById('hugSimulator');
+            const hugCircle = hugSimulator.querySelector('.hug-circle');
+            const hugDuration = document.getElementById('hugDuration');
+            const warmthIndicator = document.getElementById('warmthIndicator').querySelector('.warmth-fill');
+            const hugHeartbeat = document.getElementById('hugHeartbeat');
+            
+            let hugStartTime = 0;
+            let hugTimer = null;
+            let isHugging = false;
+            let currentWarmth = 0;
+            let currentHeartbeat = 72;
+            
+            hugCircle.addEventListener('mousedown', startHug);
+            hugCircle.addEventListener('touchstart', startHug);
+            hugCircle.addEventListener('mouseup', endHug);
+            hugCircle.addEventListener('touchend', endHug);
+            hugCircle.addEventListener('mouseleave', endHug);
+            
+            function startHug() {
+                if (isHugging) return;
+                
+                isHugging = true;
+                hugStartTime = Date.now();
+                hugCircle.style.transform = 'scale(0.9)';
+                hugCircle.style.background = 'linear-gradient(135deg, #ff6b6b, #ff8e8e)';
+                
+                // Start hug timer
+                hugTimer = setInterval(() => {
+                    const duration = (Date.now() - hugStartTime) / 1000;
+                    hugDuration.textContent = duration.toFixed(2) + 's';
+                    
+                    // Increase warmth
+                    currentWarmth = Math.min(duration * 20, 100);
+                    warmthIndicator.style.width = `${currentWarmth}%`;
+                    
+                    // Increase heartbeat
+                    currentHeartbeat = 72 + Math.floor(duration * 10);
+                    hugHeartbeat.textContent = `${currentHeartbeat} BPM`;
+                    
+                    // Change background color based on warmth
+                    const red = 255;
+                    const green = 107 + Math.floor(148 * (currentWarmth / 100));
+                    const blue = 107;
+                    hugSimulator.style.background = `rgb(${red}, ${green}, ${blue})`;
+                }, 50);
+            }
+            
+            function endHug() {
+                if (!isHugging) return;
+                
+                isHugging = false;
+                clearInterval(hugTimer);
+                hugCircle.style.transform = 'scale(1)';
+                hugCircle.style.background = '';
+                
+                // Calculate final hug stats
+                const duration = (Date.now() - hugStartTime) / 1000;
+                
+                if (duration > 0.5) {
+                    // Show hug celebration
+                    const celebration = document.createElement('div');
+                    celebration.innerHTML = `
+                        <h3>🤗 Wonderful Hug! 🤗</h3>
+                        <p>That was a ${duration.toFixed(2)} second hug!</p>
+                        <p>Warmth level: ${Math.round(currentWarmth)}%</p>
+                    `;
+                    celebration.style.position = 'fixed';
+                    celebration.style.top = '50%';
+                    celebration.style.left = '50%';
+                    celebration.style.transform = 'translate(-50%, -50%)';
+                    celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                    celebration.style.padding = '30px';
+                    celebration.style.borderRadius = '20px';
+                    celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                    celebration.style.zIndex = '10000';
+                    celebration.style.textAlign = 'center';
+                    celebration.style.animation = 'fadeIn 0.5s ease';
+                    
+                    document.body.appendChild(celebration);
+                    
+                    setTimeout(() => {
+                        celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                        setTimeout(() => {
+                            celebration.remove();
+                        }, 500);
+                    }, 2000);
+                    
+                    // Update teddy stats
+                    happiness += Math.floor(duration * 2);
+                    warmth += Math.floor(currentWarmth / 10);
+                    updateStats();
+                }
+                
+                // Reset after delay
+                setTimeout(() => {
+                    hugSimulator.style.background = '';
+                    warmthIndicator.style.width = '0%';
+                    hugDuration.textContent = '0.00s';
+                    hugHeartbeat.textContent = '72 BPM';
+                }, 1000);
+            }
+            
+            // Memory bank
+            const memoryCards = document.querySelectorAll('.memory-card');
+            const memoryDisplay = document.getElementById('memoryDisplay');
+            
+            memoryCards.forEach(card => {
+                const recallBtn = card.querySelector('.recall-btn');
+                recallBtn.addEventListener('click', function() {
+                    const memory = card.getAttribute('data-memory');
+                    memoryDisplay.textContent = memory;
+                    memoryDisplay.parentElement.classList.add('memory-revealed');
+                    
+                    // Add glow effect to card
+                    card.classList.add('memory-active');
+                    setTimeout(() => {
+                        card.classList.remove('memory-active');
+                    }, 2000);
+                    
+                    // Increase happiness
+                    happiness += 3;
+                    updateStats();
+                });
+            });
+            
+            // Build-a-teddy game
+            let selectedColor = 'brown';
+            let selectedAccessories = [];
+            let selectedExpression = 'happy';
+            
+            // Color selection
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedColor = this.getAttribute('data-color');
+                    updateTeddyPreview();
+                    this.classList.add('selected');
+                    this.parentElement.querySelectorAll('.color-btn').forEach(b => {
+                        if (b !== this) b.classList.remove('selected');
+                    });
+                });
+            });
+            
+            // Accessory selection
+            document.querySelectorAll('.accessory-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const accessory = this.getAttribute('data-accessory');
+                    this.classList.toggle('selected');
+                    
+                    if (this.classList.contains('selected')) {
+                        selectedAccessories.push(accessory);
+                    } else {
+                        selectedAccessories = selectedAccessories.filter(a => a !== accessory);
+                    }
+                    
+                    updateTeddyPreview();
+                });
+            });
+            
+            // Expression selection
+            document.querySelectorAll('.expression-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedExpression = this.getAttribute('data-expression');
+                    updateTeddyPreview();
+                    this.classList.add('selected');
+                    this.parentElement.querySelectorAll('.expression-btn').forEach(b => {
+                        if (b !== this) b.classList.remove('selected');
+                    });
+                });
+            });
+            
+            function updateTeddyPreview() {
+                const teddyBody = document.getElementById('teddyBody');
+                const teddyHead = document.getElementById('teddyHead');
+                const teddyFace = document.getElementById('teddyFace');
+                
+                // Set color
+                const colors = {
+                    brown: '#8B4513',
+                    cream: '#FFF8DC',
+                    pink: '#FFB6C1',
+                    blue: '#ADD8E6'
+                };
+                teddyBody.style.background = colors[selectedColor] || colors.brown;
+                
+                // Set expression
+                const expressions = {
+                    happy: '😊',
+                    sleepy: '😴',
+                    loving: '🥰',
+                    playful: '😄'
+                };
+                teddyFace.textContent = expressions[selectedExpression] || expressions.happy;
+                teddyFace.style.fontSize = '2rem';
+                
+                // Clear and add accessories
+                const accessoriesContainer = document.getElementById('teddyEars');
+                accessoriesContainer.innerHTML = '';
+                
+                selectedAccessories.forEach(accessory => {
+                    const accessoryEmoji = {
+                        bow: '🎀',
+                        scarf: '🧣',
+                        hat: '🎩',
+                        glasses: '👓'
+                    }[accessory];
+                    
+                    if (accessoryEmoji) {
+                        const span = document.createElement('span');
+                        span.textContent = accessoryEmoji;
+                        span.style.margin = '0 5px';
+                        span.style.fontSize = '1.5rem';
+                        accessoriesContainer.appendChild(span);
+                    }
+                });
+            }
+            
+            document.getElementById('createTeddy').addEventListener('click', function() {
+                const teddyName = document.getElementById('teddyName').value || 'Cuddles';
+                
+                // Show celebration
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>🎉 ${teddyName} is Born! 🎉</h3>
+                    <p>Your ${selectedColor} teddy with ${selectedAccessories.length} accessories</p>
+                    <p>Expression: ${selectedExpression} ${{
+                        happy: '😊',
+                        sleepy: '😴',
+                        loving: '🥰',
+                        playful: '😄'
+                    }[selectedExpression]}</p>
+                    <p>May ${teddyName} bring you comfort and joy! 🧸💖</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '40px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 3000);
+                
+                // Play celebration sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+                sound.volume = 0.3;
+                sound.play();
+                
+                // Increase happiness
+                happiness += 15;
+                updateStats();
+                
+                // Save progress
+                if (window.VDay && VDay.saveProgress) {
+                    VDay.saveProgress(4, 'teddy-created');
+                }
+            });
+            
+            // Helper functions for effects
+            function createHeartEffect() {
+                for (let i = 0; i < 5; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💖';
+                    heart.style.position = 'absolute';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+                    heart.style.zIndex = '1000';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = `heart-float ${Math.random() * 1 + 1}s ease-out forwards`;
+                    
+                    teddy.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }
+            }
+            
+            function createHoneyEffect() {
+                const honey = document.createElement('div');
+                honey.innerHTML = '🍯';
+                honey.style.position = 'absolute';
+                honey.style.left = '50%';
+                honey.style.top = '50%';
+                honey.style.fontSize = '2rem';
+                honey.style.zIndex = '1000';
+                honey.style.pointerEvents = 'none';
+                honey.style.animation = 'honey-drop 1s ease-out forwards';
+                
+                teddy.appendChild(honey);
+                
+                setTimeout(() => {
+                    honey.remove();
+                }, 1000);
+            }
+            
+            function createPlayEffect() {
+                const ball = document.createElement('div');
+                ball.innerHTML = '⚽';
+                ball.style.position = 'absolute';
+                ball.style.left = '50%';
+                ball.style.top = '50%';
+                ball.style.fontSize = '2rem';
+                ball.style.zIndex = '1000';
+                ball.style.pointerEvents = 'none';
+                ball.style.animation = 'ball-bounce 1.5s ease-out forwards';
+                
+                teddy.appendChild(ball);
+                
+                setTimeout(() => {
+                    ball.remove();
+                }, 1500);
+            }
+            
+            function createSleepEffect() {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const zzz = document.createElement('div');
+                        zzz.innerHTML = '💤';
+                        zzz.style.position = 'absolute';
+                        zzz.style.left = `${60 + i * 10}%`;
+                        zzz.style.top = '20%';
+                        zzz.style.fontSize = '1.5rem';
+                        zzz.style.zIndex = '1000';
+                        zzz.style.pointerEvents = 'none';
+                        zzz.style.animation = 'zzz-float 2s ease-out infinite';
+                        
+                        teddy.appendChild(zzz);
+                    }, i * 300);
+                }
+            }
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            if (pageMusic) {
+                pageMusic.volume = 0.3;
+                setTimeout(() => {
+                    pageMusic.play().catch(e => console.log('Music play prevented'));
+                }, 1000);
+            }
+            
+            // Initialize preview
+            updateTeddyPreview();
+            updateStats();
+        });
+    </script>
+    <style>
+        .teddy-day {
+            background: linear-gradient(135deg, #ffd3b6, #ffaaa5);
+            min-height: 100vh;
+        }
+        
+        .teddy-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+        }
+        
+        .teddy-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .virtual-teddy {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .teddy-body {
+            position: absolute;
+            width: 150px;
+            height: 120px;
+            background: #8B4513;
+            border-radius: 50% 50% 40% 40%;
+            top: 80px;
+            left: 25px;
+            z-index: 1;
+        }
+        
+        .teddy-head {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #8B4513;
+            border-radius: 50%;
+            top: 0;
+            left: 50px;
+            z-index: 2;
+        }
+        
+        .teddy-ear {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #8B4513;
+            border-radius: 50%;
+            top: -10px;
+        }
+        
+        .left-ear {
+            left: 10px;
+        }
+        
+        .right-ear {
+            right: 10px;
+        }
+        
+        .teddy-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 60px;
+        }
+        
+        .teddy-eye {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 15px;
+        }
+        
+        .left-eye {
+            left: 15px;
+        }
+        
+        .right-eye {
+            right: 15px;
+        }
+        
+        .teddy-eye::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .teddy-nose {
+            position: absolute;
+            width: 15px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .teddy-mouth {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            border-bottom: 3px solid black;
+            border-radius: 0 0 30px 30px;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .teddy-arm {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: #8B4513;
+            border-radius: 20px;
+            top: 100px;
+            z-index: 0;
+        }
+        
+        .left-arm {
+            left: 0;
+            transform: rotate(30deg);
+        }
+        
+        .right-arm {
+            right: 0;
+            transform: rotate(-30deg);
+        }
+        
+        .teddy-leg {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: #8B4513;
+            border-radius: 20px;
+            bottom: 0;
+            z-index: 0;
+        }
+        
+        .left-leg {
+            left: 40px;
+        }
+        
+        .right-leg {
+            right: 40px;
+        }
+        
+        .teddy-hug .left-arm {
+            animation: hug-left 0.5s ease forwards;
+        }
+        
+        .teddy-hug .right-arm {
+            animation: hug-right 0.5s ease forwards;
+        }
+        
+        @keyframes hug-left {
+            to { transform: rotate(-30deg) translateX(-20px); }
+        }
+        
+        @keyframes hug-right {
+            to { transform: rotate(30deg) translateX(20px); }
+        }
+        
+        .teddy-eat {
+            animation: eat 0.5s ease infinite;
+        }
+        
+        @keyframes eat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .teddy-play {
+            animation: play 1s ease infinite;
+        }
+        
+        @keyframes play {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        .teddy-sleep {
+            animation: sleep 2s ease infinite;
+        }
+        
+        @keyframes sleep {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .teddy-controls {
+            margin-top: 40px;
+        }
+        
+        .teddy-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            min-width: 200px;
+        }
+        
+        .stat-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #8B4513;
+        }
+        
+        .stat-bar {
+            height: 20px;
+            background: #e6d5c3;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease, background 0.5s ease;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #8B4513;
+        }
+        
+        .teddy-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .teddy-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .teddy-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .teddy-btn.sleeping {
+            background: linear-gradient(135deg, #666, #888);
+        }
+        
+        .hug-simulator-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+        }
+        
+        .hug-simulator {
+            background: linear-gradient(135deg, #ffefef, #ffe6e6);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+        
+        .hug-circle {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .hug-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        .hug-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-label {
+            display: block;
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ff4081;
+        }
+        
+        .warmth-indicator {
+            width: 100px;
+            height: 20px;
+            background: #e6d5c3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .warmth-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #a8e6cf, #ffd3b6, #ffaaa5, #ff8b94);
+            border-radius: 10px;
+            transition: width 0.1s ease;
+        }
+        
+        .memory-bank-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+        }
+        
+        .memory-bank {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .memory-card {
+            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+        }
+        
+        .memory-card.memory-active {
+            animation: memory-glow 2s ease;
+        }
+        
+        @keyframes memory-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2); }
+            50% { box-shadow: 0 10px 40px rgba(255, 64, 129, 0.4); }
+        }
+        
+        .memory-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .recall-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .recall-btn:hover {
+            background: #A0522D;
+            transform: scale(1.05);
+        }
+        
+        .memory-display {
+            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 2px dashed #A0522D;
+        }
+        
+        .memory-content {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .memory-content i {
+            color: #8B4513;
+            font-size: 1.5rem;
+        }
+        
+        #memoryDisplay {
+            font-size: 1.2rem;
+            color: #5d001e;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .memory-revealed #memoryDisplay {
+            animation: text-reveal 0.5s ease;
+        }
+        
+        .comfort-gallery-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+        }
+        
+        .comfort-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            text-align: center;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .img-emoji {
+            font-size: 4rem;
+        }
+        
+        .build-teddy-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+        }
+        
+        .build-game {
+            margin-top: 40px;
+        }
+        
+        .teddy-customizer {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .customizer-preview {
+            flex: 1;
+            min-width: 300px;
+            background: #fff5e6;
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-teddy {
+            width: 200px;
+            height: 250px;
+            position: relative;
+        }
+        
+        .preview-body {
+            position: absolute;
+            width: 150px;
+            height: 120px;
+            border-radius: 50% 50% 40% 40%;
+            top: 80px;
+            left: 25px;
+        }
+        
+        .preview-head {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            top: 0;
+            left: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-face {
+            font-size: 2rem;
+        }
+        
+        .preview-ears {
+            margin-bottom: 10px;
+        }
+        
+        .customizer-options {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .option-group {
+            margin-bottom: 30px;
+        }
+        
+        .option-group h4 {
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .color-options,
+        .accessory-options,
+        .expression-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .color-btn,
+        .accessory-btn,
+        .expression-btn {
+            padding: 12px 20px;
+            border: 2px solid #A0522D;
+            background: white;
+            color: #8B4513;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .color-btn:hover,
+        .accessory-btn:hover,
+        .expression-btn:hover {
+            background: #fff5e6;
+        }
+        
+        .color-btn.selected,
+        .accessory-btn.selected,
+        .expression-btn.selected {
+            background: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+        
+        .teddy-result {
+            text-align: center;
+        }
+        
+        .teddy-name-label {
+            margin: 20px 0 10px;
+            color: #8B4513;
+            font-weight: 600;
+        }
+        
+        #teddyName {
+            padding: 12px 20px;
+            border: 2px solid #A0522D;
+            border-radius: 25px;
+            font-size: 1rem;
+            width: 200px;
+            text-align: center;
+        }
+        
+        /* Animation keyframes */
+        @keyframes heart-float {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx, 0), -100px) scale(0.5);
+            }
+        }
+        
+        @keyframes honey-drop {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 50px) scale(0.5);
+            }
+        }
+        
+        @keyframes ball-bounce {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            25% {
+                transform: translate(-100%, -100%) scale(0.8);
+            }
+            50% {
+                transform: translate(0%, -150%) scale(1);
+            }
+            75% {
+                transform: translate(100%, -100%) scale(0.8);
+            }
+        }
+        
+        @keyframes zzz-float {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        @keyframes text-reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+</html>
