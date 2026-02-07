@@ -1,1 +1,1758 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5: Promise Day - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="promise-day">
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    <div class="promise-particles"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="day-header">
+            <div class="day-icon-large">🤝</div>
+            <h1>Promise Day</h1>
+            <p class="day-subtitle">Day 5 - February 11</p>
+            <p class="day-tagline">Promises that build forever</p>
+        </div>
+        
+        <!-- Digital Promise Contract -->
+        <div class="contract-section">
+            <h2><i class="fas fa-file-contract"></i> Digital Promise Contract</h2>
+            <p class="section-subtitle">Sign our promises to each other</p>
+            
+            <div class="promise-contract">
+                <div class="contract-header">
+                    <div class="contract-seal">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Promise Contract of Love</h3>
+                    <p class="contract-date">February 11, 2025</p>
+                </div>
+                
+                <div class="contract-body">
+                    <div class="contract-clause">
+                        <div class="clause-number">01</div>
+                        <div class="clause-content">
+                            <h4>Promise of Honesty</h4>
+                            <p>I promise to always be truthful with you, to share my thoughts openly, and to communicate with kindness and respect.</p>
+                            <div class="signature-line">
+                                <span class="signature-label">My Signature:</span>
+                                <div class="signature-space" id="signature1"></div>
+                                <button class="sign-btn" data-signature="1">Sign Here</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <div class="clause-number">02</div>
+                        <div class="clause-content">
+                            <h4>Promise of Support</h4>
+                            <p>I promise to be your biggest supporter, to encourage your dreams, and to stand by you through every challenge.</p>
+                            <div class="signature-line">
+                                <span class="signature-label">My Signature:</span>
+                                <div class="signature-space" id="signature2"></div>
+                                <button class="sign-btn" data-signature="2">Sign Here</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <div class="clause-number">03</div>
+                        <div class="clause-content">
+                            <h4>Promise of Growth</h4>
+                            <p>I promise to grow with you, to learn from our experiences, and to become better together each day.</p>
+                            <div class="signature-line">
+                                <span class="signature-label">My Signature:</span>
+                                <div class="signature-space" id="signature3"></div>
+                                <button class="sign-btn" data-signature="3">Sign Here</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <div class="clause-number">04</div>
+                        <div class="clause-content">
+                            <h4>Promise of Forever</h4>
+                            <p>I promise to choose you every day, to love you endlessly, and to build a lifetime of beautiful memories together.</p>
+                            <div class="signature-line">
+                                <span class="signature-label">My Signature:</span>
+                                <div class="signature-space" id="signature4"></div>
+                                <button class="sign-btn" data-signature="4">Sign Here</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contract-footer">
+                    <div class="signature-total">
+                        <span>Promises Signed:</span>
+                        <span id="signedCount">0</span>/4
+                    </div>
+                    <button id="sealContract" class="action-btn" disabled>
+                        <i class="fas fa-seal"></i> Seal Our Contract
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Promise Tree -->
+        <div class="promise-tree-section">
+            <h2><i class="fas fa-tree"></i> Our Promise Tree</h2>
+            <p class="section-subtitle">Watch our promises grow and blossom</p>
+            
+            <div class="promise-tree-container">
+                <div class="tree">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves">
+                        <!-- Promise leaves will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tree-controls">
+                    <div class="tree-stats">
+                        <div class="tree-stat">
+                            <span class="stat-label">Promises Planted:</span>
+                            <span class="stat-value" id="promisesPlanted">0</span>
+                        </div>
+                        <div class="tree-stat">
+                            <span class="stat-label">Tree Growth:</span>
+                            <span class="stat-value" id="treeGrowth">0%</span>
+                        </div>
+                        <div class="tree-stat">
+                            <span class="stat-label">Love Nutrients:</span>
+                            <span class="stat-value" id="loveNutrients">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tree-actions">
+                        <button id="plantPromise" class="tree-btn">
+                            <i class="fas fa-seedling"></i> Plant a Promise
+                        </button>
+                        <button id="waterTree" class="tree-btn">
+                            <i class="fas fa-tint"></i> Water with Love
+                        </button>
+                        <button id="growTree" class="tree-btn">
+                            <i class="fas fa-arrow-up"></i> Make it Grow
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Future Time Capsule -->
+        <div class="time-capsule-section">
+            <h2><i class="fas fa-time-capsule"></i> Future Time Capsule</h2>
+            <p class="section-subtitle">Write promises for our future to be opened later</p>
+            
+            <div class="time-capsule">
+                <div class="capsule-container">
+                    <div class="capsule-top"></div>
+                    <div class="capsule-body">
+                        <div class="capsule-content">
+                            <h3>Messages to Our Future</h3>
+                            <textarea id="futureMessage" placeholder="Write a promise or message to our future selves..."></textarea>
+                            <div class="capsule-controls">
+                                <select id="openDate">
+                                    <option value="1">Open in 1 Month</option>
+                                    <option value="3">Open in 3 Months</option>
+                                    <option value="6">Open in 6 Months</option>
+                                    <option value="12" selected>Open in 1 Year</option>
+                                </select>
+                                <button id="sealCapsule" class="capsule-btn">
+                                    <i class="fas fa-lock"></i> Seal in Capsule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="capsule-bottom"></div>
+                </div>
+                
+                <div class="capsule-messages">
+                    <h4>Sealed Messages</h4>
+                    <div class="messages-list" id="messagesList">
+                        <p class="empty-message">No messages sealed yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Bridge Builder -->
+        <div class="trust-bridge-section">
+            <h2><i class="fas fa-bridge"></i> Trust Bridge Builder</h2>
+            <p class="section-subtitle">Build our bridge of trust with promises</p>
+            
+            <div class="bridge-builder">
+                <div class="bridge-container">
+                    <div class="bridge-base"></div>
+                    <div class="bridge-pillars" id="bridgePillars">
+                        <!-- Pillars will be added by JavaScript -->
+                    </div>
+                    <div class="bridge-deck" id="bridgeDeck">
+                        <!-- Bridge pieces will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="bridge-controls">
+                    <div class="bridge-stats">
+                        <div class="bridge-stat">
+                            <span class="stat-label">Trust Level:</span>
+                            <span class="stat-value" id="trustLevel">0%</span>
+                        </div>
+                        <div class="bridge-stat">
+                            <span class="stat-label">Bridge Strength:</span>
+                            <span class="stat-value" id="bridgeStrength">0%</span>
+                        </div>
+                        <div class="bridge-stat">
+                            <span class="stat-label">Pillars Built:</span>
+                            <span class="stat-value" id="pillarsBuilt">0</span>/10
+                        </div>
+                    </div>
+                    
+                    <div class="promise-actions">
+                        <button class="promise-action" data-promise="honesty">
+                            <i class="fas fa-comment-dots"></i> Promise Honesty
+                        </button>
+                        <button class="promise-action" data-promise="loyalty">
+                            <i class="fas fa-shield-alt"></i> Promise Loyalty
+                        </button>
+                        <button class="promise-action" data-promise="understanding">
+                            <i class="fas fa-heart"></i> Promise Understanding
+                        </button>
+                        <button class="promise-action" data-promise="patience">
+                            <i class="fas fa-hourglass-half"></i> Promise Patience
+                        </button>
+                    </div>
+                    
+                    <button id="completeBridge" class="action-btn" disabled>
+                        <i class="fas fa-flag-checkered"></i> Complete Our Bridge
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Promise Constellation -->
+        <div class="constellation-section">
+            <h2><i class="fas fa-star"></i> Our Promise Constellation</h2>
+            <p class="section-subtitle">Each promise shines like a star in our love sky</p>
+            
+            <div class="constellation-container">
+                <div class="night-sky">
+                    <!-- Stars will be added by JavaScript -->
+                </div>
+                <div class="constellation-controls">
+                    <button id="addStar" class="constellation-btn">
+                        <i class="fas fa-plus"></i> Add Promise Star
+                    </button>
+                    <button id="connectStars" class="constellation-btn">
+                        <i class="fas fa-link"></i> Connect Stars
+                    </button>
+                    <button id="wishStar" class="constellation-btn">
+                        <i class="fas fa-wand-magic-sparkles"></i> Make a Wish
+                    </button>
+                </div>
+                
+                <div class="constellation-info">
+                    <div class="star-count">
+                        <i class="fas fa-star"></i>
+                        <span>Stars in our sky: <span id="starCount">0</span></span>
+                    </div>
+                    <div class="constellation-name">
+                        <input type="text" id="constellationName" placeholder="Name our constellation..." maxlength="30">
+                        <button id="saveConstellation" class="save-btn">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="teddy-day.html"><i class="fas fa-arrow-left"></i> Previous: Teddy Day</a>
+        <a href="hug-day.html" class="next-day">Next: Hug Day <i class="fas fa-arrow-right"></i></a>
+    </nav>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-ethereal-fairytale-667.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="signSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-pen-scribble-on-paper-2205.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Digital Promise Contract
+            const signBtns = document.querySelectorAll('.sign-btn');
+            const signedCount = document.getElementById('signedCount');
+            const sealContractBtn = document.getElementById('sealContract');
+            let signatures = 0;
+            
+            signBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const signatureId = this.getAttribute('data-signature');
+                    const signatureSpace = document.getElementById(`signature${signatureId}`);
+                    
+                    if (signatureSpace.classList.contains('signed')) return;
+                    
+                    // Create signature animation
+                    signatureSpace.innerHTML = '<i class="fas fa-heart signature-heart"></i>';
+                    signatureSpace.classList.add('signed');
+                    this.textContent = 'Signed!';
+                    this.classList.add('signed');
+                    this.disabled = true;
+                    
+                    // Play signing sound
+                    const signSound = document.getElementById('signSound');
+                    signSound.currentTime = 0;
+                    signSound.play();
+                    
+                    // Update count
+                    signatures++;
+                    signedCount.textContent = signatures;
+                    
+                    // Add sparkle effect
+                    createSparkleEffect(signatureSpace);
+                    
+                    // Enable seal button when all are signed
+                    if (signatures === 4) {
+                        sealContractBtn.disabled = false;
+                        sealContractBtn.innerHTML = '<i class="fas fa-seal"></i> Seal Our Contract 💖';
+                    }
+                });
+            });
+            
+            sealContractBtn.addEventListener('click', function() {
+                // Show celebration
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>💝 Contract Sealed! 💝</h3>
+                    <p>Our promises are now officially sealed with love!</p>
+                    <p>May these promises guide our journey forever! ✨</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '40px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                // Add golden seal effect
+                document.querySelector('.contract-seal').classList.add('sealed');
+                
+                // Play celebration sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+                sound.volume = 0.3;
+                sound.play();
+                
+                // Save progress
+                if (window.VDay && VDay.saveProgress) {
+                    VDay.saveProgress(5, 'contract-sealed');
+                }
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 3000);
+            });
+            
+            // Promise Tree
+            const treeLeaves = document.querySelector('.tree-leaves');
+            const promisesPlanted = document.getElementById('promisesPlanted');
+            const treeGrowth = document.getElementById('treeGrowth');
+            const loveNutrients = document.getElementById('loveNutrients');
+            const plantPromiseBtn = document.getElementById('plantPromise');
+            const waterTreeBtn = document.getElementById('waterTree');
+            const growTreeBtn = document.getElementById('growTree');
+            
+            let promises = 0;
+            let growth = 0;
+            let nutrients = 100;
+            
+            function updateTreeStats() {
+                promisesPlanted.textContent = promises;
+                treeGrowth.textContent = `${growth}%`;
+                loveNutrients.textContent = `${nutrients}%`;
+                
+                // Update tree appearance
+                treeLeaves.style.transform = `scale(${1 + growth / 200})`;
+                
+                // Update nutrients color
+                if (nutrients < 30) {
+                    loveNutrients.style.color = '#ff6b6b';
+                } else if (nutrients < 60) {
+                    loveNutrients.style.color = '#ffd166';
+                } else {
+                    loveNutrients.style.color = '#06d6a0';
+                }
+            }
+            
+            plantPromiseBtn.addEventListener('click', function() {
+                if (nutrients < 10) {
+                    alert('🌱 Need more love nutrients to plant promises!');
+                    return;
+                }
+                
+                promises++;
+                nutrients -= 10;
+                
+                // Add a leaf to the tree
+                const leaf = document.createElement('div');
+                leaf.className = 'promise-leaf';
+                leaf.innerHTML = '💖';
+                leaf.style.left = `${Math.random() * 80 + 10}%`;
+                leaf.style.top = `${Math.random() * 80 + 10}%`;
+                leaf.style.animation = 'leaf-grow 1s ease forwards';
+                
+                treeLeaves.appendChild(leaf);
+                
+                // Play planting sound
+                const plantSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-plant-growing-756.mp3');
+                plantSound.volume = 0.3;
+                plantSound.play();
+                
+                updateTreeStats();
+            });
+            
+            waterTreeBtn.addEventListener('click', function() {
+                if (nutrients >= 100) {
+                    alert('💧 Tree is fully nourished with love!');
+                    return;
+                }
+                
+                nutrients = Math.min(nutrients + 20, 100);
+                
+                // Create water effect
+                createWaterEffect();
+                
+                // Play water sound
+                const waterSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-water-splash-1180.mp3');
+                waterSound.volume = 0.3;
+                waterSound.play();
+                
+                updateTreeStats();
+            });
+            
+            growTreeBtn.addEventListener('click', function() {
+                if (promises < 3) {
+                    alert('🌳 Need at least 3 promises to grow!');
+                    return;
+                }
+                
+                if (nutrients < 30) {
+                    alert('🌳 Need more love nutrients to grow!');
+                    return;
+                }
+                
+                growth = Math.min(growth + 20, 100);
+                nutrients -= 30;
+                
+                // Create growth effect
+                createGrowthEffect();
+                
+                // Play growth sound
+                const growSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-3006.mp3');
+                growSound.volume = 0.3;
+                growSound.play();
+                
+                updateTreeStats();
+            });
+            
+            // Time Capsule
+            const futureMessage = document.getElementById('futureMessage');
+            const sealCapsuleBtn = document.getElementById('sealCapsule');
+            const messagesList = document.getElementById('messagesList');
+            const openDate = document.getElementById('openDate');
+            
+            sealCapsuleBtn.addEventListener('click', function() {
+                const message = futureMessage.value.trim();
+                if (!message) {
+                    alert('✍️ Please write a message first!');
+                    return;
+                }
+                
+                const months = parseInt(openDate.value);
+                const openDateObj = new Date();
+                openDateObj.setMonth(openDateObj.getMonth() + months);
+                
+                // Create message item
+                const messageItem = document.createElement('div');
+                messageItem.className = 'capsule-message';
+                messageItem.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-text">${message.substring(0, 50)}${message.length > 50 ? '...' : ''}</div>
+                        <div class="message-date">Opens: ${openDateObj.toLocaleDateString()}</div>
+                    </div>
+                    <div class="message-status">
+                        <i class="fas fa-lock"></i> Sealed
+                    </div>
+                `;
+                
+                // Remove empty message if exists
+                const emptyMsg = messagesList.querySelector('.empty-message');
+                if (emptyMsg) emptyMsg.remove();
+                
+                messagesList.appendChild(messageItem);
+                
+                // Clear input
+                futureMessage.value = '';
+                
+                // Play sealing sound
+                const sealSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-bottle-cap-sealed-409.mp3');
+                sealSound.volume = 0.3;
+                sealSound.play();
+                
+                // Show confirmation
+                const confirmation = document.createElement('div');
+                confirmation.textContent = '📜 Message sealed in time capsule!';
+                confirmation.style.position = 'fixed';
+                confirmation.style.bottom = '100px';
+                confirmation.style.left = '50%';
+                confirmation.style.transform = 'translateX(-50%)';
+                confirmation.style.background = 'linear-gradient(135deg, #32CD32, #228B22)';
+                confirmation.style.color = 'white';
+                confirmation.style.padding = '15px 25px';
+                confirmation.style.borderRadius = '25px';
+                confirmation.style.boxShadow = '0 10px 30px rgba(50, 205, 50, 0.5)';
+                confirmation.style.zIndex = '10000';
+                confirmation.style.animation = 'fadeInUp 0.5s ease';
+                
+                document.body.appendChild(confirmation);
+                
+                setTimeout(() => {
+                    confirmation.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        confirmation.remove();
+                    }, 500);
+                }, 2000);
+            });
+            
+            // Trust Bridge Builder
+            const bridgePillars = document.getElementById('bridgePillars');
+            const bridgeDeck = document.getElementById('bridgeDeck');
+            const trustLevel = document.getElementById('trustLevel');
+            const bridgeStrength = document.getElementById('bridgeStrength');
+            const pillarsBuilt = document.getElementById('pillarsBuilt');
+            const completeBridgeBtn = document.getElementById('completeBridge');
+            const promiseActions = document.querySelectorAll('.promise-action');
+            
+            let trust = 0;
+            let strength = 0;
+            let pillars = 0;
+            
+            function updateBridgeStats() {
+                trustLevel.textContent = `${trust}%`;
+                bridgeStrength.textContent = `${strength}%`;
+                pillarsBuilt.textContent = `${pillars}/10`;
+                
+                // Enable complete button when bridge is strong enough
+                if (strength >= 100 && pillars >= 10) {
+                    completeBridgeBtn.disabled = false;
+                    completeBridgeBtn.innerHTML = '<i class="fas fa-flag-checkered"></i> Complete Our Bridge 🎉';
+                }
+            }
+            
+            promiseActions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (pillars >= 10) {
+                        alert('🌉 Bridge is complete!');
+                        return;
+                    }
+                    
+                    const promiseType = this.getAttribute('data-promise');
+                    
+                    // Add pillar
+                    pillars++;
+                    trust += 10;
+                    strength += 10;
+                    
+                    // Create pillar
+                    const pillar = document.createElement('div');
+                    pillar.className = 'bridge-pillar';
+                    pillar.style.left = `${(pillars * 8)}%`;
+                    pillar.style.animation = 'pillar-rise 1s ease forwards';
+                    bridgePillars.appendChild(pillar);
+                    
+                    // Add bridge piece
+                    if (pillars > 1) {
+                        const piece = document.createElement('div');
+                        piece.className = 'bridge-piece';
+                        piece.style.left = `${((pillars - 1) * 8) - 4}%`;
+                        piece.style.width = '8%';
+                        piece.style.animation = 'piece-extend 1s ease forwards';
+                        bridgeDeck.appendChild(piece);
+                    }
+                    
+                    // Play construction sound
+                    const buildSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-building-tool-973.mp3');
+                    buildSound.volume = 0.3;
+                    buildSound.play();
+                    
+                    // Add promise effect
+                    createPromiseEffect(this);
+                    
+                    updateBridgeStats();
+                });
+            });
+            
+            completeBridgeBtn.addEventListener('click', function() {
+                // Show bridge completion
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>🌉 Bridge of Trust Complete! 🌉</h3>
+                    <p>Our trust level: ${trust}%</p>
+                    <p>Bridge strength: ${strength}%</p>
+                    <p>Together we've built an unbreakable connection! 💖</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '40px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                // Add bridge glow
+                document.querySelector('.bridge-container').classList.add('bridge-complete');
+                
+                // Play celebration sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+                sound.volume = 0.3;
+                sound.play();
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 3000);
+            });
+            
+            // Promise Constellation
+            const nightSky = document.querySelector('.night-sky');
+            const addStarBtn = document.getElementById('addStar');
+            const connectStarsBtn = document.getElementById('connectStars');
+            const wishStarBtn = document.getElementById('wishStar');
+            const starCount = document.getElementById('starCount');
+            const constellationName = document.getElementById('constellationName');
+            const saveConstellationBtn = document.getElementById('saveConstellation');
+            
+            let stars = [];
+            let connections = [];
+            
+            addStarBtn.addEventListener('click', function() {
+                if (stars.length >= 20) {
+                    alert('✨ Maximum 20 stars in our constellation!');
+                    return;
+                }
+                
+                // Create star
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = '⭐';
+                star.style.left = `${Math.random() * 90 + 5}%`;
+                star.style.top = `${Math.random() * 90 + 5}%`;
+                star.style.animation = 'star-twinkle 2s infinite';
+                star.dataset.id = stars.length;
+                
+                // Make star draggable
+                makeDraggable(star);
+                
+                nightSky.appendChild(star);
+                stars.push({
+                    element: star,
+                    x: parseFloat(star.style.left),
+                    y: parseFloat(star.style.top)
+                });
+                
+                starCount.textContent = stars.length;
+                
+                // Play star sound
+                const starSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-3006.mp3');
+                starSound.volume = 0.2;
+                starSound.play();
+            });
+            
+            connectStarsBtn.addEventListener('click', function() {
+                if (stars.length < 2) {
+                    alert('⭐ Need at least 2 stars to connect!');
+                    return;
+                }
+                
+                // Clear old connections
+                document.querySelectorAll('.connection').forEach(c => c.remove());
+                connections = [];
+                
+                // Connect all stars
+                for (let i = 0; i < stars.length - 1; i++) {
+                    for (let j = i + 1; j < stars.length; j++) {
+                        createConnection(stars[i], stars[j]);
+                    }
+                }
+                
+                // Play connection sound
+                const connectSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-electronic-retro-block-hit-2185.mp3');
+                connectSound.volume = 0.3;
+                connectSound.play();
+            });
+            
+            wishStarBtn.addEventListener('click', function() {
+                if (stars.length === 0) {
+                    alert('⭐ Add some stars first to make a wish!');
+                    return;
+                }
+                
+                // Make all stars sparkle
+                stars.forEach(star => {
+                    star.element.style.animation = 'star-sparkle 1s ease infinite';
+                });
+                
+                // Show wish message
+                const wish = document.createElement('div');
+                wish.innerHTML = `
+                    <h3>🌠 Wish Upon Our Stars! 🌠</h3>
+                    <p>May all our promises come true</p>
+                    <p>And our love shine forever bright! 💫</p>
+                `;
+                wish.style.position = 'fixed';
+                wish.style.top = '50%';
+                wish.style.left = '50%';
+                wish.style.transform = 'translate(-50%, -50%)';
+                wish.style.background = 'rgba(255, 255, 255, 0.95)';
+                wish.style.padding = '40px';
+                wish.style.borderRadius = '20px';
+                wish.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                wish.style.zIndex = '10000';
+                wish.style.textAlign = 'center';
+                wish.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(wish);
+                
+                // Play wish sound
+                const wishSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fairy-magic-sparkle-931.mp3');
+                wishSound.volume = 0.3;
+                wishSound.play();
+                
+                // Reset animations after 3 seconds
+                setTimeout(() => {
+                    stars.forEach(star => {
+                        star.element.style.animation = 'star-twinkle 2s infinite';
+                    });
+                    wish.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        wish.remove();
+                    }, 500);
+                }, 3000);
+            });
+            
+            saveConstellationBtn.addEventListener('click', function() {
+                const name = constellationName.value.trim();
+                if (!name) {
+                    alert('📝 Please name our constellation!');
+                    return;
+                }
+                
+                if (stars.length === 0) {
+                    alert('⭐ Add some stars first!');
+                    return;
+                }
+                
+                // Show saved message
+                const saved = document.createElement('div');
+                saved.innerHTML = `
+                    <h3>💫 Constellation Saved! 💫</h3>
+                    <p>"${name}" now has ${stars.length} stars</p>
+                    <p>Our promises will shine forever! ✨</p>
+                `;
+                saved.style.position = 'fixed';
+                saved.style.top = '50%';
+                saved.style.left = '50%';
+                saved.style.transform = 'translate(-50%, -50%)';
+                saved.style.background = 'rgba(255, 255, 255, 0.95)';
+                saved.style.padding = '40px';
+                saved.style.borderRadius = '20px';
+                saved.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                saved.style.zIndex = '10000';
+                saved.style.textAlign = 'center';
+                saved.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(saved);
+                
+                // Play save sound
+                const saveSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+                saveSound.volume = 0.3;
+                saveSound.play();
+                
+                setTimeout(() => {
+                    saved.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        saved.remove();
+                    }, 500);
+                }, 3000);
+            });
+            
+            // Helper functions
+            function createSparkleEffect(element) {
+                for (let i = 0; i < 5; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = `${Math.random() * 100}%`;
+                    sparkle.style.top = `${Math.random() * 100}%`;
+                    sparkle.style.animation = `sparkle ${Math.random() * 0.5 + 0.5}s ease-out`;
+                    
+                    element.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }
+            }
+            
+            function createWaterEffect() {
+                const water = document.createElement('div');
+                water.className = 'water-effect';
+                water.innerHTML = '💧';
+                water.style.position = 'absolute';
+                water.style.left = '50%';
+                water.style.top = '0';
+                water.style.fontSize = '2rem';
+                water.style.animation = 'water-fall 1s ease-out forwards';
+                
+                treeLeaves.appendChild(water);
+                
+                setTimeout(() => {
+                    water.remove();
+                }, 1000);
+            }
+            
+            function createGrowthEffect() {
+                const growth = document.createElement('div');
+                growth.className = 'growth-effect';
+                growth.innerHTML = '🌱';
+                growth.style.position = 'absolute';
+                growth.style.left = '50%';
+                growth.style.top = '50%';
+                growth.style.fontSize = '3rem';
+                growth.style.animation = 'growth-pulse 1s ease-out forwards';
+                
+                treeLeaves.appendChild(growth);
+                
+                setTimeout(() => {
+                    growth.remove();
+                }, 1000);
+            }
+            
+            function createPromiseEffect(element) {
+                const promise = document.createElement('div');
+                promise.className = 'promise-effect';
+                promise.innerHTML = '💖';
+                promise.style.position = 'fixed';
+                promise.style.left = `${element.getBoundingClientRect().left + element.offsetWidth / 2}px`;
+                promise.style.top = `${element.getBoundingClientRect().top + element.offsetHeight / 2}px`;
+                promise.style.fontSize = '1.5rem';
+                promise.style.animation = 'promise-float 1s ease-out forwards';
+                
+                document.body.appendChild(promise);
+                
+                setTimeout(() => {
+                    promise.remove();
+                }, 1000);
+            }
+            
+            function makeDraggable(element) {
+                let isDragging = false;
+                let offsetX, offsetY;
+                
+                element.addEventListener('mousedown', startDrag);
+                element.addEventListener('touchstart', startDrag);
+                
+                function startDrag(e) {
+                    isDragging = true;
+                    const rect = element.getBoundingClientRect();
+                    
+                    if (e.type === 'mousedown') {
+                        offsetX = e.clientX - rect.left;
+                        offsetY = e.clientY - rect.top;
+                        document.addEventListener('mousemove', drag);
+                        document.addEventListener('mouseup', stopDrag);
+                    } else {
+                        offsetX = e.touches[0].clientX - rect.left;
+                        offsetY = e.touches[0].clientY - rect.top;
+                        document.addEventListener('touchmove', drag);
+                        document.addEventListener('touchend', stopDrag);
+                    }
+                    
+                    element.style.cursor = 'grabbing';
+                }
+                
+                function drag(e) {
+                    if (!isDragging) return;
+                    
+                    let clientX, clientY;
+                    if (e.type === 'mousemove') {
+                        clientX = e.clientX;
+                        clientY = e.clientY;
+                    } else {
+                        clientX = e.touches[0].clientX;
+                        clientY = e.touches[0].clientY;
+                    }
+                    
+                    const parentRect = nightSky.getBoundingClientRect();
+                    const x = ((clientX - offsetX - parentRect.left) / parentRect.width) * 100;
+                    const y = ((clientY - offsetY - parentRect.top) / parentRect.height) * 100;
+                    
+                    element.style.left = `${Math.max(0, Math.min(95, x))}%`;
+                    element.style.top = `${Math.max(0, Math.min(95, y))}%`;
+                    
+                    // Update star position in array
+                    const starId = parseInt(element.dataset.id);
+                    if (stars[starId]) {
+                        stars[starId].x = x;
+                        stars[starId].y = y;
+                    }
+                }
+                
+                function stopDrag() {
+                    isDragging = false;
+                    element.style.cursor = 'grab';
+                    document.removeEventListener('mousemove', drag);
+                    document.removeEventListener('mouseup', stopDrag);
+                    document.removeEventListener('touchmove', drag);
+                    document.removeEventListener('touchend', stopDrag);
+                }
+                
+                element.style.cursor = 'grab';
+            }
+            
+            function createConnection(star1, star2) {
+                const connection = document.createElement('div');
+                connection.className = 'connection';
+                
+                // Calculate position and rotation
+                const x1 = parseFloat(star1.element.style.left);
+                const y1 = parseFloat(star1.element.style.top);
+                const x2 = parseFloat(star2.element.style.left);
+                const y2 = parseFloat(star2.element.style.top);
+                
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                
+                connection.style.left = `${x1}%`;
+                connection.style.top = `${y1}%`;
+                connection.style.width = `${distance}%`;
+                connection.style.transform = `rotate(${angle}deg)`;
+                connection.style.animation = 'connection-glow 2s ease-in-out infinite';
+                
+                nightSky.appendChild(connection);
+                connections.push(connection);
+            }
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            if (pageMusic) {
+                pageMusic.volume = 0.3;
+                setTimeout(() => {
+                    pageMusic.play().catch(e => console.log('Music play prevented'));
+                }, 1000);
+            }
+            
+            // Initialize stats
+            updateTreeStats();
+            updateBridgeStats();
+        });
+    </script>
+    <style>
+        .promise-day {
+            background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+            min-height: 100vh;
+        }
+        
+        .contract-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(168, 230, 207, 0.3);
+        }
+        
+        .promise-contract {
+            background: #fffef0;
+            border-radius: 20px;
+            padding: 40px;
+            border: 3px solid #a8e6cf;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .contract-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .contract-seal {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff4081, #ff79b0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .contract-seal.sealed {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            animation: seal-glow 2s infinite;
+        }
+        
+        @keyframes seal-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+        }
+        
+        .contract-date {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .contract-body {
+            margin: 40px 0;
+        }
+        
+        .contract-clause {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px dashed #a8e6cf;
+        }
+        
+        .clause-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff4081;
+            min-width: 60px;
+        }
+        
+        .clause-content {
+            flex: 1;
+        }
+        
+        .clause-content h4 {
+            color: #ff4081;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .signature-line {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .signature-label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .signature-space {
+            flex: 1;
+            height: 40px;
+            border-bottom: 2px solid #a8e6cf;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .signature-space.signed {
+            border-bottom-color: #ff4081;
+        }
+        
+        .signature-heart {
+            color: #ff4081;
+            font-size: 1.5rem;
+            animation: heartbeat 1s infinite;
+        }
+        
+        .sign-btn {
+            padding: 10px 20px;
+            background: #a8e6cf;
+            color: #333;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .sign-btn:hover {
+            background: #8dd7b9;
+        }
+        
+        .sign-btn.signed {
+            background: #ff4081;
+            color: white;
+        }
+        
+        .contract-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #a8e6cf;
+        }
+        
+        .signature-total {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff4081;
+        }
+        
+        .signature-total span:last-child {
+            font-size: 1.5rem;
+        }
+        
+        .promise-tree-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(168, 230, 207, 0.3);
+        }
+        
+        .promise-tree-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .tree {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            height: 300px;
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            width: 40px;
+            height: 100px;
+            background: #8B4513;
+            border-radius: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .tree-leaves {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #32CD32;
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.5s ease;
+        }
+        
+        .promise-leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+        
+        @keyframes leaf-grow {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .tree-controls {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .tree-stats {
+            background: #f0f9f5;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .tree-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .tree-stat:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #ff4081;
+        }
+        
+        .tree-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .tree-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #a8e6cf, #8dd7b9);
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .tree-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(141, 215, 185, 0.4);
+        }
+        
+        .water-effect {
+            animation: water-fall 1s ease-out forwards;
+        }
+        
+        @keyframes water-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.5);
+            }
+        }
+        
+        .growth-effect {
+            animation: growth-pulse 1s ease-out forwards;
+        }
+        
+        @keyframes growth-pulse {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(3);
+            }
+        }
+        
+        .time-capsule-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(168, 230, 207, 0.3);
+        }
+        
+        .time-capsule {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .capsule-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .capsule-top,
+        .capsule-bottom {
+            width: 150px;
+            height: 50px;
+            background: linear-gradient(135deg, #666, #888);
+            border-radius: 75px 75px 0 0;
+        }
+        
+        .capsule-bottom {
+            border-radius: 0 0 75px 75px;
+        }
+        
+        .capsule-body {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #888, #aaa);
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        
+        .capsule-content {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        #futureMessage {
+            width: 100%;
+            height: 100px;
+            padding: 15px;
+            border: 2px solid #a8e6cf;
+            border-radius: 10px;
+            resize: vertical;
+            margin: 15px 0;
+            font-family: inherit;
+        }
+        
+        .capsule-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #openDate {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #a8e6cf;
+            border-radius: 10px;
+            background: white;
+        }
+        
+        .capsule-btn {
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .capsule-messages {
+            flex: 1;
+            min-width: 300px;
+            background: #f0f9f5;
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .messages-list {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .capsule-message {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff4081;
+        }
+        
+        .message-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .message-status {
+            color: #ff4081;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        .trust-bridge-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(168, 230, 207, 0.3);
+        }
+        
+        .bridge-builder {
+            margin-top: 40px;
+        }
+        
+        .bridge-container {
+            position: relative;
+            height: 200px;
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #a8e6cf, #dcedc1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .bridge-base {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: #8B4513;
+        }
+        
+        .bridge-pillars {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            height: 100px;
+        }
+        
+        .bridge-pillar {
+            position: absolute;
+            width: 20px;
+            height: 0;
+            background: #666;
+            bottom: 0;
+            animation: pillar-rise 1s ease forwards;
+        }
+        
+        @keyframes pillar-rise {
+            to { height: 100px; }
+        }
+        
+        .bridge-deck {
+            position: absolute;
+            bottom: 120px;
+            width: 100%;
+            height: 10px;
+        }
+        
+        .bridge-piece {
+            position: absolute;
+            height: 10px;
+            background: #888;
+            animation: piece-extend 1s ease forwards;
+        }
+        
+        @keyframes piece-extend {
+            from { width: 0; }
+            to { width: 8%; }
+        }
+        
+        .bridge-container.bridge-complete {
+            animation: bridge-glow 2s infinite;
+        }
+        
+        @keyframes bridge-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 64, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 64, 129, 0.6); }
+        }
+        
+        .bridge-controls {
+            background: #f0f9f5;
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .bridge-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .bridge-stat {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+        }
+        
+        .promise-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .promise-action {
+            padding: 15px;
+            border: 2px solid #a8e6cf;
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .promise-action:hover {
+            background: #a8e6cf;
+            transform: translateY(-3px);
+        }
+        
+        .promise-effect {
+            animation: promise-float 1s ease-out forwards;
+        }
+        
+        @keyframes promise-float {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(0, -100px) scale(0.5);
+            }
+        }
+        
+        .constellation-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(168, 230, 207, 0.3);
+        }
+        
+        .constellation-container {
+            margin-top: 40px;
+        }
+        
+        .night-sky {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(to bottom, #0a0a2a, #1a1a3a);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            font-size: 1.5rem;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes star-sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        .connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            transform-origin: 0 0;
+        }
+        
+        @keyframes connection-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .constellation-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .constellation-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .constellation-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .constellation-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #f0f9f5;
+            border-radius: 20px;
+            padding: 25px;
+        }
+        
+        .star-count {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff4081;
+        }
+        
+        .constellation-name {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        #constellationName {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #a8e6cf;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+        
+        .save-btn {
+            padding: 12px 25px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 1s ease-out;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        
+        .promise-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</body>
+</html>
