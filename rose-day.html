@@ -171,19 +171,6 @@
       music.play().catch(()=>{});
     }
 
-    function takeRose() {
-      document.getElementById('choice').style.display = 'none';
-      const r = document.getElementById('reveal');
-      r.style.display = 'block';
-      r.innerHTML = "You didn’t just take a rose 🌹<br><br>You took my attention,<br>my smile,<br>and a piece of my heart —<br>the part that feels safest with you.";
-      setTimeout(()=>{
-        const f = document.getElementById('final');
-        f.style.display = 'block';
-        f.innerHTML = "Happy Rose Day 💖<br>This is only the beginning.";
-      }, 2500);
-    }
-
-    let teaseCount = 0;
     let teaseCount = 0;
     function tease() {
       teaseCount++;
@@ -200,7 +187,6 @@
         "LAST WARNING 😠💖 TAKE. THE. ROSE."
       ];
 
-      // typing effect
       r.style.display = 'block';
       r.innerHTML = '';
       const text = messages[Math.min(teaseCount - 1, messages.length - 1)];
@@ -211,19 +197,15 @@
         if (i >= text.length) clearInterval(type);
       }, 35);
 
-      // shake card
       card.classList.add('shake');
       setTimeout(()=>card.classList.remove('shake'),400);
 
-      // shrink wrong button
       const scale = Math.max(0, 1 - teaseCount * 0.2);
       whyBtn.style.transform = `scale(${scale})`;
       whyBtn.style.opacity = scale;
 
-      // grow correct button
       takeBtn.style.transform = `scale(${1 + teaseCount * 0.18})`;
 
-      // heart pops
       for (let h = 0; h < 3; h++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
@@ -238,16 +220,18 @@
         whyBtn.style.display = 'none';
         takeBtn.style.transform = 'scale(1.7)';
       }
-    })`;
-      whyBtn.style.opacity = scale;
+    }
 
-      // grow correct button
-      takeBtn.style.transform = `scale(${1 + teaseCount * 0.15})`;
-
-      if (teaseCount >= 5) {
-        whyBtn.style.display = 'none';
-        takeBtn.style.transform = 'scale(1.6)';
-      }
+    function takeRose() {
+      document.getElementById('choice').style.display = 'none';
+      const r = document.getElementById('reveal');
+      r.style.display = 'block';
+      r.innerHTML = "You didn’t just take a rose 🌹<br><br>You took my attention,<br>my smile,<br>and a piece of my heart —<br>the part that feels safest with you.";
+      setTimeout(()=>{
+        const f = document.getElementById('final');
+        f.style.display = 'block';
+        f.innerHTML = "Happy Rose Day 💖<br>This is only the beginning.";
+      }, 2200);
     }
   </script>
 
