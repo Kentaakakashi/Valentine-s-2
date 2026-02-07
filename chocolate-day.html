@@ -1,1 +1,889 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3: Chocolate Day - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="chocolate-day">
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    
+    <!-- Chocolate Particles -->
+    <div class="chocolate-particles"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="day-header">
+            <div class="day-icon-large">🍫</div>
+            <h1>Chocolate Day</h1>
+            <p class="day-subtitle">Day 3 - February 9</p>
+            <p class="day-tagline">Sweet moments that melt the heart</p>
+        </div>
+        
+        <!-- Animated Chocolate Box -->
+        <div class="chocolate-box-section">
+            <h2><i class="fas fa-gift"></i> Virtual Chocolate Box</h2>
+            <p class="section-subtitle">Click on chocolates to reveal sweet memories</p>
+            
+            <div class="chocolate-box">
+                <div class="chocolate" data-memory="Our first shared dessert - you had chocolate on your nose 😊">
+                    <div class="chocolate-piece dark">
+                        <div class="choco-pattern"></div>
+                    </div>
+                    <p class="choco-name">Dark Chocolate</p>
+                    <p class="choco-memory" style="display: none;">Memory will appear here</p>
+                </div>
+                
+                <div class="chocolate" data-memory="That rainy day we shared hot chocolate by the window">
+                    <div class="chocolate-piece milk">
+                        <div class="choco-pattern"></div>
+                    </div>
+                    <p class="choco-name">Milk Chocolate</p>
+                    <p class="choco-memory" style="display: none;">Memory will appear here</p>
+                </div>
+                
+                <div class="chocolate" data-memory="The chocolate cake you surprised me with on my birthday">
+                    <div class="chocolate-piece white">
+                        <div class="choco-pattern"></div>
+                    </div>
+                    <p class="choco-name">White Chocolate</p>
+                    <p class="choco-memory" style="display: none;">Memory will appear here</p>
+                </div>
+                
+                <div class="chocolate" data-memory="Our chocolate tasting adventure - discovering new flavors together">
+                    <div class="chocolate-piece ruby">
+                        <div class="choco-pattern"></div>
+                    </div>
+                    <p class="choco-name">Ruby Chocolate</p>
+                    <p class="choco-memory" style="display: none;">Memory will appear here</p>
+                </div>
+            </div>
+            
+            <!-- Memory Display -->
+            <div class="memory-display">
+                <div class="memory-container">
+                    <i class="fas fa-heart chocolate-heart"></i>
+                    <p id="memoryText">Click a chocolate to reveal a sweet memory</p>
+                    <i class="fas fa-heart chocolate-heart"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sweetness Meter -->
+        <div class="sweetness-section">
+            <h2><i class="fas fa-chart-line"></i> Our Relationship Sweetness Meter</h2>
+            
+            <div class="sweetness-meter">
+                <div class="meter-container">
+                    <div class="meter-scale">
+                        <span>Bitter</span>
+                        <span>Sweet</span>
+                        <span>Very Sweet</span>
+                        <span>Extremely Sweet!</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="sweetnessFill"></div>
+                    </div>
+                    <div class="meter-value">
+                        <span id="sweetnessValue">85%</span> Sweetness Level
+                    </div>
+                </div>
+                
+                <div class="sweetness-controls">
+                    <button id="increaseSweetness" class="sweetness-btn">
+                        <i class="fas fa-plus"></i> Increase Sweetness
+                    </button>
+                    <button id="decreaseSweetness" class="sweetness-btn decrease">
+                        <i class="fas fa-minus"></i> Decrease
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Virtual Chocolate Making -->
+        <div class="chocolate-making">
+            <h2><i class="fas fa-mortar-pestle"></i> Make Our Virtual Chocolate</h2>
+            <p class="section-subtitle">Create a custom chocolate with special ingredients</p>
+            
+            <div class="making-process">
+                <div class="process-step" id="step1">
+                    <div class="step-number">1</div>
+                    <h3>Choose Base</h3>
+                    <div class="ingredient-options">
+                        <button class="ingredient-btn" data-ingredient="dark">Dark</button>
+                        <button class="ingredient-btn" data-ingredient="milk">Milk</button>
+                        <button class="ingredient-btn" data-ingredient="white">White</button>
+                    </div>
+                </div>
+                
+                <div class="process-step" id="step2">
+                    <div class="step-number">2</div>
+                    <h3>Add Toppings</h3>
+                    <div class="ingredient-options">
+                        <button class="ingredient-btn" data-ingredient="strawberry">🍓 Strawberries</button>
+                        <button class="ingredient-btn" data-ingredient="almond">🌰 Almonds</button>
+                        <button class="ingredient-btn" data-ingredient="caramel">🍯 Caramel</button>
+                    </div>
+                </div>
+                
+                <div class="process-step" id="step3">
+                    <div class="step-number">3</div>
+                    <h3>Add Love</h3>
+                    <div class="ingredient-options">
+                        <button class="ingredient-btn" data-ingredient="love">💖 Extra Love</button>
+                        <button class="ingredient-btn" data-ingredient="hugs">🤗 Hugs</button>
+                        <button class="ingredient-btn" data-ingredient="kisses">💋 Kisses</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chocolate-result">
+                <div class="result-preview" id="chocolatePreview">
+                    <div class="chocolate-base"></div>
+                    <div class="chocolate-toppings"></div>
+                    <div class="chocolate-love"></div>
+                </div>
+                <button id="makeChocolate" class="action-btn">
+                    <i class="fas fa-magic"></i> Create Our Chocolate!
+                </button>
+            </div>
+        </div>
+        
+        <!-- Melt-to-Reveal Photos -->
+        <div class="melt-reveal">
+            <h2><i class="fas fa-image"></i> Melt to Reveal Special Moments</h2>
+            <p class="section-subtitle">Click and hold to melt the chocolate and reveal hidden memories</p>
+            
+            <div class="melt-container">
+                <div class="melt-chocolate" id="meltChocolate1">
+                    <div class="melt-cover">
+                        <div class="chocolate-cover"></div>
+                    </div>
+                    <div class="revealed-memory">
+                        <div class="memory-emoji">📸</div>
+                        <p>Our first photo together</p>
+                    </div>
+                </div>
+                
+                <div class="melt-chocolate" id="meltChocolate2">
+                    <div class="melt-cover">
+                        <div class="chocolate-cover"></div>
+                    </div>
+                    <div class="revealed-memory">
+                        <div class="memory-emoji">🎂</div>
+                        <p>Birthday celebration surprise</p>
+                    </div>
+                </div>
+                
+                <div class="melt-chocolate" id="meltChocolate3">
+                    <div class="melt-cover">
+                        <div class="chocolate-cover"></div>
+                    </div>
+                    <div class="revealed-memory">
+                        <div class="memory-emoji">🌅</div>
+                        <p>Beautiful sunset moment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chocolate Rain -->
+        <div class="chocolate-rain-control">
+            <button id="chocolateRainBtn" class="action-btn">
+                <i class="fas fa-cloud-rain"></i> Start Chocolate Rain
+            </button>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="propose-day.html"><i class="fas fa-arrow-left"></i> Previous: Propose Day</a>
+        <a href="teddy-day.html" class="next-day">Next: Teddy Day <i class="fas fa-arrow-right"></i></a>
+    </nav>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-sweet-and-light-624.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize chocolate rain
+            createChocolateRain();
+            
+            // Chocolate click events
+            const chocolates = document.querySelectorAll('.chocolate');
+            const memoryText = document.getElementById('memoryText');
+            
+            chocolates.forEach(chocolate => {
+                chocolate.addEventListener('click', function() {
+                    const memory = this.getAttribute('data-memory');
+                    memoryText.textContent = memory;
+                    memoryText.parentElement.classList.add('memory-revealed');
+                    
+                    // Melt animation
+                    const chocoPiece = this.querySelector('.chocolate-piece');
+                    chocoPiece.classList.add('chocolate-melt');
+                    
+                    // Play sound
+                    const meltSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-bite-into-a-cookie-2216.mp3');
+                    meltSound.volume = 0.3;
+                    meltSound.play();
+                    
+                    // Increase sweetness
+                    increaseSweetness(5);
+                    
+                    // Save progress
+                    if (window.VDay && VDay.saveProgress) {
+                        VDay.saveProgress(3, 'chocolate-' + Array.from(chocolates).indexOf(this));
+                    }
+                });
+            });
+            
+            // Sweetness meter
+            let sweetness = 85;
+            const sweetnessFill = document.getElementById('sweetnessFill');
+            const sweetnessValue = document.getElementById('sweetnessValue');
+            
+            function updateSweetness() {
+                sweetness = Math.min(Math.max(sweetness, 0), 100);
+                sweetnessFill.style.width = `${sweetness}%`;
+                sweetnessValue.textContent = `${sweetness}%`;
+                
+                // Change color based on level
+                if (sweetness < 30) {
+                    sweetnessFill.style.background = '#8B4513';
+                } else if (sweetness < 60) {
+                    sweetnessFill.style.background = '#A0522D';
+                } else if (sweetness < 85) {
+                    sweetnessFill.style.background = '#D2691E';
+                } else {
+                    sweetnessFill.style.background = '#FFD700';
+                }
+            }
+            
+            function increaseSweetness(amount) {
+                sweetness += amount;
+                updateSweetness();
+            }
+            
+            document.getElementById('increaseSweetness').addEventListener('click', () => increaseSweetness(5));
+            document.getElementById('decreaseSweetness').addEventListener('click', () => increaseSweetness(-5));
+            
+            // Chocolate making
+            let selectedBase = 'dark';
+            let selectedToppings = [];
+            let selectedLove = [];
+            
+            document.querySelectorAll('.ingredient-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const ingredient = this.getAttribute('data-ingredient');
+                    const step = this.closest('.process-step').id;
+                    
+                    if (step === 'step1') {
+                        selectedBase = ingredient;
+                        this.classList.add('selected');
+                        this.parentElement.querySelectorAll('.ingredient-btn').forEach(b => {
+                            if (b !== this) b.classList.remove('selected');
+                        });
+                    } else if (step === 'step2') {
+                        this.classList.toggle('selected');
+                        if (this.classList.contains('selected')) {
+                            selectedToppings.push(ingredient);
+                        } else {
+                            selectedToppings = selectedToppings.filter(t => t !== ingredient);
+                        }
+                    } else if (step === 'step3') {
+                        this.classList.toggle('selected');
+                        if (this.classList.contains('selected')) {
+                            selectedLove.push(ingredient);
+                        } else {
+                            selectedLove = selectedLove.filter(l => l !== ingredient);
+                        }
+                    }
+                    
+                    updateChocolatePreview();
+                });
+            });
+            
+            function updateChocolatePreview() {
+                const preview = document.getElementById('chocolatePreview');
+                const base = preview.querySelector('.chocolate-base');
+                const toppings = preview.querySelector('.chocolate-toppings');
+                const love = preview.querySelector('.chocolate-love');
+                
+                // Set base color
+                base.style.background = selectedBase === 'dark' ? '#8B4513' : 
+                                      selectedBase === 'milk' ? '#A0522D' : '#FFF8DC';
+                
+                // Add toppings
+                toppings.innerHTML = selectedToppings.map(t => {
+                    if (t === 'strawberry') return '🍓';
+                    if (t === 'almond') return '🌰';
+                    if (t === 'caramel') return '🍯';
+                    return '';
+                }).join('');
+                
+                // Add love
+                love.innerHTML = selectedLove.map(l => {
+                    if (l === 'love') return '💖';
+                    if (l === 'hugs') return '🤗';
+                    if (l === 'kisses') return '💋';
+                    return '';
+                }).join('');
+            }
+            
+            document.getElementById('makeChocolate').addEventListener('click', function() {
+                // Show celebration
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>🎉 Chocolate Created! 🎉</h3>
+                    <p>Our ${selectedBase} chocolate with ${selectedToppings.length} toppings and ${selectedLove.length} love ingredients!</p>
+                    <p>Just like our love - perfectly crafted! 🍫💖</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '40px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 3000);
+                
+                // Play celebration sound
+                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+                sound.volume = 0.3;
+                sound.play();
+                
+                // Increase sweetness
+                increaseSweetness(10);
+            });
+            
+            // Melt to reveal
+            const meltChocolates = document.querySelectorAll('.melt-chocolate');
+            meltChocolates.forEach(choco => {
+                let meltTimer;
+                let melting = false;
+                
+                choco.addEventListener('mousedown', startMelting);
+                choco.addEventListener('touchstart', startMelting);
+                choco.addEventListener('mouseup', stopMelting);
+                choco.addEventListener('touchend', stopMelting);
+                choco.addEventListener('mouseleave', stopMelting);
+                
+                function startMelting() {
+                    if (melting) return;
+                    melting = true;
+                    const cover = this.querySelector('.chocolate-cover');
+                    let height = 100;
+                    
+                    meltTimer = setInterval(() => {
+                        height -= 2;
+                        cover.style.height = `${height}%`;
+                        
+                        if (height <= 0) {
+                            clearInterval(meltTimer);
+                            this.classList.add('fully-melted');
+                            
+                            // Play melt sound
+                            const meltSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-bite-into-a-cookie-2216.mp3');
+                            meltSound.volume = 0.3;
+                            meltSound.play();
+                            
+                            // Increase sweetness
+                            increaseSweetness(3);
+                        }
+                    }, 50);
+                }
+                
+                function stopMelting() {
+                    if (!melting) return;
+                    melting = false;
+                    clearInterval(meltTimer);
+                }
+            });
+            
+            // Chocolate rain
+            document.getElementById('chocolateRainBtn').addEventListener('click', function() {
+                createChocolateRain();
+                this.innerHTML = '<i class="fas fa-cloud-rain"></i> Chocolate Raining!';
+                this.classList.add('active');
+            });
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            if (pageMusic) {
+                pageMusic.volume = 0.3;
+                setTimeout(() => {
+                    pageMusic.play().catch(e => console.log('Music play prevented'));
+                }, 1000);
+            }
+            
+            // Initialize preview
+            updateChocolatePreview();
+        });
+        
+        function createChocolateRain() {
+            const container = document.querySelector('.chocolate-particles');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'chocolate-particle';
+                particle.innerHTML = ['🍫', '🍬', '🍩', '🍪', '🧁'][Math.floor(Math.random() * 5)];
+                particle.style.position = 'absolute';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = '-50px';
+                particle.style.fontSize = `${Math.random() * 25 + 15}px`;
+                particle.style.animation = `chocolate-fall ${Math.random() * 3 + 2}s linear forwards ${Math.random() * 2}s`;
+                particle.style.zIndex = '-1';
+                particle.style.pointerEvents = 'none';
+                
+                container.appendChild(particle);
+            }
+        }
+    </script>
+    <style>
+        .chocolate-day {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            min-height: 100vh;
+        }
+        
+        .chocolate-box-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+        }
+        
+        .chocolate-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .chocolate {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+        }
+        
+        .chocolate:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+        }
+        
+        .chocolate-piece {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark { background: #8B4513; }
+        .milk { background: #A0522D; }
+        .white { background: #FFF8DC; }
+        .ruby { background: #E75480; }
+        
+        .choco-pattern {
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+        }
+        
+        .choco-name {
+            font-weight: 600;
+            color: #8B4513;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .memory-display {
+            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 2px dashed #A0522D;
+        }
+        
+        .memory-container {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .chocolate-heart {
+            color: #8B4513;
+            font-size: 1.5rem;
+        }
+        
+        #memoryText {
+            font-size: 1.3rem;
+            color: #5d001e;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .memory-revealed #memoryText {
+            animation: text-reveal 0.5s ease;
+        }
+        
+        .chocolate-melt {
+            animation: chocolate-melt 1.5s ease forwards;
+        }
+        
+        @keyframes chocolate-melt {
+            0% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(0.5);
+            }
+            100% {
+                transform: scaleY(0.1);
+            }
+        }
+        
+        .sweetness-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+        }
+        
+        .sweetness-meter {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .meter-container {
+            background: #fff5e6;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .meter-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #8B4513;
+        }
+        
+        .meter-bar {
+            height: 30px;
+            background: #e6d5c3;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            width: 85%;
+            background: linear-gradient(90deg, #8B4513, #A0522D, #D2691E, #FFD700);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+        
+        .meter-value {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8B4513;
+        }
+        
+        .sweetness-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .sweetness-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .sweetness-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .sweetness-btn.decrease {
+            background: linear-gradient(135deg, #666, #888);
+        }
+        
+        .chocolate-making {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+        }
+        
+        .making-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .process-step {
+            background: #fff5e6;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #8B4513;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .ingredient-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .ingredient-btn {
+            padding: 12px 20px;
+            border: 2px solid #A0522D;
+            background: white;
+            color: #8B4513;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .ingredient-btn:hover {
+            background: #fff5e6;
+        }
+        
+        .ingredient-btn.selected {
+            background: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+        
+        .chocolate-result {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .result-preview {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+            background: #fff5e6;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .chocolate-base {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: background 0.3s ease;
+        }
+        
+        .chocolate-toppings,
+        .chocolate-love {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            z-index: 2;
+        }
+        
+        .melt-reveal {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+        }
+        
+        .melt-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .melt-chocolate {
+            position: relative;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .melt-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .chocolate-cover {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            transition: height 0.5s ease;
+        }
+        
+        .revealed-memory {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff5e6;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .melt-chocolate.fully-melted .revealed-memory {
+            opacity: 1;
+        }
+        
+        .memory-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .chocolate-rain-control {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .chocolate-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .chocolate-particle {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes chocolate-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes text-reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+    </style>
+</body>
+</html>
