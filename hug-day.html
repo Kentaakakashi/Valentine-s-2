@@ -1,1 +1,1785 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6: Hug Day - 7 Days of Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="hug-day">
+    <!-- Animated Background -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles"></div>
+    <div class="hug-particles"></div>
+    
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Journey
+    </a>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="day-header">
+            <div class="day-icon-large">🤗</div>
+            <h1>Hug Day</h1>
+            <p class="day-subtitle">Day 6 - February 12</p>
+            <p class="day-tagline">Embrace the warmth of our love</p>
+        </div>
+        
+        <!-- Virtual Hug Button -->
+        <div class="hug-section">
+            <h2><i class="fas fa-hands"></i> Virtual Hug Experience</h2>
+            <p class="section-subtitle">Press and hold for a warm, comforting hug</p>
+            
+            <div class="hug-simulator" id="hugSimulator">
+                <div class="hug-circle">
+                    <div class="hug-icon">🤗</div>
+                    <p class="hug-instruction">Press & Hold to Hug</p>
+                    <div class="hug-glow"></div>
+                </div>
+                
+                <div class="hug-metrics">
+                    <div class="metric">
+                        <div class="metric-icon">⏱️</div>
+                        <span class="metric-label">Hug Duration</span>
+                        <span class="metric-value" id="hugDuration">0.00s</span>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-icon">🔥</div>
+                        <span class="metric-label">Warmth Level</span>
+                        <div class="warmth-indicator" id="warmthIndicator">
+                            <div class="warmth-fill"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-icon">💓</div>
+                        <span class="metric-label">Heartbeat Sync</span>
+                        <span class="metric-value" id="heartbeatSync">72 BPM</span>
+                    </div>
+                </div>
+                
+                <div class="hug-streaks">
+                    <div class="streak-info">
+                        <span class="streak-label">Longest Hug:</span>
+                        <span class="streak-value" id="longestHug">0.00s</span>
+                    </div>
+                    <div class="streak-info">
+                        <span class="streak-label">Total Hugs Today:</span>
+                        <span class="streak-value" id="totalHugs">0</span>
+                    </div>
+                    <div class="streak-info">
+                        <span class="streak-label">Hug Energy:</span>
+                        <span class="streak-value" id="hugEnergy">100%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hug-controls">
+                <button id="quickHug" class="hug-btn">
+                    <i class="fas fa-bolt"></i> Quick Hug
+                </button>
+                <button id="warmHug" class="hug-btn">
+                    <i class="fas fa-fire"></i> Warm Hug
+                </button>
+                <button id="bearHug" class="hug-btn">
+                    <i class="fas fa-paw"></i> Bear Hug
+                </button>
+                <button id="resetHugs" class="hug-btn reset">
+                    <i class="fas fa-redo"></i> Reset Stats
+                </button>
+            </div>
+        </div>
+        
+        <!-- Heartbeat Synchronization -->
+        <div class="heartbeat-section">
+            <h2><i class="fas fa-heartbeat"></i> Heartbeat Synchronization</h2>
+            <p class="section-subtitle">Feel our hearts beating as one</p>
+            
+            <div class="heartbeat-visualizer">
+                <div class="heartbeat-container">
+                    <div class="heartbeat-line" style="animation-delay: 0s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.1s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.2s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.3s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.4s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.5s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.6s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.7s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.8s"></div>
+                    <div class="heartbeat-line" style="animation-delay: 0.9s"></div>
+                </div>
+                
+                <div class="heartbeat-info">
+                    <div class="heartbeat-rate">
+                        <span class="rate-label">Our Heartbeat:</span>
+                        <span class="rate-value" id="heartbeatRate">72</span>
+                        <span class="rate-unit">BPM</span>
+                    </div>
+                    <div class="heartbeat-sync">
+                        <span class="sync-label">Synchronization:</span>
+                        <span class="sync-value" id="syncLevel">0%</span>
+                    </div>
+                    <div class="heartbeat-message" id="heartbeatMessage">
+                        Hearts are calm and steady 💖
+                    </div>
+                </div>
+                
+                <div class="heartbeat-controls">
+                    <button id="calmHeart" class="heartbeat-btn">
+                        <i class="fas fa-spa"></i> Calm Heart
+                    </button>
+                    <button id="exciteHeart" class="heartbeat-btn">
+                        <i class="fas fa-bolt"></i> Excite Heart
+                    </button>
+                    <button id="syncHearts" class="heartbeat-btn sync">
+                        <i class="fas fa-link"></i> Sync Hearts
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Warmth Simulation -->
+        <div class="warmth-section">
+            <h2><i class="fas fa-temperature-high"></i> Warmth Simulation</h2>
+            <p class="section-subtitle">Experience the comforting warmth of our hugs</p>
+            
+            <div class="warmth-simulator">
+                <div class="temperature-control">
+                    <div class="temp-display">
+                        <div class="temp-value" id="temperatureValue">36.5°C</div>
+                        <div class="temp-label">Body Temperature</div>
+                    </div>
+                    
+                    <div class="temp-slider">
+                        <input type="range" id="warmthSlider" min="20" max="40" step="0.1" value="36.5">
+                        <div class="temp-scale">
+                            <span>Cold</span>
+                            <span>Warm</span>
+                            <span>Hot</span>
+                            <span>Very Warm</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warmth-effects">
+                    <div class="effect" id="colorEffect">
+                        <div class="effect-icon">🎨</div>
+                        <h4>Color Warmth</h4>
+                        <p>Background changes with warmth</p>
+                    </div>
+                    <div class="effect" id="glowEffect">
+                        <div class="effect-icon">✨</div>
+                        <h4>Heart Glow</h4>
+                        <p>Hearts glow with warmth</p>
+                    </div>
+                    <div class="effect" id="breathEffect">
+                        <div class="effect-icon">💨</div>
+                        <h4>Breath Visualization</h4>
+                        <p>See the warmth of breath</p>
+                    </div>
+                </div>
+                
+                <div class="warmth-presets">
+                    <button class="warmth-preset" data-temp="20">
+                        ❄️ Cool Hug
+                    </button>
+                    <button class="warmth-preset" data-temp="30">
+                        🌡️ Warm Hug
+                    </button>
+                    <button class="warmth-preset" data-temp="36.5">
+                        💖 Normal Hug
+                    </button>
+                    <button class="warmth-preset" data-temp="39">
+                        🔥 Hot Hug
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hug History Visualization -->
+        <div class="history-section">
+            <h2><i class="fas fa-history"></i> Hug History Timeline</h2>
+            <p class="section-subtitle">Visualize our hugging journey today</p>
+            
+            <div class="hug-timeline">
+                <div class="timeline-container">
+                    <div class="timeline-track" id="timelineTrack">
+                        <!-- Hug events will be added here -->
+                    </div>
+                </div>
+                
+                <div class="timeline-stats">
+                    <div class="timeline-stat">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="avgHugDuration">0.00s</div>
+                            <div class="stat-label">Average Hug Duration</div>
+                        </div>
+                    </div>
+                    <div class="timeline-stat">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalHugTime">0s</div>
+                            <div class="stat-label">Total Hug Time Today</div>
+                        </div>
+                    </div>
+                    <div class="timeline-stat">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="bestHugTime">12:00 PM</div>
+                            <div class="stat-label">Best Hug Time</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-actions">
+                    <button id="addHugEvent" class="timeline-btn">
+                        <i class="fas fa-plus"></i> Add Hug Event
+                    </button>
+                    <button id="clearTimeline" class="timeline-btn clear">
+                        <i class="fas fa-trash"></i> Clear Timeline
+                    </button>
+                    <button id="saveTimeline" class="timeline-btn save">
+                        <i class="fas fa-save"></i> Save History
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Special Hug Types -->
+        <div class="special-hugs-section">
+            <h2><i class="fas fa-star"></i> Special Hug Collection</h2>
+            <p class="section-subtitle">Collect and unlock different hug types</p>
+            
+            <div class="hug-collection">
+                <div class="hug-card" data-hug="quick" data-unlocked="true">
+                    <div class="hug-card-icon">⚡</div>
+                    <h3>Quick Hug</h3>
+                    <p>Fast and sweet</p>
+                    <div class="hug-status unlocked">✓ Unlocked</div>
+                </div>
+                
+                <div class="hug-card" data-hug="warm" data-unlocked="false">
+                    <div class="hug-card-icon">🔥</div>
+                    <h3>Warm Hug</h3>
+                    <p>Cozy and comforting</p>
+                    <div class="hug-status locked">🔒 3 Hugs</div>
+                </div>
+                
+                <div class="hug-card" data-hug="bear" data-unlocked="false">
+                    <div class="hug-card-icon">🐻</div>
+                    <h3>Bear Hug</h3>
+                    <p>Strong and protective</p>
+                    <div class="hug-status locked">🔒 5 Hugs</div>
+                </div>
+                
+                <div class="hug-card" data-hug="group" data-unlocked="false">
+                    <div class="hug-card-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Group Hug</h3>
+                    <p>All-encompassing love</p>
+                    <div class="hug-status locked">🔒 10 Hugs</div>
+                </div>
+                
+                <div class="hug-card" data-hug="surprise" data-unlocked="false">
+                    <div class="hug-card-icon">🎁</div>
+                    <h3>Surprise Hug</h3>
+                    <p>Unexpected delight</p>
+                    <div class="hug-status locked">🔒 15 Hugs</div>
+                </div>
+                
+                <div class="hug-card" data-hug="eternal" data-unlocked="false">
+                    <div class="hug-card-icon">∞</div>
+                    <h3>Eternal Hug</h3>
+                    <p>Never-ending embrace</p>
+                    <div class="hug-status locked">🔒 20 Hugs</div>
+                </div>
+            </div>
+            
+            <div class="collection-progress">
+                <div class="progress-info">
+                    <span>Hugs Collected:</span>
+                    <span id="hugsCollected">1</span>/6
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="collectionProgress" style="width: 16%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hug Challenges -->
+        <div class="challenges-section">
+            <h2><i class="fas fa-trophy"></i> Hug Challenges</h2>
+            <p class="section-subtitle">Complete challenges to earn hug rewards</p>
+            
+            <div class="hug-challenges">
+                <div class="challenge" data-challenge="first" data-completed="true">
+                    <div class="challenge-icon">🥇</div>
+                    <div class="challenge-content">
+                        <h4>First Hug</h4>
+                        <p>Give your first virtual hug</p>
+                        <div class="challenge-reward">Reward: Quick Hug Unlocked</div>
+                    </div>
+                    <div class="challenge-status completed">✓ Completed</div>
+                </div>
+                
+                <div class="challenge" data-challenge="warm" data-completed="false">
+                    <div class="challenge-icon">🔥</div>
+                    <div class="challenge-content">
+                        <h4>Warm Heart</h4>
+                        <p>Reach 90% warmth level</p>
+                        <div class="challenge-reward">Reward: Warm Glow Effect</div>
+                    </div>
+                    <div class="challenge-status pending">0/90%</div>
+                </div>
+                
+                <div class="challenge" data-challenge="duration" data-completed="false">
+                    <div class="challenge-icon">⏱️</div>
+                    <div class="challenge-content">
+                        <h4>Enduring Embrace</h4>
+                        <p>Hug for 10 seconds straight</p>
+                        <div class="challenge-reward">Reward: Bear Hug Unlocked</div>
+                    </div>
+                    <div class="challenge-status pending">0/10s</div>
+                </div>
+                
+                <div class="challenge" data-challenge="sync" data-completed="false">
+                    <div class="challenge-icon">💓</div>
+                    <div class="challenge-content">
+                        <h4>Heart Sync</h4>
+                        <p>Sync hearts at 100%</p>
+                        <div class="challenge-reward">Reward: Heartbeat Visualization</div>
+                    </div>
+                    <div class="challenge-status pending">0/100%</div>
+                </div>
+                
+                <div class="challenge" data-challenge="collector" data-completed="false">
+                    <div class="challenge-icon">🏆</div>
+                    <div class="challenge-content">
+                        <h4>Hug Collector</h4>
+                        <p>Unlock all hug types</p>
+                        <div class="challenge-reward">Reward: Golden Hug Badge</div>
+                    </div>
+                    <div class="challenge-status pending">1/6</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="promise-day.html"><i class="fas fa-arrow-left"></i> Previous: Promise Day</a>
+        <a href="kiss-day.html" class="next-day">Next: Kiss Day <i class="fas fa-arrow-right"></i></a>
+    </nav>
+    
+    <!-- Audio -->
+    <audio id="pageMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hugSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cute-little-girl-hug-1902.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="heartbeatSound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-990.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hug Simulator Variables
+            let hugStartTime = 0;
+            let hugTimer = null;
+            let isHugging = false;
+            let currentWarmth = 0;
+            let currentHeartbeat = 72;
+            let syncLevel = 0;
+            let totalHugs = 0;
+            let longestHug = 0;
+            let totalHugTime = 0;
+            let hugEnergy = 100;
+            let bodyTemperature = 36.5;
+            
+            // DOM Elements
+            const hugSimulator = document.getElementById('hugSimulator');
+            const hugCircle = hugSimulator.querySelector('.hug-circle');
+            const hugDuration = document.getElementById('hugDuration');
+            const warmthIndicator = document.getElementById('warmthIndicator').querySelector('.warmth-fill');
+            const heartbeatSync = document.getElementById('heartbeatSync');
+            const longestHugEl = document.getElementById('longestHug');
+            const totalHugsEl = document.getElementById('totalHugs');
+            const hugEnergyEl = document.getElementById('hugEnergy');
+            
+            const heartbeatRate = document.getElementById('heartbeatRate');
+            const syncLevelEl = document.getElementById('syncLevel');
+            const heartbeatMessage = document.getElementById('heartbeatMessage');
+            
+            const temperatureValue = document.getElementById('temperatureValue');
+            const warmthSlider = document.getElementById('warmthSlider');
+            
+            const avgHugDuration = document.getElementById('avgHugDuration');
+            const totalHugTimeEl = document.getElementById('totalHugTime');
+            const bestHugTime = document.getElementById('bestHugTime');
+            
+            const hugsCollected = document.getElementById('hugsCollected');
+            const collectionProgress = document.getElementById('collectionProgress');
+            
+            // Hug events array
+            let hugEvents = [];
+            let bestHugTimestamp = null;
+            
+            // Initialize
+            updateStats();
+            
+            // Hug Simulator
+            hugCircle.addEventListener('mousedown', startHug);
+            hugCircle.addEventListener('touchstart', startHug);
+            hugCircle.addEventListener('mouseup', endHug);
+            hugCircle.addEventListener('touchend', endHug);
+            hugCircle.addEventListener('mouseleave', endHug);
+            
+            function startHug() {
+                if (isHugging || hugEnergy <= 0) return;
+                
+                isHugging = true;
+                hugStartTime = Date.now();
+                hugCircle.style.transform = 'scale(0.9)';
+                hugCircle.style.background = 'linear-gradient(135deg, #ff6b6b, #ff8e8e)';
+                hugCircle.querySelector('.hug-glow').style.animation = 'hug-glow 0.5s infinite';
+                
+                // Play heartbeat sound
+                const heartbeatSound = document.getElementById('heartbeatSound');
+                heartbeatSound.volume = 0.2;
+                heartbeatSound.play();
+                
+                // Start hug timer
+                hugTimer = setInterval(() => {
+                    const duration = (Date.now() - hugStartTime) / 1000;
+                    hugDuration.textContent = duration.toFixed(2) + 's';
+                    
+                    // Increase warmth
+                    currentWarmth = Math.min(duration * 15, 100);
+                    warmthIndicator.style.width = `${currentWarmth}%`;
+                    
+                    // Increase heartbeat
+                    currentHeartbeat = 72 + Math.floor(duration * 8);
+                    heartbeatSync.textContent = `${currentHeartbeat} BPM`;
+                    heartbeatRate.textContent = currentHeartbeat;
+                    
+                    // Increase sync level
+                    syncLevel = Math.min(duration * 10, 100);
+                    syncLevelEl.textContent = `${Math.round(syncLevel)}%`;
+                    
+                    // Update heartbeat message
+                    updateHeartbeatMessage();
+                    
+                    // Change background color based on warmth
+                    const red = 255;
+                    const green = 107 + Math.floor(148 * (currentWarmth / 100));
+                    const blue = 107;
+                    hugSimulator.style.background = `rgb(${red}, ${green}, ${blue})`;
+                    
+                    // Update body based on warmth
+                    updateBodyEffects();
+                    
+                    // Drain energy
+                    hugEnergy = Math.max(0, 100 - (duration * 2));
+                    hugEnergyEl.textContent = `${Math.round(hugEnergy)}%`;
+                    
+                    // Update warmth slider
+                    bodyTemperature = 20 + (currentWarmth / 100) * 20;
+                    warmthSlider.value = bodyTemperature;
+                    temperatureValue.textContent = `${bodyTemperature.toFixed(1)}°C`;
+                }, 50);
+            }
+            
+            function endHug() {
+                if (!isHugging) return;
+                
+                isHugging = false;
+                clearInterval(hugTimer);
+                
+                const duration = (Date.now() - hugStartTime) / 1000;
+                
+                // Stop heartbeat sound
+                const heartbeatSound = document.getElementById('heartbeatSound');
+                heartbeatSound.pause();
+                heartbeatSound.currentTime = 0;
+                
+                // Reset circle
+                hugCircle.style.transform = 'scale(1)';
+                hugCircle.style.background = '';
+                hugCircle.querySelector('.hug-glow').style.animation = '';
+                
+                if (duration > 0.3) {
+                    // Record hug
+                    totalHugs++;
+                    totalHugTime += duration;
+                    
+                    if (duration > longestHug) {
+                        longestHug = duration;
+                        longestHugEl.textContent = duration.toFixed(2) + 's';
+                    }
+                    
+                    // Add hug event
+                    const hugEvent = {
+                        time: new Date(),
+                        duration: duration,
+                        warmth: currentWarmth,
+                        heartbeat: currentHeartbeat
+                    };
+                    hugEvents.push(hugEvent);
+                    
+                    // Update best hug time
+                    if (!bestHugTimestamp || duration > bestHugTimestamp.duration) {
+                        bestHugTimestamp = {
+                            time: hugEvent.time,
+                            duration: duration
+                        };
+                        const timeStr = hugEvent.time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        bestHugTime.textContent = timeStr;
+                    }
+                    
+                    // Update timeline
+                    updateTimeline();
+                    
+                    // Check for unlocks
+                    checkHugUnlocks();
+                    
+                    // Check challenges
+                    checkChallenges(duration, currentWarmth, syncLevel);
+                    
+                    // Play hug sound
+                    const hugSound = document.getElementById('hugSound');
+                    hugSound.currentTime = 0;
+                    hugSound.play();
+                    
+                    // Show hug celebration
+                    showHugCelebration(duration);
+                    
+                    // Save progress
+                    if (window.VDay && VDay.saveProgress) {
+                        VDay.saveProgress(6, `hug-${totalHugs}-${duration.toFixed(1)}s`);
+                    }
+                }
+                
+                // Reset after delay
+                setTimeout(() => {
+                    hugSimulator.style.background = '';
+                    warmthIndicator.style.width = '0%';
+                    hugDuration.textContent = '0.00s';
+                    heartbeatSync.textContent = '72 BPM';
+                    heartbeatRate.textContent = '72';
+                    syncLevelEl.textContent = '0%';
+                    currentWarmth = 0;
+                    currentHeartbeat = 72;
+                    syncLevel = 0;
+                    updateHeartbeatMessage();
+                    updateBodyEffects();
+                }, 1000);
+                
+                updateStats();
+            }
+            
+            // Quick Hug buttons
+            document.getElementById('quickHug').addEventListener('click', function() {
+                simulateHug(1, 'quick');
+            });
+            
+            document.getElementById('warmHug').addEventListener('click', function() {
+                simulateHug(3, 'warm');
+            });
+            
+            document.getElementById('bearHug').addEventListener('click', function() {
+                simulateHug(5, 'bear');
+            });
+            
+            document.getElementById('resetHugs').addEventListener('click', function() {
+                if (confirm('Reset all hug statistics?')) {
+                    totalHugs = 0;
+                    longestHug = 0;
+                    totalHugTime = 0;
+                    hugEnergy = 100;
+                    hugEvents = [];
+                    bestHugTimestamp = null;
+                    updateStats();
+                    updateTimeline();
+                    
+                    // Reset unlocks (keep quick hug)
+                    document.querySelectorAll('.hug-card').forEach(card => {
+                        if (card.dataset.hug !== 'quick') {
+                            card.dataset.unlocked = 'false';
+                            card.querySelector('.hug-status').textContent = '🔒 Locked';
+                            card.querySelector('.hug-status').className = 'hug-status locked';
+                        }
+                    });
+                    
+                    // Reset challenges (keep first)
+                    document.querySelectorAll('.challenge').forEach(challenge => {
+                        if (challenge.dataset.challenge !== 'first') {
+                            challenge.dataset.completed = 'false';
+                            const status = challenge.querySelector('.challenge-status');
+                            status.className = 'challenge-status pending';
+                            status.textContent = getChallengeProgress(challenge.dataset.challenge);
+                        }
+                    });
+                    
+                    updateCollectionProgress();
+                }
+            });
+            
+            function simulateHug(duration, type) {
+                if (hugEnergy < duration * 10) {
+                    alert('💤 Not enough hug energy!');
+                    return;
+                }
+                
+                hugStartTime = Date.now() - (duration * 1000);
+                currentWarmth = duration * 15;
+                currentHeartbeat = 72 + Math.floor(duration * 8);
+                syncLevel = duration * 10;
+                hugEnergy -= duration * 10;
+                
+                // Add hug event
+                const hugEvent = {
+                    time: new Date(),
+                    duration: duration,
+                    warmth: currentWarmth,
+                    heartbeat: currentHeartbeat,
+                    type: type
+                };
+                hugEvents.push(hugEvent);
+                totalHugs++;
+                totalHugTime += duration;
+                
+                // Play hug sound
+                const hugSound = document.getElementById('hugSound');
+                hugSound.currentTime = 0;
+                hugSound.play();
+                
+                // Show celebration
+                showHugCelebration(duration, type);
+                
+                updateStats();
+                checkHugUnlocks();
+                checkChallenges(duration, currentWarmth, syncLevel);
+            }
+            
+            // Heartbeat Controls
+            document.getElementById('calmHeart').addEventListener('click', function() {
+                currentHeartbeat = Math.max(60, currentHeartbeat - 10);
+                heartbeatRate.textContent = currentHeartbeat;
+                updateHeartbeatMessage();
+            });
+            
+            document.getElementById('exciteHeart').addEventListener('click', function() {
+                currentHeartbeat = Math.min(120, currentHeartbeat + 10);
+                heartbeatRate.textContent = currentHeartbeat;
+                updateHeartbeatMessage();
+            });
+            
+            document.getElementById('syncHearts').addEventListener('click', function() {
+                if (syncLevel < 30) {
+                    alert('💖 Need more hug warmth to sync hearts!');
+                    return;
+                }
+                
+                syncLevel = 100;
+                syncLevelEl.textContent = '100%';
+                this.innerHTML = '<i class="fas fa-link"></i> Hearts Synced! 💝';
+                this.classList.add('synced');
+                
+                // Show sync celebration
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>💖 Hearts Synced! 💖</h3>
+                    <p>Our hearts are beating as one!</p>
+                    <p>Synchronization: 100%</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '30px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 2000);
+                
+                // Check sync challenge
+                checkChallenges(0, 0, 100);
+            });
+            
+            function updateHeartbeatMessage() {
+                let message = '';
+                if (currentHeartbeat < 70) {
+                    message = 'Hearts are calm and steady 💖';
+                } else if (currentHeartbeat < 90) {
+                    message = 'Hearts are happy and content 😊';
+                } else if (currentHeartbeat < 110) {
+                    message = 'Hearts are excited! 🥰';
+                } else {
+                    message = 'Hearts are racing with love! 💘';
+                }
+                heartbeatMessage.textContent = message;
+            }
+            
+            // Warmth Simulation
+            warmthSlider.addEventListener('input', function() {
+                bodyTemperature = parseFloat(this.value);
+                temperatureValue.textContent = `${bodyTemperature.toFixed(1)}°C`;
+                updateBodyEffects();
+            });
+            
+            document.querySelectorAll('.warmth-preset').forEach(preset => {
+                preset.addEventListener('click', function() {
+                    const temp = parseFloat(this.dataset.temp);
+                    warmthSlider.value = temp;
+                    bodyTemperature = temp;
+                    temperatureValue.textContent = `${temp.toFixed(1)}°C`;
+                    updateBodyEffects();
+                });
+            });
+            
+            function updateBodyEffects() {
+                // Update color effect
+                const colorEffect = document.getElementById('colorEffect');
+                if (bodyTemperature > 35) {
+                    colorEffect.style.background = `rgba(255, ${107 + (bodyTemperature - 35) * 10}, 107, 0.1)`;
+                }
+                
+                // Update glow effect
+                const glowEffect = document.getElementById('glowEffect');
+                if (bodyTemperature > 37) {
+                    glowEffect.style.animation = 'glow-pulse 1s infinite';
+                } else {
+                    glowEffect.style.animation = '';
+                }
+                
+                // Update breath effect
+                const breathEffect = document.getElementById('breathEffect');
+                if (bodyTemperature > 30) {
+                    breathEffect.classList.add('breathing');
+                } else {
+                    breathEffect.classList.remove('breathing');
+                }
+            }
+            
+            // Timeline
+            document.getElementById('addHugEvent').addEventListener('click', function() {
+                const duration = Math.random() * 5 + 1;
+                const hugEvent = {
+                    time: new Date(),
+                    duration: duration,
+                    warmth: duration * 15,
+                    heartbeat: 72 + Math.floor(duration * 8)
+                };
+                hugEvents.push(hugEvent);
+                updateTimeline();
+                updateStats();
+            });
+            
+            document.getElementById('clearTimeline').addEventListener('click', function() {
+                if (confirm('Clear all hug events from timeline?')) {
+                    hugEvents = [];
+                    updateTimeline();
+                    updateStats();
+                }
+            });
+            
+            document.getElementById('saveTimeline').addEventListener('click', function() {
+                // Show save message
+                const message = document.createElement('div');
+                message.innerHTML = `
+                    <h3>📊 Timeline Saved!</h3>
+                    <p>${hugEvents.length} hug events recorded</p>
+                    <p>Total hug time: ${totalHugTime.toFixed(1)}s</p>
+                `;
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'rgba(255, 255, 255, 0.95)';
+                message.style.padding = '30px';
+                message.style.borderRadius = '20px';
+                message.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                message.style.zIndex = '10000';
+                message.style.textAlign = 'center';
+                message.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 500);
+                }, 2000);
+            });
+            
+            function updateTimeline() {
+                const timelineTrack = document.getElementById('timelineTrack');
+                timelineTrack.innerHTML = '';
+                
+                hugEvents.forEach((event, index) => {
+                    const eventEl = document.createElement('div');
+                    eventEl.className = 'timeline-event';
+                    eventEl.style.left = `${(index / Math.max(hugEvents.length, 1)) * 90 + 5}%`;
+                    eventEl.style.width = `${Math.min(event.duration * 10, 50)}px`;
+                    eventEl.title = `${event.duration.toFixed(1)}s hug at ${event.time.toLocaleTimeString()}`;
+                    
+                    const time = document.createElement('div');
+                    time.className = 'event-time';
+                    time.textContent = event.time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    
+                    const duration = document.createElement('div');
+                    duration.className = 'event-duration';
+                    duration.textContent = `${event.duration.toFixed(1)}s`;
+                    
+                    eventEl.appendChild(time);
+                    eventEl.appendChild(duration);
+                    timelineTrack.appendChild(eventEl);
+                });
+            }
+            
+            // Hug Unlocks
+            function checkHugUnlocks() {
+                const hugCards = document.querySelectorAll('.hug-card');
+                
+                // Warm hug - 3 total hugs
+                if (totalHugs >= 3 && !hugCards[1].dataset.unlocked) {
+                    unlockHugCard(hugCards[1], 'warm');
+                }
+                
+                // Bear hug - 5 total hugs
+                if (totalHugs >= 5 && !hugCards[2].dataset.unlocked) {
+                    unlockHugCard(hugCards[2], 'bear');
+                }
+                
+                // Group hug - 10 total hugs
+                if (totalHugs >= 10 && !hugCards[3].dataset.unlocked) {
+                    unlockHugCard(hugCards[3], 'group');
+                }
+                
+                // Surprise hug - 15 total hugs
+                if (totalHugs >= 15 && !hugCards[4].dataset.unlocked) {
+                    unlockHugCard(hugCards[4], 'surprise');
+                }
+                
+                // Eternal hug - 20 total hugs
+                if (totalHugs >= 20 && !hugCards[5].dataset.unlocked) {
+                    unlockHugCard(hugCards[5], 'eternal');
+                }
+                
+                updateCollectionProgress();
+            }
+            
+            function unlockHugCard(card, type) {
+                card.dataset.unlocked = 'true';
+                const status = card.querySelector('.hug-status');
+                status.textContent = '✓ Unlocked';
+                status.className = 'hug-status unlocked';
+                
+                // Show unlock celebration
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>🎉 New Hug Unlocked! 🎉</h3>
+                    <p>${type.charAt(0).toUpperCase() + type.slice(1)} Hug is now available!</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '30px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 2000);
+            }
+            
+            function updateCollectionProgress() {
+                const unlocked = document.querySelectorAll('.hug-card[data-unlocked="true"]').length;
+                hugsCollected.textContent = unlocked;
+                const progress = (unlocked / 6) * 100;
+                collectionProgress.style.width = `${progress}%`;
+            }
+            
+            // Challenges
+            function checkChallenges(duration, warmth, sync) {
+                const challenges = document.querySelectorAll('.challenge');
+                
+                // Warm heart challenge
+                if (warmth >= 90 && !challenges[1].dataset.completed) {
+                    completeChallenge(challenges[1], 'warm');
+                }
+                
+                // Duration challenge
+                if (duration >= 10 && !challenges[2].dataset.completed) {
+                    completeChallenge(challenges[2], 'duration');
+                }
+                
+                // Sync challenge
+                if (sync >= 100 && !challenges[3].dataset.completed) {
+                    completeChallenge(challenges[3], 'sync');
+                }
+                
+                // Collector challenge
+                const unlocked = document.querySelectorAll('.hug-card[data-unlocked="true"]').length;
+                if (unlocked >= 6 && !challenges[4].dataset.completed) {
+                    completeChallenge(challenges[4], 'collector');
+                }
+            }
+            
+            function completeChallenge(challenge, type) {
+                challenge.dataset.completed = 'true';
+                const status = challenge.querySelector('.challenge-status');
+                status.textContent = '✓ Completed';
+                status.className = 'challenge-status completed';
+                
+                // Show reward
+                const reward = challenge.querySelector('.challenge-reward').textContent;
+                const message = document.createElement('div');
+                message.innerHTML = `
+                    <h3>🏆 Challenge Complete! 🏆</h3>
+                    <p>${challenge.querySelector('h4').textContent}</p>
+                    <p>${reward}</p>
+                `;
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'rgba(255, 255, 255, 0.95)';
+                message.style.padding = '30px';
+                message.style.borderRadius = '20px';
+                message.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                message.style.zIndex = '10000';
+                message.style.textAlign = 'center';
+                message.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 500);
+                }, 3000);
+            }
+            
+            function getChallengeProgress(challenge) {
+                switch(challenge) {
+                    case 'warm': return `0/90%`;
+                    case 'duration': return `0/10s`;
+                    case 'sync': return `0/100%`;
+                    case 'collector': return `1/6`;
+                    default: return '0%';
+                }
+            }
+            
+            // Helper Functions
+            function updateStats() {
+                totalHugsEl.textContent = totalHugs;
+                hugEnergyEl.textContent = `${Math.round(hugEnergy)}%`;
+                
+                // Update average duration
+                const avgDuration = hugEvents.length > 0 ? totalHugTime / hugEvents.length : 0;
+                avgHugDuration.textContent = avgDuration.toFixed(2) + 's';
+                
+                // Update total hug time
+                totalHugTimeEl.textContent = `${totalHugTime.toFixed(1)}s`;
+            }
+            
+            function showHugCelebration(duration, type = 'normal') {
+                const types = {
+                    quick: '⚡ Quick Hug',
+                    warm: '🔥 Warm Hug',
+                    bear: '🐻 Bear Hug',
+                    normal: '🤗 Hug'
+                };
+                
+                const celebration = document.createElement('div');
+                celebration.innerHTML = `
+                    <h3>${types[type]}!</h3>
+                    <p>Duration: ${duration.toFixed(2)}s</p>
+                    <p>Warmth: ${Math.round(currentWarmth)}%</p>
+                    <p>Heartbeat: ${currentHeartbeat} BPM</p>
+                `;
+                celebration.style.position = 'fixed';
+                celebration.style.top = '50%';
+                celebration.style.left = '50%';
+                celebration.style.transform = 'translate(-50%, -50%)';
+                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
+                celebration.style.padding = '30px';
+                celebration.style.borderRadius = '20px';
+                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                celebration.style.zIndex = '10000';
+                celebration.style.textAlign = 'center';
+                celebration.style.animation = 'fadeIn 0.5s ease';
+                
+                document.body.appendChild(celebration);
+                
+                setTimeout(() => {
+                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 500);
+                }, 2000);
+            }
+            
+            // Start music
+            const pageMusic = document.getElementById('pageMusic');
+            if (pageMusic) {
+                pageMusic.volume = 0.3;
+                setTimeout(() => {
+                    pageMusic.play().catch(e => console.log('Music play prevented'));
+                }, 1000);
+            }
+            
+            // Initialize collection progress
+            updateCollectionProgress();
+        });
+    </script>
+    <style>
+        .hug-day {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            min-height: 100vh;
+        }
+        
+        .hug-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hug-simulator {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffefef, #ffe6e6);
+            border-radius: 20px;
+            transition: background 0.5s ease;
+        }
+        
+        .hug-circle {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .hug-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hug-instruction {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .hug-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            animation: hug-glow 0.5s infinite;
+        }
+        
+        @keyframes hug-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .hug-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .metric {
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .metric-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            display: block;
+            font-weight: 600;
+            color: #ff4081;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .warmth-indicator {
+            width: 100px;
+            height: 20px;
+            background: #e6d5c3;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .warmth-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #a8e6cf, #ffd3b6, #ffaaa5, #ff8b94);
+            border-radius: 10px;
+            transition: width 0.1s ease;
+        }
+        
+        .hug-streaks {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .streak-info {
+            text-align: center;
+        }
+        
+        .streak-label {
+            display: block;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .streak-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ff4081;
+        }
+        
+        .hug-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .hug-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .hug-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .hug-btn.reset {
+            background: linear-gradient(135deg, #666, #888);
+        }
+        
+        .heartbeat-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .heartbeat-visualizer {
+            margin-top: 40px;
+        }
+        
+        .heartbeat-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            height: 150px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+            border-radius: 20px;
+            padding: 20px;
+        }
+        
+        .heartbeat-info {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .heartbeat-rate,
+        .heartbeat-sync {
+            text-align: center;
+        }
+        
+        .rate-label,
+        .sync-label {
+            display: block;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .rate-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff4081;
+        }
+        
+        .rate-unit {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .sync-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff4081;
+        }
+        
+        .heartbeat-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ff4081;
+            font-weight: 600;
+            margin-top: 10px;
+            min-height: 30px;
+        }
+        
+        .heartbeat-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .heartbeat-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .heartbeat-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .heartbeat-btn.sync {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .heartbeat-btn.synced {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            animation: pulse 1s infinite;
+        }
+        
+        .warmth-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .warmth-simulator {
+            margin-top: 40px;
+        }
+        
+        .temperature-control {
+            background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .temp-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .temp-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff4081;
+            margin-bottom: 10px;
+        }
+        
+        .temp-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .temp-slider {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        #warmthSlider {
+            width: 100%;
+            height: 30px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #a8e6cf, #ffd3b6, #ffaaa5, #ff8b94);
+            border-radius: 15px;
+            outline: none;
+        }
+        
+        #warmthSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid #ff4081;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .temp-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .warmth-effects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .effect {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #ffd3b6;
+        }
+        
+        .effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+        }
+        
+        .effect-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .effect.breathing {
+            animation: breath 3s infinite;
+        }
+        
+        @keyframes breath {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .warmth-presets {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .warmth-preset {
+            padding: 15px 25px;
+            border: 2px solid #ffd3b6;
+            background: white;
+            color: #333;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .warmth-preset:hover {
+            background: #fff0f0;
+            transform: translateY(-3px);
+        }
+        
+        .history-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hug-timeline {
+            margin-top: 40px;
+        }
+        
+        .timeline-container {
+            position: relative;
+            height: 100px;
+            background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+        
+        .timeline-track {
+            position: relative;
+            height: 60px;
+            width: 100%;
+            min-width: 500px;
+        }
+        
+        .timeline-event {
+            position: absolute;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            border-radius: 20px;
+            bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-event:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .event-time {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .event-duration {
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+        
+        .timeline-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-stat {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid #ffd3b6;
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff4081;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .timeline-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .timeline-btn.clear {
+            background: linear-gradient(135deg, #666, #888);
+        }
+        
+        .timeline-btn.save {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+        }
+        
+        .special-hugs-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hug-collection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .hug-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #ffd3b6;
+        }
+        
+        .hug-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+        }
+        
+        .hug-card[data-unlocked="true"] {
+            border-color: #ff4081;
+            background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+        }
+        
+        .hug-card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hug-status {
+            margin-top: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .hug-status.unlocked {
+            background: #32CD32;
+            color: white;
+        }
+        
+        .hug-status.locked {
+            background: #666;
+            color: white;
+        }
+        
+        .collection-progress {
+            background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #ff4081;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #e6d5c3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .challenges-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hug-challenges {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .challenge {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #ffd3b6;
+            transition: all 0.3s ease;
+        }
+        
+        .challenge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.1);
+        }
+        
+        .challenge[data-completed="true"] {
+            border-color: #32CD32;
+            background: linear-gradient(135deg, #f0fff0, #e0ffe0);
+        }
+        
+        .challenge-icon {
+            font-size: 2.5rem;
+        }
+        
+        .challenge-content {
+            flex: 1;
+        }
+        
+        .challenge-content h4 {
+            color: #ff4081;
+            margin-bottom: 5px;
+        }
+        
+        .challenge-reward {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .challenge-status {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .challenge-status.completed {
+            background: #32CD32;
+            color: white;
+        }
+        
+        .challenge-status.pending {
+            background: #ffd166;
+            color: #333;
+        }
+        
+        .hug-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</body>
+</html>
