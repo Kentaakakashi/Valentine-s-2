@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Fun Zone! | Online Sweetness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --chocolate-dark: #4a2c2a;
+            --chocolate-medium: #7b3f00;
+            --chocolate-light: #d2691e;
+            --chocolate-cream: #f5e8da;
+            --chocolate-milk: #8b5a2b;
+            --chocolate-caramel: #d35400;
+            --gold: #ffd700;
+            --gold-light: #fff9c4;
+            --rose: #ff6b8b;
+            --mint: #98ff98;
+            --strawberry: #ff6b8b;
+            --bubblegum: #ffb6c1;
+            --cottoncandy: #c9a0ff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--chocolate-dark), var(--chocolate-medium), var(--chocolate-light));
+            color: var(--chocolate-cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 40% 40%, rgba(201, 160, 255, 0.15) 0%, transparent 30%);
+            z-index: -1;
+        }
+
+        /* Floating Elements */
+        .floating-chocolate {
+            position: fixed;
+            font-size: 2rem;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatAround 20s infinite linear;
+        }
+
+        /* Cute Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: gentleGlow 3s infinite alternate;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cute-subtitle {
+            display: inline-block;
+            background: rgba(255, 182, 193, 0.3);
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: 2px solid var(--bubblegum);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Chat Section - Cute Version */
+        .chat-section {
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 3px solid var(--bubblegum);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chat-container {
+            height: 350px;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 2px solid var(--cottoncandy);
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 25px;
+            position: relative;
+            animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.1rem;
+        }
+
+        .message.received {
+            background: linear-gradient(135deg, var(--cottoncandy), #a68fff);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.sent {
+            background: linear-gradient(135deg, var(--bubblegum), #ff8fab);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 8px;
+            padding: 15px 25px;
+            background: rgba(201, 160, 255, 0.3);
+            border-radius: 25px;
+            width: fit-content;
+            margin-bottom: 20px;
+            border: 2px dashed var(--cottoncandy);
+        }
+
+        .typing-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--cottoncandy);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        .chat-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cute-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .cute-btn.pink {
+            background: linear-gradient(135deg, var(--bubblegum), var(--rose));
+            color: white;
+        }
+
+        .cute-btn.purple {
+            background: linear-gradient(135deg, var(--cottoncandy), #9c6bff);
+            color: white;
+        }
+
+        .cute-btn.gold {
+            background: linear-gradient(135deg, var(--gold), #ffcc00);
+            color: var(--chocolate-dark);
+        }
+
+        .cute-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cute-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Interactive Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .game-card:active {
+            transform: translateY(-5px) rotate(1deg);
+        }
+
+        .game-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover .game-emoji {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--gold-light);
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .game-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .game-progress {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .game-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--bubblegum), var(--cottoncandy));
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Chocolate Factory */
+        .factory-section {
+            background: rgba(255, 215, 0, 0.15);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid var(--gold);
+            text-align: center;
+        }
+
+        .factory-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--gold-light);
+        }
+
+        .chocolate-machine {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .machine-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8b7355, #a0522d);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 5px solid var(--chocolate-dark);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .machine-window {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            transition: all 0.5s ease;
+        }
+
+        .machine-button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: var(--rose);
+            border-radius: 50%;
+            border: 5px solid var(--bubblegum);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .machine-button:hover {
+            transform: translateX(-50%) scale(1.1);
+            background: var(--bubblegum);
+        }
+
+        .machine-button:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        /* Chocolate Rain Zone */
+        .rain-zone {
+            background: rgba(201, 160, 255, 0.15);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid var(--cottoncandy);
+            text-align: center;
+        }
+
+        .rain-btn {
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--cottoncandy), #8a6bff);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .rain-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(138, 107, 255, 0.4);
+        }
+
+        .rain-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Dancing Chocolate */
+        .dance-party {
+            background: rgba(255, 182, 193, 0.15);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid var(--bubblegum);
+            text-align: center;
+        }
+
+        .dance-floor {
+            height: 200px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dancing-chocolate {
+            font-size: 4rem;
+            position: absolute;
+            cursor: grab;
+            transition: transform 0.1s ease;
+        }
+
+        .dancing-chocolate:active {
+            cursor: grabbing;
+        }
+
+        /* Popup Messages */
+        .chocolate-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, var(--chocolate-cream), #fff);
+            border-radius: 25px;
+            padding: 40px;
+            z-index: 1000;
+            color: var(--chocolate-dark);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 5px solid var(--gold);
+        }
+
+        .chocolate-popup.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: popupDance 1s infinite alternate;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--chocolate-dark);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .popup-close:hover {
+            transform: scale(1.2);
+        }
+
+        /* Chocolate Particles */
+        .chocolate-particle {
+            position: fixed;
+            font-size: 1.5rem;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* Animations */
+        @keyframes gentleGlow {
+            0% { text-shadow: 0 4px 8px rgba(255, 215, 0, 0.3); }
+            100% { text-shadow: 0 4px 20px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 182, 193, 0.5); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 50px) rotate(90deg); }
+            50% { transform: translate(50px, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes messagePop {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes typingBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes popupDance {
+            0% { transform: scale(1) rotate(-5deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes chocolateFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.8rem; }
+            .chat-title { font-size: 2.2rem; }
+            .games-grid { grid-template-columns: 1fr; }
+            .cute-btn { min-width: 160px; }
+            .chocolate-machine { width: 250px; height: 250px; }
+            .factory-title { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 2.2rem; }
+            .container { padding: 10px; }
+            .chat-section, .factory-section, .rain-zone, .dance-party { padding: 20px; }
+            .chat-controls { flex-direction: column; align-items: center; }
+            .cute-btn { width: 100%; max-width: 300px; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--bubblegum), var(--cottoncandy));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--cottoncandy), var(--bubblegum));
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Chocolates -->
+    <div id="floating-elements"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-heart"></i> Chocolate Fun Zone! <i class="fas fa-heart"></i></h1>
+            <p>No memories to type! Just pure, cute, chocolatey fun! 🍫✨</p>
+            <div class="cute-subtitle">
+                <i class="fas fa-star"></i> Click everything! It's all interactive! <i class="fas fa-star"></i>
+            </div>
+        </header>
+
+        <!-- Cute Chat Section -->
+        <section class="chat-section">
+            <div class="chat-title">
+                <i class="fas fa-comment-heart"></i> Sweet Chat Simulator <i class="fas fa-comment-heart"></i>
+            </div>
+            <div class="chat-container" id="chat-container">
+                <!-- Messages appear here -->
+            </div>
+            <div class="chat-controls">
+                <button class="cute-btn pink" id="send-sweet">
+                    <i class="fas fa-candy-cane"></i> Send Sweet Message
+                </button>
+                <button class="cute-btn purple" id="send-funny">
+                    <i class="fas fa-laugh-squint"></i> Send Funny Message
+                </button>
+                <button class="cute-btn gold" id="send-love">
+                    <i class="fas fa-heart"></i> Send Love Message
+                </button>
+            </div>
+        </section>
+
+        <!-- Interactive Games -->
+        <section>
+            <h2 class="chat-title"><i class="fas fa-gamepad"></i> Chocolate Mini-Games <i class="fas fa-gamepad"></i></h2>
+            <div class="games-grid">
+                <div class="game-card" id="pop-chocolate">
+                    <div class="game-emoji">🎈🍫</div>
+                    <div class="game-title">Chocolate Popper</div>
+                    <div class="game-desc">Tap to pop chocolate bubbles! How many can you pop in 10 seconds?</div>
+                    <div class="game-progress">
+                        <div class="game-progress-fill" id="pop-progress"></div>
+                    </div>
+                    <div>Score: <span id="pop-score">0</span> pops</div>
+                </div>
+
+                <div class="game-card" id="catch-chocolate">
+                    <div class="game-emoji">🕹️🍫</div>
+                    <div class="game-title">Chocolate Catcher</div>
+                    <div class="game-desc">Catch falling chocolates in your basket! Don't let them hit the ground!</div>
+                    <div class="game-progress">
+                        <div class="game-progress-fill" id="catch-progress"></div>
+                    </div>
+                    <div>Caught: <span id="catch-score">0</span> chocolates</div>
+                </div>
+
+                <div class="game-card" id="build-chocolate">
+                    <div class="game-emoji">🏗️🍫</div>
+                    <div class="game-title">Chocolate Builder</div>
+                    <div class="game-desc">Stack chocolate blocks as high as you can without them falling!</div>
+                    <div class="game-progress">
+                        <div class="game-progress-fill" id="build-progress"></div>
+                    </div>
+                    <div>Height: <span id="build-score">0</span> blocks</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chocolate Machine -->
+        <section class="factory-section">
+            <h2 class="factory-title"><i class="fas fa-industry"></i> Magical Chocolate Machine <i class="fas fa-industry"></i></h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">Click the button to make surprise chocolates!</p>
+            
+            <div class="chocolate-machine" id="chocolate-machine">
+                <div class="machine-body">
+                    <div class="machine-window" id="machine-window">❓</div>
+                    <div class="machine-button" id="machine-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="font-size: 1.3rem; color: var(--gold-light); margin-bottom: 10px;">
+                    Chocolates Made: <span id="machine-count">0</span>
+                </div>
+                <div style="opacity: 0.8;">Each chocolate is unique and magical! ✨</div>
+            </div>
+        </section>
+
+        <!-- Chocolate Rain -->
+        <section class="rain-zone">
+            <h2 class="chat-title"><i class="fas fa-cloud-rain"></i> Chocolate Rain Maker <i class="fas fa-cloud-rain"></i></h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">Make it rain chocolate! The more you click, the more it rains!</p>
+            
+            <button class="rain-btn" id="rain-btn">
+                <i class="fas fa-cloud-showers-heavy"></i> MAKE IT RAIN CHOCOLATE! <i class="fas fa-cloud-showers-heavy"></i>
+            </button>
+            
+            <div class="rain-stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="rain-count">0</div>
+                    <div>Rain Sessions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="chocolate-count">0</div>
+                    <div>Total Chocolates</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="click-count">0</div>
+                    <div>Clicks Today</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dancing Chocolate Party -->
+        <section class="dance-party">
+            <h2 class="chat-title"><i class="fas fa-music"></i> Chocolate Dance Party <i class="fas fa-music"></i></h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">Drag the chocolates to make them dance! Click to add more dancers!</p>
+            
+            <div class="dance-floor" id="dance-floor">
+                <div style="opacity: 0.7; font-size: 1.2rem;">Drag me around! 🕺💃</div>
+            </div>
+            
+            <div class="chat-controls">
+                <button class="cute-btn pink" id="add-dancer">
+                    <i class="fas fa-plus"></i> Add Dancer
+                </button>
+                <button class="cute-btn purple" id="clear-dance">
+                    <i class="fas fa-broom"></i> Clear Floor
+                </button>
+                <button class="cute-btn gold" id="dance-party">
+                    <i class="fas fa-play"></i> Start Dance Party!
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chocolate Popup -->
+    <div class="chocolate-popup" id="chocolate-popup">
+        <button class="popup-close" id="popup-close">&times;</button>
+        <div class="popup-emoji" id="popup-emoji">🍫</div>
+        <h3 id="popup-title">Sweet!</h3>
+        <p id="popup-message">You found a chocolate!</p>
+        <div style="margin-top: 20px; font-size: 1.2rem; color: var(--chocolate-medium);">
+            Keep clicking for more surprises! ✨
+        </div>
+    </div>
+
+    <!-- Chocolate Particles Container -->
+    <div id="chocolate-particles"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // State variables
+            let clickCount = 0;
+            let rainCount = 0;
+            let totalChocolates = 0;
+            let machineCount = 0;
+            let popScore = 0;
+            let catchScore = 0;
+            let buildScore = 0;
+            let isPopping = false;
+            let isCatching = false;
+            let isBuilding = false;
+            let dancers = [];
+            
+            // DOM Elements
+            const chatContainer = document.getElementById('chat-container');
+            const sendSweetBtn = document.getElementById('send-sweet');
+            const sendFunnyBtn = document.getElementById('send-funny');
+            const sendLoveBtn = document.getElementById('send-love');
+            const chocolatePopup = document.getElementById('chocolate-popup');
+            const popupClose = document.getElementById('popup-close');
+            const popupEmoji = document.getElementById('popup-emoji');
+            const popupTitle = document.getElementById('popup-title');
+            const popupMessage = document.getElementById('popup-message');
+            const chocolateParticles = document.getElementById('chocolate-particles');
+            const floatingElements = document.getElementById('floating-elements');
+            const rainBtn = document.getElementById('rain-btn');
+            const rainCountEl = document.getElementById('rain-count');
+            const chocolateCountEl = document.getElementById('chocolate-count');
+            const clickCountEl = document.getElementById('click-count');
+            const machineButton = document.getElementById('machine-button');
+            const machineWindow = document.getElementById('machine-window');
+            const machineCountEl = document.getElementById('machine-count');
+            const danceFloor = document.getElementById('dance-floor');
+            const addDancerBtn = document.getElementById('add-dancer');
+            const clearDanceBtn = document.getElementById('clear-dance');
+            const dancePartyBtn = document.getElementById('dance-party');
+            
+            // Game score elements
+            const popScoreEl = document.getElementById('pop-score');
+            const catchScoreEl = document.getElementById('catch-score');
+            const buildScoreEl = document.getElementById('build-score');
+            const popProgress = document.getElementById('pop-progress');
+            const catchProgress = document.getElementById('catch-progress');
+            const buildProgress = document.getElementById('build-progress');
+            
+            // Chat messages
+            const sweetMessages = [
+                { text: "You're sweeter than the sweetest chocolate! 🍫❤️", emoji: "🍫" },
+                { text: "Just thinking about you makes my day sweeter! ✨", emoji: "✨" },
+                { text: "If you were a chocolate, you'd be the fancy one with gold foil! 🥇", emoji: "🥇" },
+                { text: "Sending you virtual chocolate hugs! 🤗🍫", emoji: "🤗" },
+                { text: "You deserve all the chocolate in the world! 🌍🍫", emoji: "🌍" }
+            ];
+            
+            const funnyMessages = [
+                { text: "Why did the chocolate go to the doctor? Because it was feeling a little choc-olate! 😂", emoji: "😂" },
+                { text: "What do you call a chocolate that's a knight? Sir Cocoa! 🏰", emoji: "🏰" },
+                { text: "I'm not saying I love chocolate, but if chocolate and I were on a sinking ship, I'd save the chocolate first! 🚢", emoji: "🚢" },
+                { text: "Why don't chocolates ever win races? They always get stuck in the wrapper! 🏎️", emoji: "🏎️" },
+                { text: "What's a chocolate's favorite music? Rock & Roll-verine! 🎸", emoji: "🎸" }
+            ];
+            
+            const loveMessages = [
+                { text: "I love you more than I love chocolate! And that's saying A LOT! 💖", emoji: "💖" },
+                { text: "You + me = the perfect chocolate pairing! 🍫+❤️", emoji: "🍫" },
+                { text: "My love for you is like dark chocolate - deep, rich, and unforgettable! 🖤", emoji: "🖤" },
+                { text: "Every moment with you is sweeter than chocolate! 🥰", emoji: "🥰" },
+                { text: "You're the caramel in my chocolate center - the sweetest part! 🍯", emoji: "🍯" }
+            ];
+            
+            // Machine chocolate types
+            const chocolateTypes = [
+                { emoji: "🍫", name: "Classic Chocolate", color: "#8B4513" },
+                { emoji: "🍬", name: "Candy Chocolate", color: "#FF69B4" },
+                { emoji: "🍩", name: "Donut Chocolate", color: "#8B7355" },
+                { emoji: "🍪", name: "Cookie Chocolate", color: "#D2691E" },
+                { emoji: "🎂", name: "Cake Chocolate", color: "#FFD700" },
+                { emoji: "🧁", name: "Cupcake Chocolate", color: "#FFB6C1" },
+                { emoji: "🍮", name: "Pudding Chocolate", color: "#FFDEAD" },
+                { emoji: "🍦", name: "Ice Cream Chocolate", color: "#87CEEB" },
+                { emoji: "🌟", name: "Sparkly Chocolate", color: "#FFD700" },
+                { emoji: "💎", name: "Diamond Chocolate", color: "#B9F2FF" }
+            ];
+            
+            // Initialize
+            function initialize() {
+                createFloatingChocolates();
+                setupEventListeners();
+                startChat();
+                updateStats();
+                
+                // Add initial dancer
+                addDancer();
+            }
+            
+            // Create floating chocolate elements
+            function createFloatingChocolates() {
+                const emojis = ["🍫", "🍬", "🍪", "🍩", "🎂", "🧁", "🌟", "💖"];
+                
+                for (let i = 0; i < 15; i++) {
+                    const chocolate = document.createElement('div');
+                    chocolate.className = 'floating-chocolate';
+                    chocolate.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    chocolate.style.left = Math.random() * 100 + 'vw';
+                    chocolate.style.top = Math.random() * 100 + 'vh';
+                    chocolate.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    chocolate.style.opacity = Math.random() * 0.5 + 0.3;
+                    chocolate.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                    
+                    chocolate.addEventListener('click', () => {
+                        createParticle(chocolate.textContent, 
+                            chocolate.offsetLeft + 20, 
+                            chocolate.offsetTop + 20);
+                        showPopup("Floating Chocolate!", `You caught a ${chocolate.textContent}!`, chocolate.textContent);
+                        chocolate.remove();
+                        setTimeout(() => createFloatingChocolates(1), 1000);
+                    });
+                    
+                    floatingElements.appendChild(chocolate);
+                }
+            }
+            
+            // Start chat with initial messages
+            function startChat() {
+                addChatMessage("Welcome to the Chocolate Fun Zone! 🎉", "received", "🎉");
+                addChatMessage("Everything here is clickable and cute! Try it! 🍫", "received", "🍫");
+                addChatMessage("Click the buttons to send me messages! 💌", "received", "💌");
+                
+                // Show typing indicator
+                setTimeout(showTypingIndicator, 1000);
+            }
+            
+            // Add message to chat
+            function addChatMessage(text, type, emoji = "🍫") {
+                const messageEl = document.createElement('div');
+                messageEl.className = `message ${type}`;
+                messageEl.innerHTML = `
+                    <span class="message-emoji">${emoji}</span>
+                    ${text}
+                `;
+                chatContainer.appendChild(messageEl);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+            
+            // Show typing indicator
+            function showTypingIndicator() {
+                const typingEl = document.createElement('div');
+                typingEl.className = 'typing-indicator';
+                typingEl.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatContainer.appendChild(typingEl);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                
+                // Remove after 1-3 seconds and add response
+                const typingTime = 1000 + Math.random() * 2000;
+                setTimeout(() => {
+                    typingEl.remove();
+                    
+                    // Add cute response
+                    const responses = [
+                        { text: "That's so sweet! I love it! 🥰", emoji: "🥰" },
+                        { text: "Haha that made me smile! 😄", emoji: "😄" },
+                        { text: "Aww you're the best! 💖", emoji: "💖" },
+                        { text: "More chocolates please! 🍫🍫", emoji: "🍫" },
+                        { text: "You're making this so much fun! 🎮", emoji: "🎮" }
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    addChatMessage(response.text, "received", response.emoji);
+                }, typingTime);
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Chat buttons
+                sendSweetBtn.addEventListener('click', () => sendMessage('sweet'));
+                sendFunnyBtn.addEventListener('click', () => sendMessage('funny'));
+                sendLoveBtn.addEventListener('click', () => sendMessage('love'));
+                
+                // Popup close
+                popupClose.addEventListener('click', () => {
+                    chocolatePopup.classList.remove('active');
+                });
+                
+                // Rain button
+                rainBtn.addEventListener('click', makeItRain);
+                
+                // Machine button
+                machineButton.addEventListener('click', makeChocolate);
+                
+                // Dance floor buttons
+                addDancerBtn.addEventListener('click', addDancer);
+                clearDanceBtn.addEventListener('click', clearDanceFloor);
+                dancePartyBtn.addEventListener('click', startDanceParty);
+                
+                // Game cards
+                document.getElementById('pop-chocolate').addEventListener('click', startPopGame);
+                document.getElementById('catch-chocolate').addEventListener('click', startCatchGame);
+                document.getElementById('build-chocolate').addEventListener('click', startBuildGame);
+                
+                // Track all clicks
+                document.addEventListener('click', () => {
+                    clickCount++;
+                    updateStats();
+                });
+            }
+            
+            // Send chat message
+            function sendMessage(type) {
+                let messageArray;
+                switch(type) {
+                    case 'sweet': messageArray = sweetMessages; break;
+                    case 'funny': messageArray = funnyMessages; break;
+                    case 'love': messageArray = loveMessages; break;
+                }
+                
+                const message = messageArray[Math.floor(Math.random() * messageArray.length)];
+                addChatMessage(message.text, 'sent', message.emoji);
+                
+                // Show typing indicator for response
+                setTimeout(showTypingIndicator, 500);
+                
+                // Show particle effect
+                createParticle(message.emoji, 
+                    sendSweetBtn.offsetLeft + sendSweetBtn.offsetWidth / 2, 
+                    sendSweetBtn.offsetTop + sendSweetBtn.offsetHeight / 2);
+            }
+            
+            // Make chocolate rain
+            function makeItRain() {
+                rainCount++;
+                totalChocolates += 50;
+                
+                // Update stats
+                updateStats();
+                
+                // Create rain effect
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createRainChocolate();
+                    }, i * 30);
+                }
+                
+                // Show popup
+                showPopup("Chocolate Rain! 🌧️", "It's raining chocolates! Look up!", "🍫");
+                
+                // Add chat message
+                addChatMessage("I made it rain chocolate! 🌧️🍫", "sent", "🌧️");
+                setTimeout(showTypingIndicator, 1000);
+            }
+            
+            // Create single rain chocolate
+            function createRainChocolate() {
+                const chocolate = document.createElement('div');
+                chocolate.className = 'chocolate-particle';
+                chocolate.textContent = ['🍫', '🍬', '🍪', '🍩', '🌟', '💖'][Math.floor(Math.random() * 6)];
+                chocolate.style.left = Math.random() * 100 + 'vw';
+                chocolate.style.top = '-50px';
+                chocolate.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                chocolate.style.opacity = '1';
+                
+                chocolateParticles.appendChild(chocolate);
+                
+                // Animation
+                const duration = Math.random() * 2 + 2;
+                chocolate.style.animation = `chocolateFall ${duration}s linear forwards`;
+                
+                // Remove after animation
+                setTimeout(() => {
+                    chocolate.remove();
+                }, duration * 1000);
+                
+                // Make clickable
+                chocolate.addEventListener('click', () => {
+                    createParticle(chocolate.textContent, 
+                        chocolate.offsetLeft, 
+                        chocolate.offsetTop);
+                    chocolate.remove();
+                });
+            }
+            
+            // Make chocolate in machine
+            function makeChocolate() {
+                machineCount++;
+                machineCountEl.textContent = machineCount;
+                
+                // Random chocolate type
+                const chocolate = chocolateTypes[Math.floor(Math.random() * chocolateTypes.length)];
+                
+                // Animate machine
+                machineWindow.textContent = "⚙️";
+                machineWindow.style.animation = "spin 0.5s linear";
+                machineButton.style.animation = "wiggle 0.3s 3";
+                
+                setTimeout(() => {
+                    machineWindow.textContent = chocolate.emoji;
+                    machineWindow.style.animation = "";
+                    machineButton.style.animation = "";
+                    machineWindow.style.color = chocolate.color;
+                    
+                    // Show popup
+                    showPopup(chocolate.name, `You made a ${chocolate.name.toLowerCase()}! ${chocolate.emoji}`, chocolate.emoji);
+                    
+                    // Create particle
+                    createParticle(chocolate.emoji, 
+                        machineWindow.offsetLeft + machineWindow.offsetWidth / 2, 
+                        machineWindow.offsetTop + machineWindow.offsetHeight / 2);
+                        
+                    // Add chat message
+                    addChatMessage(`I just made a ${chocolate.name.toLowerCase()} in the machine! ${chocolate.emoji}`, "sent", chocolate.emoji);
+                    setTimeout(showTypingIndicator, 1000);
+                }, 500);
+            }
+            
+            // Add dancer to floor
+            function addDancer() {
+                const dancer = document.createElement('div');
+                dancer.className = 'dancing-chocolate';
+                dancer.textContent = ['🍫', '🍬', '🍪', '🎂', '🧁', '🌟'][Math.floor(Math.random() * 6)];
+                dancer.style.left = Math.random() * 80 + 10 + '%';
+                dancer.style.top = Math.random() * 80 + 10 + '%';
+                
+                // Make draggable
+                makeDraggable(dancer);
+                
+                danceFloor.appendChild(dancer);
+                dancers.push(dancer);
+                
+                // Show popup if first dancer
+                if (dancers.length === 1) {
+                    showPopup("Dancer Added! 💃", "Drag the chocolate around to make it dance!", "💃");
+                }
+            }
+            
+            // Make element draggable
+            function makeDraggable(element) {
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                
+                element.onmousedown = dragMouseDown;
+                element.ontouchstart = dragTouchStart;
+                
+                function dragMouseDown(e) {
+                    e.preventDefault();
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    document.onmousemove = elementDrag;
+                }
+                
+                function dragTouchStart(e) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    pos3 = touch.clientX;
+                    pos4 = touch.clientY;
+                    document.ontouchend = closeDragElement;
+                    document.ontouchmove = elementDragTouch;
+                }
+                
+                function elementDrag(e) {
+                    e.preventDefault();
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    
+                    const newTop = element.offsetTop - pos2;
+                    const newLeft = element.offsetLeft - pos1;
+                    
+                    // Keep within bounds
+                    if (newTop >= 0 && newTop <= danceFloor.offsetHeight - 60) {
+                        element.style.top = newTop + "px";
+                    }
+                    if (newLeft >= 0 && newLeft <= danceFloor.offsetWidth - 60) {
+                        element.style.left = newLeft + "px";
+                    }
+                }
+                
+                function elementDragTouch(e) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    pos1 = pos3 - touch.clientX;
+                    pos2 = pos4 - touch.clientY;
+                    pos3 = touch.clientX;
+                    pos4 = touch.clientY;
+                    
+                    const newTop = element.offsetTop - pos2;
+                    const newLeft = element.offsetLeft - pos1;
+                    
+                    // Keep within bounds
+                    if (newTop >= 0 && newTop <= danceFloor.offsetHeight - 60) {
+                        element.style.top = newTop + "px";
+                    }
+                    if (newLeft >= 0 && newLeft <= danceFloor.offsetWidth - 60) {
+                        element.style.left = newLeft + "px";
+                    }
+                }
+                
+                function closeDragElement() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                    document.ontouchend = null;
+                    document.ontouchmove = null;
+                }
+            }
+            
+            // Clear dance floor
+            function clearDanceFloor() {
+                dancers.forEach(dancer => dancer.remove());
+                dancers = [];
+                showPopup("Clean Floor! 🧹", "All dancers cleared! Add new ones!", "🧹");
+            }
+            
+            // Start dance party
+            function startDanceParty() {
+                dancers.forEach(dancer => {
+                    dancer.style.animation = "wiggle 0.5s infinite alternate";
+                });
+                
+                // Add party effects
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        createParticle(["🎉", "✨", "🌟", "🎊"][Math.floor(Math.random() * 4)], 
+                            Math.random() * window.innerWidth, 
+                            Math.random() * window.innerHeight);
+                    }, i * 100);
+                }
+                
+                showPopup("Dance Party! 🎊", "All chocolates are dancing! Woo!", "🎉");
+                
+                // Stop after 5 seconds
+                setTimeout(() => {
+                    dancers.forEach(dancer => {
+                        dancer.style.animation = "";
+                    });
+                }, 5000);
+            }
+            
+            // Game functions
+            function startPopGame() {
+                if (isPopping) return;
+                isPopping = true;
+                popScore = 0;
+                popScoreEl.textContent = popScore;
+                popProgress.style.width = "0%";
+                
+                showPopup("Pop Game! 🎈", "Pop as many chocolate bubbles as you can in 10 seconds!", "🎈");
+                
+                // Create bubbles
+                const interval = setInterval(() => {
+                    if (popScore >= 50) {
+                        clearInterval(interval);
+                        isPopping = false;
+                        showPopup("Game Over! 🏆", `You popped ${popScore} bubbles! Amazing!`, "🏆");
+                        return;
+                    }
+                    
+                    createBubble();
+                }, 300);
+                
+                // Game timer
+                setTimeout(() => {
+                    clearInterval(interval);
+                    isPopping = false;
+                    showPopup("Time's Up! ⏰", `You popped ${popScore} chocolate bubbles!`, "🍫");
+                }, 10000);
+            }
+            
+            function createBubble() {
+                const bubble = document.createElement('div');
+                bubble.className = 'chocolate-particle';
+                bubble.textContent = "🎈";
+                bubble.style.left = Math.random() * 80 + 10 + 'vw';
+                bubble.style.top = Math.random() * 80 + 10 + 'vh';
+                bubble.style.fontSize = '40px';
+                bubble.style.cursor = 'pointer';
+                bubble.style.opacity = '1';
+                bubble.style.zIndex = '1000';
+                
+                bubble.addEventListener('click', () => {
+                    popScore++;
+                    popScoreEl.textContent = popScore;
+                    popProgress.style.width = Math.min(100, popScore * 2) + '%';
+                    
+                    createParticle("💥", bubble.offsetLeft, bubble.offsetTop);
+                    bubble.remove();
+                    
+                    // Play pop sound effect (visual)
+                    bubble.style.transform = 'scale(1.5)';
+                    bubble.style.opacity = '0';
+                    setTimeout(() => bubble.remove(), 300);
+                });
+                
+                document.body.appendChild(bubble);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    if (bubble.parentNode) {
+                        bubble.remove();
+                    }
+                }, 3000);
+            }
+            
+            function startCatchGame() {
+                if (isCatching) return;
+                isCatching = true;
+                catchScore = 0;
+                catchScoreEl.textContent = catchScore;
+                catchProgress.style.width = "0%";
+                
+                showPopup("Catch Game! 🕹️", "Catch falling chocolates! Click them before they disappear!", "🍫");
+                
+                // Create falling chocolates
+                const interval = setInterval(() => {
+                    if (catchScore >= 30) {
+                        clearInterval(interval);
+                        isCatching = false;
+                        showPopup("Winner! 🏆", `You caught ${catchScore} chocolates! You're a pro!`, "🏆");
+                        return;
+                    }
+                    
+                    createFallingChocolate();
+                }, 500);
+                
+                // Game timer
+                setTimeout(() => {
+                    clearInterval(interval);
+                    isCatching = false;
+                    showPopup("Game Over! 🎮", `You caught ${catchScore} chocolates!`, "🍫");
+                }, 15000);
+            }
+            
+            function createFallingChocolate() {
+                const chocolate = document.createElement('div');
+                chocolate.className = 'chocolate-particle';
+                chocolate.textContent = ["🍫", "🍬", "🍪"][Math.floor(Math.random() * 3)];
+                chocolate.style.left = Math.random() * 80 + 10 + 'vw';
+                chocolate.style.top = '-50px';
+                chocolate.style.fontSize = '35px';
+                chocolate.style.cursor = 'pointer';
+                chocolate.style.opacity = '1';
+                chocolate.style.zIndex = '1000';
+                
+                chocolate.addEventListener('click', () => {
+                    catchScore++;
+                    catchScoreEl.textContent = catchScore;
+                    catchProgress.style.width = Math.min(100, catchScore * 3.33) + '%';
+                    
+                    createParticle("⭐", chocolate.offsetLeft, chocolate.offsetTop);
+                    chocolate.remove();
+                });
+                
+                document.body.appendChild(chocolate);
+                
+                // Fall animation
+                const duration = Math.random() * 2 + 1;
+                chocolate.style.animation = `chocolateFall ${duration}s linear forwards`;
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (chocolate.parentNode) {
+                        chocolate.remove();
+                    }
+                }, duration * 1000);
+            }
+            
+            function startBuildGame() {
+                if (isBuilding) return;
+                isBuilding = true;
+                buildScore = 0;
+                buildScoreEl.textContent = buildScore;
+                buildProgress.style.width = "0%";
+                
+                showPopup("Build Game! 🏗️", "Click to add blocks! Build as high as you can!", "🧱");
+                
+                // Simple click-to-build game
+                const gameDuration = 10000; // 10 seconds
+                const startTime = Date.now();
+                
+                // Update score on click
+                const clickHandler = () => {
+                    if (isBuilding) {
+                        buildScore++;
+                        buildScoreEl.textContent = buildScore;
+                        buildProgress.style.width = Math.min(100, buildScore * 5) + '%';
+                        
+                        // Create block particle
+                        createParticle("🧱", 
+                            Math.random() * window.innerWidth, 
+                            Math.random() * window.innerHeight);
+                    }
+                };
+                
+                document.addEventListener('click', clickHandler);
+                
+                // Game timer
+                setTimeout(() => {
+                    isBuilding = false;
+                    document.removeEventListener('click', clickHandler);
+                    
+                    showPopup("Construction Complete! 🏢", `You built ${buildScore} blocks high!`, "🏢");
+                }, gameDuration);
+            }
+            
+            // Create particle effect
+            function createParticle(emoji, x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'chocolate-particle';
+                particle.textContent = emoji;
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.fontSize = '25px';
+                particle.style.opacity = '1';
+                
+                chocolateParticles.appendChild(particle);
+                
+                // Random movement
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 3 + 2;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+                
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+                
+                function animate() {
+                    posX += vx;
+                    posY += vy;
+                    opacity -= 0.02;
+                    
+                    particle.style.left = posX + 'px';
+                    particle.style.top = posY + 'px';
+                    particle.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                animate();
+            }
+            
+            // Show popup
+            function showPopup(title, message, emoji) {
+                popupTitle.textContent = title;
+                popupMessage.textContent = message;
+                popupEmoji.textContent = emoji;
+                chocolatePopup.classList.add('active');
+            }
+            
+            // Update stats
+            function updateStats() {
+                rainCountEl.textContent = rainCount;
+                chocolateCountEl.textContent = totalChocolates;
+                clickCountEl.textContent = clickCount;
+            }
+            
+            // Initialize everything
+            initialize();
+            
+            // Easter egg: Secret dance code
+            let secretCode = '';
+            document.addEventListener('keydown', (e) => {
+                secretCode += e.key.toLowerCase();
+                if (secretCode.length > 20) secretCode = secretCode.slice(-20);
+                
+                if (secretCode.includes('chocolatedance')) {
+                    for (let i = 0; i < 10; i++) {
+                        setTimeout(() => addDancer(), i * 200);
+                    }
+                    startDanceParty();
+                    secretCode = '';
+                    showPopup("Secret Code! 🔑", "You unlocked the chocolate dance party! 🎉", "🔑");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
