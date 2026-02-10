@@ -3,1456 +3,1514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 4: Teddy Day - 7 Days of Love</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/pages.css">
+    <title>Happy Teddy Day 🧸</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Arial Rounded MT Bold', cursive;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffd6e7 0%, #ffc2d1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: background 1.5s ease;
+        }
+
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 2s ease;
+            background: linear-gradient(to bottom, #0a0a2a 0%, #1a1a4a 100%);
+        }
+
+        .moon {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            width: 60px;
+            height: 60px;
+            background: #f8f8e6;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 255, 200, 0.8);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(231, 124, 156, 0.25);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 10px solid #ffb6c1;
+            z-index: 10;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, #ff9ebb, #ffc2d1, #ff9ebb);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: #d45d79;
+            margin-bottom: 0;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            background: #ff9ebb;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 158, 187, 0.3);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+            background: #ff7b9c;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #ff7b9c;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .teddy-container {
+            position: relative;
+            height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 30px;
+            background: rgba(255, 245, 250, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .teddy {
+            width: 180px;
+            height: 200px;
+            position: relative;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .teddy-body {
+            width: 180px;
+            height: 160px;
+            background-color: #c57a5f;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            top: 40px;
+            box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .teddy-head {
+            width: 140px;
+            height: 130px;
+            background-color: #c57a5f;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 20px;
+            z-index: 3;
+        }
+
+        .ear {
+            width: 40px;
+            height: 50px;
+            background-color: #c57a5f;
+            border-radius: 50%;
+            position: absolute;
+            top: -15px;
+        }
+
+        .ear-left {
+            left: 15px;
+            transform: rotate(-20deg);
+        }
+
+        .ear-right {
+            right: 15px;
+            transform: rotate(20deg);
+        }
+
+        .eye {
+            width: 25px;
+            height: 35px;
+            background-color: #3a2c2c;
+            border-radius: 50%;
+            position: absolute;
+            top: 45px;
+            transition: all 0.5s ease;
+        }
+
+        .eye-left {
+            left: 35px;
+        }
+
+        .eye-right {
+            right: 35px;
+        }
+
+        .eye-shine {
+            width: 8px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 5px;
+        }
+
+        .nose {
+            width: 20px;
+            height: 15px;
+            background-color: #3a2c2c;
+            border-radius: 50%;
+            position: absolute;
+            top: 75px;
+            left: 60px;
+        }
+
+        .mouth {
+            width: 30px;
+            height: 10px;
+            border-bottom: 4px solid #3a2c2c;
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            top: 95px;
+            left: 55px;
+            transition: all 0.5s ease;
+        }
+
+        .mouth.smile {
+            border-radius: 0 0 50% 50%;
+            border-bottom: 6px solid #3a2c2c;
+            height: 15px;
+        }
+
+        .mouth.sleep {
+            width: 25px;
+            border-bottom: 3px solid #3a2c2c;
+            border-radius: 50%;
+            transform: rotate(90deg);
+            top: 100px;
+            left: 58px;
+        }
+
+        .arm {
+            width: 60px;
+            height: 40px;
+            background-color: #c57a5f;
+            border-radius: 50%;
+            position: absolute;
+            top: 90px;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .arm-left {
+            left: -15px;
+            transform: rotate(30deg);
+        }
+
+        .arm-right {
+            right: -15px;
+            transform: rotate(-30deg);
+        }
+
+        .arm.hug {
+            transform: rotate(0deg) !important;
+            top: 70px;
+        }
+
+        .leg {
+            width: 50px;
+            height: 40px;
+            background-color: #c57a5f;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .leg-left {
+            left: 40px;
+        }
+
+        .leg-right {
+            right: 40px;
+        }
+
+        .message-box {
+            background-color: #fff9fb;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #d45d79;
+            border: 3px dashed #ffb6c1;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 700px;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .message-box::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ffb6c1;
+        }
+
+        .actions-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #ff9ebb 0%, #ff7b9c 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 35px;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 158, 187, 0.4);
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 158, 187, 0.6);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .action-btn .counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            font-size: 0.8rem;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .honey {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ffc107;
+            border-radius: 50% 50% 40% 40%;
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .blanket {
+            position: absolute;
+            width: 280px;
+            height: 120px;
+            background: linear-gradient(to bottom, #a8e6cf 0%, #8dd7c0 100%);
+            bottom: -120px;
+            border-radius: 15px 15px 0 0;
+            z-index: 1;
+            transition: bottom 1.5s ease;
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.15);
+            border-top: 5px solid #7ccbb1;
+        }
+
+        .blanket-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#7ccbb1 2px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff7b9c;
+            font-size: 1.5rem;
+            opacity: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .final-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 214, 231, 0.98);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .final-screen.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .final-text {
+            font-size: 2.8rem;
+            color: #d45d79;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #ff9ebb 0%, #ff7b9c 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 158, 187, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 158, 187, 0.6);
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            color: #ffd166;
+            font-size: 1.2rem;
+            opacity: 0;
+        }
+
+        .instructions {
+            text-align: center;
+            color: #ff7b9c;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 700px;
+            height: 12px;
+            background-color: #ffe4ec;
+            border-radius: 6px;
+            margin: 25px auto;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff9ebb, #ffc2d1, #ff9ebb);
+            border-radius: 6px;
+            transition: width 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .memory-album {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 250, 0.98);
+            border-radius: 20px;
+            padding: 30px;
+            z-index: 25;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .memory-album.active {
+            display: flex;
+        }
+
+        .album-title {
+            color: #d45d79;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .memory-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .memory-text {
+            color: #d45d79;
+            font-size: 0.9rem;
+        }
+
+        .close-album {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff9ebb;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff9ebb;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .personalized-area {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 245, 250, 0.7);
+            border-radius: 15px;
+            border: 2px dashed #ffb6c1;
+            text-align: center;
+        }
+
+        .personalized-input {
+            padding: 10px 15px;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .personalized-btn {
+            background: #ff9ebb;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .actions-container {
+                gap: 15px;
+            }
+            
+            .action-btn {
+                padding: 15px 25px;
+                font-size: 1.2rem;
+            }
+            
+            .teddy-container {
+                height: 280px;
+            }
+            
+            .final-text {
+                font-size: 2.2rem;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes honeyDrip {
+            0% { opacity: 0; transform: translateY(-50px) scale(0.5); }
+            20% { opacity: 1; transform: translateY(0) scale(1); }
+            80% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(20px) scale(0.5); }
+        }
+
+        @keyframes heartFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            20% { opacity: 1; transform: translateY(-20px) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(0.5); }
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes blink {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        @keyframes nightIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
-<body class="teddy-day">
-    <!-- Animated Background -->
-    <div class="floating-hearts"></div>
-    <div class="sparkles"></div>
-    
-    <!-- Back Button -->
-    <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Back to Journey
-    </a>
-    
-    <!-- Main Content -->
-    <div class="page-container">
-        <div class="day-header">
-            <div class="day-icon-large">🧸</div>
-            <h1>Teddy Day</h1>
-            <p class="day-subtitle">Day 4 - February 10</p>
-            <p class="day-tagline">Soft hugs and warm memories</p>
-        </div>
-        
-        <!-- Interactive Virtual Teddy Bear -->
-        <div class="teddy-section">
-            <h2><i class="fas fa-paw"></i> Interactive Virtual Teddy Bear</h2>
-            <p class="section-subtitle">Click, hug, and interact with your virtual teddy</p>
-            
-            <div class="teddy-container">
-                <div class="virtual-teddy" id="virtualTeddy">
-                    <div class="teddy-body">
-                        <div class="teddy-head">
-                            <div class="teddy-ear left-ear"></div>
-                            <div class="teddy-ear right-ear"></div>
-                            <div class="teddy-face">
-                                <div class="teddy-eye left-eye"></div>
-                                <div class="teddy-eye right-eye"></div>
-                                <div class="teddy-nose"></div>
-                                <div class="teddy-mouth"></div>
-                            </div>
-                        </div>
-                        <div class="teddy-arm left-arm"></div>
-                        <div class="teddy-arm right-arm"></div>
-                        <div class="teddy-leg left-leg"></div>
-                        <div class="teddy-leg right-leg"></div>
-                    </div>
-                </div>
-                
-                <div class="teddy-controls">
-                    <div class="teddy-stats">
-                        <div class="stat">
-                            <span class="stat-label">Happiness:</span>
-                            <div class="stat-bar">
-                                <div class="stat-fill" id="happinessBar" style="width: 75%"></div>
-                            </div>
-                            <span class="stat-value" id="happinessValue">75%</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Warmth:</span>
-                            <div class="stat-bar">
-                                <div class="stat-fill" id="warmthBar" style="width: 60%"></div>
-                            </div>
-                            <span class="stat-value" id="warmthValue">60%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="teddy-actions">
-                        <button id="hugTeddy" class="teddy-btn">
-                            <i class="fas fa-hands"></i> Give a Hug
-                        </button>
-                        <button id="feedTeddy" class="teddy-btn">
-                            <i class="fas fa-cookie-bite"></i> Feed Honey
-                        </button>
-                        <button id="playTeddy" class="teddy-btn">
-                            <i class="fas fa-gamepad"></i> Play Together
-                        </button>
-                        <button id="sleepTeddy" class="teddy-btn">
-                            <i class="fas fa-moon"></i> Put to Sleep
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Hug Simulator -->
-        <div class="hug-simulator-section">
-            <h2><i class="fas fa-hands"></i> Virtual Hug Simulator</h2>
-            <p class="section-subtitle">Press and hold for a warm, comforting hug</p>
-            
-            <div class="hug-simulator" id="hugSimulator">
-                <div class="hug-circle">
-                    <div class="hug-icon">🤗</div>
-                    <p class="hug-instruction">Press & Hold to Hug</p>
-                </div>
-                <div class="hug-metrics">
-                    <div class="metric">
-                        <span class="metric-label">Hug Duration:</span>
-                        <span class="metric-value" id="hugDuration">0.00s</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Hug Warmth:</span>
-                        <div class="warmth-indicator" id="warmthIndicator">
-                            <div class="warmth-fill"></div>
-                        </div>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Heartbeat:</span>
-                        <span class="metric-value" id="hugHeartbeat">72 BPM</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Teddy Memory Bank -->
-        <div class="memory-bank-section">
-            <h2><i class="fas fa-memory"></i> Teddy Memory Bank</h2>
-            <p class="section-subtitle">Store and revisit our special comfort moments</p>
-            
-            <div class="memory-bank">
-                <div class="memory-card" data-memory="That time we cuddled during the thunderstorm">
-                    <div class="memory-icon">⛈️</div>
-                    <h3>Stormy Comfort</h3>
-                    <p>You made me feel safe and warm</p>
-                    <button class="recall-btn">Recall Memory</button>
-                </div>
-                
-                <div class="memory-card" data-memory="Our movie marathon with endless snacks">
-                    <div class="memory-icon">🎬</div>
-                    <h3>Movie Nights</h3>
-                    <p>Cozy evenings together</p>
-                    <button class="recall-btn">Recall Memory</button>
-                </div>
-                
-                <div class="memory-card" data-memory="When you surprised me with breakfast in bed">
-                    <div class="memory-icon">🍳</div>
-                    <h3>Morning Surprise</h3>
-                    <p>The sweetest wake-up call</p>
-                    <button class="recall-btn">Recall Memory</button>
-                </div>
-                
-                <div class="memory-card" data-memory="Quiet evenings just talking for hours">
-                    <div class="memory-icon">💭</div>
-                    <h3>Heart-to-Heart</h3>
-                    <p>Conversations that never end</p>
-                    <button class="recall-btn">Recall Memory</button>
-                </div>
-            </div>
-            
-            <div class="memory-display">
-                <div class="memory-content">
-                    <i class="fas fa-quote-left"></i>
-                    <p id="memoryDisplay">Click "Recall Memory" to see a special moment</p>
-                    <i class="fas fa-quote-right"></i>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Our Comfort Moments Gallery -->
-        <div class="comfort-gallery-section">
-            <h2><i class="fas fa-images"></i> Our Comfort Moments Gallery</h2>
-            <p class="section-subtitle">Visual memories of warmth and comfort</p>
-            
-            <div class="comfort-gallery">
-                <div class="gallery-item">
-                    <div class="gallery-img" style="background: linear-gradient(135deg, #ffb6c1, #ff8fa3);">
-                        <div class="img-emoji">🛋️</div>
-                    </div>
-                    <h3>Cozy Sofa Days</h3>
-                    <p>Lazy Sundays together</p>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-img" style="background: linear-gradient(135deg, #a8e6cf, #dcedc1);">
-                        <div class="img-emoji">🌿</div>
-                    </div>
-                    <h3>Park Picnics</h3>
-                    <p>Sunny afternoons in nature</p>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-img" style="background: linear-gradient(135deg, #ffd3b6, #ffaaa5);">
-                        <div class="img-emoji">☕</div>
-                    </div>
-                    <h3>Coffee Mornings</h3>
-                    <p>Warm cups and warm hearts</p>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-img" style="background: linear-gradient(135deg, #d4a5a5, #ff8fa3);">
-                        <div class="img-emoji">📚</div>
-                    </div>
-                    <h3>Reading Together</h3>
-                    <p>Quiet moments of shared stories</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Build-a-Teddy Mini Game -->
-        <div class="build-teddy-section">
-            <h2><i class="fas fa-gamepad"></i> Build-a-Teddy Mini Game</h2>
-            <p class="section-subtitle">Customize your perfect teddy bear</p>
-            
-            <div class="build-game">
-                <div class="teddy-customizer">
-                    <div class="customizer-preview" id="teddyPreview">
-                        <div class="preview-teddy">
-                            <div class="preview-body" id="teddyBody">
-                                <div class="preview-head" id="teddyHead">
-                                    <div class="preview-ears" id="teddyEars"></div>
-                                    <div class="preview-face" id="teddyFace"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="customizer-options">
-                        <div class="option-group">
-                            <h4>Fur Color</h4>
-                            <div class="color-options">
-                                <button class="color-btn" data-color="brown" data-part="fur">🧸 Brown</button>
-                                <button class="color-btn" data-color="cream" data-part="fur">🤍 Cream</button>
-                                <button class="color-btn" data-color="pink" data-part="fur">🎀 Pink</button>
-                                <button class="color-btn" data-color="blue" data-part="fur">💙 Blue</button>
-                            </div>
-                        </div>
-                        
-                        <div class="option-group">
-                            <h4>Accessories</h4>
-                            <div class="accessory-options">
-                                <button class="accessory-btn" data-accessory="bow">🎀 Bow Tie</button>
-                                <button class="accessory-btn" data-accessory="scarf">🧣 Scarf</button>
-                                <button class="accessory-btn" data-accessory="hat">🎩 Hat</button>
-                                <button class="accessory-btn" data-accessory="glasses">👓 Glasses</button>
-                            </div>
-                        </div>
-                        
-                        <div class="option-group">
-                            <h4>Expression</h4>
-                            <div class="expression-options">
-                                <button class="expression-btn" data-expression="happy">😊 Happy</button>
-                                <button class="expression-btn" data-expression="sleepy">😴 Sleepy</button>
-                                <button class="expression-btn" data-expression="loving">🥰 Loving</button>
-                                <button class="expression-btn" data-expression="playful">😄 Playful</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="teddy-result">
-                    <button id="createTeddy" class="action-btn">
-                        <i class="fas fa-magic"></i> Create My Teddy!
-                    </button>
-                    <p class="teddy-name-label">Name your teddy:</p>
-                    <input type="text" id="teddyName" placeholder="e.g., Cuddles" maxlength="20">
-                </div>
-            </div>
-        </div>
+<body>
+    <!-- Night sky for tuck-in phase -->
+    <div class="night-sky" id="nightSky">
+        <div class="moon"></div>
     </div>
     
-    <!-- Navigation -->
-    <nav class="page-nav">
-        <a href="chocolate-day.html"><i class="fas fa-arrow-left"></i> Previous: Chocolate Day</a>
-        <a href="promise-day.html" class="next-day">Next: Promise Day <i class="fas fa-arrow-right"></i></a>
-    </nav>
+    <!-- Sound toggle -->
+    <button class="sound-toggle" id="soundToggle">
+        <i class="fas fa-volume-up"></i>
+    </button>
     
-    <!-- Audio -->
-    <audio id="pageMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-little-birds-singing-in-the-trees-34.mp3" type="audio/mpeg">
+    <div class="container">
+        <div class="header">
+            <h1>🧸 Happy Teddy Day 🧸</h1>
+            <div class="controls">
+                <button class="icon-btn" id="musicBtn" title="Toggle Music">
+                    <i class="fas fa-music"></i>
+                </button>
+                <button class="icon-btn" id="albumBtn" title="Memory Album">
+                    <i class="fas fa-book"></i>
+                </button>
+                <button class="icon-btn" id="helpBtn" title="Instructions">
+                    <i class="fas fa-question"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="subtitle">A cozy interactive experience for my favorite person</div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="message-box" id="messageBox">
+            This teddy's had a long day...
+        </div>
+        
+        <div class="teddy-container">
+            <div class="stars" id="starsContainer"></div>
+            
+            <div class="teddy" id="teddy">
+                <div class="teddy-body"></div>
+                <div class="teddy-head">
+                    <div class="ear ear-left"></div>
+                    <div class="ear ear-right"></div>
+                    <div class="eye eye-left">
+                        <div class="eye-shine"></div>
+                    </div>
+                    <div class="eye eye-right">
+                        <div class="eye-shine"></div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="mouth" id="teddyMouth"></div>
+                </div>
+                <div class="arm arm-left" id="leftArm"></div>
+                <div class="arm arm-right" id="rightArm"></div>
+                <div class="leg leg-left"></div>
+                <div class="leg leg-right"></div>
+            </div>
+            
+            <div class="blanket" id="blanket">
+                <div class="blanket-pattern"></div>
+            </div>
+        </div>
+        
+        <div class="actions-container">
+            <button class="action-btn active" id="feedBtn">
+                <span>🍯</span> Feed
+                <div class="counter" id="feedCounter">0</div>
+            </button>
+            <button class="action-btn" id="hugBtn">
+                <span>🫂</span> Hug
+                <div class="counter" id="hugCounter">0</div>
+            </button>
+            <button class="action-btn" id="tuckBtn">
+                <span>😴</span> Tuck In
+                <div class="counter" id="tuckCounter">0</div>
+            </button>
+        </div>
+        
+        <div class="personalized-area">
+            <p style="margin-bottom: 10px; color: #d45d79;">Add your name to personalize the experience:</p>
+            <input type="text" class="personalized-input" id="nameInput" placeholder="Your name" maxlength="20">
+            <button class="personalized-btn" id="nameBtn">Update</button>
+        </div>
+        
+        <div class="instructions">
+            Take care of the teddy by clicking actions in order • Each action can be repeated
+        </div>
+        
+        <!-- Memory Album -->
+        <div class="memory-album" id="memoryAlbum">
+            <h2 class="album-title">Our Teddy Memories</h2>
+            <div class="memory-grid" id="memoryGrid">
+                <!-- Memories will be added here dynamically -->
+            </div>
+            <button class="close-album" id="closeAlbum">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Final Screen -->
+        <div class="final-screen" id="finalScreen">
+            <div class="final-text" id="finalText"></div>
+            <button class="reset-btn" id="resetBtn">
+                <i class="fas fa-redo"></i> Care for Teddy Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-carefree-joy-1156.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="feedSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cute-eating-sounds-2000.mp3" type="audio/mpeg">
     </audio>
     <audio id="hugSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cute-little-girl-hug-1902.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-love-880.mp3" type="audio/mpeg">
     </audio>
-    
-    <script src="js/main.js"></script>
+    <audio id="tuckSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-sleep-sounds-1007.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="unlockSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Teddy stats
-            let happiness = 75;
-            let warmth = 60;
-            let teddyIsSleeping = false;
+        // DOM Elements
+        const teddy = document.getElementById('teddy');
+        const messageBox = document.getElementById('messageBox');
+        const feedBtn = document.getElementById('feedBtn');
+        const hugBtn = document.getElementById('hugBtn');
+        const tuckBtn = document.getElementById('tuckBtn');
+        const finalScreen = document.getElementById('finalScreen');
+        const finalText = document.getElementById('finalText');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressBar = document.getElementById('progressBar');
+        const starsContainer = document.getElementById('starsContainer');
+        const blanket = document.getElementById('blanket');
+        const nightSky = document.getElementById('nightSky');
+        const teddyMouth = document.getElementById('teddyMouth');
+        const leftArm = document.getElementById('leftArm');
+        const rightArm = document.getElementById('rightArm');
+        const soundToggle = document.getElementById('soundToggle');
+        const musicBtn = document.getElementById('musicBtn');
+        const albumBtn = document.getElementById('albumBtn');
+        const helpBtn = document.getElementById('helpBtn');
+        const memoryAlbum = document.getElementById('memoryAlbum');
+        const memoryGrid = document.getElementById('memoryGrid');
+        const closeAlbum = document.getElementById('closeAlbum');
+        const nameInput = document.getElementById('nameInput');
+        const nameBtn = document.getElementById('nameBtn');
+        
+        // Audio elements
+        const bgMusic = document.getElementById('bgMusic');
+        const feedSound = document.getElementById('feedSound');
+        const hugSound = document.getElementById('hugSound');
+        const tuckSound = document.getElementById('tuckSound');
+        const clickSound = document.getElementById('clickSound');
+        const unlockSound = document.getElementById('unlockSound');
+        
+        // Counters
+        const feedCounter = document.getElementById('feedCounter');
+        const hugCounter = document.getElementById('hugCounter');
+        const tuckCounter = document.getElementById('tuckCounter');
+        
+        // Game state
+        let currentState = 0;
+        let feedCount = 0;
+        let hugCount = 0;
+        let tuckCount = 0;
+        let playerName = "My Love";
+        let memories = [];
+        let soundEnabled = true;
+        let musicEnabled = false;
+        
+        const states = [
+            { 
+                message: "This teddy's had a long day...", 
+                nextAction: "feed",
+                progress: 0
+            },
+            { 
+                message: "That helped... thank you.", 
+                nextAction: "hug",
+                progress: 25
+            },
+            { 
+                message: "I needed that.", 
+                nextAction: "tuck",
+                progress: 50
+            },
+            { 
+                message: "I feel safe now.", 
+                nextAction: "complete",
+                progress: 75
+            }
+        ];
+        
+        // Final message
+        const finalMessage = "You're my comfort too, {name}.<br>Happy Teddy Day 🧸❤️";
+        
+        // Memory templates
+        const memoryTemplates = [
+            { emoji: "🍯", text: "Fed the teddy" },
+            { emoji: "🫂", text: "Gave a warm hug" },
+            { emoji: "😴", text: "Tucked in safely" },
+            { emoji: "🧸", text: "Made teddy happy" },
+            { emoji: "💖", text: "Showed love" },
+            { emoji: "🌟", text: "Brightened the day" }
+        ];
+        
+        // Initialize
+        function init() {
+            // Set up event listeners
+            feedBtn.addEventListener('click', feedTeddy);
+            hugBtn.addEventListener('click', hugTeddy);
+            tuckBtn.addEventListener('click', tuckTeddy);
+            resetBtn.addEventListener('click', resetExperience);
+            soundToggle.addEventListener('click', toggleSound);
+            musicBtn.addEventListener('click', toggleMusic);
+            albumBtn.addEventListener('click', showAlbum);
+            helpBtn.addEventListener('click', showInstructions);
+            closeAlbum.addEventListener('click', hideAlbum);
+            nameBtn.addEventListener('click', updateName);
             
-            const teddy = document.getElementById('virtualTeddy');
-            const happinessBar = document.getElementById('happinessBar');
-            const happinessValue = document.getElementById('happinessValue');
-            const warmthBar = document.getElementById('warmthBar');
-            const warmthValue = document.getElementById('warmthValue');
+            // Try to autoplay background music (muted by default)
+            bgMusic.muted = true;
+            bgMusic.volume = 0.3;
             
-            function updateStats() {
-                happiness = Math.min(Math.max(happiness, 0), 100);
-                warmth = Math.min(Math.max(warmth, 0), 100);
+            // Add floating animation to teddy
+            teddy.style.animation = "float 4s ease-in-out infinite";
+            
+            // Create some twinkling stars in the background
+            createStars();
+            
+            // Load saved data if available
+            loadSavedData();
+            
+            // Update counters
+            updateCounters();
+            
+            // Add eye blinking animation
+            setInterval(blinkEyes, 3000);
+        }
+        
+        // Create twinkling stars
+        function createStars() {
+            // Clear existing stars
+            starsContainer.innerHTML = '';
+            
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.innerHTML = '✦';
                 
-                happinessBar.style.width = `${happiness}%`;
-                happinessValue.textContent = `${happiness}%`;
-                warmthBar.style.width = `${warmth}%`;
-                warmthValue.textContent = `${warmth}%`;
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                star.style.left = `${left}%`;
+                star.style.top = `${top}%`;
                 
-                // Change color based on happiness
-                if (happiness < 30) {
-                    happinessBar.style.background = '#ff6b6b';
-                } else if (happiness < 60) {
-                    happinessBar.style.background = '#ffd166';
-                } else if (happiness < 85) {
-                    happinessBar.style.background = '#06d6a0';
-                } else {
-                    happinessBar.style.background = '#118ab2';
-                }
+                // Random animation delay
+                const delay = Math.random() * 5;
+                const duration = 2 + Math.random() * 3;
+                star.style.animation = `starTwinkle ${duration}s ease-in-out ${delay}s infinite`;
                 
-                // Change color based on warmth
-                if (warmth < 30) {
-                    warmthBar.style.background = '#a8e6cf';
-                } else if (warmth < 60) {
-                    warmthBar.style.background = '#ffd3b6';
-                } else if (warmth < 85) {
-                    warmthBar.style.background = '#ffaaa5';
-                } else {
-                    warmthBar.style.background = '#ff8b94';
-                }
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Eye blinking animation
+        function blinkEyes() {
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                eye.style.animation = 'blink 0.3s ease';
+                setTimeout(() => {
+                    eye.style.animation = '';
+                }, 300);
+            });
+        }
+        
+        // Feed action
+        function feedTeddy() {
+            if (currentState < 1) return;
+            
+            playSound(clickSound);
+            playSound(feedSound);
+            
+            // Animate honey
+            createHoneyAnimation();
+            
+            // Change teddy appearance
+            teddy.style.transform = "scale(1.1)";
+            teddyMouth.classList.add('smile');
+            
+            setTimeout(() => {
+                teddy.style.transform = "scale(1.05)";
+            }, 300);
+            
+            // Update counter
+            feedCount++;
+            updateCounters();
+            
+            // Update message
+            updateState();
+            
+            // Enable next action if needed
+            if (currentState === 1) {
+                setTimeout(() => {
+                    hugBtn.classList.add('active');
+                    playSound(unlockSound);
+                    addMemory("🍯", "You fed the hungry teddy!");
+                }, 800);
             }
             
-            // Teddy interactions
-            document.getElementById('hugTeddy').addEventListener('click', function() {
-                if (teddyIsSleeping) {
-                    alert('🤫 Shhh... Teddy is sleeping!');
-                    return;
-                }
-                
-                teddy.classList.add('teddy-hug');
-                happiness += 10;
-                warmth += 15;
-                updateStats();
-                
-                // Play hug sound
-                const hugSound = document.getElementById('hugSound');
-                hugSound.currentTime = 0;
-                hugSound.play();
-                
-                // Show heart effect
-                createHeartEffect();
-                
-                setTimeout(() => {
-                    teddy.classList.remove('teddy-hug');
-                }, 2000);
-            });
+            // Create hearts
+            createHearts(3);
             
-            document.getElementById('feedTeddy').addEventListener('click', function() {
-                if (teddyIsSleeping) {
-                    alert('🤫 Shhh... Teddy is sleeping!');
-                    return;
-                }
-                
-                teddy.classList.add('teddy-eat');
-                happiness += 5;
-                updateStats();
-                
-                // Show honey effect
-                createHoneyEffect();
-                
+            // Save progress
+            saveProgress();
+        }
+        
+        // Hug action
+        function hugTeddy() {
+            if (currentState < 2) return;
+            
+            playSound(clickSound);
+            playSound(hugSound);
+            
+            // Animate hug (teddy grows and arms move)
+            teddy.style.transform = "scale(1.15)";
+            leftArm.classList.add('hug');
+            rightArm.classList.add('hug');
+            document.body.style.background = "linear-gradient(135deg, #ffc2d1 0%, #ff9ebb 100%)";
+            
+            // Update counter
+            hugCount++;
+            updateCounters();
+            
+            // Update message
+            updateState();
+            
+            // Enable next action if needed
+            if (currentState === 2) {
                 setTimeout(() => {
-                    teddy.classList.remove('teddy-eat');
+                    tuckBtn.classList.add('active');
+                    playSound(unlockSound);
+                    addMemory("🫂", "You gave the teddy a warm hug!");
+                }, 800);
+            }
+            
+            // Return to normal after a moment
+            setTimeout(() => {
+                leftArm.classList.remove('hug');
+                rightArm.classList.remove('hug');
+                setTimeout(() => {
+                    document.body.style.background = "linear-gradient(135deg, #ffd6e7 0%, #ffc2d1 100%)";
                 }, 1000);
+            }, 1500);
+            
+            // Create hearts
+            createHearts(5);
+            
+            // Save progress
+            saveProgress();
+        }
+        
+        // Tuck in action
+        function tuckTeddy() {
+            if (currentState < 3) return;
+            
+            playSound(clickSound);
+            playSound(tuckSound);
+            
+            // Animate blanket
+            blanket.style.bottom = "0px";
+            
+            // Show night sky
+            nightSky.style.opacity = "1";
+            
+            // Close eyes (reduce opacity) and change mouth
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                eye.style.opacity = "0.3";
             });
             
-            document.getElementById('playTeddy').addEventListener('click', function() {
-                if (teddyIsSleeping) {
-                    alert('🤫 Shhh... Teddy is sleeping!');
-                    return;
-                }
-                
-                teddy.classList.add('teddy-play');
-                happiness += 8;
-                updateStats();
-                
-                // Show play effect
-                createPlayEffect();
-                
+            teddyMouth.classList.remove('smile');
+            teddyMouth.classList.add('sleep');
+            
+            // Update counter
+            tuckCount++;
+            updateCounters();
+            
+            // Update message
+            updateState();
+            
+            // Show final screen after delay
+            setTimeout(() => {
+                showFinalScreen();
+                addMemory("😴", "You tucked the teddy in for the night!");
+            }, 2000);
+            
+            // Create hearts
+            createHearts(8);
+            
+            // Save progress
+            saveProgress();
+        }
+        
+        // Create honey animation
+        function createHoneyAnimation() {
+            const honey = document.createElement('div');
+            honey.classList.add('honey');
+            
+            // Position near teddy's mouth
+            const teddyRect = teddy.getBoundingClientRect();
+            honey.style.left = `${teddyRect.left + teddyRect.width/2 - 15}px`;
+            honey.style.top = `${teddyRect.top + 100}px`;
+            
+            document.body.appendChild(honey);
+            
+            // Animate honey
+            honey.style.animation = "honeyDrip 1.5s ease forwards";
+            
+            // Remove after animation
+            setTimeout(() => {
+                honey.remove();
+            }, 1500);
+        }
+        
+        // Create floating hearts
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
                 setTimeout(() => {
-                    teddy.classList.remove('teddy-play');
-                }, 1500);
-            });
-            
-            document.getElementById('sleepTeddy').addEventListener('click', function() {
-                teddyIsSleeping = !teddyIsSleeping;
-                
-                if (teddyIsSleeping) {
-                    teddy.classList.add('teddy-sleep');
-                    this.innerHTML = '<i class="fas fa-sun"></i> Wake Up';
-                    this.classList.add('sleeping');
-                    
-                    // Add Zzz effect
-                    createSleepEffect();
-                } else {
-                    teddy.classList.remove('teddy-sleep');
-                    this.innerHTML = '<i class="fas fa-moon"></i> Put to Sleep';
-                    this.classList.remove('sleeping');
-                    happiness += 5; // Happiness from good sleep
-                    updateStats();
-                }
-            });
-            
-            // Hug simulator
-            const hugSimulator = document.getElementById('hugSimulator');
-            const hugCircle = hugSimulator.querySelector('.hug-circle');
-            const hugDuration = document.getElementById('hugDuration');
-            const warmthIndicator = document.getElementById('warmthIndicator').querySelector('.warmth-fill');
-            const hugHeartbeat = document.getElementById('hugHeartbeat');
-            
-            let hugStartTime = 0;
-            let hugTimer = null;
-            let isHugging = false;
-            let currentWarmth = 0;
-            let currentHeartbeat = 72;
-            
-            hugCircle.addEventListener('mousedown', startHug);
-            hugCircle.addEventListener('touchstart', startHug);
-            hugCircle.addEventListener('mouseup', endHug);
-            hugCircle.addEventListener('touchend', endHug);
-            hugCircle.addEventListener('mouseleave', endHug);
-            
-            function startHug() {
-                if (isHugging) return;
-                
-                isHugging = true;
-                hugStartTime = Date.now();
-                hugCircle.style.transform = 'scale(0.9)';
-                hugCircle.style.background = 'linear-gradient(135deg, #ff6b6b, #ff8e8e)';
-                
-                // Start hug timer
-                hugTimer = setInterval(() => {
-                    const duration = (Date.now() - hugStartTime) / 1000;
-                    hugDuration.textContent = duration.toFixed(2) + 's';
-                    
-                    // Increase warmth
-                    currentWarmth = Math.min(duration * 20, 100);
-                    warmthIndicator.style.width = `${currentWarmth}%`;
-                    
-                    // Increase heartbeat
-                    currentHeartbeat = 72 + Math.floor(duration * 10);
-                    hugHeartbeat.textContent = `${currentHeartbeat} BPM`;
-                    
-                    // Change background color based on warmth
-                    const red = 255;
-                    const green = 107 + Math.floor(148 * (currentWarmth / 100));
-                    const blue = 107;
-                    hugSimulator.style.background = `rgb(${red}, ${green}, ${blue})`;
-                }, 50);
-            }
-            
-            function endHug() {
-                if (!isHugging) return;
-                
-                isHugging = false;
-                clearInterval(hugTimer);
-                hugCircle.style.transform = 'scale(1)';
-                hugCircle.style.background = '';
-                
-                // Calculate final hug stats
-                const duration = (Date.now() - hugStartTime) / 1000;
-                
-                if (duration > 0.5) {
-                    // Show hug celebration
-                    const celebration = document.createElement('div');
-                    celebration.innerHTML = `
-                        <h3>🤗 Wonderful Hug! 🤗</h3>
-                        <p>That was a ${duration.toFixed(2)} second hug!</p>
-                        <p>Warmth level: ${Math.round(currentWarmth)}%</p>
-                    `;
-                    celebration.style.position = 'fixed';
-                    celebration.style.top = '50%';
-                    celebration.style.left = '50%';
-                    celebration.style.transform = 'translate(-50%, -50%)';
-                    celebration.style.background = 'rgba(255, 255, 255, 0.95)';
-                    celebration.style.padding = '30px';
-                    celebration.style.borderRadius = '20px';
-                    celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
-                    celebration.style.zIndex = '10000';
-                    celebration.style.textAlign = 'center';
-                    celebration.style.animation = 'fadeIn 0.5s ease';
-                    
-                    document.body.appendChild(celebration);
-                    
-                    setTimeout(() => {
-                        celebration.style.animation = 'fadeOut 0.5s ease forwards';
-                        setTimeout(() => {
-                            celebration.remove();
-                        }, 500);
-                    }, 2000);
-                    
-                    // Update teddy stats
-                    happiness += Math.floor(duration * 2);
-                    warmth += Math.floor(currentWarmth / 10);
-                    updateStats();
-                }
-                
-                // Reset after delay
-                setTimeout(() => {
-                    hugSimulator.style.background = '';
-                    warmthIndicator.style.width = '0%';
-                    hugDuration.textContent = '0.00s';
-                    hugHeartbeat.textContent = '72 BPM';
-                }, 1000);
-            }
-            
-            // Memory bank
-            const memoryCards = document.querySelectorAll('.memory-card');
-            const memoryDisplay = document.getElementById('memoryDisplay');
-            
-            memoryCards.forEach(card => {
-                const recallBtn = card.querySelector('.recall-btn');
-                recallBtn.addEventListener('click', function() {
-                    const memory = card.getAttribute('data-memory');
-                    memoryDisplay.textContent = memory;
-                    memoryDisplay.parentElement.classList.add('memory-revealed');
-                    
-                    // Add glow effect to card
-                    card.classList.add('memory-active');
-                    setTimeout(() => {
-                        card.classList.remove('memory-active');
-                    }, 2000);
-                    
-                    // Increase happiness
-                    happiness += 3;
-                    updateStats();
-                });
-            });
-            
-            // Build-a-teddy game
-            let selectedColor = 'brown';
-            let selectedAccessories = [];
-            let selectedExpression = 'happy';
-            
-            // Color selection
-            document.querySelectorAll('.color-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedColor = this.getAttribute('data-color');
-                    updateTeddyPreview();
-                    this.classList.add('selected');
-                    this.parentElement.querySelectorAll('.color-btn').forEach(b => {
-                        if (b !== this) b.classList.remove('selected');
-                    });
-                });
-            });
-            
-            // Accessory selection
-            document.querySelectorAll('.accessory-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const accessory = this.getAttribute('data-accessory');
-                    this.classList.toggle('selected');
-                    
-                    if (this.classList.contains('selected')) {
-                        selectedAccessories.push(accessory);
-                    } else {
-                        selectedAccessories = selectedAccessories.filter(a => a !== accessory);
-                    }
-                    
-                    updateTeddyPreview();
-                });
-            });
-            
-            // Expression selection
-            document.querySelectorAll('.expression-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedExpression = this.getAttribute('data-expression');
-                    updateTeddyPreview();
-                    this.classList.add('selected');
-                    this.parentElement.querySelectorAll('.expression-btn').forEach(b => {
-                        if (b !== this) b.classList.remove('selected');
-                    });
-                });
-            });
-            
-            function updateTeddyPreview() {
-                const teddyBody = document.getElementById('teddyBody');
-                const teddyHead = document.getElementById('teddyHead');
-                const teddyFace = document.getElementById('teddyFace');
-                
-                // Set color
-                const colors = {
-                    brown: '#8B4513',
-                    cream: '#FFF8DC',
-                    pink: '#FFB6C1',
-                    blue: '#ADD8E6'
-                };
-                teddyBody.style.background = colors[selectedColor] || colors.brown;
-                
-                // Set expression
-                const expressions = {
-                    happy: '😊',
-                    sleepy: '😴',
-                    loving: '🥰',
-                    playful: '😄'
-                };
-                teddyFace.textContent = expressions[selectedExpression] || expressions.happy;
-                teddyFace.style.fontSize = '2rem';
-                
-                // Clear and add accessories
-                const accessoriesContainer = document.getElementById('teddyEars');
-                accessoriesContainer.innerHTML = '';
-                
-                selectedAccessories.forEach(accessory => {
-                    const accessoryEmoji = {
-                        bow: '🎀',
-                        scarf: '🧣',
-                        hat: '🎩',
-                        glasses: '👓'
-                    }[accessory];
-                    
-                    if (accessoryEmoji) {
-                        const span = document.createElement('span');
-                        span.textContent = accessoryEmoji;
-                        span.style.margin = '0 5px';
-                        span.style.fontSize = '1.5rem';
-                        accessoriesContainer.appendChild(span);
-                    }
-                });
-            }
-            
-            document.getElementById('createTeddy').addEventListener('click', function() {
-                const teddyName = document.getElementById('teddyName').value || 'Cuddles';
-                
-                // Show celebration
-                const celebration = document.createElement('div');
-                celebration.innerHTML = `
-                    <h3>🎉 ${teddyName} is Born! 🎉</h3>
-                    <p>Your ${selectedColor} teddy with ${selectedAccessories.length} accessories</p>
-                    <p>Expression: ${selectedExpression} ${{
-                        happy: '😊',
-                        sleepy: '😴',
-                        loving: '🥰',
-                        playful: '😄'
-                    }[selectedExpression]}</p>
-                    <p>May ${teddyName} bring you comfort and joy! 🧸💖</p>
-                `;
-                celebration.style.position = 'fixed';
-                celebration.style.top = '50%';
-                celebration.style.left = '50%';
-                celebration.style.transform = 'translate(-50%, -50%)';
-                celebration.style.background = 'rgba(255, 255, 255, 0.95)';
-                celebration.style.padding = '40px';
-                celebration.style.borderRadius = '20px';
-                celebration.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
-                celebration.style.zIndex = '10000';
-                celebration.style.textAlign = 'center';
-                celebration.style.animation = 'fadeIn 0.5s ease';
-                
-                document.body.appendChild(celebration);
-                
-                setTimeout(() => {
-                    celebration.style.animation = 'fadeOut 0.5s ease forwards';
-                    setTimeout(() => {
-                        celebration.remove();
-                    }, 500);
-                }, 3000);
-                
-                // Play celebration sound
-                const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
-                sound.volume = 0.3;
-                sound.play();
-                
-                // Increase happiness
-                happiness += 15;
-                updateStats();
-                
-                // Save progress
-                if (window.VDay && VDay.saveProgress) {
-                    VDay.saveProgress(4, 'teddy-created');
-                }
-            });
-            
-            // Helper functions for effects
-            function createHeartEffect() {
-                for (let i = 0; i < 5; i++) {
                     const heart = document.createElement('div');
-                    heart.innerHTML = '💖';
-                    heart.style.position = 'absolute';
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    heart.style.fontSize = `${Math.random() * 20 + 15}px`;
-                    heart.style.zIndex = '1000';
-                    heart.style.pointerEvents = 'none';
-                    heart.style.animation = `heart-float ${Math.random() * 1 + 1}s ease-out forwards`;
+                    heart.classList.add('heart');
+                    heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💖';
                     
-                    teddy.appendChild(heart);
+                    // Random position near teddy
+                    const teddyRect = teddy.getBoundingClientRect();
+                    const left = teddyRect.left + Math.random() * 100 - 50;
+                    const top = teddyRect.top + Math.random() * 50;
                     
+                    heart.style.left = `${left}px`;
+                    heart.style.top = `${top}px`;
+                    
+                    // Random size
+                    const size = 1 + Math.random() * 0.5;
+                    heart.style.fontSize = `${size}rem`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Animate heart
+                    heart.style.animation = `heartFloat ${1 + Math.random()}s ease forwards`;
+                    
+                    // Remove after animation
                     setTimeout(() => {
                         heart.remove();
                     }, 2000);
+                }, i * 200);
+            }
+        }
+        
+        // Update game state
+        function updateState() {
+            if (currentState < states.length - 1) {
+                currentState++;
+                
+                // Update message
+                messageBox.textContent = states[currentState].message;
+                messageBox.style.animation = "none";
+                setTimeout(() => {
+                    messageBox.style.animation = "pulse 0.5s ease";
+                }, 10);
+                
+                // Update progress bar
+                progressBar.style.width = `${states[currentState].progress}%`;
+            }
+        }
+        
+        // Update counters display
+        function updateCounters() {
+            feedCounter.textContent = feedCount;
+            hugCounter.textContent = hugCount;
+            tuckCounter.textContent = tuckCount;
+        }
+        
+        // Show final screen
+        function showFinalScreen() {
+            const personalizedMessage = finalMessage.replace("{name}", playerName);
+            finalText.innerHTML = personalizedMessage;
+            finalScreen.classList.add('active');
+            
+            // Add some final hearts
+            createHearts(12);
+            
+            // Add completion memory
+            addMemory("🎉", "You completed caring for the teddy!");
+        }
+        
+        // Toggle sound effects
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = soundToggle.querySelector('i');
+            
+            if (soundEnabled) {
+                icon.className = "fas fa-volume-up";
+                soundToggle.style.background = "#ff9ebb";
+            } else {
+                icon.className = "fas fa-volume-mute";
+                soundToggle.style.background = "#aaa";
+            }
+        }
+        
+        // Toggle background music
+        function toggleMusic() {
+            musicEnabled = !musicEnabled;
+            const icon = musicBtn.querySelector('i');
+            
+            if (musicEnabled) {
+                bgMusic.muted = false;
+                bgMusic.play().catch(e => console.log("Autoplay prevented"));
+                icon.style.color = "#ff4757";
+                musicBtn.style.transform = "scale(1.1)";
+                setTimeout(() => {
+                    musicBtn.style.transform = "scale(1)";
+                }, 200);
+            } else {
+                bgMusic.pause();
+                icon.style.color = "white";
+            }
+        }
+        
+        // Play sound if enabled
+        function playSound(soundElement) {
+            if (!soundEnabled) return;
+            
+            soundElement.currentTime = 0;
+            soundElement.play().catch(e => console.log("Sound play prevented"));
+        }
+        
+        // Show memory album
+        function showAlbum() {
+            playSound(clickSound);
+            memoryAlbum.classList.add('active');
+            renderMemories();
+        }
+        
+        // Hide memory album
+        function hideAlbum() {
+            playSound(clickSound);
+            memoryAlbum.classList.remove('active');
+        }
+        
+        // Add a memory to the album
+        function addMemory(emoji, text) {
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const memory = {
+                emoji,
+                text: `${text} (${timestamp})`,
+                date: new Date().toLocaleDateString()
+            };
+            
+            memories.push(memory);
+            
+            // Limit to 12 memories
+            if (memories.length > 12) {
+                memories.shift();
+            }
+            
+            // Save memories
+            saveProgress();
+        }
+        
+        // Render memories in the album
+        function renderMemories() {
+            memoryGrid.innerHTML = '';
+            
+            if (memories.length === 0) {
+                // Add default memories based on actions
+                const defaultMemories = [
+                    { emoji: "🍯", text: "Feed the teddy to unlock memories!" },
+                    { emoji: "🫂", text: "Give the teddy a warm hug" },
+                    { emoji: "😴", text: "Tuck the teddy in for the night" },
+                    { emoji: "🧸", text: "Make the teddy feel loved" },
+                    { emoji: "💝", text: "Create sweet memories together" },
+                    { emoji: "🌟", text: "Your caring moments will appear here" }
+                ];
+                
+                defaultMemories.forEach(memory => {
+                    const memoryCard = document.createElement('div');
+                    memoryCard.className = 'memory-card';
+                    memoryCard.innerHTML = `
+                        <div class="memory-emoji">${memory.emoji}</div>
+                        <div class="memory-text">${memory.text}</div>
+                    `;
+                    memoryGrid.appendChild(memoryCard);
+                });
+            } else {
+                memories.forEach(memory => {
+                    const memoryCard = document.createElement('div');
+                    memoryCard.className = 'memory-card';
+                    memoryCard.innerHTML = `
+                        <div class="memory-emoji">${memory.emoji}</div>
+                        <div class="memory-text">${memory.text}</div>
+                    `;
+                    memoryGrid.appendChild(memoryCard);
+                });
+            }
+        }
+        
+        // Show instructions
+        function showInstructions() {
+            playSound(clickSound);
+            alert("💌 Teddy Day Instructions 💌\n\n1. Click actions in order: Feed → Hug → Tuck In\n2. Each action can be repeated for more love\n3. Unlock all actions to complete the experience\n4. Check the Memory Album for your caring moments\n5. Add your name to personalize the message\n\nEnjoy this cozy moment! 🧸❤️");
+        }
+        
+        // Update player name
+        function updateName() {
+            playSound(clickSound);
+            const newName = nameInput.value.trim();
+            if (newName) {
+                playerName = newName;
+                nameInput.value = "";
+                nameInput.placeholder = playerName;
+                
+                // Show confirmation
+                messageBox.textContent = `Hello, ${playerName}! The teddy is happy to see you.`;
+                messageBox.style.animation = "none";
+                setTimeout(() => {
+                    messageBox.style.animation = "pulse 0.5s ease";
+                }, 10);
+                
+                // Save name
+                saveProgress();
+            }
+        }
+        
+        // Save progress to localStorage
+        function saveProgress() {
+            const progress = {
+                currentState,
+                feedCount,
+                hugCount,
+                tuckCount,
+                playerName,
+                memories,
+                lastPlayed: new Date().toISOString()
+            };
+            
+            localStorage.setItem('teddyDayProgress', JSON.stringify(progress));
+        }
+        
+        // Load progress from localStorage
+        function loadSavedData() {
+            const saved = localStorage.getItem('teddyDayProgress');
+            if (saved) {
+                try {
+                    const progress = JSON.parse(saved);
+                    
+                    currentState = progress.currentState || 0;
+                    feedCount = progress.feedCount || 0;
+                    hugCount = progress.hugCount || 0;
+                    tuckCount = progress.tuckCount || 0;
+                    playerName = progress.playerName || "My Love";
+                    memories = progress.memories || [];
+                    
+                    // Update UI based on loaded state
+                    nameInput.placeholder = playerName;
+                    
+                    // Enable buttons based on state
+                    if (currentState >= 1) {
+                        feedBtn.classList.add('active');
+                        hugBtn.classList.add('active');
+                    }
+                    
+                    if (currentState >= 2) {
+                        tuckBtn.classList.add('active');
+                    }
+                    
+                    // Update progress bar
+                    progressBar.style.width = `${states[currentState]?.progress || 0}%`;
+                    
+                    // Update message
+                    messageBox.textContent = states[currentState]?.message || states[0].message;
+                    
+                    // If completed, show final screen
+                    if (currentState >= states.length - 1) {
+                        setTimeout(() => {
+                            showFinalScreen();
+                        }, 500);
+                    }
+                    
+                } catch (e) {
+                    console.log("Could not load saved progress");
                 }
             }
+        }
+        
+        // Reset experience
+        function resetExperience() {
+            playSound(clickSound);
             
-            function createHoneyEffect() {
-                const honey = document.createElement('div');
-                honey.innerHTML = '🍯';
-                honey.style.position = 'absolute';
-                honey.style.left = '50%';
-                honey.style.top = '50%';
-                honey.style.fontSize = '2rem';
-                honey.style.zIndex = '1000';
-                honey.style.pointerEvents = 'none';
-                honey.style.animation = 'honey-drop 1s ease-out forwards';
-                
-                teddy.appendChild(honey);
-                
-                setTimeout(() => {
-                    honey.remove();
-                }, 1000);
-            }
+            // Reset state
+            currentState = 0;
+            feedCount = 0;
+            hugCount = 0;
+            tuckCount = 0;
             
-            function createPlayEffect() {
-                const ball = document.createElement('div');
-                ball.innerHTML = '⚽';
-                ball.style.position = 'absolute';
-                ball.style.left = '50%';
-                ball.style.top = '50%';
-                ball.style.fontSize = '2rem';
-                ball.style.zIndex = '1000';
-                ball.style.pointerEvents = 'none';
-                ball.style.animation = 'ball-bounce 1.5s ease-out forwards';
-                
-                teddy.appendChild(ball);
-                
-                setTimeout(() => {
-                    ball.remove();
-                }, 1500);
-            }
+            // Reset UI
+            messageBox.textContent = states[0].message;
+            teddy.style.transform = "scale(1)";
+            blanket.style.bottom = "-120px";
+            nightSky.style.opacity = "0";
             
-            function createSleepEffect() {
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const zzz = document.createElement('div');
-                        zzz.innerHTML = '💤';
-                        zzz.style.position = 'absolute';
-                        zzz.style.left = `${60 + i * 10}%`;
-                        zzz.style.top = '20%';
-                        zzz.style.fontSize = '1.5rem';
-                        zzz.style.zIndex = '1000';
-                        zzz.style.pointerEvents = 'none';
-                        zzz.style.animation = 'zzz-float 2s ease-out infinite';
-                        
-                        teddy.appendChild(zzz);
-                    }, i * 300);
-                }
-            }
+            // Reset facial features
+            teddyMouth.className = "mouth";
             
-            // Start music
-            const pageMusic = document.getElementById('pageMusic');
-            if (pageMusic) {
-                pageMusic.volume = 0.3;
-                setTimeout(() => {
-                    pageMusic.play().catch(e => console.log('Music play prevented'));
-                }, 1000);
-            }
+            // Reset eyes
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                eye.style.opacity = "1";
+            });
             
-            // Initialize preview
-            updateTeddyPreview();
-            updateStats();
-        });
+            // Reset arms
+            leftArm.className = "arm arm-left";
+            rightArm.className = "arm arm-right";
+            
+            // Reset actions
+            hugBtn.classList.remove('active');
+            tuckBtn.classList.remove('active');
+            feedBtn.classList.add('active');
+            
+            // Reset progress bar
+            progressBar.style.width = "0%";
+            
+            // Hide final screen
+            finalScreen.classList.remove('active');
+            
+            // Reset background
+            document.body.style.background = "linear-gradient(135deg, #ffd6e7 0%, #ffc2d1 100%)";
+            
+            // Create more stars
+            createStars();
+            
+            // Add reset memory
+            addMemory("🔄", "You started caring for the teddy again!");
+            
+            // Update counters
+            updateCounters();
+            
+            // Save reset state
+            saveProgress();
+        }
+        
+        // Initialize the experience
+        window.onload = init;
     </script>
-    <style>
-        .teddy-day {
-            background: linear-gradient(135deg, #ffd3b6, #ffaaa5);
-            min-height: 100vh;
-        }
-        
-        .teddy-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-        }
-        
-        .teddy-container {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .virtual-teddy {
-            width: 200px;
-            height: 250px;
-            margin: 0 auto;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .teddy-body {
-            position: absolute;
-            width: 150px;
-            height: 120px;
-            background: #8B4513;
-            border-radius: 50% 50% 40% 40%;
-            top: 80px;
-            left: 25px;
-            z-index: 1;
-        }
-        
-        .teddy-head {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: #8B4513;
-            border-radius: 50%;
-            top: 0;
-            left: 50px;
-            z-index: 2;
-        }
-        
-        .teddy-ear {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #8B4513;
-            border-radius: 50%;
-            top: -10px;
-        }
-        
-        .left-ear {
-            left: 10px;
-        }
-        
-        .right-ear {
-            right: 10px;
-        }
-        
-        .teddy-face {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 60px;
-        }
-        
-        .teddy-eye {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 15px;
-        }
-        
-        .left-eye {
-            left: 15px;
-        }
-        
-        .right-eye {
-            right: 15px;
-        }
-        
-        .teddy-eye::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: black;
-            border-radius: 50%;
-            top: 5px;
-            left: 5px;
-        }
-        
-        .teddy-nose {
-            position: absolute;
-            width: 15px;
-            height: 10px;
-            background: black;
-            border-radius: 50%;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .teddy-mouth {
-            position: absolute;
-            width: 30px;
-            height: 15px;
-            border-bottom: 3px solid black;
-            border-radius: 0 0 30px 30px;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .teddy-arm {
-            position: absolute;
-            width: 40px;
-            height: 60px;
-            background: #8B4513;
-            border-radius: 20px;
-            top: 100px;
-            z-index: 0;
-        }
-        
-        .left-arm {
-            left: 0;
-            transform: rotate(30deg);
-        }
-        
-        .right-arm {
-            right: 0;
-            transform: rotate(-30deg);
-        }
-        
-        .teddy-leg {
-            position: absolute;
-            width: 40px;
-            height: 50px;
-            background: #8B4513;
-            border-radius: 20px;
-            bottom: 0;
-            z-index: 0;
-        }
-        
-        .left-leg {
-            left: 40px;
-        }
-        
-        .right-leg {
-            right: 40px;
-        }
-        
-        .teddy-hug .left-arm {
-            animation: hug-left 0.5s ease forwards;
-        }
-        
-        .teddy-hug .right-arm {
-            animation: hug-right 0.5s ease forwards;
-        }
-        
-        @keyframes hug-left {
-            to { transform: rotate(-30deg) translateX(-20px); }
-        }
-        
-        @keyframes hug-right {
-            to { transform: rotate(30deg) translateX(20px); }
-        }
-        
-        .teddy-eat {
-            animation: eat 0.5s ease infinite;
-        }
-        
-        @keyframes eat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .teddy-play {
-            animation: play 1s ease infinite;
-        }
-        
-        @keyframes play {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-        }
-        
-        .teddy-sleep {
-            animation: sleep 2s ease infinite;
-        }
-        
-        @keyframes sleep {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .teddy-controls {
-            margin-top: 40px;
-        }
-        
-        .teddy-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .stat {
-            min-width: 200px;
-        }
-        
-        .stat-label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #8B4513;
-        }
-        
-        .stat-bar {
-            height: 20px;
-            background: #e6d5c3;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-        
-        .stat-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.5s ease, background 0.5s ease;
-        }
-        
-        .stat-value {
-            font-weight: 700;
-            color: #8B4513;
-        }
-        
-        .teddy-actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .teddy-btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            background: linear-gradient(135deg, #8B4513, #A0522D);
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .teddy-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
-        }
-        
-        .teddy-btn.sleeping {
-            background: linear-gradient(135deg, #666, #888);
-        }
-        
-        .hug-simulator-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-        }
-        
-        .hug-simulator {
-            background: linear-gradient(135deg, #ffefef, #ffe6e6);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            transition: background 0.5s ease;
-        }
-        
-        .hug-circle {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        
-        .hug-icon {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-        
-        .hug-metrics {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        .metric {
-            text-align: center;
-        }
-        
-        .metric-label {
-            display: block;
-            font-weight: 600;
-            color: #8B4513;
-            margin-bottom: 5px;
-        }
-        
-        .metric-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ff4081;
-        }
-        
-        .warmth-indicator {
-            width: 100px;
-            height: 20px;
-            background: #e6d5c3;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .warmth-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #a8e6cf, #ffd3b6, #ffaaa5, #ff8b94);
-            border-radius: 10px;
-            transition: width 0.1s ease;
-        }
-        
-        .memory-bank-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-        }
-        
-        .memory-bank {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .memory-card {
-            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .memory-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
-        }
-        
-        .memory-card.memory-active {
-            animation: memory-glow 2s ease;
-        }
-        
-        @keyframes memory-glow {
-            0%, 100% { box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2); }
-            50% { box-shadow: 0 10px 40px rgba(255, 64, 129, 0.4); }
-        }
-        
-        .memory-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .recall-btn {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #8B4513;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .recall-btn:hover {
-            background: #A0522D;
-            transform: scale(1.05);
-        }
-        
-        .memory-display {
-            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 40px;
-            border: 2px dashed #A0522D;
-        }
-        
-        .memory-content {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .memory-content i {
-            color: #8B4513;
-            font-size: 1.5rem;
-        }
-        
-        #memoryDisplay {
-            font-size: 1.2rem;
-            color: #5d001e;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .memory-revealed #memoryDisplay {
-            animation: text-reveal 0.5s ease;
-        }
-        
-        .comfort-gallery-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-        }
-        
-        .comfort-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .gallery-item {
-            text-align: center;
-        }
-        
-        .gallery-img {
-            width: 100%;
-            height: 150px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        
-        .img-emoji {
-            font-size: 4rem;
-        }
-        
-        .build-teddy-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
-        }
-        
-        .build-game {
-            margin-top: 40px;
-        }
-        
-        .teddy-customizer {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .customizer-preview {
-            flex: 1;
-            min-width: 300px;
-            background: #fff5e6;
-            border-radius: 20px;
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .preview-teddy {
-            width: 200px;
-            height: 250px;
-            position: relative;
-        }
-        
-        .preview-body {
-            position: absolute;
-            width: 150px;
-            height: 120px;
-            border-radius: 50% 50% 40% 40%;
-            top: 80px;
-            left: 25px;
-        }
-        
-        .preview-head {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            top: 0;
-            left: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .preview-face {
-            font-size: 2rem;
-        }
-        
-        .preview-ears {
-            margin-bottom: 10px;
-        }
-        
-        .customizer-options {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .option-group {
-            margin-bottom: 30px;
-        }
-        
-        .option-group h4 {
-            color: #8B4513;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .color-options,
-        .accessory-options,
-        .expression-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .color-btn,
-        .accessory-btn,
-        .expression-btn {
-            padding: 12px 20px;
-            border: 2px solid #A0522D;
-            background: white;
-            color: #8B4513;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        .color-btn:hover,
-        .accessory-btn:hover,
-        .expression-btn:hover {
-            background: #fff5e6;
-        }
-        
-        .color-btn.selected,
-        .accessory-btn.selected,
-        .expression-btn.selected {
-            background: #8B4513;
-            color: white;
-            border-color: #8B4513;
-        }
-        
-        .teddy-result {
-            text-align: center;
-        }
-        
-        .teddy-name-label {
-            margin: 20px 0 10px;
-            color: #8B4513;
-            font-weight: 600;
-        }
-        
-        #teddyName {
-            padding: 12px 20px;
-            border: 2px solid #A0522D;
-            border-radius: 25px;
-            font-size: 1rem;
-            width: 200px;
-            text-align: center;
-        }
-        
-        /* Animation keyframes */
-        @keyframes heart-float {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx, 0), -100px) scale(0.5);
-            }
-        }
-        
-        @keyframes honey-drop {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, 50px) scale(0.5);
-            }
-        }
-        
-        @keyframes ball-bounce {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            25% {
-                transform: translate(-100%, -100%) scale(0.8);
-            }
-            50% {
-                transform: translate(0%, -150%) scale(1);
-            }
-            75% {
-                transform: translate(100%, -100%) scale(0.8);
-            }
-        }
-        
-        @keyframes zzz-float {
-            0%, 100% {
-                opacity: 0;
-                transform: translateY(0);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(-20px);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-        }
-        
-        @keyframes text-reveal {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 </body>
 </html>
