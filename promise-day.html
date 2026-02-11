@@ -355,13 +355,13 @@
 
   <!-- ✿ input – only for WALL (HER promises)  ✿ -->
   <div class="center">
-    <span class="input-label" style="font-weight:600; color:#b86578; background:#ffe7d2; padding:0.2rem 1.2rem; border-radius:50px;">💭 she promises ...</span>
+    <span class="input-label" style="font-weight:600; color:#b86578; background:#ffe7d2; padding:0.2rem 1.2rem; border-radius:50px;">💭 your promises ...</span>
     <textarea id="promiseInput" placeholder="e.g. I'll always steal your hoodies... but NEVER bring them back 🥺"></textarea>
     <div class="btn-wrap" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
       <button class="btn-wall" onclick="addWallPromise()">🧱 Pin to wall</button>
       <!-- "add to my promises" button is GONE – builder promises are fixed ✨ -->
     </div>
-    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">You can lock her promises with 🔒, just so it dosen't ever get deleted</span>
+    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">You can lock your promises with 🔒, just so it dosen't ever get deleted</span>
   </div>
 
   <!-- 🧸  WALL – where HER promises live (from gf)  🧸 -->
@@ -455,7 +455,7 @@
 
       card.querySelector(".del").onclick = async (e) => {
         e.stopPropagation();
-        if (confirm("💔 remove her promise? ")) {
+        if (confirm("💔 remove your promise? ")) {
           await deleteDoc(doc(db, "promises", id));
           playSound(deleteSound);
         }
@@ -515,7 +515,7 @@
         wallDiv.appendChild(renderWallCard(docu.data(), docu.id));
       });
       if (snap.empty) {
-        wallDiv.innerHTML = '<div class="empty-message">🌸 she hasn’t made a promise yet... waiting for her words 🌸</div>';
+        wallDiv.innerHTML = '<div class="empty-message">🌸 you hasn’t made a promise yet... waiting for your words 🌸</div>';
       }
     });
 
