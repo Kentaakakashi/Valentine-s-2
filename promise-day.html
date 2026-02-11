@@ -2,166 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Promise Day 💙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     * {
       box-sizing: border-box;
-      font-family: "Segoe UI", system-ui, sans-serif;
+      font-family: "Segoe UI", sans-serif;
     }
 
     body {
       margin: 0;
+      background: #0f172a;
+      color: #e5e7eb;
       padding: 20px;
-      background: linear-gradient(135deg, #e8f0ff, #fdfbff);
-      color: #1f2937;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 10px;
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      text-align: center;
-      font-size: 0.95rem;
-      opacity: 0.8;
-      margin-bottom: 25px;
-    }
-
-    .input-area {
-      max-width: 500px;
-      margin: 0 auto 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      font-size: 2.5rem;
     }
 
     textarea {
-      resize: none;
-      height: 120px;
+      width: 100%;
+      max-width: 600px;
+      height: 100px;
       padding: 12px;
       border-radius: 12px;
-      border: 1px solid #c7d2fe;
+      border: none;
+      resize: none;
       font-size: 1rem;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 40px;
     }
 
     button {
-      padding: 12px;
+      padding: 10px 18px;
       border-radius: 999px;
       border: none;
-      background: #4f46e5;
-      color: white;
-      font-size: 1rem;
       cursor: pointer;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+      font-weight: 600;
     }
 
-    button:hover {
-      transform: scale(1.03);
-      opacity: 0.95;
+    .btn-wall {
+      background: #38bdf8;
     }
 
-    .wall {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f5f2eb;
-      border-radius: 20px;
+    .btn-mine {
+      background: #22c55e;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    /* WALL */
+    #wall {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
-      min-height: 300px;
+      gap: 20px;
+      justify-content: center;
     }
 
-    .promise-card {
-      background: #ffffff;
-      width: 180px;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 10px 18px rgba(0,0,0,0.1);
+    .card {
+      background: #1e293b;
+      padding: 14px;
+      width: 200px;
+      border-radius: 14px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       position: relative;
-      animation: dropIn 0.35s ease;
-      transform: rotate(var(--rot));
+      transform: rotate(calc(-2deg + 4deg * var(--r)));
     }
 
-    .promise-card::before {
-      content: "📌";
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.2rem;
-    }
-
-    .promise-card p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .timestamp {
+    .card small {
+      opacity: 0.6;
+      display: block;
       margin-top: 8px;
-      font-size: 0.7rem;
-      opacity: 0.6;
     }
 
-    .remove-btn {
-      position: absolute;
-      top: 6px;
-      right: 8px;
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .lock {
       cursor: pointer;
-      font-size: 0.9rem;
-      opacity: 0.6;
     }
 
-    .remove-btn:hover {
-      opacity: 1;
-    }
-
-    @keyframes dropIn {
-      from {
-        transform: translateY(-20px) scale(0.9);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
+    /* MY PROMISES */
+    #my-promises {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
     }
   </style>
 </head>
-
 <body>
 
   <h1>Promise Day 💙</h1>
-  <div class="subtitle">
-    Promises aren’t words. They’re choices we keep making.
+  <p style="text-align:center;opacity:.7">
+    Words that matter. Kept until we choose otherwise.
+  </p>
+
+  <div class="center">
+    <textarea id="promiseInput" placeholder="Write a promise..."></textarea>
+    <div>
+      <button class="btn-wall" onclick="addWallPromise()">Hang on Wall</button>
+      <button class="btn-mine" onclick="addMyPromise()">Add to My Promises</button>
+    </div>
   </div>
 
-  <div class="input-area">
-    <textarea id="promiseInput" maxlength="200"
-      placeholder="I promise to choose you, even on hard days…"></textarea>
-    <button id="addPromise">Hang this promise 💙</button>
-  </div>
+  <section>
+    <h2>🧱 Promise Wall</h2>
+    <div id="wall"></div>
+  </section>
 
-  <div id="wall" class="wall"></div>
+  <section>
+    <h2>💙 My Promises</h2>
+    <div id="my-promises"></div>
+  </section>
 
-  <!-- Sounds -->
+  <!-- SOUNDS -->
   <audio id="hangSound" src="assets/sounds/hang.mp3"></audio>
-  <audio id="removeSound" src="assets/sounds/remove.mp3"></audio>
+  <audio id="deleteSound" src="assets/sounds/delete.mp3"></audio>
+  <audio id="lockSound" src="assets/sounds/lock.mp3"></audio>
 
-  <!-- Firebase + App Logic -->
+  <!-- FIREBASE -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
-      getFirestore,
-      collection,
-      addDoc,
-      getDocs,
-      deleteDoc,
-      doc
-    } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+      getFirestore, collection, addDoc,
+      onSnapshot, deleteDoc, doc, updateDoc
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA0PcywZQvUzbwKiz0FTUpsHBu9naR8OUo",
@@ -175,65 +158,83 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const wall = document.getElementById("wall");
     const input = document.getElementById("promiseInput");
+    const wall = document.getElementById("wall");
+    const mine = document.getElementById("my-promises");
+
     const hangSound = document.getElementById("hangSound");
-    const removeSound = document.getElementById("removeSound");
+    const deleteSound = document.getElementById("deleteSound");
+    const lockSound = document.getElementById("lockSound");
 
-    document.getElementById("addPromise").onclick = async () => {
-      const text = input.value.trim();
-      if (!text) return;
-
-      hangSound.currentTime = 0;
-      hangSound.play();
-
+    window.addWallPromise = async () => {
+      if (!input.value.trim()) return;
       await addDoc(collection(db, "promises"), {
-        text,
-        createdAt: Date.now()
+        text: input.value,
+        createdAt: Date.now(),
+        locked: false
       });
-
+      hangSound.play();
       input.value = "";
-      loadPromises();
     };
 
-    async function loadPromises() {
-      wall.innerHTML = "";
-      const snapshot = await getDocs(collection(db, "promises"));
-
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        createCard(docSnap.id, data.text, data.createdAt);
+    window.addMyPromise = async () => {
+      if (!input.value.trim()) return;
+      await addDoc(collection(db, "myPromises"), {
+        text: input.value,
+        createdAt: Date.now(),
+        locked: false
       });
-    }
+      hangSound.play();
+      input.value = "";
+    };
 
-    function createCard(id, text, time) {
+    function renderCard(data, id, isWall) {
       const card = document.createElement("div");
-      card.className = "promise-card";
-      card.style.setProperty("--rot", `${Math.random() * 6 - 3}deg`);
+      card.className = "card";
+      card.style.setProperty("--r", Math.random());
 
-      const date = new Date(time);
-      const prettyDate = date.toLocaleDateString(undefined, {
-        month: "short",
-        day: "numeric"
-      });
+      const time = Math.floor((Date.now() - data.createdAt) / 86400000);
 
       card.innerHTML = `
-        <span class="remove-btn">❌</span>
-        <p>${text}</p>
-        <div class="timestamp">Hung on ${prettyDate} 💙</div>
+        <div>${data.text}</div>
+        <small>${time} day(s) ago</small>
+        <div class="actions">
+          <span class="lock">${data.locked ? "🔒" : "🔓"}</span>
+          <span class="del">🗑️</span>
+        </div>
       `;
 
-      card.querySelector(".remove-btn").onclick = async () => {
-        removeSound.currentTime = 0;
-        removeSound.play();
-        await deleteDoc(doc(db, "promises", id));
-        card.remove();
+      card.querySelector(".del").onclick = async () => {
+        if (confirm("Remove this promise?")) {
+          await deleteDoc(doc(db, isWall ? "promises" : "myPromises", id));
+          deleteSound.play();
+        }
       };
 
-      wall.appendChild(card);
+      card.querySelector(".lock").onclick = async () => {
+        await updateDoc(
+          doc(db, isWall ? "promises" : "myPromises", id),
+          { locked: !data.locked }
+        );
+        lockSound.play();
+      };
+
+      return card;
     }
 
-    loadPromises();
+    onSnapshot(collection(db, "promises"), snap => {
+      wall.innerHTML = "";
+      snap.forEach(docu => {
+        wall.appendChild(renderCard(docu.data(), docu.id, true));
+      });
+    });
+
+    onSnapshot(collection(db, "myPromises"), snap => {
+      mine.innerHTML = "";
+      snap.forEach(docu => {
+        mine.appendChild(renderCard(docu.data(), docu.id, false));
+      });
+    });
   </script>
 
 </body>
