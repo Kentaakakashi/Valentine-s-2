@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
-  <title>Promise Day · for her 🩵</title>
+  <title>Promise Day · 🩵</title>
   <!-- same cute font, same dreamy vibes -->
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -350,34 +350,34 @@
     <span>💙 Promise</span> <span>Day</span> <span style="font-size:3rem;">🌸</span>
   </h1>
   <p style="text-align:center; font-size:1.35rem; font-weight:600; color:#c06a7d; background: rgba(255,242,238,0.7); backdrop-filter: blur(2px); padding: 10px 24px; border-radius: 60px; width: fit-content; margin: 0 auto 30px; border:3px solid white;">
-    𓇢𓆸 her words on the wall · my eternal promises to her 𓆸𓇢
+    𓇢𓆸 your words on the wall · my life promises to you 𓆸𓇢
   </p>
 
   <!-- ✿ input – only for WALL (HER promises)  ✿ -->
   <div class="center">
     <span class="input-label" style="font-weight:600; color:#b86578; background:#ffe7d2; padding:0.2rem 1.2rem; border-radius:50px;">💭 she promises ...</span>
-    <textarea id="promiseInput" placeholder="e.g. I'll always steal your hoodies... but bring them back 🥺"></textarea>
+    <textarea id="promiseInput" placeholder="e.g. I'll always steal your hoodies... but NEVER bring them back 🥺"></textarea>
     <div class="btn-wrap" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-      <button class="btn-wall" onclick="addWallPromise()">🧱 Hang on wall (her promise)</button>
+      <button class="btn-wall" onclick="addWallPromise()">🧱 Pin to wall</button>
       <!-- "add to my promises" button is GONE – builder promises are fixed ✨ -->
     </div>
-    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">she can lock her promises with 🔒</span>
+    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">You can lock her promises with 🔒, just so it dosen't ever get deleted</span>
   </div>
 
   <!-- 🧸  WALL – where HER promises live (from gf)  🧸 -->
   <section style="position: relative;">
-    <h2 style="display: flex; gap: 12px; align-items: center;">🧱 Her Promises <span style="font-size:1.8rem;">🌷</span></h2>
+    <h2 style="display: flex; gap: 12px; align-items: center;">🧱 Your Promises <span style="font-size:1.8rem;">🌷</span></h2>
     <div id="wall"></div>
   </section>
 
   <!-- 💙  MY PROMISES – pre-written, uneditable, BUILDER MADE  💙 -->
   <section style="position: relative; margin-top: 30px;">
-    <h2 style="display: flex; gap: 12px;">💙 My Promises to her <span style="font-size:2rem;">👑</span></h2>
+    <h2 style="display: flex; gap: 12px;">💙 My Promises to you <span style="font-size:2rem;">👑</span></h2>
     <div id="my-promises"></div>
   </section>
 
   <footer>
-    ⋆｡°✩ her promises are kept on the wall · mine are forever locked with love  ⋆｡°✩ <br> 
+    ⋆｡°✩ our promises are kept on the wall forever locked with love  ⋆｡°✩ <br> 
     <span style="font-size:1.8rem;">🔒💖👑</span>
   </footer>
 
@@ -476,14 +476,15 @@
     // ---------- 💙 MY PROMISES (pre-written, uneditable, BUILDER MADE) ----------
     // These are HARDCODED – never from Firebase. they are ETERNAL.
     const builderPromises = [
-      { text: "I promise to always bring you your favorite coffee ☕💕", days: 0 },
-      { text: "I promise to hold your hand during scary movies 🎬🫂", days: 2 },
-      { text: "I promise to send you cute animal pics every single day 🐕🩷", days: 5 },
-      { text: "I promise to believe in you, even when you don't 🌟", days: 1 },
-      { text: "I promise to never stop making you laugh 🍭😊", days: 3 },
-      { text: "I promise to always save you the last bite 🍰👼", days: 7 },
-      { text: "I promise to choose you, every single day 💍✨", days: 0 },
-      { text: "I promise to listen, not just hear 👂💭", days: 4 }
+      { text: "I promise to never get mad at ya for silly things💕"},
+      { text: "I promise to hold your hands forever and never let go 🫂"},
+      { text: "I promise to be changed to be more good lil pookie ahh hubby for ya🐕🩷"},
+      { text: "I promise to believe in you, even when you don't 🌟"},
+      { text: "I promise to never stop making you laugh 🍭😊" },
+      { text: "I promise to always save you the last bite 🍰👼" },
+      { text: "I promise to choose you, every single day 💍✨"},
+      { text: "I promise to listen, not just hear 👂💭"},
+      { text: "I promise to be always me to you and never hide my feelings 💖🚪" }
     ];
 
     function renderPremadePromise(text, daysAgo) {
