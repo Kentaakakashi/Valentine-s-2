@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Promise Day. · ˗ˋˏ ♡ ˎˊ˗  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
-
-  <!-- soft, cute font & extra icons -->
+  <title>Promise Day · for her 🩵</title>
+  <!-- same cute font, same dreamy vibes -->
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ⋆｡°✩  cozy, dreamy promise wonderland  ✩°｡⋆ */
+    /* ⋆｡°✩  EXACT same design – just cozier  ✩°｡⋆ */
     * {
       margin: 0;
       padding: 0;
@@ -25,27 +24,27 @@
       overflow-x: hidden;
     }
 
-    /* floating sparkles background ✨ */
+    /* floating sparkles — more sparkle!! */
     body::before {
-      content: "🌸🍃✨💫🌸🍃✨💫";
+      content: "🌸🍃✨💫🌸🍃✨💫🌸🍃✨💫";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      font-size: 40px;
+      font-size: 48px;
       opacity: 0.08;
       white-space: nowrap;
-      letter-spacing: 60px;
+      letter-spacing: 70px;
       pointer-events: none;
-      animation: floatSparkle 28s linear infinite;
+      animation: floatSparkle 32s linear infinite;
       z-index: 0;
     }
 
     @keyframes floatSparkle {
-      0% { transform: translateY(0px) rotate(0deg); opacity: 0.05; }
-      50% { transform: translateY(-30px) rotate(5deg); opacity: 0.1; }
-      100% { transform: translateY(0px) rotate(0deg); opacity: 0.05; }
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
+      50% { transform: translateY(-40px) rotate(4deg); opacity: 0.12; }
+      100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
     }
 
     h1, h2, p, div, button, textarea, section {
@@ -68,7 +67,7 @@
       font-size: 1.9rem;
       font-weight: 600;
       color: #b37b9e;
-      background: rgba(255, 235, 238, 0.7);
+      background: rgba(255, 235, 238, 0.8);
       display: inline-block;
       padding: 0.4rem 1.6rem;
       border-radius: 100px;
@@ -151,12 +150,13 @@
       color: #3a4f6d;
     }
 
+    /* btn-mine removed — but keep style unused? we keep for consistency but hide later */
     .btn-mine {
       background: #ffe1ac;
       color: #624c3c;
     }
 
-    /* ˗ˋˏ WALL OF PROMISES ˎˊ˗ – cute tilted cards with bounce */
+    /* ˗ˋˏ WALL OF PROMISES (HER WORDS) ˎˊ˗ */
     #wall {
       display: flex;
       flex-wrap: wrap;
@@ -166,7 +166,7 @@
       margin-top: 10px;
     }
 
-    /*  💌 MY PROMISES section – little grid of cuties */
+    /* 💙 MY PROMISES – now pre-written by you, the builder. UNEDITABLE & LOCKED */
     #my-promises {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -243,7 +243,7 @@
       transform: scale(1.1);
     }
 
-    /* special stickers for each card  */
+    /* special sticker on each card */
     .card::after {
       content: "💝";
       position: absolute;
@@ -260,20 +260,53 @@
       transform: rotate(0deg) scale(1.2);
     }
 
-    /* different random rotation values — set by js */
-    /* audio hidden but cute */
-    audio {
+    /* ----- ✦ MY PROMISES — builder locked, no delete, no lock toggle ✦ ----- */
+    .premade-card .actions, 
+    .premade-card .lock, 
+    .premade-card .del {
+      display: none;   /* no buttons – they're eternal promises 💗 */
+    }
+
+    .premade-card {
+      background: linear-gradient(145deg, #fff5e6, #ffede1);
+      border: 4px solid #ffe7d4;
+      box-shadow: 10px 15px 0 #feb4a5, 0 18px 30px #fac9cd;
+      cursor: default;
+    }
+
+    .premade-card::after {
+      content: "👑✨"; /* builder's seal */
+      opacity: 0.5;
+      font-size: 2rem;
+    }
+
+    .premade-card:hover::after {
+      opacity: 1;
+    }
+
+    .premade-card small {
+      background: rgba(255, 204, 188, 0.6);
+    }
+
+    /* hide old "my promises" button – not needed anymore */
+    .btn-mine {
       display: none;
     }
 
-    /* extra sweet floating elements */
-    .cute-emoji-bg {
-      position: absolute;
-      font-size: 50px;
-      user-select: none;
-      z-index: 1;
-      opacity: 0.15;
-      pointer-events: none;
+    /* cute empty states */
+    .empty-message {
+      background: #ffd9df;
+      padding: 30px;
+      border-radius: 80px;
+      color: #9f6a7a;
+      font-size: 1.4rem;
+      border: 5px solid white;
+      width: 100%;
+      text-align: center;
+    }
+
+    audio {
+      display: none;
     }
 
     footer {
@@ -287,85 +320,73 @@
       position: relative;
     }
 
-    /* responsiveness */
     @media (max-width: 550px) {
       h1 { font-size: 2.2rem; }
       .center { padding: 1.5rem; }
       button { font-size: 0.9rem; padding: 0.7rem 1rem;}
     }
 
-    /* extra kawaii 🌸*/
-    .wall-wrapper, .my-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .btn-wrap {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .input-label {
-      font-weight: 600;
-      color: #b86578;
-      background: #ffe7d2;
-      padding: 0.2rem 1.2rem;
-      border-radius: 50px;
-      font-size: 1.1rem;
+    /* extra floating cuties */
+    .cute-floaties {
+      position: absolute;
+      top: 20%;
+      left: 2%;
+      font-size: 55px;
+      opacity: 0.1;
+      transform: rotate(-15deg);
+      pointer-events: none;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <!-- floating decoration (extra) -->
-  <div style="position:absolute; top:10px; left:10px; font-size:42px; opacity:0.1; transform:rotate(-12deg);">💌</div>
-  <div style="position:absolute; bottom:20px; right:30px; font-size:70px; opacity:0.1; transform:rotate(20deg);">🍰</div>
-  <div style="position:absolute; top:40%; left:5%; font-size:55px; opacity:0.07;">✨🧸✨</div>
+  <!-- ✨ even more floating sparkles – same vibe ✨ -->
+  <div style="position:absolute; top:10px; left:10px; font-size:48px; opacity:0.1; transform:rotate(-12deg);">💌💌</div>
+  <div style="position:absolute; bottom:60px; right:20px; font-size:80px; opacity:0.08; transform:rotate(20deg);">🍰🧁</div>
+  <div style="position:absolute; top:40%; left:8%; font-size:70px; opacity:0.06;">✨🧸🌸</div>
+  <div style="position:absolute; bottom:10%; left:15%; font-size:60px; opacity:0.07;">🩵🐇</div>
 
   <h1 style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
     <span>💙 Promise</span> <span>Day</span> <span style="font-size:3rem;">🌸</span>
   </h1>
   <p style="text-align:center; font-size:1.35rem; font-weight:600; color:#c06a7d; background: rgba(255,242,238,0.7); backdrop-filter: blur(2px); padding: 10px 24px; border-radius: 60px; width: fit-content; margin: 0 auto 30px; border:3px solid white;">
-    𓇢𓆸 words that bloom, kept with love 𓆸𓇢
+    𓇢𓆸 her words on the wall · my eternal promises to her 𓆸𓇢
   </p>
 
-  <!-- ✿  input area – extra cozy  ✿ -->
+  <!-- ✿ input – only for WALL (HER promises)  ✿ -->
   <div class="center">
-    <span class="input-label">💭 what do you promise?</span>
-    <textarea id="promiseInput" placeholder="e.g. I'll always share my strawberries with you... 🍓"></textarea>
-    <div class="btn-wrap">
-      <button class="btn-wall" onclick="addWallPromise()">🧱 Hang on wall</button>
-      <button class="btn-mine" onclick="addMyPromise()">💘 Add to my promises</button>
+    <span class="input-label" style="font-weight:600; color:#b86578; background:#ffe7d2; padding:0.2rem 1.2rem; border-radius:50px;">💭 she promises ...</span>
+    <textarea id="promiseInput" placeholder="e.g. I'll always steal your hoodies... but bring them back 🥺"></textarea>
+    <div class="btn-wrap" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <button class="btn-wall" onclick="addWallPromise()">🧱 Hang on wall (her promise)</button>
+      <!-- "add to my promises" button is GONE – builder promises are fixed ✨ -->
     </div>
-    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">click lock to keep secret 🔐</span>
+    <span style="font-size:0.95rem; color:#9c616c; background: #ffe3e0; padding: 6px 20px; border-radius: 50px;">she can lock her promises with 🔒</span>
   </div>
 
-  <!-- 🧸  WALL SECTION  🧸 -->
+  <!-- 🧸  WALL – where HER promises live (from gf)  🧸 -->
   <section style="position: relative;">
-    <h2 style="display: flex; gap: 12px; align-items: center;">🧱 Promise Wall <span style="font-size:1.8rem;">🌸</span></h2>
-    <div id="wall" class="wall"></div>
+    <h2 style="display: flex; gap: 12px; align-items: center;">🧱 Her Promises <span style="font-size:1.8rem;">🌷</span></h2>
+    <div id="wall"></div>
   </section>
 
-  <!-- 💌  MY PROMISES  💌 -->
+  <!-- 💙  MY PROMISES – pre-written, uneditable, BUILDER MADE  💙 -->
   <section style="position: relative; margin-top: 30px;">
-    <h2 style="display: flex; gap: 12px;">💙 My Promises <span style="font-size:2rem;">🐇</span></h2>
+    <h2 style="display: flex; gap: 12px;">💙 My Promises to her <span style="font-size:2rem;">👑</span></h2>
     <div id="my-promises"></div>
   </section>
 
   <footer>
-    ⋆｡°✩ every locked promise is a little treasure  ⋆｡°✩ <br> 
-    <span style="font-size:1.5rem;">🔒💖🔓</span>
+    ⋆｡°✩ her promises are kept on the wall · mine are forever locked with love  ⋆｡°✩ <br> 
+    <span style="font-size:1.8rem;">🔒💖👑</span>
   </footer>
 
-  <!-- SOUNDS (no missing assets - cute base64 beeps, no console 404) -->
+  <!-- SAME audio (still cute) -->
   <audio id="hangSound" src="data:audio/wav;base64,U3R1ZmZUdW5lIQ=="></audio>
   <audio id="deleteSound" src="data:audio/wav;base64,U3R1ZmZUdW5lIQ=="></audio>
   <audio id="lockSound" src="data:audio/wav;base64,U3R1ZmZUdW5lIQ=="></audio>
 
-  <!-- FIREBASE (using CDN + modern) -->
+  <!-- FIREBASE (same config) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
@@ -389,18 +410,15 @@
     const wallDiv = document.getElementById("wall");
     const mineDiv = document.getElementById("my-promises");
 
-    // simple web-safe "sounds" – no console error
     const hangSound = document.getElementById("hangSound");
     const deleteSound = document.getElementById("deleteSound");
     const lockSound = document.getElementById("lockSound");
 
-    // make audio play safely (avoid not loaded error)
     function playSound(audioEl) {
-      if (audioEl) {
-        audioEl.play().catch(() => {}); // silence is okay
-      }
+      if (audioEl) audioEl.play().catch(() => {});
     }
 
+    // ---------- ONLY wall promises can be added (HER promises) ----------
     window.addWallPromise = async () => {
       if (!input.value.trim()) return;
       await addDoc(collection(db, "promises"), {
@@ -412,36 +430,18 @@
       input.value = "";
     };
 
-    window.addMyPromise = async () => {
-      if (!input.value.trim()) return;
-      await addDoc(collection(db, "myPromises"), {
-        text: input.value,
-        createdAt: Date.now(),
-        locked: false
-      });
-      playSound(hangSound);
-      input.value = "";
-    };
-
-    //  cute card generator with random rotation & animation delay
-    function renderCard(data, id, isWall) {
+    // ---------- RENDER for WALL cards (editable, deletable, lockable) ----------
+    function renderWallCard(data, id) {
       const card = document.createElement("div");
       card.className = "card";
-
-      // random rotation between -3deg and 4deg
       const rot = (Math.random() * 7 - 3).toFixed(1);
       card.style.setProperty("--r", rot + "deg");
-      // tiny random y offset for playfulness
       card.style.setProperty("--y", (Math.random() * 6 - 3) + "px");
-      
-      // animation delay for staggered pop-in
       const delay = (Math.random() * 0.3).toFixed(2);
       card.style.animationDelay = delay + "s";
 
       const days = data.createdAt ? Math.floor((Date.now() - data.createdAt) / 86400000) : 0;
       const timeText = days === 0 ? "💖 today" : days === 1 ? "yesterday 💭" : `${days} days ago ✨`;
-
-      // if locked we show lovelock
       const lockIcon = data.locked ? "🔒💘" : "🔓🩵";
       
       card.innerHTML = `
@@ -453,20 +453,18 @@
         </div>
       `;
 
-      // delete
       card.querySelector(".del").onclick = async (e) => {
         e.stopPropagation();
-        if (confirm("💔 remove this promise? ")) {
-          await deleteDoc(doc(db, isWall ? "promises" : "myPromises", id));
+        if (confirm("💔 remove her promise? ")) {
+          await deleteDoc(doc(db, "promises", id));
           playSound(deleteSound);
         }
       };
 
-      // lock toggle
       card.querySelector(".lock").onclick = async (e) => {
         e.stopPropagation();
         await updateDoc(
-          doc(db, isWall ? "promises" : "myPromises", id),
+          doc(db, "promises", id),
           { locked: !data.locked }
         );
         playSound(lockSound);
@@ -475,46 +473,88 @@
       return card;
     }
 
-    // realtime wall
+    // ---------- 💙 MY PROMISES (pre-written, uneditable, BUILDER MADE) ----------
+    // These are HARDCODED – never from Firebase. they are ETERNAL.
+    const builderPromises = [
+      { text: "I promise to always bring you your favorite coffee ☕💕", days: 0 },
+      { text: "I promise to hold your hand during scary movies 🎬🫂", days: 2 },
+      { text: "I promise to send you cute animal pics every single day 🐕🩷", days: 5 },
+      { text: "I promise to believe in you, even when you don't 🌟", days: 1 },
+      { text: "I promise to never stop making you laugh 🍭😊", days: 3 },
+      { text: "I promise to always save you the last bite 🍰👼", days: 7 },
+      { text: "I promise to choose you, every single day 💍✨", days: 0 },
+      { text: "I promise to listen, not just hear 👂💭", days: 4 }
+    ];
+
+    function renderPremadePromise(text, daysAgo) {
+      const card = document.createElement("div");
+      card.className = "card premade-card"; // special class – no actions, no delete, no lock toggle
+      const rot = (Math.random() * 6 - 3).toFixed(1);
+      card.style.setProperty("--r", rot + "deg");
+      card.style.setProperty("--y", (Math.random() * 6 - 3) + "px");
+      const delay = (Math.random() * 0.3).toFixed(2);
+      card.style.animationDelay = delay + "s";
+
+      const timeText = daysAgo === 0 ? "💖 today" : daysAgo === 1 ? "yesterday 💭" : `${daysAgo} days ago ✨`;
+      
+      card.innerHTML = `
+        <div style="font-size:1.25rem; font-weight:600; line-height:1.3;">${text}</div>
+        <small>${timeText} · my promise 💙</small>
+        <!-- no actions div at all — they don't exist in premade-card (hidden via css) -->
+      `;
+      // no lock, no delete – eternal.
+      return card;
+    }
+
+    // ---------- realtime listeners ----------
+    // 1) WALL – her promises (firebase)
     onSnapshot(collection(db, "promises"), (snap) => {
       wallDiv.innerHTML = "";
       snap.forEach((docu) => {
-        wallDiv.appendChild(renderCard(docu.data(), docu.id, true));
+        wallDiv.appendChild(renderWallCard(docu.data(), docu.id));
       });
       if (snap.empty) {
-        wallDiv.innerHTML = '<div style="background: #ffd9df; padding: 30px; border-radius: 80px; color: #9f6a7a; font-size:1.4rem; border:5px solid white;">🌸 hang your first promise! 🌸</div>';
+        wallDiv.innerHTML = '<div class="empty-message">🌸 she hasn’t made a promise yet... waiting for her words 🌸</div>';
       }
     });
 
-    // my promises realtime
-    onSnapshot(collection(db, "myPromises"), (snap) => {
-      mineDiv.innerHTML = "";
-      snap.forEach((docu) => {
-        mineDiv.appendChild(renderCard(docu.data(), docu.id, false));
-      });
-      if (snap.empty) {
-        mineDiv.innerHTML = '<div style="background: #ffe3bb; padding: 30px; border-radius: 80px; color: #83616b; font-size:1.4rem; border:5px solid white;">🐣 my secret promises will appear here...</div>';
-      }
+    // 2) MY PROMISES – static, builder-made, NEVER from firebase.
+    //    directly render the hardcoded beautiful promises.
+    mineDiv.innerHTML = ""; // clear and fill with premade cards
+    builderPromises.forEach(p => {
+      mineDiv.appendChild(renderPremadePromise(p.text, p.days));
     });
 
-    // fix initial empty – placeholder is shown via snapshot empty.
-
-    // little extra: 404 sound fallback - we don't need actual mp3.
-    // override missing assets: already replaced with inline datauri that won't load but won't throw 404.
-    // Also make audio src empty to be safe but we keep.
-    console.log("💌 Promise Day — super cute edition!");
+    // tiny extra: add a little "forever" stamp
+    console.log("💙 builder's promises are locked with love");
   </script>
 
-  <!-- assign global functions for inline onclick (module functions attached to window) -->
+  <!-- ensure global function for wall promise (already in module) -->
   <script>
-    // ensure addWallPromise / addMyPromise are globally accessible 
-    // because they are defined as async in module, we attach them explicitly.
-    import('./').catch(()=>{});
-    window.addWallPromise = window.addWallPromise || function(){ alert('loading... wait a sec 💕'); };
-    window.addMyPromise = window.addMyPromise || function(){ alert('loading... almost ready 🩷'); };
-    // but after module load, they will override.
-    // we already define in module and attached to window (since using window.addWallPromise = async ... inside module)
-    // so it's fine
+    // just in case, attach dummy, but module will override.
+    window.addWallPromise = window.addWallPromise || function(){ alert('loading... 💕'); };
   </script>
+  <!-- remove any leftover "my promise" button – already hidden via css but ensure no trace -->
+  <style>
+    /* ensure btn-mine is nowhere to be seen */
+    .btn-mine {
+      display: none !important;
+    }
+    /* extra love for premade cards */
+    .premade-card .actions {
+      display: none;
+    }
+    /* remove any possible stray delete/lock from premade if any */
+    .premade-card .lock, .premade-card .del {
+      display: none;
+    }
+    /* make wall cards extra special */
+    #wall .card::after {
+      content: "🌸";
+    }
+    #wall .card:hover::after {
+      content: "🌸💖";
+    }
+  </style>
 </body>
 </html>
