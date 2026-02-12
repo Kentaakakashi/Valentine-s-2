@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
-  <title>🫂  HUG JOURNAL ·  real-time hold</title>
+  <title>🫂  HUG JOURNAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ------------------------------------------------------------
@@ -630,14 +630,14 @@
         
         // JOURNAL ENTRY
         const moodMessages = {
-          heavy: 'you let yourself be held, even when it’s heavy. that takes strength.',
-          quiet: 'a hug that doesn’t need words. silence can be warm too.',
-          still: 'you stayed. sometimes that’s the whole thing — just staying.',
-          tender: 'gentleness is not weakness. this hug proves it.',
-          grateful: 'this moment, this breath, this embrace. thank you for being here.',
+          heavy: 'Hold me tight, dont let me go alright?',
+          quiet: 'Wanna stay like this forever',
+          still: 'you stayed. sometimes that’s the whole thing. just staying',
+          tender: 'I can feel it for some reason.',
+          grateful: 'this moment, this breath. thank you for being here.',
           weary: 'you rested here. i hope it felt like coming home.'
         };
-        let message = moodMessages[mood] || 'you held and were held. this second is real.';
+        let message = moodMessages[mood] || 'you held and were held. the hug was mabey not real, but the time you spent on it was.';
         
         let timeString = duration.toFixed(1) + 's';
         if (duration >= 60) {
@@ -663,11 +663,11 @@
     // ---------- REFLECT ----------
     document.getElementById('reflectBtn').addEventListener('click', function() {
       let reflections = [
-        'you have held yourself for ' + Math.floor(totalSeconds / 60) + ' minutes in total. each second, a quiet act of care.',
-        'hugs don’t fix everything. but they remind you you’re here.',
-        'your most recent hug was ' + (hugHistory[0] ? hugHistory[0].duration.toFixed(1) + 's' : 'waiting for you') + '. it mattered.',
+        'you have held me for ' + Math.floor(totalSeconds / 60) + ' minutes in total. each second, is a of care.',
+        'who said a hug cant fix everything, all i want after a rough day is a hug from you',
+        'your most recent hug was ' + (hugHistory[0] ? hugHistory[0].duration.toFixed(1) + 's' : 'waiting for you') + '. it matters.',
         'this journal doesn’t keep score. it keeps you.',
-        'some days are heavy. some are light. all are held.'
+        'some days are heavy. some are light. all it takes to fix it is to be held.'
       ];
       let randomReflection = reflections[Math.floor(Math.random() * reflections.length)];
       journalEntry.textContent = '🕯️ ' + randomReflection;
@@ -688,7 +688,7 @@
       updateTotalTime();
       renderHistory();
       if (hugHistory.length === 0) {
-        historyContainer.innerHTML = '<div class="history-item">🫂 your hugs will appear here — real seconds, not points.</div>';
+        historyContainer.innerHTML = '<div class="history-item">🫂 your hugs will appear here. real seconds, not points.</div>';
       }
     }
     init();
