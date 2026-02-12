@@ -1,502 +1,614 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2" />
-  <title>🫂 hug time · forever hold</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
+  <title>🫂  HUG JOURNAL ·  real-time hold</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* OPTIMIZED: no heavy filters, no infinite loops that leak, no audio, pure hug */
+    /* ------------------------------------------------------------
+       HUG JOURNAL — local heartbeat sound, real-time timer.
+       Hold the button: world darkens, pulse begins, heartbeat plays,
+       and you see exactly how long you're holding.
+    ------------------------------------------------------------ */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    /* DARKEN OVERLAY — simulates embrace */
+    #hug-veil {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(25, 15, 20, 0);
+      pointer-events: none;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      transition: background 0.25s ease, backdrop-filter 0.25s ease;
+    }
+
+    .hug-veil-active {
+      background: rgba(30, 18, 22, 0.45) !important;
+      backdrop-filter: blur(2px) !important;
+    }
+
+    /* HEARTBEAT PULSE — subtle, organic */
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.05); }
+      50% { transform: scale(1); }
+      70% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    .heartbeat-pulse {
+      animation: heartbeat 1.4s infinite ease-in-out;
+    }
+
     body {
-      background: linear-gradient(145deg, #ffe4ec, #ffe0ed, #ffe9f0);
+      background: #f4ece9;
+      background-image: radial-gradient(circle at 15% 30%, #fbe9e5 0%, #f4e3df 70%, #efe5e2 100%);
       font-family: 'Quicksand', sans-serif;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 16px;
-      color: #402a33;
+      padding: 20px;
+      color: #2d2a2a;
     }
 
-    .cozy-container {
-      max-width: 650px;
+    .journal-container {
+      max-width: 720px;
       width: 100%;
-      background: rgba(255, 250, 245, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 80px 80px 80px 80px;
-      padding: 32px 24px;
-      box-shadow: 0 20px 40px rgba(250, 130, 160, 0.2),
-                  inset 0 4px 12px rgba(255, 255, 255, 0.9);
-      border: 4px solid rgba(255, 255, 255, 0.8);
-      transition: all 0.2s;
+      background: rgba(255, 250, 245, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 48px 48px 48px 16px;
+      padding: 36px 28px;
+      box-shadow: 0 25px 40px rgba(90, 60, 60, 0.12),
+                  inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      position: relative;
+      z-index: 10;
+    }
+
+    .journal-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      border-bottom: 2px solid #e5d5cf;
+      padding-bottom: 16px;
     }
 
     h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      color: #512a38;
-      text-shadow: 0 6px 0 #ffc0cb, 0 12px 20px #ffa5b9;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: #4c3b37;
+      letter-spacing: -0.5px;
     }
 
-    .soft-quote {
-      background: #fff0f5dd;
-      padding: 14px 20px;
-      border-radius: 100px;
-      border: 3px dashed #ff889d;
+    .date-stamp {
+      font-weight: 600;
+      color: #8c6e68;
+      background: rgba(255, 235, 230, 0.7);
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      border: 1px solid #fff;
+    }
+
+    /* today's mood */
+    .today-mood {
+      background: rgba(245, 235, 230, 0.7);
+      border-radius: 40px;
+      padding: 22px 20px;
+      margin-bottom: 30px;
+      border: 1px solid white;
+    }
+
+    .mood-ask {
       font-weight: 700;
-      margin-bottom: 24px;
+      color: #5d4742;
+      margin-bottom: 16px;
       font-size: 1.1rem;
     }
 
-    /* MOOD - super light */
-    .mood-corner {
-      background: rgba(255, 235, 245, 0.6);
-      border-radius: 70px;
-      padding: 18px 12px;
-      margin-bottom: 16px;
-      border: 2px solid white;
-    }
-
-    .mood-grid {
+    .mood-choices {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 8px;
-      margin-top: 8px;
     }
 
-    .mood-pill {
+    .mood-word {
       background: white;
-      border: 3px solid white;
+      border: 1px solid #e7d3cd;
       padding: 10px 20px;
       border-radius: 60px;
-      font-weight: 700;
-      color: #452830;
-      box-shadow: 0 5px 0 #d68e99;
-      transition: 0.06s linear;
+      font-weight: 600;
+      color: #57413c;
+      box-shadow: 0 2px 0 #dac2bb;
+      transition: 0.03s;
       cursor: pointer;
       font-size: 0.95rem;
     }
 
-    .mood-pill.active {
-      background: #ffdee8;
-      border: 3px solid #ff4f6c;
-      box-shadow: 0 6px 0 #f34a62;
-      transform: scale(1.02);
+    .mood-word.active {
+      background: #ffe8e1;
+      border: 2px solid #c48a7c;
+      box-shadow: 0 3px 0 #b07669;
+      color: #3e2e2b;
     }
 
-    /* HUG ZONE — NO LEAKS, SMOOTH */
-    .hug-zone {
-      position: relative;
-      margin: 18px 0 24px;
+    /* HUG BUTTON — now with real-time timer display */
+    .hug-anchor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 24px 0 32px;
     }
 
-    .hug-planet {
-      width: 210px;
-      height: 210px;
-      margin: 0 auto;
+    .hug-core {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at 30% 30%, #f5dbd2, #eccbc2);
       border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
-      background: radial-gradient(circle at 30% 30%, #ffbfcc, #ffaaba, #ff97aa);
-      border: 7px solid white;
-      box-shadow: 0 20px 0 #9e6972, 0 30px 50px #ff95a8a0;
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 0 #b4938a, 0 18px 30px rgba(110, 70, 60, 0.18);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.9rem;
-      font-weight: 900;
-      color: #341f26;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #342824;
       cursor: pointer;
       transition: 0.02s;
-      animation: float 4s infinite alternate;
+      animation: gentleDrift 6s infinite alternate ease-in-out;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-12px) scale(1.01); }
+    @keyframes gentleDrift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
     }
 
-    .hug-glow {
-      box-shadow: 0 0 0 20px rgba(255, 180, 200, 0.5), 0 20px 0 #9e6972 !important;
-      transition: 0s;
+    .hug-hold-glow {
+      box-shadow: 0 0 0 18px rgba(200, 150, 140, 0.3), 0 12px 0 #b4938a !important;
     }
 
-    /* TIMER — big and clear */
-    .time-castle {
-      background: #ffe5ecf0;
-      border-radius: 70px;
-      padding: 22px 18px;
-      border: 4px solid white;
-      margin-bottom: 20px;
+    /* REAL-TIME HOLD TIMER — big, clear, present */
+    .hold-timer {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: 2px solid white;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #5c3b36;
+      box-shadow: 0 6px 0 #cfa89e;
+      display: inline-block;
+      transition: all 0.1s;
+      letter-spacing: 2px;
+    }
+
+    .time-keeper {
+      background: rgba(250, 240, 235, 0.8);
+      border-radius: 100px;
+      padding: 16px 24px;
+      margin: 16px 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid white;
+      font-weight: 600;
     }
 
     .total-time {
-      font-size: 2.1rem;
-      font-weight: 900;
       background: white;
-      display: inline-block;
-      padding: 8px 28px;
-      border-radius: 80px;
-      border: 4px solid #ffb6c1;
-      color: #732434;
-    }
-
-    .current-hug-badge {
-      background: white;
+      padding: 8px 24px;
       border-radius: 60px;
-      padding: 12px 28px;
-      font-size: 1.8rem;
-      font-weight: 900;
-      border: 4px solid #ffa5b4;
+      color: #5c403b;
+      font-weight: 700;
+      font-size: 1.4rem;
+      border: 1px solid #e3cbc4;
     }
 
-    /* stats row */
-    .stats-row {
+    /* journal entry */
+    .entry-page {
+      background: #fffcf9;
+      border-radius: 32px 32px 32px 8px;
+      padding: 28px 24px;
+      margin: 28px 0 16px;
+      border: 1px solid #ffeae3;
+      box-shadow: inset 0 0 0 1px white, 0 6px 0 #cfb6af;
+    }
+
+    .entry-title {
+      font-weight: 700;
+      color: #6e4f48;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
     }
 
-    .stat-puff {
-      background: #ffedf1;
-      border-radius: 40px;
-      padding: 16px 14px;
-      flex: 1 1 130px;
-      border: 4px solid white;
-      font-weight: 800;
+    .entry-content {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #352d2b;
+      font-weight: 500;
+      min-height: 80px;
+    }
+
+    .entry-footer {
+      margin-top: 20px;
+      color: #95746b;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px dashed #e2cec7;
+      padding-top: 16px;
+    }
+
+    /* history */
+    .history-scroll {
+      background: rgba(245, 237, 233, 0.6);
+      border-radius: 40px 40px 40px 8px;
+      padding: 22px 20px;
+      margin-top: 24px;
+      border: 1px solid white;
+    }
+
+    .history-title {
+      font-weight: 700;
+      color: #6f554f;
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .history-list {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      box-shadow: 0 5px 0 #c88f99;
+      gap: 12px;
     }
 
-    .stat-num {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #8f4352;
-    }
-
-    /* calendar */
-    .week-hugs {
-      background: #ffe0e8f0;
-      border-radius: 60px;
-      padding: 16px 22px;
+    .history-item {
+      background: white;
+      padding: 12px 18px;
+      border-radius: 30px;
+      border: 1px solid #f2dbd4;
+      color: #4f3d39;
+      font-weight: 600;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      border: 4px solid white;
-      margin-bottom: 18px;
-      font-weight: 800;
+      font-size: 0.95rem;
     }
 
-    .dot-calendar {
+    .presence-actions {
       display: flex;
       gap: 12px;
-      font-size: 1.9rem;
+      margin-top: 24px;
+      justify-content: flex-end;
     }
 
-    /* message area — snappy */
-    .message-nest {
-      background: #fff7f9;
-      border-radius: 80px 80px 80px 20px;
-      padding: 20px 22px;
-      border: 5px solid white;
-      box-shadow: 0 8px 0 #dc9ca6;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin: 16px 0 14px;
-      min-height: 95px;
-      transition: 0.15s;
-    }
-
-    /* hug tools — all clickable, no lag */
-    .tool-family {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .tool-btn {
-      background: white;
-      border: 4px solid #ffbfcb;
+    .presence-btn {
+      background: transparent;
+      border: 2px solid #e1cbc5;
       padding: 12px 18px;
       border-radius: 50px;
-      font-weight: 800;
-      color: #48262f;
-      box-shadow: 0 6px 0 #af7a84;
-      transition: 0.03s;
-      cursor: pointer;
-      flex: 1 0 130px;
-    }
-
-    .tool-btn:active {
-      transform: translateY(6px);
-      box-shadow: 0 1px 0 #af7a84;
-    }
-
-    .dynamic-area {
-      margin-top: 20px;
-      background: rgba(255, 245, 250, 0.7);
-      border-radius: 70px;
-      padding: 18px;
-      border: 4px solid white;
-      min-height: 90px;
+      font-weight: 700;
+      color: #6f5350;
       transition: 0.1s;
+      cursor: pointer;
+      background: rgba(255, 250, 245, 0.5);
     }
 
-    /* floating only hugs — very few, optimized */
-    .hug-float {
+    .presence-btn:hover {
+      background: #ffe7e0;
+      border-color: #cfa89e;
+    }
+
+    .float-reminder {
       position: fixed;
       pointer-events: none;
-      font-size: 2.2rem;
-      opacity: 0.2;
-      animation: rise 24s infinite linear;
+      font-size: 1.8rem;
+      opacity: 0.1;
+      animation: rise 25s infinite linear;
       z-index: 0;
     }
 
     @keyframes rise {
-      0% { transform: translateY(110vh) rotate(0deg); opacity: 0.1; }
-      70% { opacity: 0.3; }
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0.05; }
+      80% { opacity: 0.15; }
       100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-<!-- very few floating hugs, no perf hit -->
-<div id="hugAtmosphere"></div>
+<!-- DARKEN VEIL -->
+<div id="hug-veil"></div>
 
-<div class="cozy-container">
-  <h1>🫂  HUG TIME</h1>
-  <div class="soft-quote">✧  every second you hold is felt  ✧</div>
+<!-- FLOATING ELEMENTS -->
+<div id="airborne"></div>
 
-  <!-- mood — instant switch -->
-  <div class="mood-corner">
-    <div style="font-weight:800; margin-bottom:8px;">🌸 how are you?</div>
-    <div class="mood-grid" id="moodGrid">
-      <button class="mood-pill" data-mood="low">🌧️ low</button>
-      <button class="mood-pill" data-mood="meh">🍃 meh</button>
-      <button class="mood-pill active" data-mood="okay">☁️ okay</button>
-      <button class="mood-pill" data-mood="emotional">🥹 emotional</button>
-      <button class="mood-pill" data-mood="loved">💘 loved</button>
-      <button class="mood-pill" data-mood="anxious">🌀 anxious</button>
+<!-- 
+  HEARTBEAT SOUND — from assets folder 
+  USING LOCAL FILE: assets/heartbeat.mp3
+  (you need to place your heartbeat sound file there)
+-->
+<audio id="heartbeatAudio" loop preload="auto">
+  <source src="assets/heartbeat.mp3" type="audio/mpeg">
+  <!-- fallback message if file not found -->
+  Your browser doesn't support the heartbeat sound or the file is missing.
+  Please add assets/heartbeat.mp3 to your project.
+</audio>
+
+<main class="journal-container" id="journalContainer">
+
+  <div class="journal-header">
+    <h1>🫂  hug journal</h1>
+    <span class="date-stamp" id="todayDate"></span>
+  </div>
+
+  <!-- MOOD SELECTION -->
+  <div class="today-mood">
+    <div class="mood-ask">how are you, really?</div>
+    <div class="mood-choices" id="moodSelection">
+      <button class="mood-word" data-mood="heavy">🌧️ heavy</button>
+      <button class="mood-word" data-mood="quiet">🍂 quiet</button>
+      <button class="mood-word active" data-mood="still">🕯️ still</button>
+      <button class="mood-word" data-mood="tender">🕊️ tender</button>
+      <button class="mood-word" data-mood="grateful">✨ grateful</button>
+      <button class="mood-word" data-mood="weary">🕯️ weary</button>
     </div>
   </div>
 
-  <!-- MAIN HUG BUTTON — performance optimized, no interval leaks -->
-  <div class="hug-zone">
-    <button class="hug-planet" id="hugCore">🫂 hold</button>
+  <!-- HUG BUTTON + REAL-TIME HOLD TIMER -->
+  <div class="hug-anchor">
+    <button class="hug-core" id="hugCenter">
+      <span style="font-size: 2.8rem;">🫂</span>
+      <span style="font-size: 0.95rem; margin-top: 4px;">hold — hear the beat</span>
+    </button>
+    <!-- THIS IS THE REAL-TIME HOLD TIMER — updates every 100ms while hugging -->
+    <div class="hold-timer" id="holdTimerDisplay">0.0s</div>
   </div>
 
-  <!-- TIME KINGDOM -->
-  <div class="time-castle">
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-      <span style="font-weight:900; font-size:1.4rem;">⏱️ lifetime hug</span>
-      <span class="total-time" id="totalTimeDisplay">0m 0s</span>
-    </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
-      <span style="font-weight:900;">this hug</span>
-      <span class="current-hug-badge" id="currentHugTimer">0.0s</span>
-    </div>
+  <!-- LIFETIME HUG TIME -->
+  <div class="time-keeper">
+    <span style="font-weight: 700; color: #5e4540;">lifetime hugs</span>
+    <span class="total-time" id="totalHugTimeDisplay">0m 0s</span>
   </div>
 
-  <!-- STATS: HUG COUNT, STREAK, MILESTONE -->
-  <div class="stats-row">
-    <div class="stat-puff">
-      <span style="font-size:1.8rem;">🫂</span>
-      <span class="stat-num" id="hugCountDisplay">0</span>
-      <span>hugs</span>
+  <!-- JOURNAL ENTRY -->
+  <div class="entry-page">
+    <div class="entry-title">
+      <span>📓</span> today's entry
     </div>
-    <div class="stat-puff">
-      <span style="font-size:1.8rem;">🔥</span>
-      <span class="stat-num" id="streakDisplay">0</span>
-      <span>streak</span>
+    <div class="entry-content" id="journalEntry">
+      press and hold the hug. feel the heartbeat.
     </div>
-    <div class="stat-puff">
-      <span style="font-size:1.8rem;">🏆</span>
-      <span class="stat-num" id="milestoneDisplay">0</span>
-      <span>mins</span>
+    <div class="entry-footer">
+      <span id="hugMoodTag">mood · still</span>
+      <span id="hugDurationTag"></span>
     </div>
   </div>
 
-  <!-- WEEK CALENDAR — super light -->
-  <div class="week-hugs">
-    <span style="font-size:1.8rem;">📆</span>
-    <span style="font-weight:900;">hug week</span>
-    <div class="dot-calendar" id="calendarDots">○ ○ ○ ○ ○ ○ ○</div>
+  <!-- HUG HISTORY -->
+  <div class="history-scroll">
+    <div class="history-title">📋 recent hugs · real seconds</div>
+    <div class="history-list" id="historyContainer">
+      <div class="history-item">🫂 your hugs will appear here</div>
+    </div>
   </div>
 
-  <!-- MESSAGE FROM HUG -->
-  <div class="message-nest" id="hugMessage">🫂 hold to begin your hug</div>
-
-  <!-- HUG EXTRAS — all visual, no audio, no lag -->
-  <div class="tool-family">
-    <div class="tool-btn" id="couponTool">🎟️ hug coupon</div>
-    <div class="tool-btn" id="milestoneTool">⏳ hug minute</div>
-    <div class="tool-btn" id="letterTool">💌 comfort letter</div>
-    <div class="tool-btn" id="memoryTool">📖 hug memory</div>
-    <div class="tool-btn" id="breatheTool">🫁 breathe</div>
+  <!-- REFLECTION ACTIONS -->
+  <div class="presence-actions">
+    <div class="presence-btn" id="reflectBtn">🕯️ reflect</div>
+    <div class="presence-btn" id="clearHistoryBtn" style="border-color: #dfc2bb;">🕸️ let go</div>
   </div>
-
-  <!-- DYNAMIC REWARD / COUPON AREA (no heavy animation) -->
-  <div class="dynamic-area" id="dynamicZone">
-    ✨ your hug extras appear here
-  </div>
-</div>
+</main>
 
 <script>
+  // -------------------------------------------------------------
+  //  🫂  HUG JOURNAL — LOCAL HEARTBEAT + REAL-TIME HOLD TIMER
+  //  Hold the button: 
+  //  - world darkens
+  //  - heartbeat animation pulses
+  //  - LOCAL heartbeat sound plays from assets/heartbeat.mp3
+  //  - YOU SEE EXACTLY HOW LONG YOU'RE HOLDING (real-time)
+  // -------------------------------------------------------------
   (function() {
-    // ----------------------------------------------------
-    // 🫂  HUG TIME — 100% AUDIO FREE, ZERO LEAKS, FAST
-    // ----------------------------------------------------
-
-    // ---- FLOATING HUGS (very few, to avoid "unresponsive") ----
-    function addHugFloats() {
-      let atm = document.getElementById('hugAtmosphere');
-      for (let i = 0; i < 12; i++) {  // reduced count for smoothness
-        let fl = document.createElement('div');
-        fl.className = 'hug-float';
-        fl.innerHTML = ['🫂','🤍','🫂','🧸','🫂','☁️'][Math.floor(Math.random() * 6)];
-        fl.style.left = Math.random() * 100 + '%';
-        fl.style.animationDelay = Math.random() * 12 + 's';
-        fl.style.fontSize = (Math.random() * 24 + 24) + 'px';
-        fl.style.animationDuration = (Math.random() * 12 + 18) + 's';
-        atm.appendChild(fl);
+    // Create floating atmosphere
+    function createAtmosphere() {
+      let air = document.getElementById('airborne');
+      for (let i = 0; i < 10; i++) {
+        let el = document.createElement('div');
+        el.className = 'float-reminder';
+        el.innerHTML = ['🫂', '🤍', '🕯️', '🕊️'][Math.floor(Math.random() * 4)];
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDelay = Math.random() * 12 + 's';
+        el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        el.style.animationDuration = (Math.random() * 16 + 22) + 's';
+        air.appendChild(el);
       }
     }
-    addHugFloats();
+    createAtmosphere();
 
-    // ---------- STATE (no memory leaks, clean intervals) ----------
-    let mood = 'okay';
-    let hugging = false;
-    let hugStart = null;
-    let totalSeconds = Number(localStorage.getItem('hugTotalSeconds') || 0);
-    let hugCount = Number(localStorage.getItem('hugCount') || 0);
-    let streak = Number(localStorage.getItem('hugStreak') || 0);
-    let lastHugDate = localStorage.getItem('lastHugDate') || '';
+    // DOM elements
+    const veil = document.getElementById('hug-veil');
+    const hugBtn = document.getElementById('hugCenter');
+    const journalContainer = document.querySelector('.journal-container');
+    const heartbeatSound = document.getElementById('heartbeatAudio');
+    const holdTimerDisplay = document.getElementById('holdTimerDisplay');
+    const totalDisplay = document.getElementById('totalHugTimeDisplay');
+    const journalEntry = document.getElementById('journalEntry');
+    const hugMoodTag = document.getElementById('hugMoodTag');
+    const hugDurationTag = document.getElementById('hugDurationTag');
+    const historyContainer = document.getElementById('historyContainer');
+    const todayDateSpan = document.getElementById('todayDate');
+    const moodBtns = document.querySelectorAll('.mood-word');
 
-    // Timer handle
-    let timerInterval = null;
+    // ---------- STATE ----------
+    let mood = 'still';
+    let totalSeconds = Number(localStorage.getItem('hj_totalSeconds') || 0);
+    let totalHugs = Number(localStorage.getItem('hj_hugCount') || 0);
+    
+    // Hug history
+    let hugHistory = [];
+    try {
+      hugHistory = JSON.parse(localStorage.getItem('hj_history') || '[]');
+    } catch(e) { hugHistory = []; }
 
-    // DOM references
-    const hugCore = document.getElementById('hugCore');
-    const totalTimeDisplay = document.getElementById('totalTimeDisplay');
-    const currentHugTimer = document.getElementById('currentHugTimer');
-    const hugCountDisplay = document.getElementById('hugCountDisplay');
-    const streakDisplay = document.getElementById('streakDisplay');
-    const milestoneDisplay = document.getElementById('milestoneDisplay');
-    const calendarDots = document.getElementById('calendarDots');
-    const hugMessage = document.getElementById('hugMessage');
-    const dynamicZone = document.getElementById('dynamicZone');
+    // ---------- TODAY'S DATE ----------
+    const today = new Date();
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    todayDateSpan.textContent = today.toLocaleDateString('en-US', options);
 
-    // Mood pills
-    const moodPills = document.querySelectorAll('.mood-pill');
-    moodPills.forEach(p => {
-      p.addEventListener('click', function(e) {
-        moodPills.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        mood = this.dataset.mood;
-      });
-    });
-
-    // ---------- MESSAGES ----------
-    const hugReplies = {
-      low: ['holding you softly', 'you can lean on me', 'i’ve got you'],
-      meh: ['here, in the quiet', 'a gentle squeeze', 'i’m with you'],
-      okay: ['you’re doing great', 'warmth surrounds you', 'proud of you'],
-      emotional: ['let it out, sweetheart', 'feel it all', 'i’ll hold you through'],
-      loved: ['you are so loved', 'this hug celebrates you', 'your heart glows'],
-      anxious: ['breathe in… out…', 'you are safe', 'grounded in this hug'],
-    };
-
-    // ----- UPDATE TOTAL TIME DISPLAY -----
-    function updateTotalDisplay() {
+    // ---------- UPDATE TOTAL TIME DISPLAY ----------
+    function updateTotalTime() {
       let mins = Math.floor(totalSeconds / 60);
       let secs = Math.floor(totalSeconds % 60);
-      totalTimeDisplay.textContent = `${mins}m ${secs}s`;
-      milestoneDisplay.textContent = mins;
+      totalDisplay.textContent = `${mins}m ${secs}s`;
     }
 
-    // ----- ADD SECONDS TO TOTAL (only called on hug end) -----
-    function addHugSeconds(sec) {
-      totalSeconds += sec;
-      localStorage.setItem('hugTotalSeconds', totalSeconds);
-      updateTotalDisplay();
+    // ---------- ADD SECONDS ----------
+    function addSeconds(sec) {
+      totalSeconds = Math.round((totalSeconds + sec) * 10) / 10;
+      localStorage.setItem('hj_totalSeconds', totalSeconds);
+      updateTotalTime();
     }
 
-    // ----- STREAK & CALENDAR -----
-    function refreshStreakAndCalendar() {
-      const today = new Date().toDateString();
-      if (lastHugDate !== today) {
-        let yest = new Date();
-        yest.setDate(yest.getDate() - 1);
-        if (lastHugDate === yest.toDateString()) {
-          streak++;
-        } else {
-          streak = 1;
-        }
-        lastHugDate = today;
-        localStorage.setItem('lastHugDate', today);
-        localStorage.setItem('hugStreak', streak);
+    // ---------- RECORD HUG ----------
+    function recordHug(duration, moodUsed) {
+      totalHugs++;
+      localStorage.setItem('hj_hugCount', totalHugs);
+
+      const timestamp = new Date();
+      const timeStr = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const dateStr = timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      
+      const hugRecord = {
+        id: Date.now() + Math.random(),
+        date: dateStr,
+        time: timeStr,
+        duration: duration,
+        mood: moodUsed,
+      };
+
+      hugHistory.unshift(hugRecord);
+      if (hugHistory.length > 8) hugHistory.pop();
+      localStorage.setItem('hj_history', JSON.stringify(hugHistory));
+      
+      renderHistory();
+    }
+
+    // ---------- RENDER HISTORY ----------
+    function renderHistory() {
+      if (!historyContainer) return;
+      if (hugHistory.length === 0) {
+        historyContainer.innerHTML = '<div class="history-item">🫂 no hugs yet — they will come</div>';
+        return;
       }
-      streakDisplay.textContent = streak;
-
-      // 7-day calendar (lightweight)
-      let dots = '';
-      for (let i = 6; i >= 0; i--) {
-        let d = new Date();
-        d.setDate(d.getDate() - i);
-        let dateStr = d.toDateString();
-        let mark = '○';
-        if (dateStr === today) mark = '🫂';
-        else if (localStorage.getItem('hugmark_' + dateStr)) mark = '🤍';
-        dots += mark + ' ';
-      }
-      calendarDots.textContent = dots;
+      let html = '';
+      hugHistory.slice(0, 6).forEach(h => {
+        html += `<div class="history-item">
+                    <span>🫂 ${h.date} · ${h.time}</span>
+                    <span style="background: #f3e1db; padding: 4px 14px; border-radius: 50px;">${h.duration.toFixed(1)}s · ${h.mood}</span>
+                  </div>`;
+      });
+      historyContainer.innerHTML = html;
     }
 
-    function markHugDay() {
-      const today = new Date().toDateString();
-      localStorage.setItem('hugmark_' + today, '🤍');
-      refreshStreakAndCalendar();
-    }
+    // ---------- MOOD SWITCHER ----------
+    moodBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        moodBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        mood = this.dataset.mood;
+        hugMoodTag.textContent = `mood · ${mood}`;
+      });
+    });
+    hugMoodTag.textContent = `mood · still`;
 
-    // ----- HUG START (clean, no memory buildup) -----
-    function onStartHug(e) {
+    // --------------------------------------------------------
+    //  💓  HEARTBEAT + DARKEN + SOUND + REAL-TIME TIMER
+    // --------------------------------------------------------
+    let heartbeatInterval = null;
+    let hugging = false;
+    let hugStart = null;
+    let timerInterval = null;
+
+    function startHug(e) {
       if (hugging) return;
       hugging = true;
       hugStart = Date.now();
-      hugCore.classList.add('hug-glow');
-      hugMessage.classList.remove('show'); // not needed but we remove style
-      // start timer update (RAF later)
+      
+      // DARKEN
+      veil.classList.add('hug-veil-active');
+      
+      // HEARTBEAT ANIMATION
+      hugBtn.classList.add('hug-hold-glow', 'heartbeat-pulse');
+      journalContainer.classList.add('heartbeat-pulse');
+      
+      // PLAY LOCAL HEARTBEAT SOUND (from assets folder)
+      if (heartbeatSound) {
+        heartbeatSound.currentTime = 0;
+        heartbeatSound.play().catch(e => {
+          console.log('heartbeat audio could not be played — check assets/heartbeat.mp3');
+          // Still hug, even without sound
+        });
+      }
+      
+      // VEIL OPACITY PULSE
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      let beatCount = 0;
+      heartbeatInterval = setInterval(() => {
+        if (hugging) {
+          veil.style.background = `rgba(30, 18, 22, ${0.45 + Math.sin(beatCount * 1.2) * 0.04})`;
+          beatCount++;
+        }
+      }, 180);
+      
+      // ---------- REAL-TIME HOLD TIMER — updates every 100ms ----------
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(() => {
         if (hugging && hugStart) {
           let elapsed = (Date.now() - hugStart) / 1000;
-          currentHugTimer.textContent = elapsed.toFixed(1) + 's';
+          // Update the big hold timer display in REAL TIME
+          holdTimerDisplay.textContent = elapsed.toFixed(1) + 's';
         }
       }, 100);
     }
 
-    // ----- HUG END (all updates happen once) -----
-    function onEndHug() {
+    function endHug() {
       if (!hugging) return;
       hugging = false;
-      hugCore.classList.remove('hug-glow');
+      
+      // REMOVE DARKEN & HEARTBEAT
+      veil.classList.remove('hug-veil-active');
+      veil.style.background = '';
+      
+      hugBtn.classList.remove('hug-hold-glow', 'heartbeat-pulse');
+      journalContainer.classList.remove('heartbeat-pulse');
+      
+      // STOP HEARTBEAT SOUND
+      if (heartbeatSound) {
+        heartbeatSound.pause();
+        heartbeatSound.currentTime = 0;
+      }
+      
+      if (heartbeatInterval) {
+        clearInterval(heartbeatInterval);
+        heartbeatInterval = null;
+      }
       
       if (timerInterval) {
         clearInterval(timerInterval);
@@ -505,129 +617,95 @@
 
       if (hugStart) {
         let duration = (Date.now() - hugStart) / 1000;
-        duration = Math.round(duration * 10) / 10; // .1s precision
+        duration = Math.round(duration * 10) / 10;
         
-        // increment total time
-        addHugSeconds(duration);
+        // Reset hold timer display to 0.0s
+        holdTimerDisplay.textContent = '0.0s';
         
-        // hug count +1
-        hugCount++;
-        localStorage.setItem('hugCount', hugCount);
-        hugCountDisplay.textContent = hugCount;
+        // Add to total time
+        addSeconds(duration);
         
-        // mark day & streak
-        markHugDay();
-
-        // display message
-        let moodSet = hugReplies[mood] || hugReplies.okay;
-        let randomMsg = moodSet[Math.floor(Math.random() * moodSet.length)];
-        hugMessage.textContent = `🫂 ${randomMsg}  ·  ${duration.toFixed(1)}s hug`;
-
-        // push to hug memory (last 3)
-        let mem = JSON.parse(localStorage.getItem('hugMemoryList') || '[]');
-        mem.push(`${duration.toFixed(1)}s (${mood})`);
-        if (mem.length > 5) mem.shift();
-        localStorage.setItem('hugMemoryList', JSON.stringify(mem));
-
-        // reset current timer display
-        currentHugTimer.textContent = '0.0s';
+        // Record hug
+        recordHug(duration, mood);
+        
+        // JOURNAL ENTRY
+        const moodMessages = {
+          heavy: 'you let yourself be held, even when it’s heavy. that takes strength.',
+          quiet: 'a hug that doesn’t need words. silence can be warm too.',
+          still: 'you stayed. sometimes that’s the whole thing — just staying.',
+          tender: 'gentleness is not weakness. this hug proves it.',
+          grateful: 'this moment, this breath, this embrace. thank you for being here.',
+          weary: 'you rested here. i hope it felt like coming home.'
+        };
+        let message = moodMessages[mood] || 'you held and were held. this second is real.';
+        
+        let timeString = duration.toFixed(1) + 's';
+        if (duration >= 60) {
+          let mins = Math.floor(duration / 60);
+          let secs = Math.floor(duration % 60);
+          timeString = `${mins}m ${secs}s`;
+        }
+        
+        journalEntry.textContent = `🫂  ${message}`;
+        hugDurationTag.textContent = `${timeString} · ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+        
         hugStart = null;
       }
     }
 
-    // attach listeners (no double)
-    hugCore.addEventListener('mousedown', onStartHug);
-    hugCore.addEventListener('touchstart', onStartHug);
-    document.addEventListener('mouseup', onEndHug);
-    document.addEventListener('touchend', onEndHug);
-    window.addEventListener('blur', onEndHug); // safety
+    // EVENT LISTENERS
+    hugBtn.addEventListener('mousedown', startHug);
+    hugBtn.addEventListener('touchstart', startHug);
+    document.addEventListener('mouseup', endHug);
+    document.addEventListener('touchend', endHug);
+    window.addEventListener('blur', endHug);
 
-    // ----- initial UI update -----
-    function initUI() {
-      hugCountDisplay.textContent = hugCount;
-      streakDisplay.textContent = streak;
-      updateTotalDisplay();
-      refreshStreakAndCalendar();
-    }
-    initUI();
-
-    // ----- HUG COUPON -----
-    document.getElementById('couponTool').addEventListener('click', function() {
-      dynamicZone.innerHTML = `
-        <div style="background:#fff0f5; border-radius:50px; padding:16px; display:flex; justify-content:space-between; align-items:center; border:4px dashed #ff7e97;">
-          <span style="font-weight:900;">🎟️ one hug · redeem anytime</span>
-          <button style="background:white; border:4px solid #ffb6c1; border-radius:50px; padding:8px 24px; font-weight:900;" id="copyCouponNow">copy</button>
-        </div>
-      `;
-      document.getElementById('copyCouponNow')?.addEventListener('click', function() {
-        navigator.clipboard?.writeText('🫂✨ good for 1 hug – redeem with warmth');
-        dynamicZone.innerHTML = '💌 coupon copied!';
-      });
-    });
-
-    // ----- MILESTONE (hug minute celebration) -----
-    document.getElementById('milestoneTool').addEventListener('click', function() {
-      let mins = Math.floor(totalSeconds / 60);
-      dynamicZone.innerHTML = `🏆 <span style="font-weight:900;font-size:1.3rem;">you've hugged for ${mins} minute${mins!==1?'s':''}!</span> 🏆`;
-    });
-
-    // ----- COMFORT LETTER -----
-    document.getElementById('letterTool').addEventListener('click', function() {
-      let letters = [
-        'you are allowed to take up space.',
-        'somewhere, someone is grateful for you.',
-        'your heart is gentle and needed.',
-        'rest is not weakness.',
-        'this hug is real and so are you.'
+    // ---------- REFLECT ----------
+    document.getElementById('reflectBtn').addEventListener('click', function() {
+      let reflections = [
+        'you have held yourself for ' + Math.floor(totalSeconds / 60) + ' minutes in total. each second, a quiet act of care.',
+        'hugs don’t fix everything. but they remind you you’re here.',
+        'your most recent hug was ' + (hugHistory[0] ? hugHistory[0].duration.toFixed(1) + 's' : 'waiting for you') + '. it mattered.',
+        'this journal doesn’t keep score. it keeps you.',
+        'some days are heavy. some are light. all are held.'
       ];
-      let chosen = letters[Math.floor(Math.random() * letters.length)];
-      dynamicZone.innerHTML = `💌 ${chosen}`;
+      let randomReflection = reflections[Math.floor(Math.random() * reflections.length)];
+      journalEntry.textContent = '🕯️ ' + randomReflection;
     });
 
-    // ----- HUG MEMORY (last 5) -----
-    document.getElementById('memoryTool').addEventListener('click', function() {
-      let memList = JSON.parse(localStorage.getItem('hugMemoryList') || '[]');
-      if (memList.length === 0) memList = ['🫂 your first hug', '🫂 another warm hug'];
-      let html = '📖 recent hugs:<br>';
-      memList.slice(-4).forEach(m => html += '🫂 ' + m + '<br>');
-      dynamicZone.innerHTML = html;
-    });
-
-    // ----- BREATHE (visual only, no audio) -----
-    let breathActive = false;
-    let breathInterval = null;
-    document.getElementById('breatheTool').addEventListener('click', function() {
-      if (breathActive) {
-        clearInterval(breathInterval);
-        breathActive = false;
-        dynamicZone.innerHTML = '✨ breathing paused';
-        return;
+    // ---------- LET GO ----------
+    document.getElementById('clearHistoryBtn').addEventListener('click', function() {
+      if (confirm('let go of hug history? the seconds stay with you, but the list will fade.')) {
+        hugHistory = [];
+        localStorage.setItem('hj_history', JSON.stringify([]));
+        renderHistory();
+        journalEntry.textContent = '🕸️ you let go. the hugs still happened. you don’t need to prove them.';
       }
-      breathActive = true;
-      let phase = 'inhale';
-      let counter = 0;
-      dynamicZone.innerHTML = `<div style="font-size:2rem; text-align:center;">🫁<br><span style="font-size:1.3rem;" id="breathMsg">inhale... 3s</span></div>`;
-      breathInterval = setInterval(() => {
-        counter++;
-        let msgEl = document.getElementById('breathMsg');
-        if (msgEl) {
-          if (counter % 6 < 3) msgEl.textContent = 'inhale... 3s';
-          else msgEl.textContent = 'exhale... 3s';
-        }
-        if (counter > 30) { // auto-stop after 30s
-          clearInterval(breathInterval);
-          breathActive = false;
-          dynamicZone.innerHTML = '🧘 breathe complete';
-        }
-      }, 1000);
     });
 
-    // first message
+    // ---------- INIT ----------
+    function init() {
+      updateTotalTime();
+      renderHistory();
+      if (hugHistory.length === 0) {
+        historyContainer.innerHTML = '<div class="history-item">🫂 your hugs will appear here — real seconds, not points.</div>';
+      }
+    }
+    init();
+
     setTimeout(() => {
-      hugMessage.textContent = '🫂 hold the hug button — it counts every second';
+      if (journalEntry.textContent.includes('press and hold')) {
+        journalEntry.textContent = '🕯️ this journal holds whatever you bring to it. start with a hug.';
+      }
     }, 200);
   })();
 </script>
 
+<!-- 
+  INSTRUCTION FOR YOU:
+  Place your heartbeat sound file at: assets/heartbeat.mp3
+  The file will be loaded from that relative path.
+  Supported formats: .mp3, .ogg, .wav — change the <source> if needed.
+-->
 </body>
 </html>
