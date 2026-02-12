@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hug Day · you’re safe here 🫂</title>
-  <!-- Poppins & extra cute font -->
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+  <title>🫂 Hug Cloud · infinite warmth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,505 +14,731 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(145deg, #ffe9f2 0%, #ffe0f0 30%, #ffd9e8 70%, #fff0e7 100%);
-      font-family: 'Quicksand', 'Poppins', system-ui, sans-serif;
+      background: radial-gradient(circle at 10% 30%, #ffe6f0, #ffdae8, #ffe0ea, #fff4ea);
+      font-family: 'Quicksand', sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #3d2b3a;
+      color: #3e2b36;
       position: relative;
       overflow-x: hidden;
-      animation: bgPulse 12s infinite alternate ease-in-out;
+      animation: bgWaves 14s infinite alternate;
+      padding: 20px 10px;
     }
 
-    @keyframes bgPulse {
-      0% { background: linear-gradient(145deg, #ffe9f2, #ffe0f0, #ffd9e8, #fff0e7); }
-      50% { background: linear-gradient(145deg, #ffe0f7, #ffd9ef, #ffe0ea, #fff3e6); }
-      100% { background: linear-gradient(145deg, #ffecf5, #ffe3f2, #ffdaec, #fff1e5); }
+    @keyframes bgWaves {
+      0% { background: radial-gradient(circle at 10% 30%, #ffe9f2, #ffdeec, #ffe2ed, #fff5ea); }
+      50% { background: radial-gradient(circle at 70% 80%, #fff0f5, #ffe3ef, #ffdae9, #ffe8df); }
+      100% { background: radial-gradient(circle at 30% 70%, #ffecf5, #ffd7e6, #ffe6ed, #fff1e5); }
     }
 
-    /* floating glossy bubbles */
-    .bubble {
+    /* floating kisses */
+    .float-kiss {
       position: fixed;
-      background: rgba(255, 230, 240, 0.5);
-      backdrop-filter: blur(2px);
-      border-radius: 100%;
       pointer-events: none;
-      z-index: 0;
-      animation: floatBubble 18s infinite ease-in-out;
-      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.7), 0 6px 14px rgba(255, 140, 170, 0.1);
+      color: #ffa5b9;
+      font-size: 1.8rem;
+      opacity: 0.45;
+      animation: kissFloat 16s infinite linear;
+      z-index: 1;
+      text-shadow: 0 0 12px #ffe2e2;
     }
 
-    @keyframes floatBubble {
-      0% { transform: translateY(0) scale(1); opacity: 0.5; }
-      50% { transform: translateY(-40px) scale(1.1); opacity: 0.8; }
-      100% { transform: translateY(0) scale(1); opacity: 0.5; }
+    @keyframes kissFloat {
+      0% { transform: translateY(120vh) rotate(0deg) scale(0.6); opacity: 0.2; }
+      50% { opacity: 0.7; transform: translateY(40vh) rotate(180deg) scale(1.2); }
+      100% { transform: translateY(-20vh) rotate(360deg) scale(0.4); opacity: 0; }
     }
 
-    .b1 { width: 200px; height: 200px; top: 5%; left: -30px; animation-delay: 0s; }
-    .b2 { width: 280px; height: 280px; bottom: -50px; right: -40px; animation-delay: 3s; background: rgba(255, 215, 225, 0.4); }
-    .b3 { width: 140px; height: 140px; top: 40%; right: 10%; animation-delay: 6s; }
-    .b4 { width: 100px; height: 100px; bottom: 20%; left: 8%; animation-delay: 2s; background: rgba(255, 245, 215, 0.5); }
-    .b5 { width: 360px; height: 360px; top: -100px; right: -80px; opacity: 0.2; background: radial-gradient(circle, #fff9f0, #ffe6f0); animation-delay: 9s; }
-
-    .container {
+    .glass-panel {
       position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 35px 25px;
-      max-width: 460px;
-      width: 90%;
-      background: rgba(255, 250, 245, 0.55);
-      backdrop-filter: blur(18px);
-      border-radius: 68px 68px 68px 68px;
-      box-shadow: 0 25px 45px rgba(250, 140, 170, 0.18),
-                  inset 0 2px 8px rgba(255, 255, 255, 0.7),
-                  inset 0 -4px 6px rgba(255, 200, 210, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      animation: containerGlow 4s infinite alternate;
+      z-index: 20;
+      max-width: 560px;
+      width: 100%;
+      background: rgba(255, 250, 245, 0.58);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 80px 80px 80px 80px;
+      padding: 30px 28px;
+      box-shadow: 0 25px 50px rgba(250, 140, 170, 0.25),
+                  inset 0 5px 12px rgba(255, 255, 255, 0.9),
+                  inset 0 -6px 12px rgba(255, 200, 200, 0.4);
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      transition: all 0.3s;
+      animation: panelGlow 6s infinite alternate;
     }
 
-    @keyframes containerGlow {
-      0% { box-shadow: 0 25px 45px rgba(250, 140, 170, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.8); }
-      100% { box-shadow: 0 35px 55px rgba(255, 150, 190, 0.3), inset 0 3px 12px rgba(255, 255, 255, 1); }
+    @keyframes panelGlow {
+      0% { box-shadow: 0 25px 50px rgba(250, 140, 170, 0.2), inset 0 5px 12px white; }
+      100% { box-shadow: 0 35px 70px rgba(255, 120, 160, 0.4), inset 0 8px 18px rgba(255, 255, 255, 0.95); }
     }
 
     h1 {
-      font-size: 3.1rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-shadow: 0 8px 18px rgba(255, 160, 190, 0.3), 2px 4px 0 rgba(255, 255, 255, 0.8);
-      color: #5e3a47;
-      letter-spacing: 2px;
-      animation: wobble 3.5s infinite, floatText 6s infinite;
-    }
-
-    @keyframes wobble {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(3deg); }
-      75% { transform: rotate(-2deg); }
-    }
-
-    @keyframes floatText {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      font-weight: 600;
-      background: rgba(255, 225, 235, 0.7);
-      padding: 12px 16px;
-      border-radius: 50px;
-      backdrop-filter: blur(2px);
-      margin-bottom: 28px;
-      color: #5a3b48;
-      border: 2px dashed #ffb6c9;
-      box-shadow: 0 5px 0 #ffc2c9;
-      animation: subtitleShake 4s infinite;
-    }
-
-    @keyframes subtitleShake {
-      0%, 100% { transform: translateX(0); }
-      10% { transform: translateX(-3px); }
-      20% { transform: translateX(3px); }
-    }
-
-    /* mood section — cotton candy style */
-    .mood {
-      background: rgba(255, 235, 240, 0.6);
-      border-radius: 60px 60px 30px 30px;
-      padding: 18px 10px;
-      margin-bottom: 20px;
-      border: 2px solid #ffffffaa;
-      backdrop-filter: blur(4px);
-    }
-
-    .mood p {
-      font-weight: 700;
-      margin-bottom: 15px;
-      font-size: 1rem;
-      color: #6c4f5a;
-      letter-spacing: 1px;
-    }
-
-    .mood-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .mood-buttons button {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 40px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(2px);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #5e3a47;
-      border: 2px solid transparent;
-      transition: 0.2s all cubic-bezier(0.175, 0.885, 0.32, 1.5);
-      box-shadow: 0 4px 0 #ffb0b9;
-      letter-spacing: 0.5px;
+      font-size: 2.9rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 3px;
+      color: #56333e;
+      text-shadow: 0 6px 0 #ffc2ce, 0 12px 20px rgba(255, 130, 150, 0.3);
+      animation: hugTitle 2.2s infinite alternate;
+    }
+
+    @keyframes hugTitle {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(1.04) translateY(-6px); text-shadow: 0 8px 0 #ffb3c1, 0 18px 30px #ff95a8; }
+    }
+
+    .subhead {
+      background: #ffe9f0cc;
+      padding: 14px 20px;
+      border-radius: 100px;
+      border: 2px dashed #ff8da1;
+      margin: 18px 0 18px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #4f3340;
+      backdrop-filter: blur(4px);
+      animation: subPulse 3s infinite;
+    }
+
+    @keyframes subPulse {
+      0% { border-color: #ff8da1; background: #ffe9f0cc; }
+      50% { border-color: #ffb8c9; background: #ffeef4cc; }
+    }
+
+    /* mood + extra comfort toggles */
+    .mood-section {
+      background: rgba(255, 235, 245, 0.7);
+      border-radius: 70px 70px 40px 40px;
+      padding: 18px 12px;
+      margin-bottom: 18px;
+      border: 2px solid #ffffffd0;
+    }
+
+    .button-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      color: #4b2e39;
+      box-shadow: 0 6px 0 #e7a1ab;
+      transition: 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .mood-buttons button:hover {
-      transform: scale(1.1) translateY(-4px);
-      box-shadow: 0 8px 0 #ff9aac;
-      background: #ffeef2;
+    .pill:hover {
+      transform: scale(1.08) translateY(-5px);
+      box-shadow: 0 11px 0 #da8c98;
+      background: #fff5f7;
     }
 
-    .mood-buttons button.active {
-      background: #ffe2eb;
-      border: 2px solid #ff889d;
-      box-shadow: 0 6px 0 #ff6f8a;
-      transform: scale(1.06);
+    .pill.active {
+      background: #ffdee8;
+      border: 3px solid #ff6f8a;
+      box-shadow: 0 7px 0 #ff5f7c;
     }
 
-    /* hug button — literal cloud */
-    .hug-area {
-      margin: 30px 0 25px;
+    /* hug button — now with extra cuddle */
+    .hug-throne {
       position: relative;
+      margin: 25px 0 20px;
     }
 
     .hug-button {
-      width: 180px;
-      height: 180px;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      border: none;
-      background: radial-gradient(circle at 30% 30%, #ffdde6, #ffc1cc);
-      box-shadow: 0 12px 0 #d48b9b, 0 20px 35px rgba(255, 140, 170, 0.5),
-                  inset 0 -12px 15px rgba(120, 40, 50, 0.1),
-                  inset 0 10px 25px rgba(255, 255, 255, 0.8);
-      cursor: pointer;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #4d2f3a;
-      transition: 0.1s all;
-      position: relative;
-      backdrop-filter: blur(4px);
-      border: 3px solid white;
+      width: 200px;
+      height: 200px;
+      border-radius: 60% 40% 50% 50% / 45% 55% 45% 55%;
+      background: radial-gradient(circle at 35% 25%, #ffccd5, #ffb3c1, #ffa5b7);
+      border: 5px solid white;
+      box-shadow: 0 18px 0 #b07782, 0 30px 45px rgba(255, 100, 130, 0.5), inset 0 -12px 15px rgba(0,0,0,0.04), inset 0 12px 25px rgba(255,255,255,0.8);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #402630;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       margin: 0 auto;
-      animation: cloudFloat 5s infinite alternate, buttonWiggle 8s infinite;
-      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.06s;
+      animation: hugMorph 4s infinite alternate, cloudLevitate 3.5s infinite;
+      line-height: 1.4;
+      padding: 0 12px;
     }
 
-    @keyframes cloudFloat {
+    @keyframes hugMorph {
+      0% { border-radius: 60% 40% 50% 50% / 45% 55% 45% 55%; }
+      25% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
+      50% { border-radius: 45% 55% 55% 45% / 50% 60% 40% 50%; }
+      100% { border-radius: 55% 45% 50% 50% / 50% 50% 50% 50%; }
+    }
+
+    @keyframes cloudLevitate {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-18px) scale(1.02); }
-    }
-
-    @keyframes buttonWiggle {
-      0%, 100% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
-      25% { border-radius: 55% 45% 60% 40% / 50% 60% 40% 60%; }
-      75% { border-radius: 45% 55% 50% 50% / 55% 50% 50% 45%; }
-    }
-
-    .hug-button:active {
-      transform: scale(0.92) translateY(6px);
-      box-shadow: 0 6px 0 #b07280, 0 16px 35px rgba(255, 120, 150, 0.6);
+      100% { transform: translateY(-15px) scale(1.02); }
     }
 
     .hug-glow {
-      animation: hugPulse 1s infinite, glitchHug 0.3s infinite alternate !important;
-      box-shadow: 0 0 0 12px rgba(255, 220, 240, 0.6), 0 0 0 24px rgba(255, 200, 220, 0.3), 0 12px 0 #d48b9b !important;
+      animation: hugTsunami 1.1s infinite !important;
+      box-shadow: 0 0 0 20px rgba(255, 170, 190, 0.5), 0 0 0 40px rgba(255, 190, 200, 0.2), 0 18px 0 #b07782 !important;
     }
 
-    @keyframes hugPulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 200, 210, 0.9), 0 0 0 0 rgba(255, 170, 190, 0.5), 0 12px 0 #d48b9b; }
-      50% { box-shadow: 0 0 0 25px rgba(255, 200, 220, 0.2), 0 0 0 45px rgba(255, 190, 200, 0.1), 0 12px 0 #d48b9b; }
-      100% { box-shadow: 0 0 0 0 rgba(255, 200, 210, 0), 0 0 0 0 rgba(255, 170, 190, 0), 0 12px 0 #d48b9b; }
+    @keyframes hugTsunami {
+      0% { box-shadow: 0 0 0 0 rgba(255, 170, 200, 0.6), 0 0 0 0 rgba(255, 150, 170, 0.3), 0 18px 0 #b07782; }
+      70% { box-shadow: 0 0 0 30px rgba(255, 200, 210, 0.1), 0 0 0 60px rgba(255, 180, 190, 0.05), 0 18px 0 #b07782; }
     }
 
-    @keyframes glitchHug {
-      0% { transform: rotate(0.4deg) translateY(-18px); }
-      100% { transform: rotate(-0.4deg) translateY(-15px); }
+    .comfort-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin: 28px 0 12px;
     }
 
-    /* message bubble */
-    .message {
-      min-height: 80px;
-      background: #fff4f7e0;
-      backdrop-filter: blur(12px);
-      margin: 20px 8px 0;
-      padding: 18px 15px;
-      border-radius: 50px 50px 50px 10px;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .comfort-item {
+      background: #ffeef2f0;
+      backdrop-filter: blur(4px);
+      padding: 12px 16px;
+      border-radius: 40px;
       border: 3px solid white;
-      box-shadow: 0 12px 0 #ffb6c1, 0 10px 25px #ffb0b0a0;
-      color: #3d2b33;
-      opacity: 0;
-      transform: scale(0.8) translateY(15px);
-      transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      word-break: break-word;
-      animation: messageBob 4s infinite alternate;
-    }
-
-    .message.show {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
-    @keyframes messageBob {
-      0% { transform: rotate(0.2deg); }
-      100% { transform: rotate(-0.4deg); }
-    }
-
-    /* counter — cute badge */
-    .counter {
-      margin-top: 24px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      background: #ffdbe4;
-      padding: 10px 20px;
-      border-radius: 80px;
+      box-shadow: 0 5px 0 #d6a0a8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+      cursor: pointer;
+      min-width: 110px;
+    }
+
+    .comfort-item:hover {
+      transform: scale(1.05) translateY(-6px);
+      box-shadow: 0 11px 0 #c2848f;
+      background: #fff2f6;
+    }
+
+    .comfort-icon {
+      font-size: 1.7rem;
+    }
+
+    /* hug calendar / streak */
+    .streak-haven {
+      background: rgba(255, 240, 245, 0.7);
+      padding: 16px 18px;
+      border-radius: 60px 20px 60px 20px;
+      margin: 15px 0 10px;
+      border: 3px solid #ffe2ec;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .streak-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .streak-fire {
+      font-size: 2rem;
+      filter: drop-shadow(0 6px 2px rgba(255, 100, 0, 0.3));
+      animation: fireFlick 1s infinite alternate;
+    }
+
+    @keyframes fireFlick {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); text-shadow: 0 0 15px orange; }
+    }
+
+    .calendar-dots {
+      display: flex;
+      gap: 10px;
+      font-size: 1.7rem;
+    }
+
+    /* breathing buddy */
+    .breathe-ball {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #ffa5bc, #ff7e9f);
+      border-radius: 50%;
       display: inline-block;
-      color: #59363f;
+      transition: 0.1s;
+      box-shadow: 0 0 10px #ff99aa;
+    }
+
+    /* message area – extra fluffy */
+    .message-bay {
+      background: #fff4f9;
+      border-radius: 60px 60px 60px 20px;
+      padding: 18px 24px;
+      margin: 20px 0 10px;
+      border: 4px solid white;
+      box-shadow: 0 10px 0 #e7a1ab, inset 0 2px 10px white;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #3f2a32;
+      min-height: 95px;
+      word-break: break-word;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .message-bay.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .counter-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      background: #ffdce6;
+      border-radius: 80px;
+      padding: 8px 18px 8px 12px;
       border: 3px solid white;
-      box-shadow: 0 5px 0 #e7a1ab;
-      letter-spacing: 1.5px;
-      animation: counterSpark 2s infinite;
     }
 
-    @keyframes counterSpark {
-      0% { box-shadow: 0 5px 0 #e7a1ab, 0 0 0 0 #ffd0d6; }
-      70% { box-shadow: 0 5px 0 #e7a1ab, 0 0 0 10px rgba(255, 210, 220, 0.2); }
-    }
-
-    .mute {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 245, 240, 0.75);
-      backdrop-filter: blur(10px);
-      padding: 10px 18px;
-      border-radius: 60px;
+    /* share coupon */
+    .coupon {
+      background: #fff3e0;
+      border: 3px dashed #ff889f;
+      border-radius: 30px;
+      padding: 12px 10px;
+      margin-top: 16px;
       font-size: 0.95rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .coupon button {
+      background: white;
+      border: 2px solid #ffb6c1;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #572c36;
+      box-shadow: 0 4px 0 #c4929b;
+      transition: 0.1s;
+    }
+
+    .coupon button:active {
+      transform: translateY(6px);
+      box-shadow: 0 1px 0 #c4929b;
+    }
+
+    .mute-toggle {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #ffeef2f0;
+      backdrop-filter: blur(20px);
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-weight: 800;
       border: 3px solid white;
-      box-shadow: 0 5px 0 #cf9aa5;
+      box-shadow: 0 7px 0 #b2808a;
       z-index: 99;
       cursor: pointer;
-      transition: 0.2s;
-      color: #4b2b34;
     }
 
-    .mute:hover {
-      transform: scale(1.05) translateY(-4px);
-      box-shadow: 0 9px 0 #cf9aa5;
-      background: #ffeef2;
+    /* ambient sound selector */
+    .ambient-panel {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-
-    /* falling hearts */
-    .floating-heart {
-      position: fixed;
-      color: #ff8dae;
-      font-size: 1.6rem;
-      opacity: 0.7;
-      animation: heartFloat 8s linear infinite;
-      pointer-events: none;
-      z-index: 5;
-      user-select: none;
-      text-shadow: 0 2px 10px #ffb6c1;
-    }
-
-    @keyframes heartFloat {
-      0% { transform: translateY(110vh) rotate(0deg); opacity: 0.2; }
-      50% { opacity: 0.9; }
-      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    .ambient-pill {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 2px solid white;
+      box-shadow: 0 4px 0 #cf9fa8;
     }
   </style>
 </head>
 <body>
-  <!-- dreamy bubbles -->
-  <div class="bubble b1"></div>
-  <div class="bubble b2"></div>
-  <div class="bubble b3"></div>
-  <div class="bubble b4"></div>
-  <div class="bubble b5"></div>
 
-  <!-- infinite falling hearts (cuteness overload) -->
-  <div id="heartContainer"></div>
+<div id="kissContainer"></div>
+<div class="glass-panel">
 
-  <div class="mute" id="muteToggle">🔊 sound on</div>
+  <h1>🫂  hug day  𓆷𓆷</h1>
+  <div class="subhead">💭  hold the cloud. feel everything.  💭</div>
 
-  <div class="container">
-    <h1>🫂 Hug Day</h1>
-    <div class="subtitle">
-      ✦  some feelings just need a hug  ✦
+  <!-- MOODS — now with extra sparkle -->
+  <div class="mood-section">
+    <div style="font-weight:800; margin-bottom:10px;">pick your heart color 🎨</div>
+    <div class="button-panel" id="moodPanel">
+      <button data-mood="low" class="pill">🌧️ low</button>
+      <button data-mood="meh" class="pill">🍃 meh</button>
+      <button data-mood="okay" class="pill active">☁️ okay</button>
+      <button data-mood="emotional" class="pill">🌊 emotional</button>
+      <button data-mood="loved" class="pill">💘 loved</button>
+      <button data-mood="anxious" class="pill">🌀 anxious</button>
+      <button data-mood="hopeful" class="pill">✨ hopeful</button>
     </div>
-
-    <div class="mood">
-      <p>🌸 how are you, sweetheart? 🌸</p>
-      <div class="mood-buttons">
-        <button data-mood="low">😞 low</button>
-        <button data-mood="meh">😐 meh</button>
-        <button data-mood="okay" class="active">🙂 okay</button>
-        <button data-mood="emotional">🥹 emotional</button>
-        <button data-mood="loved">💖 loved</button>
-      </div>
-    </div>
-
-    <div class="hug-area">
-      <button class="hug-button" id="hugBtn">
-        hold me 𓆩♡𓆪
-      </button>
-    </div>
-
-    <div class="message" id="messageBox"></div>
-    <div class="counter" id="hugCounter">loading hugs...</div>
   </div>
 
-  <audio id="hugSound" preload="auto" loop="false">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_18b1f4e7e4.mp3?filename=soft-whoosh-11808.mp3">
-  </audio>
+  <!-- HUG THRONE 🫂 -->
+  <div class="hug-throne">
+    <button class="hug-button" id="hugBtn">
+      <span style="font-size:1.9rem;">🫂</span> hold here
+    </button>
+  </div>
 
-  <script>
-    (function() {
-      // 🫶🏻 infinite falling hearts 💘
-      const heartContainer = document.getElementById('heartContainer');
-      for (let i = 0; i < 28; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.innerText = '🫀💓💗🩷💕💞💖'.charAt(Math.floor(Math.random() * 7));
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDelay = Math.random() * 12 + 's';
-        heart.style.fontSize = (Math.random() * 20 + 18) + 'px';
-        heart.style.animationDuration = (Math.random() * 8 + 7) + 's';
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        heartContainer.appendChild(heart);
+  <!-- MESSAGE appears here ✨ -->
+  <div class="message-bay" id="messageBox">⋆｡°✩ press & hold ⋆｡°✩</div>
+
+  <!-- COMFORT ZONE: breathing, hug coupon, ambient -->
+  <div class="comfort-strip">
+    <div class="comfort-item" id="breathingBuddy">
+      <span class="comfort-icon" id="breathIcon">🫁</span>
+      <span id="breathText">breathe with me</span>
+    </div>
+    <div class="comfort-item" id="giftCouponBtn">
+      <span class="comfort-icon">🎟️</span>
+      <span>hug coupon</span>
+    </div>
+    <div class="comfort-item" id="ambientToggle">
+      <span class="comfort-icon" id="ambientIcon">🌙</span>
+      <span>rain sounds</span>
+    </div>
+  </div>
+
+  <!-- STREAK / HUG CALENDAR -->
+  <div class="streak-haven">
+    <div class="streak-box">
+      <span class="streak-fire">🔥</span>
+      <div style="font-weight:800;"><span id="streakCount">0</span>-day streak</div>
+    </div>
+    <div class="calendar-dots" id="weekDots">
+      <!-- js populated -->
+    </div>
+  </div>
+
+  <!-- HUG COUNTER + RESET? no reset, only love -->
+  <div class="counter-wrap">
+    <span style="font-weight:800; font-size:1.2rem;">🫂 total hugs</span>
+    <span style="background:white; padding:8px 24px; border-radius:60px; font-weight:900; font-size:1.6rem; color:#9f4a5a; border:3px solid #ffb6c1;" id="hugCounter">0</span>
+  </div>
+
+  <!-- HUG COUPON (hidden then show) -->
+  <div id="couponArea" style="margin-top: 12px;"></div>
+
+  <!-- ambient sound selector -->
+  <div class="ambient-panel" id="ambientSelector" style="display: none;">
+    <span class="ambient-pill" data-sound="rain">🌧️ rain</span>
+    <span class="ambient-pill" data-sound="waves">🌊 waves</span>
+    <span class="ambient-pill" data-sound="night">🦉 night</span>
+    <span class="ambient-pill" data-sound="off">🔇 off</span>
+  </div>
+</div>
+
+<!-- MUTE (global) -->
+<div class="mute-toggle" id="muteToggle">🔊 sound on</div>
+
+<!-- AUDIOS: hug + ambient -->
+<audio id="hugSound" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_18b1f4e7e4.mp3?filename=soft-whoosh-11808.mp3"></audio>
+<audio id="ambientRain" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_11f5f429b0.mp3?filename=soft-rain-ambient-111154.mp3"></audio>
+<audio id="ambientWaves" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_a3c1a36f8d.mp3?filename=ocean-waves-112906.mp3"></audio>
+<audio id="ambientNight" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0c1ff8d6d.mp3?filename=night-forest-ambient-15297.mp3"></audio>
+
+<script>
+  (function() {
+    'use strict';
+    // --------------------------------------
+    //  ✦‧⁺ HUG ENGINE — EXTRA FEATURE RUSH ⁺‧✦
+    // --------------------------------------
+
+    // infinite floating kisses (more!)
+    function createKisses() {
+      const container = document.getElementById('kissContainer');
+      for (let i=0;i<34;i++) {
+        let kiss = document.createElement('div');
+        kiss.className = 'float-kiss';
+        kiss.innerHTML = ['🫂','🤍','🩷','💗','💓','🌸','✨','🕊️','☁️','🧸'][Math.floor(Math.random()*10)];
+        kiss.style.left = Math.random()*100 + '%';
+        kiss.style.animationDelay = Math.random()*14 + 's';
+        kiss.style.fontSize = (Math.random()*24 + 20) + 'px';
+        kiss.style.animationDuration = (Math.random()*12 + 12) + 's';
+        container.appendChild(kiss);
       }
+    }
+    createKisses();
 
-      // state
-      let mood = "okay";
-      let hugging = false;
-      let muted = false;
-      let soundEnabled = true;
+    // state variables — lots of them!
+    let mood = 'okay';
+    let hugging = false;
+    let muted = false;
+    let ambientOn = false;
+    let currentAmbient = null;
+    let hugCount = Number(localStorage.getItem('hugCount') || 0);
+    let streak = Number(localStorage.getItem('hugStreak') || 0);
+    let lastHugDate = localStorage.getItem('lastHugDate') || '';
+    let breatheActive = false;
+    let breathInterval;
 
-      const hugBtn = document.getElementById("hugBtn");
-      const messageBox = document.getElementById("messageBox");
-      const sound = document.getElementById("hugSound");
-      const counterEl = document.getElementById("hugCounter");
-      const muteToggle = document.getElementById("muteToggle");
-      const moodButtons = document.querySelectorAll(".mood-buttons button");
+    // DOM elements
+    const hugBtn = document.getElementById('hugBtn');
+    const messageBox = document.getElementById('messageBox');
+    const hugSound = document.getElementById('hugSound');
+    const muteToggle = document.getElementById('muteToggle');
+    const moodBtns = document.querySelectorAll('#moodPanel .pill');
+    const counterEl = document.getElementById('hugCounter');
+    const streakEl = document.getElementById('streakCount');
+    const weekDots = document.getElementById('weekDots');
+    const breathBuddy = document.getElementById('breathingBuddy');
+    const breathText = document.getElementById('breathText');
+    const breathIcon = document.getElementById('breathIcon');
+    const couponBtn = document.getElementById('giftCouponBtn');
+    const couponArea = document.getElementById('couponArea');
+    const ambientToggle = document.getElementById('ambientToggle');
+    const ambientIcon = document.getElementById('ambientIcon');
+    const ambientSelector = document.getElementById('ambientSelector');
+    const ambientPills = document.querySelectorAll('.ambient-pill');
+    const ambientRain = document.getElementById('ambientRain');
+    const ambientWaves = document.getElementById('ambientWaves');
+    const ambientNight = document.getElementById('ambientNight');
 
-      // 💌 messages — each one is a tiny hug
-      const messages = {
-        low: [
-          "you're allowed to rest. i'll hold you.",
-          "lean on me. i've got you, always.",
-          "soft hug for your heavy heart."
-        ],
-        meh: [
-          "i'm here, even on the gray days.",
-          "quiet hug for your quiet soul.",
-          "you don't have to be anything."
-        ],
-        okay: [
-          "this hug says 'i'm proud of you'.",
-          "wrapped in warmth, just as you are.",
-          "you are doing so, so well."
-        ],
-        emotional: [
-          "let it pour. i'll hold you through it.",
-          "every tear is seen, every feeling held.",
-          "you're safe to feel everything."
-        ],
-        loved: [
-          "you are so deeply, wildly cherished.",
-          "this hug glows because of you.",
-          "your heart is so precious."
-        ]
-      };
+    // HUGE message pool per mood
+    const messages = {
+      low: ['you can rest your bones here.', 'this hug absorbs the heaviness.', 'i’ll carry it with you.', 'you’re not alone, never.'],
+      meh: ['quiet hug for a quiet heart.', 'i’m here even in the silence.', 'you don’t need to perform.'],
+      okay: ['proud of you, always.', 'you’re doing better than you think.', 'warm hug, just because.'],
+      emotional: ['let it flow. i’m not leaving.', 'your tears are safe here.', 'feel it all, i’ll hold you.'],
+      loved: ['you are SO cherished.', 'this hug glows because of you.', 'your heart is a treasure.'],
+      anxious: ['breathe with me. in… out…', 'you are safe right now.', 'i’ve got you, sweetheart.'],
+      hopeful: ['light is finding you.', 'something beautiful is coming.', 'hope is hugging you tightly.']
+    };
 
-      // mood switcher — with sparkle
-      moodButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          moodButtons.forEach(b => b.classList.remove("active"));
-          this.classList.add("active");
-          mood = this.dataset.mood;
-        });
+    // ----- update streak & calendar -----
+    function updateStreakAndCalendar() {
+      const today = new Date().toDateString();
+      if (lastHugDate !== today) {
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yestStr = yesterday.toDateString();
+        if (lastHugDate === yestStr) {
+          streak++;
+        } else {
+          streak = 1;
+        }
+        lastHugDate = today;
+        localStorage.setItem('lastHugDate', today);
+        localStorage.setItem('hugStreak', streak);
+      }
+      streakEl.textContent = streak;
+
+      // draw 7-day cute calendar
+      let dotsHtml = '';
+      for (let i = 6; i >= 0; i--) {
+        let d = new Date();
+        d.setDate(d.getDate() - i);
+        let dateStr = d.toDateString();
+        let isHugged = (dateStr === lastHugDate) ? '🫶' : '○';
+        if (dateStr === lastHugDate) isHugged = '🫂';
+        else if (localStorage.getItem('hug_' + dateStr)) isHugged = '🤍'; 
+        else isHugged = '·';
+        dotsHtml += `<span style="filter: drop-shadow(0 2px 5px pink);">${isHugged}</span>`;
+      }
+      weekDots.innerHTML = dotsHtml;
+    }
+    updateStreakAndCalendar();
+
+    // save hug day mark
+    function markHugDay() {
+      const today = new Date().toDateString();
+      localStorage.setItem('hug_' + today, '🤍');
+      updateStreakAndCalendar();
+    }
+
+    // ----- HUG counter -----
+    function updateHugCounter() {
+      counterEl.textContent = hugCount;
+      localStorage.setItem('hugCount', hugCount);
+    }
+    updateHugCounter();
+
+    // ----- mood switcher -----
+    moodBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        moodBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        mood = this.dataset.mood;
       });
+    });
 
-      // 🫂 hug counter — stored in your heart (localStorage)
-      let hugsToday = Number(localStorage.getItem("hugCount") || 0);
-      updateCounter();
+    // ----- HUG start / end -----
+    function startHug(e) {
+      if (hugging) return;
+      hugging = true;
+      hugBtn.classList.add('hug-glow');
+      messageBox.classList.remove('show');
 
-      // start hug (both mouse & touch)
-      function startHug(e) {
-        if (hugging) return;
-        hugging = true;
-        hugBtn.classList.add("hug-glow");
-        messageBox.classList.remove("show");
+      if (!muted) {
+        hugSound.currentTime = 0;
+        hugSound.play().catch(() => {});
+      }
+      if (navigator.vibrate) navigator.vibrate(30);
+    }
 
-        if (!muted) {
-          sound.currentTime = 0;
-          sound.play().catch(e => {});  // autoplay may be blocked — but that's okay
+    function endHug() {
+      if (!hugging) return;
+      hugging = false;
+      hugBtn.classList.remove('hug-glow');
+
+      hugCount++;
+      localStorage.setItem('hugCount', hugCount);
+      updateHugCounter();
+      markHugDay(); // updates streak + calendar
+
+      const moodMessages = messages[mood] || messages.okay;
+      const msg = moodMessages[Math.floor(Math.random() * moodMessages.length)];
+      messageBox.textContent = '🫂 ' + msg;
+      messageBox.classList.add('show');
+    }
+
+    hugBtn.addEventListener('mousedown', startHug);
+    hugBtn.addEventListener('touchstart', startHug);
+    document.addEventListener('mouseup', endHug);
+    document.addEventListener('touchend', endHug);
+    window.addEventListener('blur', () => { if (hugging) endHug(); });
+
+    // mute toggle
+    muteToggle.onclick = () => {
+      muted = !muted;
+      muteToggle.textContent = muted ? '🔇 sound off' : '🔊 sound on';
+      if (!muted && currentAmbient) {
+        let snd = getAmbientSound(currentAmbient);
+        if (snd) snd.play().catch(() => {});
+      }
+    };
+
+    // ---------- BREATHING EXERCISE ----------
+    breathBuddy.addEventListener('click', function() {
+      if (breatheActive) {
+        clearInterval(breathInterval);
+        breatheActive = false;
+        breathText.textContent = 'breathe with me';
+        breathIcon.textContent = '🫁';
+        return;
+      }
+      breatheActive = true;
+      breathText.textContent = 'breathe in...';
+      breathIcon.textContent = '⬆️💨';
+      let count = 0;
+      breathInterval = setInterval(() => {
+        count++;
+        if (count % 2 === 1) {
+          breathText.textContent = 'breathe in...  🫁⬆️';
+          breathIcon.textContent = '🫁✨';
+        } else {
+          breathText.textContent = 'breathe out...  🫁⬇️';
+          breathIcon.textContent = '🍃💨';
         }
+        if (count === 10) count = 0;
+      }, 3000);
+    });
 
-        // tiny vibration if supported (cute!)
-        if (navigator.vibrate) navigator.vibrate(30);
-      }
-
-      function endHug() {
-        if (!hugging) return;
-        hugging = false;
-        hugBtn.classList.remove("hug-glow");
-
-        // increment hug counter
-        hugsToday++;
-        localStorage.setItem("hugCount", hugsToday);
-        updateCounter();
-
-        // random message based on mood
-        const moodMessages = messages[mood] || messages.okay;
-        const msg = moodMessages[Math.floor(Math.random() * moodMessages.length)];
-        messageBox.textContent = msg + ' 🫂';
-        messageBox.classList.add("show");
-      }
-
-      function updateCounter() {
-        counterEl.textContent = `🫶🏻 hugs today: ${hugsToday}`;
-      }
-
-      // event listeners
-      hugBtn.addEventListener("mousedown", startHug);
-      hugBtn.addEventListener("touchstart", startHug);
-      document.addEventListener("mouseup", endHug);
-      document.addEventListener("touchend", endHug);
-
-      // mute toggle
-      muteToggle.onclick = () => {
-        muted = !muted;
-        muteToggle.textContent = muted ? "🔇 sound off" : "🔊 sound on";
-        // bonus: if unmuted, reload audio context?
-      };
-
-      // make sure we don't keep stuck hugging if mouse leaves window
-      window.addEventListener('blur', function() {
-        if (hugging) {
-          endHug(); 
-        }
+    // ---------- HUG COUPON generator ----------
+    function createCoupon() {
+      couponArea.innerHTML = `
+        <div class="coupon" style="animation: fadeIn 0.6s;">
+          <span style="display:flex; gap:6px;">🎫 ONE FREE HUG — redeem anytime 🤍</span>
+          <button id="shareCoupon">share 🎁</button>
+        </div>
+      `;
+      document.getElementById('shareCoupon')?.addEventListener('click', function() {
+        alert('💌 you shared a hug coupon! (copy this: "🫂✨ good for 1 hug, any time.")');
+        navigator.clipboard?.writeText('🫂✨ good for 1 hug, any time. redeem with love.');
       });
+    }
 
-      // initial placeholder message
-      setTimeout(() => {
-        if (!messageBox.classList.contains('show')) {
-          messageBox.textContent = 'press and hold the cloud 🕊️';
-          messageBox.classList.add('show');
+    couponBtn.addEventListener('click', createCoupon);
+
+    // ---------- AMBIENT SOUND ----------
+    function getAmbientSound(type) {
+      if (type === 'rain') return ambientRain;
+      if (type === 'waves') return ambientWaves;
+      if (type === 'night') return ambientNight;
+      return null;
+    }
+
+    ambientToggle.addEventListener('click', function() {
+      if (ambientSelector.style.display === 'none' || ambientSelector.style.display === '') {
+        ambientSelector.style.display = 'flex';
+      } else {
+        ambientSelector.style.display = 'none';
+      }
+    });
+
+    ambientPills.forEach(pill => {
+      pill.addEventListener('click', function() {
+        let type = this.dataset.sound;
+        if (type === 'off') {
+          if (currentAmbient) {
+            let snd = getAmbientSound(currentAmbient);
+            if (snd) { snd.pause(); snd.currentTime = 0; }
+            currentAmbient = null;
+            ambientIcon.textContent = '🌙';
+          }
+          ambientSelector.style.display = 'none';
+          return;
         }
-      }, 200);
-    })();
-  </script>
+        // stop previous ambient
+        if (currentAmbient) {
+          let old = getAmbientSound(currentAmbient);
+          if (old) { old.pause(); old.currentTime = 0; }
+        }
+        currentAmbient = type;
+        let newSnd = getAmbientSound(type);
+        if (newSnd) {
+          newSnd.loop = true;
+          if (!muted) newSnd.play().catch(() => {});
+          ambientIcon.textContent = type === 'rain' ? '🌧️' : (type === 'waves' ? '🌊' : '🦉');
+        }
+        ambientSelector.style.display = 'none';
+      });
+    });
+
+    // initial message
+    setTimeout(() => {
+      if (!messageBox.classList.contains('show')) {
+        messageBox.textContent = '⋆｡°✩ hold the cloud ⋆｡°✩';
+        messageBox.classList.add('show');
+      }
+    }, 200);
+  })();
+</script>
+
 </body>
 </html>
