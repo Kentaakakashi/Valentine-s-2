@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiss · after dark</title>
+  <title>kiss · voice</title>
   <style>
     * {
       margin: 0;
@@ -17,6 +17,10 @@
       font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
       overflow-x: hidden;
       line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* noise overlay */
@@ -33,15 +37,17 @@
       mix-blend-mode: overlay;
     }
 
+    /* sections */
     .section {
       min-height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2rem 1.5rem;
       position: relative;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.8s ease;
     }
 
     .hidden {
@@ -112,174 +118,62 @@
       border-color: #ffd0dc;
     }
 
-    /* ————— KISS BUTTONS with play icon ————— */
-    #kissButtons {
-      background: #130008;
-      background-image: radial-gradient(circle at 30% 80%, #440022 0%, #000000 90%);
-      justify-content: flex-start;
-      padding-top: 15vh;
-      transition: opacity 0.6s ease;
-    }
-
-    .section-title {
-      font-size: 3.2rem;
-      font-weight: 200;
-      margin-bottom: 3rem;
-      border-bottom: 2px solid #ff4d6d;
-      display: inline-block;
-      padding-bottom: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 12px;
-      text-shadow: 0 0 25px #ff3b6f;
-    }
-
-    .kiss-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      max-width: 900px;
-    }
-
-    .kiss-btn {
-      background: transparent;
-      border: 1.8px solid #ff3f6b;
-      color: #ffb6c1;
-      padding: 1.2rem 2.8rem;
-      font-size: 1.8rem;
-      border-radius: 50px;
-      cursor: pointer;
-      backdrop-filter: blur(15px);
-      transition: all 0.3s;
-      box-shadow: 0 20px 30px rgba(255, 20, 80, 0.3);
-      font-weight: 200;
-      letter-spacing: 4px;
-      flex: 0 1 auto;
-      min-width: 200px;
-      position: relative;
-      overflow: hidden;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .play-icon {
-      font-size: 2rem;
-      line-height: 1;
-      filter: drop-shadow(0 0 8px #ff99bb);
-      transition: transform 0.2s;
-    }
-
-    .play-icon:hover {
-      transform: scale(1.2);
-    }
-
-    .kiss-btn:hover {
-      background: #ff1f4f;
-      color: #fff;
-      border-color: #ffa6c0;
-      transform: scale(1.1) translateY(-5px);
-      box-shadow: 0 30px 40px #f005;
-    }
-
-    .french-btn {
-      border-color: #b3005e;
-      color: #ffb3d9;
-      box-shadow: 0 0 35px #c1005c;
-    }
-
-    /* ————— ANIMATION STATE ————— */
-    .kiss-btn.moving {
-      transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), opacity 0.4s;
-      z-index: 10000;
-      pointer-events: none;
-      opacity: 1 !important;
-    }
-
-    /* ————— KISS OVERLAY (no longer used, but kept for compatibility) ————— */
-    #kissOverlay {
-      position: fixed;
-      inset: 0;
-      background: center / cover no-repeat;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 3000;
-      backdrop-filter: blur(20px) brightness(0.4);
-      -webkit-backdrop-filter: blur(20px) brightness(0.4);
-      transition: opacity 0.5s ease;
-      opacity: 1;
-    }
-
-    #kissText {
-      font-size: 5.5rem;
-      font-weight: 100;
-      color: #ffeef5;
-      text-shadow: 0 0 60px #ff0066, 0 0 150px #ff99bb;
-      animation: kissSway 3s infinite alternate;
-      padding: 1.5rem 4rem;
-      border: 3px solid #ff99bb55;
-      border-radius: 200px;
-      backdrop-filter: blur(10px);
-      background: #0a000440;
-      white-space: nowrap;
-    }
-
-    @keyframes kissSway {
-      0% { transform: translateY(0) rotate(0deg); letter-spacing: 4px; }
-      100% { transform: translateY(-40px) rotate(1deg); letter-spacing: 12px; text-shadow: 0 0 80px #ff80b3; }
-    }
-
-    /* ————— CUSTOM AUDIO PLAYER (unchanged) ————— */
-    #audioSection {
+    /* ————— MAIN VOICE SECTION ————— */
+    #voiceSection {
       background: #0b0006;
-      background: linear-gradient(145deg, #1a0010 0%, #030002 100%);
-      border-top: 3px solid #a00040;
-      box-shadow: inset 0 0 150px #2b0012;
+      background: radial-gradient(circle at 30% 50%, #1f0012, #020001);
       position: relative;
     }
 
-    .story-player {
-      background: rgba(15, 0, 8, 0.6);
+    .voice-container {
+      background: rgba(20, 0, 10, 0.6);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
-      border-radius: 60px 60px 40px 40px;
+      border-radius: 70px 70px 40px 40px;
       padding: 3rem 3rem 4rem;
       border: 1px solid #a02b50;
-      box-shadow: 0 50px 100px #200008, 0 0 0 2px #ff336622 inset;
-      max-width: 700px;
+      box-shadow: 0 50px 100px #200008, 0 0 0 2px #ff336622 inset,
+                  0 0 80px #ff004c;
+      max-width: 750px;
       width: 100%;
       position: relative;
       z-index: 10;
+      animation: glowPulse 6s infinite alternate;
     }
 
-    .story-player h2 {
-      font-size: 3.2rem;
+    @keyframes glowPulse {
+      0% { box-shadow: 0 50px 100px #200008, 0 0 0 2px #ff336622 inset, 0 0 60px #ff004c; }
+      100% { box-shadow: 0 50px 120px #300010, 0 0 0 4px #ff7799 inset, 0 0 120px #ff0066; }
+    }
+
+    .voice-container h2 {
+      font-size: 3.5rem;
       font-weight: 200;
-      letter-spacing: 12px;
+      letter-spacing: 14px;
       color: #ffb0cc;
-      text-shadow: 0 0 20px #ff99bb;
+      text-shadow: 0 0 30px #ff99bb;
+      margin-bottom: 0.5rem;
     }
 
-    .story-player p {
-      font-size: 1.4rem;
+    .voice-container p {
+      font-size: 1.6rem;
       color: #ffc0cb;
-      margin: 0.5rem 0 2.5rem;
+      margin-bottom: 2.5rem;
       font-style: italic;
       opacity: 0.9;
     }
 
+    /* custom player */
     .custom-player {
       background: #230012;
       border-radius: 160px 160px 60px 60px;
-      padding: 2rem 2rem 2rem 2.5rem;
-      margin-bottom: 2.5rem;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
       border: 1px solid #ff4d6e;
-      box-shadow: 0 20px 30px #00000077, 0 0 30px #ff1a4c inset;
+      box-shadow: 0 20px 30px #00000077, 0 0 40px #ff1a4c inset;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      transition: opacity 0.4s;
     }
 
     .player-controls {
@@ -293,21 +187,21 @@
       background: #ff2a5e;
       border: none;
       color: white;
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 0 40px #ff0066;
+      box-shadow: 0 0 50px #ff0066;
       line-height: 1;
     }
 
     .play-pause:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
       background: #ff477b;
     }
 
@@ -316,7 +210,7 @@
       align-items: center;
       gap: 1rem;
       color: #ffb6c1;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       letter-spacing: 2px;
       font-weight: 200;
       flex: 1;
@@ -324,12 +218,12 @@
 
     .time-bar {
       flex: 1;
-      height: 6px;
+      height: 8px;
       background: #3d0022;
       border-radius: 10px;
       position: relative;
       cursor: pointer;
-      min-width: 150px;
+      min-width: 200px;
     }
 
     .progress-fill {
@@ -337,52 +231,54 @@
       width: 0%;
       background: linear-gradient(90deg, #ff99bb, #ff3355);
       border-radius: 10px;
-      position: relative;
       box-shadow: 0 0 20px #ff4d6d;
     }
 
     .time-display {
       font-family: monospace;
       background: #00000055;
-      padding: 0.3rem 1rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 40px;
       border: 1px solid #ff7799;
+      font-size: 1.4rem;
     }
 
     .volume-slider {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 1rem;
       color: #ff99bb;
       margin-left: auto;
     }
 
     .volume-slider input {
-      width: 100px;
+      width: 120px;
       accent-color: #ff2a5e;
       background: #1e000b;
     }
 
     .choice-buttons {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       justify-content: center;
-      margin: 1rem 0 0.5rem;
+      margin: 2rem 0 0.5rem;
+      transition: all 0.3s;
     }
 
     .choice-btn {
       background: transparent;
       border: 2px solid #ff4d88;
       color: #ffc0d5;
-      font-size: 2.4rem;
-      padding: 0.7rem 3rem;
-      border-radius: 80px;
+      font-size: 2.8rem;
+      padding: 1rem 4rem;
+      border-radius: 100px;
       cursor: pointer;
       transition: 0.3s;
-      min-width: 160px;
-      backdrop-filter: blur(10px);
+      min-width: 200px;
+      backdrop-filter: blur(15px);
       font-weight: 200;
-      letter-spacing: 6px;
+      letter-spacing: 8px;
+      box-shadow: 0 0 30px #ff3366;
     }
 
     .choice-btn:hover {
@@ -390,7 +286,7 @@
       color: #fff;
       border-color: #ffb3c6;
       transform: scale(1.1);
-      box-shadow: 0 0 60px #ff3b6f;
+      box-shadow: 0 0 80px #ff3b6f;
     }
 
     .locked {
@@ -399,42 +295,29 @@
       filter: grayscale(1);
     }
 
+    /* floating message */
     .floating-message {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 200;
       color: #ffc0cb;
-      text-shadow: 0 0 40px #ff1a4c;
-      animation: floatMessage 4s infinite alternate ease-in-out;
+      text-shadow: 0 0 50px #ff1a4c, 0 0 150px #ff80b3;
+      animation: floatMessage 5s infinite alternate ease-in-out;
       text-align: center;
-      margin-top: 2rem;
-      letter-spacing: 6px;
+      margin-top: 3rem;
+      letter-spacing: 8px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      padding: 2rem 4rem;
+      border-radius: 120px;
+      border: 2px solid #ff99bb55;
     }
 
     @keyframes floatMessage {
-      0% { transform: translateY(0); opacity: 0.8; }
-      100% { transform: translateY(-40px); opacity: 1; text-shadow: 0 0 70px #ff80b3; }
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-50px) scale(1.05); opacity: 1; text-shadow: 0 0 80px #ff80b3; }
     }
 
-    .vinyl-decoration {
-      position: absolute;
-      bottom: -40px;
-      right: 20px;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #330018, #0f0008);
-      border: 8px double #ff4d6d55;
-      box-shadow: 0 0 80px #ff004c, inset 0 0 60px #ff99bb;
-      animation: spin 12s infinite linear;
-      z-index: 1;
-      opacity: 0.3;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
+    /* floating hearts */
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -447,25 +330,30 @@
 
     .heart {
       position: absolute;
-      font-size: 1.6rem;
+      font-size: 2rem;
       opacity: 0.3;
       color: #ff4d8c;
-      animation: rise 12s infinite linear;
+      animation: rise 14s infinite linear;
       user-select: none;
     }
 
     @keyframes rise {
       0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.5; }
+      20% { opacity: 0.6; }
       100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
     }
 
-    @media (max-width: 600px) {
-      .kiss-btn { min-width: 150px; font-size: 1.4rem; }
+    /* small effects */
+    .glow-text {
+      text-shadow: 0 0 20px currentColor;
+    }
+
+    @media (max-width: 700px) {
+      .voice-container { padding: 2rem; }
+      .choice-btn { font-size: 2rem; padding: 0.8rem 2rem; min-width: 140px; }
       .player-controls { flex-direction: column; align-items: stretch; }
       .volume-slider { margin-left: 0; }
-      #kissText { font-size: 2.8rem; white-space: normal; }
-      .floating-message { font-size: 2.5rem; }
+      .floating-message { font-size: 2.8rem; }
     }
   </style>
 </head>
@@ -478,33 +366,13 @@
     <div class="intro-content">
       <h1 class="intro-title">kiss me like you'll never forget</h1>
       <p class="intro-sub">some kisses are play. some are ember. some… never leave.</p>
-      <button class="enter-btn" onclick="startPage()">enter</button>
+      <button class="enter-btn" onclick="startVoice()">listen</button>
     </div>
   </section>
 
-  <!-- KISS BUTTONS with play icons -->
-  <section id="kissButtons" class="section hidden">
-    <h2 class="section-title">steal a kiss</h2>
-    <div class="kiss-grid">
-      <button class="kiss-btn">
-        <span class="play-icon" data-kiss="soft">▶</span> soft
-      </button>
-      <button class="kiss-btn">
-        <span class="play-icon" data-kiss="quick">▶</span> quick
-      </button>
-      <button class="kiss-btn">
-        <span class="play-icon" data-kiss="playful">▶</span> playful
-      </button>
-      <button class="kiss-btn french-btn">
-        <span class="play-icon" data-kiss="french">▶</span> french
-      </button>
-    </div>
-    <p style="margin-top: 70px; opacity:0.5; letter-spacing: 6px;">each kiss · a flicker</p>
-  </section>
-
-  <!-- AUDIO STORY : CUSTOM PLAYER + FLOATING MESSAGE -->
-  <section id="audioSection" class="section">
-    <div class="story-player" id="storyPlayer">
+  <!-- VOICE SECTION -->
+  <section id="voiceSection" class="section hidden">
+    <div class="voice-container">
       <h2>✦ deeper ✦</h2>
       <p>my voice · your choice</p>
 
@@ -521,58 +389,45 @@
           </div>
           <div class="volume-slider">
             <span>🔊</span>
-            <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="0.7">
+            <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="0.8">
           </div>
-        </div>
-        <div class="choice-buttons hidden" id="choices">
-          <button class="choice-btn" onclick="choose('yes')">yes</button>
-          <button class="choice-btn" onclick="choose('no')">no</button>
         </div>
       </div>
 
-      <!-- floating message -->
+      <!-- choice buttons -->
+      <div class="choice-buttons hidden" id="choices">
+        <button class="choice-btn" onclick="choose('yes')">yes</button>
+        <button class="choice-btn" onclick="choose('no')">no</button>
+      </div>
+
+      <!-- floating message (hidden initially) -->
       <div id="floatingMessage" class="floating-message hidden">happy kiss day my bujji</div>
-      <div class="vinyl-decoration"></div>
     </div>
   </section>
-
-  <!-- KISS OVERLAY (kept for compatibility, not used) -->
-  <div id="kissOverlay">
-    <div id="kissText"></div>
-  </div>
 
   <script>
     (function() {
       // --- ambient hearts ---
       const heartContainer = document.getElementById('heartContainer');
       if (heartContainer) {
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < 30; i++) {
           let heart = document.createElement('div');
           heart.className = 'heart';
-          heart.innerHTML = i % 3 === 0 ? '❤️' : (i % 3 === 1 ? '❤️‍🔥' : '💋');
+          heart.innerHTML = ['❤️', '❤️‍🔥', '💋', '💕'][i % 4];
           heart.style.left = Math.random() * 100 + '%';
-          heart.style.animationDelay = Math.random() * 10 + 's';
-          heart.style.fontSize = (0.9 + Math.random() * 1.8) + 'rem';
+          heart.style.animationDelay = Math.random() * 12 + 's';
+          heart.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
           heart.style.opacity = 0.2 + Math.random() * 0.4;
           heartContainer.appendChild(heart);
         }
       }
 
       // --- DOM elements ---
-      const overlay = document.getElementById('kissOverlay');
-      const kissText = document.getElementById('kissText');
       const introSec = document.getElementById('intro');
-      const kissSec = document.getElementById('kissButtons');
+      const voiceSec = document.getElementById('voiceSection');
       const choicesDiv = document.getElementById('choices');
       const customPlayerDiv = document.getElementById('customPlayer');
       const floatingMessageDiv = document.getElementById('floatingMessage');
-      const storyPlayer = document.getElementById('storyPlayer');
-
-      // audio element for story
-      const audio = new Audio();
-      audio.src = "audio1.mp3";  // FIXED: removed assets/sounds/
-
-      // custom player elements
       const playPauseBtn = document.getElementById('playPauseBtn');
       const currentTimeSpan = document.getElementById('currentTime');
       const durationTimeSpan = document.getElementById('durationTime');
@@ -580,11 +435,14 @@
       const progressFill = document.getElementById('progressFill');
       const volumeControl = document.getElementById('volumeControl');
 
-      let stage = 0;
-      let finalLock = false;
-      let overlayTimeout = null; // not used for new kiss effect
+      // audio element
+      const audio = new Audio();
+      audio.src = "audio1.mp3";  // initial voice note
 
-      // --- helper: show toast message ---
+      let stage = 0;          // 0 = after audio1, 1 = after first yes
+      let finalLock = false;  // if true, no more choices
+
+      // --- helper: show subtle toast for missing files (optional) ---
       function showToast(msg) {
         const toast = document.createElement('div');
         toast.textContent = msg;
@@ -594,26 +452,25 @@
         toast.style.transform = 'translateX(-50%)';
         toast.style.background = '#ff3366';
         toast.style.color = 'white';
-        toast.style.padding = '12px 24px';
-        toast.style.borderRadius = '50px';
+        toast.style.padding = '12px 30px';
+        toast.style.borderRadius = '60px';
         toast.style.zIndex = '10000';
-        toast.style.fontSize = '1.2rem';
-        toast.style.boxShadow = '0 0 30px #ff0066';
+        toast.style.fontSize = '1.4rem';
+        toast.style.boxShadow = '0 0 40px #ff0066';
         toast.style.backdropFilter = 'blur(10px)';
         toast.style.border = '1px solid #ff99bb';
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
       }
 
-      // --- safe play with error handling ---
       function safePlay(audioObj, fallbackMsg) {
         audioObj.play().catch(err => {
-          console.warn('Audio play failed:', err, 'for', audioObj.src);
-          showToast(fallbackMsg || '💋 audio missing (but kiss still there)');
+          console.warn('Audio play failed:', err);
+          showToast(fallbackMsg || 'audio file not found');
         });
       }
 
-      // ---- custom player logic (unchanged) ----
+      // --- custom player logic ---
       function formatTime(seconds) {
         if (isNaN(seconds)) return '0:00';
         const m = Math.floor(seconds / 60);
@@ -643,7 +500,7 @@
 
       playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
-          safePlay(audio, 'audio file not found – check path');
+          safePlay(audio, 'audio file missing');
           playPauseBtn.textContent = '⏸';
         } else {
           audio.pause();
@@ -665,20 +522,22 @@
         audio.volume = e.target.value;
       });
 
-      // ---- story choices ----
+      // --- branching choices ---
       window.choose = function(answer) {
         if (finalLock) return;
-        choicesDiv.classList.add('hidden');
+
+        choicesDiv.classList.add('hidden');  // hide buttons
 
         if (stage === 0) {
           if (answer === 'no') {
-            audio.src = "no1.mp3";  // FIXED
+            // first no: play no1.mp3 and lock
+            audio.src = "no1.mp3";
             finalLock = true;
             audio.load();
             safePlay(audio, 'no1.mp3 missing');
             playPauseBtn.textContent = '⏸';
-          } else {
-            audio.src = "yes1.mp3";  // FIXED
+          } else { // yes
+            audio.src = "yes1.mp3";
             stage = 1;
             audio.load();
             safePlay(audio, 'yes1.mp3 missing');
@@ -686,12 +545,14 @@
           }
         } else if (stage === 1) {
           if (answer === 'yes') {
-            audio.src = "yes2.mp3";  // FIXED
+            // second yes: play yes2.mp3 and lock
+            audio.src = "yes2.mp3";
             finalLock = true;
             audio.load();
             safePlay(audio, 'yes2.mp3 missing');
             playPauseBtn.textContent = '⏸';
-          } else {
+          } else { // no
+            // second no: hide player, show floating message
             customPlayerDiv.classList.add('hidden');
             floatingMessageDiv.classList.remove('hidden');
             finalLock = true;
@@ -701,149 +562,30 @@
         }
       };
 
-      // ---- intro ----
-      window.startPage = function() {
+      // --- start voice section ---
+      window.startVoice = function() {
         introSec.classList.add('hidden');
-        kissSec.classList.remove('hidden');
-        kissSec.scrollIntoView({ behavior: 'smooth' });
+        voiceSec.classList.remove('hidden');
+        // optionally start playing automatically?
+        // we'll let user press play
       };
 
-      // --------------------------------------------------
-      // NEW KISS ANIMATION: button floats to center, then back
-      // --------------------------------------------------
-      let isAnimating = false;
-      let currentMovingButton = null;
-      let currentAudio = null;
-
-      // Function to animate button to center and back
-      function animateKissButton(button, kissType) {
-        if (isAnimating) return;
-        isAnimating = true;
-        currentMovingButton = button;
-
-        // 1. Get original position and size
-        const rect = button.getBoundingClientRect();
-        const originalStyles = {
-          position: button.style.position,
-          left: button.style.left,
-          top: button.style.top,
-          width: button.style.width,
-          transition: button.style.transition,
-          zIndex: button.style.zIndex,
-        };
-
-        // 2. Apply fixed positioning to keep it in place
-        button.style.position = 'fixed';
-        button.style.left = rect.left + 'px';
-        button.style.top = rect.top + 'px';
-        button.style.width = rect.width + 'px';
-        button.style.zIndex = '10000';
-        button.style.transition = 'transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), opacity 0.4s';
-        button.classList.add('moving');
-
-        // 3. Compute translation to center
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        const buttonCenterX = rect.left + rect.width / 2;
-        const buttonCenterY = rect.top + rect.height / 2;
-        const deltaX = centerX - buttonCenterX;
-        const deltaY = centerY - buttonCenterY;
-
-        // 4. Fade out the kiss section (other content)
-        kissSec.style.transition = 'opacity 0.5s';
-        kissSec.style.opacity = '0';
-
-        // 5. Trigger move to center (next frame)
-        requestAnimationFrame(() => {
-          button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-        });
-
-        // 6. Prepare audio
-        let audioToPlay;
-        if (kissType === 'french') {
-          // Special case: play tease then french
-          const tease = new Audio("french_tease.mp3");  // FIXED
-          safePlay(tease, 'french_tease.mp3 missing');
-          setTimeout(() => {
-            if (isAnimating && currentMovingButton === button) {
-              const frenchAudio = new Audio("french.mp3");  // FIXED
-              currentAudio = frenchAudio;
-              safePlay(frenchAudio, 'french.mp3 missing');
-              frenchAudio.addEventListener('ended', onAudioEnd);
-            }
-          }, 700);
-          audioToPlay = null; // handled by timeout
-        } else {
-          audioToPlay = new Audio(`${kissType}.mp3`);  // FIXED
-          currentAudio = audioToPlay;
-          safePlay(audioToPlay, `${kissType}.mp3 missing`);
-          audioToPlay.addEventListener('ended', onAudioEnd);
-        }
-
-        function onAudioEnd() {
-          if (!isAnimating || currentMovingButton !== button) return;
-          // Wait 3 seconds, then return
-          setTimeout(() => {
-            if (!isAnimating || currentMovingButton !== button) return;
-            // Move back to original position
-            button.style.transform = 'translate(0, 0)';
-            // After transition, reset styles and fade in section
-            setTimeout(() => {
-              if (!isAnimating || currentMovingButton !== button) return;
-              // Reset styles
-              button.style.position = originalStyles.position;
-              button.style.left = originalStyles.left;
-              button.style.top = originalStyles.top;
-              button.style.width = originalStyles.width;
-              button.style.zIndex = originalStyles.zIndex;
-              button.style.transition = originalStyles.transition;
-              button.classList.remove('moving');
-              button.style.transform = '';
-
-              // Fade section back in
-              kissSec.style.opacity = '1';
-
-              // Clean up
-              isAnimating = false;
-              currentMovingButton = null;
-              if (currentAudio) {
-                currentAudio.removeEventListener('ended', onAudioEnd);
-                currentAudio = null;
-              }
-            }, 800); // match transition duration
-          }, 3000);
-        }
-      }
-
-      // Attach click listeners to play icons
-      document.querySelectorAll('.play-icon').forEach(icon => {
-        icon.addEventListener('click', (e) => {
-          e.stopPropagation(); // prevent button's default behavior if any
-          const button = e.currentTarget.closest('.kiss-btn');
-          if (!button) return;
-          const kissType = e.currentTarget.dataset.kiss; // 'soft', 'quick', 'playful', 'french'
-          if (!kissType) return;
-          animateKissButton(button, kissType);
-        });
-      });
-
-      // Heart burst on any button click (for fun)
-      document.querySelectorAll('button').forEach(btn => {
+      // --- extra visual flair: heart burst on choice clicks ---
+      document.querySelectorAll('.choice-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          // Only add heart burst, but don't interfere with play icons
-          if (e.target.classList.contains('play-icon')) return; // already handled
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 6; i++) {
             let h = document.createElement('span');
             h.innerHTML = '❤️';
             h.style.position = 'fixed';
-            h.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
-            h.style.top = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
-            h.style.fontSize = '2rem';
+            h.style.left = (e.clientX + (Math.random() - 0.5) * 100) + 'px';
+            h.style.top = (e.clientY + (Math.random() - 0.5) * 100) + 'px';
+            h.style.fontSize = '2.5rem';
             h.style.pointerEvents = 'none';
-            h.style.zIndex = '5000';
-            h.style.animation = 'rise 1s forwards';
+            h.style.zIndex = '10000';
+            h.style.animation = 'rise 1.5s forwards';
+            h.style.filter = 'drop-shadow(0 0 10px #ff0066)';
             document.body.appendChild(h);
-            setTimeout(() => h.remove(), 900);
+            setTimeout(() => h.remove(), 1500);
           }
         });
       });
