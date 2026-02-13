@@ -21,16 +21,7 @@
   // 1. Scene
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x2222ff);
-  const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
-  
-  //2. any
 
-const testGeometry = new THREE.BoxGeometry(2, 2, 2);
-const testMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const testCube = new THREE.Mesh(testGeometry, testMaterial);
-testCube.position.set(0, 1, 0);
-scene.add(testCube);
 
  // Night sky sphere
 const skyGeometry = new THREE.SphereGeometry(100, 32, 32);
