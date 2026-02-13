@@ -60,8 +60,9 @@ scene.add(directionalLight);
 // Floor
 const floorGeometry = new THREE.PlaneGeometry(50, 50);
 const floorMaterial = new THREE.MeshStandardMaterial({
-  color: 0x111111,
+  color: 0x444444,
   side: THREE.DoubleSide
+});
 });
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -Math.PI / 2; // lay it flat
