@@ -164,6 +164,9 @@ function focusObject(object) {
   function animate() {
   requestAnimationFrame(animate);
 
+  if (focusedObject) {
+    focusedObject.rotation.y += 0.01;
+  }
 
   renderer.render(scene, camera);
 }
