@@ -20,6 +20,9 @@
 <script>
   // 1. Scene
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x2222ff);
+  const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
 
  // Night sky sphere
 const skyGeometry = new THREE.SphereGeometry(100, 32, 32);
