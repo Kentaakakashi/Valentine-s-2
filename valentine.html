@@ -154,7 +154,9 @@ let focusedObject = null;
 
 function focusObject(object) {
   focusedObject = object;
-
+  targetPosition = new THREE.Vector3(0, 1.2, 0);
+  controls.enabled = false;
+}
   // Move object to center above table
   object.position.set(0, 1.2, 0);
 
