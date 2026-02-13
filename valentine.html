@@ -49,9 +49,14 @@ scene.add(sky);
   controls.enableZoom = false;
   controls.enablePan = false;
 
-  // 5. Light (so we can see stuff later)
-  const light = new THREE.AmbientLight(0xffffff, 1);
-  scene.add(light);
+  // 5. Lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 10, 5);
+scene.add(directionalLight);
+
 // Floor
 const floorGeometry = new THREE.PlaneGeometry(50, 50);
 const floorMaterial = new THREE.MeshStandardMaterial({
