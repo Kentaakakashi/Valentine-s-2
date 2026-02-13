@@ -63,6 +63,15 @@ floor.rotation.x = -Math.PI / 2; // lay it flat
 floor.position.y = 0;
 scene.add(floor);
 
+// 6. Table (placeholder)
+const tableGeometry = new THREE.BoxGeometry(3, 0.3, 2);
+const tableMaterial = new THREE.MeshStandardMaterial({ color: 0x3b2a1a });
+const table = new THREE.Mesh(tableGeometry, tableMaterial);
+
+// Start far away
+table.position.set(0, 0.15, -10);
+scene.add(table);
+
   // 7. Animation loop
   function animate() {
     requestAnimationFrame(animate);
