@@ -191,6 +191,19 @@ window.addEventListener('click', (event) => {
     focusObject(clickedObject);
   }
 });
+
+window.addEventListener('click', (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(clickableObjects);
+
+  if (intersects.length > 0) {
+    focusObject(intersects[0].object);
+  }
+});
+
 </script>
 
 </body>
