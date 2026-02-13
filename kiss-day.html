@@ -570,7 +570,7 @@
 
       // audio element for story
       const audio = new Audio();
-      audio.src = "assets/sounds/audio1.mp3";
+      audio.src = "audio1.mp3";  // FIXED: removed assets/sounds/
 
       // custom player elements
       const playPauseBtn = document.getElementById('playPauseBtn');
@@ -672,13 +672,13 @@
 
         if (stage === 0) {
           if (answer === 'no') {
-            audio.src = "assets/sounds/no1.mp3";
+            audio.src = "no1.mp3";  // FIXED
             finalLock = true;
             audio.load();
             safePlay(audio, 'no1.mp3 missing');
             playPauseBtn.textContent = '⏸';
           } else {
-            audio.src = "assets/sounds/yes1.mp3";
+            audio.src = "yes1.mp3";  // FIXED
             stage = 1;
             audio.load();
             safePlay(audio, 'yes1.mp3 missing');
@@ -686,7 +686,7 @@
           }
         } else if (stage === 1) {
           if (answer === 'yes') {
-            audio.src = "assets/sounds/yes2.mp3";
+            audio.src = "yes2.mp3";  // FIXED
             finalLock = true;
             audio.load();
             safePlay(audio, 'yes2.mp3 missing');
@@ -762,11 +762,11 @@
         let audioToPlay;
         if (kissType === 'french') {
           // Special case: play tease then french
-          const tease = new Audio("assets/sounds/french_tease.mp3");
+          const tease = new Audio("french_tease.mp3");  // FIXED
           safePlay(tease, 'french_tease.mp3 missing');
           setTimeout(() => {
             if (isAnimating && currentMovingButton === button) {
-              const frenchAudio = new Audio("assets/sounds/french.mp3");
+              const frenchAudio = new Audio("french.mp3");  // FIXED
               currentAudio = frenchAudio;
               safePlay(frenchAudio, 'french.mp3 missing');
               frenchAudio.addEventListener('ended', onAudioEnd);
@@ -774,7 +774,7 @@
           }, 700);
           audioToPlay = null; // handled by timeout
         } else {
-          audioToPlay = new Audio(`assets/sounds/${kissType}.mp3`);
+          audioToPlay = new Audio(`${kissType}.mp3`);  // FIXED
           currentAudio = audioToPlay;
           safePlay(audioToPlay, `${kissType}.mp3 missing`);
           audioToPlay.addEventListener('ended', onAudioEnd);
@@ -849,8 +849,5 @@
       });
     })();
   </script>
-  <!-- audio files expected:
-       assets/sounds/soft.mp3, quick.mp3, playful.mp3, french_tease.mp3, french.mp3,
-       audio1.mp3, no1.mp3, yes1.mp3, yes2.mp3 -->
 </body>
 </html>
