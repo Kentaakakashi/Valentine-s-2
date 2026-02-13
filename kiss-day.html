@@ -19,7 +19,7 @@
       line-height: 1.5;
     }
 
-    /* ——— cinematic atmosphere ——— */
+    /* noise overlay */
     .noise {
       position: fixed;
       top: 0;
@@ -48,7 +48,7 @@
       display: none !important;
     }
 
-    /* ————— INTRO : velvet noir ————— */
+    /* ————— INTRO ————— */
     #intro {
       background: radial-gradient(circle at 70% 20%, #2b0018 0%, #020001 90%);
       text-align: center;
@@ -112,7 +112,7 @@
       border-color: #ffd0dc;
     }
 
-    /* ————— KISS PLAYGROUND : lip print ————— */
+    /* ————— KISS BUTTONS (custom) ————— */
     #kissButtons {
       background: #130008;
       background-image: radial-gradient(circle at 30% 80%, #440022 0%, #000000 90%);
@@ -188,7 +188,7 @@
       box-shadow: 0 0 35px #c1005c;
     }
 
-    /* ————— KISS OVERLAY (full bleed) ————— */
+    /* ————— KISS OVERLAY (with linger) ————— */
     #kissOverlay {
       position: fixed;
       inset: 0;
@@ -199,12 +199,8 @@
       z-index: 3000;
       backdrop-filter: blur(20px) brightness(0.4);
       -webkit-backdrop-filter: blur(20px) brightness(0.4);
-      animation: overlayGlow 0.5s ease-out;
-    }
-
-    @keyframes overlayGlow {
-      0% { opacity: 0; backdrop-filter: blur(0); }
-      100% { opacity: 1; backdrop-filter: blur(20px) brightness(0.4); }
+      transition: opacity 0.5s ease;
+      opacity: 1;
     }
 
     #kissText {
@@ -226,7 +222,7 @@
       100% { transform: translateY(-40px) rotate(1deg); letter-spacing: 12px; text-shadow: 0 0 80px #ff80b3; }
     }
 
-    /* ————— CUSTOM AUDIO PLAYER : VINYL DREAMS ————— */
+    /* ————— CUSTOM AUDIO PLAYER ————— */
     #audioSection {
       background: #0b0006;
       background: linear-gradient(145deg, #1a0010 0%, #030002 100%);
@@ -276,6 +272,7 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      transition: opacity 0.4s;
     }
 
     .player-controls {
@@ -315,6 +312,7 @@
       font-size: 1.3rem;
       letter-spacing: 2px;
       font-weight: 200;
+      flex: 1;
     }
 
     .time-bar {
@@ -358,7 +356,6 @@
       background: #1e000b;
     }
 
-    /* choices inside custom player */
     .choice-buttons {
       display: flex;
       gap: 2rem;
@@ -395,7 +392,23 @@
       filter: grayscale(1);
     }
 
-    /* vinyl animation */
+    /* floating message */
+    .floating-message {
+      font-size: 4rem;
+      font-weight: 200;
+      color: #ffc0cb;
+      text-shadow: 0 0 40px #ff1a4c;
+      animation: floatMessage 4s infinite alternate ease-in-out;
+      text-align: center;
+      margin-top: 2rem;
+      letter-spacing: 6px;
+    }
+
+    @keyframes floatMessage {
+      0% { transform: translateY(0); opacity: 0.8; }
+      100% { transform: translateY(-40px); opacity: 1; text-shadow: 0 0 70px #ff80b3; }
+    }
+
     .vinyl-decoration {
       position: absolute;
       bottom: -40px;
@@ -416,7 +429,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* floating embers */
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -447,6 +459,7 @@
       .player-controls { flex-direction: column; align-items: stretch; }
       .volume-slider { margin-left: 0; }
       #kissText { font-size: 2.8rem; white-space: normal; }
+      .floating-message { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -463,26 +476,26 @@
     </div>
   </section>
 
-  <!-- KISS BUTTONS -->
+  <!-- KISS BUTTONS (custom types) -->
   <section id="kissButtons" class="section hidden">
     <h2 class="section-title">steal a kiss</h2>
     <div class="kiss-grid">
-      <button class="kiss-btn" onclick="playKiss('assets/sounds/soft.mp3')">soft</button>
-<button class="kiss-btn" onclick="playKiss('quick')">quick</button>
-<button class="kiss-btn" onclick="playKiss('playful')">playful</button>
-<button class="kiss-btn french-btn" onclick="playFrench()">french</button>
+      <button class="kiss-btn" onclick="playKiss('soft')">soft</button>
+      <button class="kiss-btn" onclick="playKiss('quick')">quick</button>
+      <button class="kiss-btn" onclick="playKiss('playful')">playful</button>
+      <button class="kiss-btn french-btn" onclick="playFrench()">french</button>
     </div>
     <p style="margin-top: 70px; opacity:0.5; letter-spacing: 6px;">each kiss · a flicker</p>
   </section>
 
-  <!-- AUDIO STORY : CUSTOM PLAYER -->
+  <!-- AUDIO STORY : CUSTOM PLAYER + FLOATING MESSAGE -->
   <section id="audioSection" class="section">
-    <div class="story-player">
+    <div class="story-player" id="storyPlayer">
       <h2>✦ deeper ✦</h2>
       <p>my voice · your choice</p>
 
-      <!-- custom audio player -->
-      <div class="custom-player">
+      <!-- custom player (will be hidden on final no) -->
+      <div class="custom-player" id="customPlayer">
         <div class="player-controls">
           <button class="play-pause" id="playPauseBtn">▶</button>
           <div class="time-container">
@@ -503,6 +516,8 @@
         </div>
       </div>
 
+      <!-- floating message (hidden initially) -->
+      <div id="floatingMessage" class="floating-message hidden">happy kiss day my bujji</div>
       <div class="vinyl-decoration"></div>
     </div>
   </section>
@@ -533,10 +548,13 @@
       const introSec = document.getElementById('intro');
       const kissSec = document.getElementById('kissButtons');
       const choicesDiv = document.getElementById('choices');
+      const customPlayerDiv = document.getElementById('customPlayer');
+      const floatingMessageDiv = document.getElementById('floatingMessage');
+      const storyPlayer = document.getElementById('storyPlayer');
 
       // audio element (hidden)
       const audio = new Audio();
-      audio.src = "assets/sounds/audio1.mp3";  // placeholder
+      audio.src = "assets/sounds/audio1.mp3";  // initial voice note
 
       // custom player elements
       const playPauseBtn = document.getElementById('playPauseBtn');
@@ -546,8 +564,9 @@
       const progressFill = document.getElementById('progressFill');
       const volumeControl = document.getElementById('volumeControl');
 
-      let stage = 0;
-      let finalLock = false;
+      let stage = 0;               // 0: after audio1, 1: after first yes
+      let finalLock = false;       // if true, no more choices
+      let overlayTimeout = null;   // for kiss overlay linger
 
       // ---- custom player logic ----
       function formatTime(seconds) {
@@ -572,10 +591,8 @@
 
       audio.addEventListener('ended', () => {
         playPauseBtn.textContent = '▶';
-        if (!finalLock && !choicesDiv.classList.contains('hidden')) {
-          // choices already visible? sometimes hidden
-        }
-        if (!finalLock) {
+        // show choices only if not locked and player is visible (not hidden by final no)
+        if (!finalLock && !customPlayerDiv.classList.contains('hidden')) {
           choicesDiv.classList.remove('hidden');
         }
       });
@@ -604,49 +621,49 @@
         audio.volume = e.target.value;
       });
 
-      // ---- story choices ----
+      // ---- story choices (revised) ----
       window.choose = function(answer) {
         if (finalLock) return;
 
-        choicesDiv.classList.add('hidden');
+        choicesDiv.classList.add('hidden');  // hide buttons immediately
 
-        if (answer === 'no') {
-          document.body.style.backgroundColor = '#0f0006';
-        } else {
-          document.body.style.backgroundColor = '#1f0012';
+        // Stage 0: after audio1
+        if (stage === 0) {
+          if (answer === 'no') {
+            // first no: play no1.mp3 and lock
+            audio.src = "assets/sounds/no1.mp3";
+            finalLock = true;
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+          } else { // yes
+            audio.src = "assets/sounds/yes1.mp3";
+            stage = 1; // move to next stage
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+          }
         }
-
-        if (stage === 0 && answer === 'no') {
-          audio.src = "assets/sounds/no1.mp3";
-          finalLock = true;
-        } else if (stage === 0 && answer === 'yes') {
-          audio.src = "assets/sounds/yes1.mp3";
-          stage = 1;
-        } else if (stage === 1 && answer === 'no') {
-          audio.src = "assets/sounds/no2.mp3";
-          finalLock = true;
-        } else if (stage === 1 && answer === 'yes') {
-          audio.src = "assets/sounds/yes2.mp3";
-          finalLock = true;
-          // final visual bloom
-          setTimeout(() => {
-            overlay.style.display = 'flex';
-            overlay.style.background = 'radial-gradient(circle at center, #5f0029, #000)';
-            kissText.textContent = 'the kiss that stays';
-            kissText.style.fontSize = '4rem';
-            setTimeout(() => { overlay.style.display = 'none'; }, 2800);
-          }, 500);
+        // Stage 1: after first yes
+        else if (stage === 1) {
+          if (answer === 'yes') {
+            // second yes: play yes2.mp3 and lock permanently
+            audio.src = "assets/sounds/yes2.mp3";
+            finalLock = true;
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+            // after yes2 ends, no further choices (locked)
+          } else { // no
+            // second no: hide player, show floating message, no audio
+            customPlayerDiv.classList.add('hidden');
+            floatingMessageDiv.classList.remove('hidden');
+            finalLock = true; // lock everything
+            // optional: pause any playing audio
+            audio.pause();
+            playPauseBtn.textContent = '▶';
+          }
         }
-
-        if (finalLock) {
-          audio.classList.add('locked');
-        } else {
-          audio.classList.remove('locked');
-        }
-
-        audio.load();
-        audio.play().catch(e => console.log('audio play prevented (missing files)'));
-        playPauseBtn.textContent = '⏸';
       };
 
       // ---- intro ----
@@ -656,13 +673,12 @@
         kissSec.scrollIntoView({ behavior: 'smooth' });
       };
 
-      // ---- kiss effects ----
+      // ---- kiss effects with 3-second linger ----
       window.playKiss = function(type) {
         let gradient = '';
-        if (type === 'cheek') gradient = 'linear-gradient(135deg, #440022, #13000c)';
-        else if (type === 'forehead') gradient = 'linear-gradient(105deg, #2f0025, #0e000b)';
-        else if (type === 'nose') gradient = 'linear-gradient(170deg, #3b0025, #080004)';
-        else if (type === 'hand') gradient = 'linear-gradient(90deg, #52002b, #140010)';
+        if (type === 'soft') gradient = 'linear-gradient(145deg, #440022, #13000c)';
+        else if (type === 'quick') gradient = 'linear-gradient(105deg, #2f0025, #0e000b)';
+        else if (type === 'playful') gradient = 'linear-gradient(170deg, #3b0025, #080004)';
         else gradient = '#1f0015';
         showOverlay(type + ' kiss', `assets/sounds/${type}.mp3`, gradient);
       };
@@ -676,7 +692,11 @@
       };
 
       function showOverlay(msg, soundSrc, bgStyle) {
+        // clear any pending hide timeout
+        if (overlayTimeout) clearTimeout(overlayTimeout);
+
         overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
         overlay.style.background = bgStyle;
         kissText.textContent = msg;
 
@@ -684,12 +704,16 @@
         sfx.play().catch(e => console.warn('audio missing, but mood stays'));
 
         sfx.onended = () => {
-          overlay.style.transition = 'opacity 0.5s';
-          overlay.style.opacity = '0';
-          setTimeout(() => {
-            overlay.style.display = 'none';
-            overlay.style.opacity = '1';
-          }, 500);
+          // keep overlay for 3 more seconds, then fade out
+          overlayTimeout = setTimeout(() => {
+            overlay.style.transition = 'opacity 0.5s';
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+              overlay.style.display = 'none';
+              overlay.style.opacity = '1'; // reset for next time
+              overlay.style.transition = '';
+            }, 500);
+          }, 3000);
         };
       }
 
@@ -712,12 +736,12 @@
         });
       });
 
-      // store globally for inline handlers
+      // expose functions globally
       window.showOverlay = showOverlay;
     })();
   </script>
-  <!-- note: audio files should be placed in assets/sounds/ 
-       (cheek.mp3, forehead.mp3, nose.mp3, hand.mp3, french_tease.mp3, french.mp3,
-        audio1.mp3, no1.mp3, yes1.mp3, no2.mp3, yes2.mp3) -->
+  <!-- audio files expected:
+       assets/sounds/soft.mp3, quick.mp3, playful.mp3, french_tease.mp3, french.mp3,
+       audio1.mp3, no1.mp3, yes1.mp3, yes2.mp3 -->
 </body>
 </html>
