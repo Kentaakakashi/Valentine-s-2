@@ -74,10 +74,14 @@ scene.add(table);
 
   // 7. Animation loop
   function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+
+  if (table.position.z < 0) {
+    table.position.z += 0.05;
   }
-  animate();
+
+  renderer.render(scene, camera);
+}
 
   // 8. Handle resize
   window.addEventListener('resize', () => {
