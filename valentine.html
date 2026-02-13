@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Valentine's Day</title>
   <style>
     body {
@@ -13,7 +13,6 @@
 </head>
 <body>
 
-<!-- Three.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -23,12 +22,7 @@
 ====================== */
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 3, 8);
 camera.lookAt(0, 1, 0);
 
@@ -36,6 +30,9 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+/* ======================
+   CAMERA CONTROLS
+====================== */
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.enablePan = false;
@@ -43,21 +40,25 @@ controls.enablePan = false;
 /* ======================
    SKY
 ====================== */
-const skyGeometry = new THREE.SphereGeometry(100, 32, 32);
-const skyMaterial = new THREE.MeshBasicMaterial({
-  color: 0x0a0a1a,
-  side: THREE.BackSide
-});
-scene.add(new THREE.Mesh(skyGeometry, skyMaterial));
+const sky = new THREE.Mesh(
+  new THREE.SphereGeometry(100, 32, 32),
+  new THREE.MeshBasicMaterial({ color: 0x0a0a1a, side: THREE.BackSide })
+);
+scene.add(sky);
 
 /* ======================
    LIGHTING
 ====================== */
-scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(5, 10, 5);
-scene.add(directionalLight);
+const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+mainLight.position.set(5, 10, 5);
+scene.add(mainLight);
+
+/* Spotlight (NEW FEATURE #1) */
+const spotlight = new THREE.SpotLight(0xffc0cb, 0);
+spotlight.position.set(0, 5, 0);
+scene.add(spotlight);
 
 /* ======================
    FLOOR
@@ -80,7 +81,7 @@ table.position.set(0, 0.15, 0);
 scene.add(table);
 
 /* ======================
-   INTERACTION SETUP
+   INTERACTION
 ====================== */
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -88,39 +89,43 @@ const clickableObjects = [];
 
 let focusedObject = null;
 let targetPosition = null;
+let isDragging = false;
 
 /* ======================
-   OBJECTS ON TABLE
+   HELPER FUNCTION
 ====================== */
+function makeClickable(mesh) {
+  mesh.userData.originalPosition = mesh.position.clone();
+  clickableObjects.push(mesh);
+}
 
-// Photo Frame
+/* ======================
+   OBJECTS
+====================== */
 const photoFrame = new THREE.Mesh(
   new THREE.BoxGeometry(0.8, 0.6, 0.05),
   new THREE.MeshStandardMaterial({ color: 0x222222 })
 );
 photoFrame.position.set(-0.8, 0.6, 0);
 scene.add(photoFrame);
-clickableObjects.push(photoFrame);
+makeClickable(photoFrame);
 
-// Letter
 const letter = new THREE.Mesh(
   new THREE.BoxGeometry(0.6, 0.05, 0.4),
   new THREE.MeshStandardMaterial({ color: 0xf5f5dc })
 );
 letter.position.set(0, 0.55, 0.3);
 scene.add(letter);
-clickableObjects.push(letter);
+makeClickable(letter);
 
-// Teddy
 const teddy = new THREE.Mesh(
   new THREE.SphereGeometry(0.25, 32, 32),
   new THREE.MeshStandardMaterial({ color: 0xc68642 })
 );
 teddy.position.set(0.9, 0.6, 0);
 scene.add(teddy);
-clickableObjects.push(teddy);
+makeClickable(teddy);
 
-// Ring
 const ring = new THREE.Mesh(
   new THREE.TorusGeometry(0.12, 0.03, 16, 100),
   new THREE.MeshStandardMaterial({ color: 0xffd700 })
@@ -128,18 +133,16 @@ const ring = new THREE.Mesh(
 ring.rotation.x = Math.PI / 2;
 ring.position.set(0.4, 0.55, -0.3);
 scene.add(ring);
-clickableObjects.push(ring);
+makeClickable(ring);
 
-// Chocolate
 const chocolate = new THREE.Mesh(
   new THREE.BoxGeometry(0.5, 0.15, 0.5),
   new THREE.MeshStandardMaterial({ color: 0x4b2e2b })
 );
 chocolate.position.set(-0.3, 0.55, -0.3);
 scene.add(chocolate);
-clickableObjects.push(chocolate);
+makeClickable(chocolate);
 
-// Lemon 🍋
 const lemon = new THREE.Mesh(
   new THREE.SphereGeometry(0.15, 32, 32),
   new THREE.MeshStandardMaterial({ color: 0xffeb3b })
@@ -147,26 +150,40 @@ const lemon = new THREE.Mesh(
 lemon.scale.set(1.2, 0.8, 1);
 lemon.position.set(0.8, 0.55, 0.3);
 scene.add(lemon);
-clickableObjects.push(lemon);
+makeClickable(lemon);
 
 /* ======================
-   FOCUS / UNFOCUS
+   FOCUS LOGIC
 ====================== */
 function focusObject(object) {
   focusedObject = object;
   targetPosition = new THREE.Vector3(0, 1.2, 0);
   controls.enabled = false;
+  spotlight.target = object;
+  spotlight.intensity = 1;
 }
 
 function resetFocus() {
+  if (!focusedObject) return;
+  targetPosition = focusedObject.userData.originalPosition.clone();
+  spotlight.intensity = 0;
   focusedObject = null;
-  targetPosition = null;
   controls.enabled = true;
 }
 
 /* ======================
-   CLICK HANDLER
+   MOUSE EVENTS
 ====================== */
+window.addEventListener("mousedown", () => isDragging = true);
+window.addEventListener("mouseup", () => isDragging = false);
+
+window.addEventListener("mousemove", (e) => {
+  if (focusedObject && isDragging) {
+    focusedObject.rotation.y += e.movementX * 0.01;
+    focusedObject.rotation.x += e.movementY * 0.01;
+  }
+});
+
 window.addEventListener("click", (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -177,7 +194,7 @@ window.addEventListener("click", (event) => {
   if (hits.length > 0) {
     focusObject(hits[0].object);
   } else {
-    resetFocus(); // click empty space to exit focus
+    resetFocus();
   }
 });
 
@@ -189,7 +206,6 @@ function animate() {
 
   if (focusedObject && targetPosition) {
     focusedObject.position.lerp(targetPosition, 0.08);
-    focusedObject.rotation.y += 0.01;
   }
 
   renderer.render(scene, camera);
