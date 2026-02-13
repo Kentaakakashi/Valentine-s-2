@@ -21,6 +21,15 @@
   // 1. Scene
   const scene = new THREE.Scene();
 
+ // Night sky sphere
+const skyGeometry = new THREE.SphereGeometry(100, 32, 32);
+const skyMaterial = new THREE.MeshBasicMaterial({
+  color: 0x0a0a1a,
+  side: THREE.BackSide
+});
+const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+scene.add(sky);
+
   // 2. Camera
   const camera = new THREE.PerspectiveCamera(
     75,
