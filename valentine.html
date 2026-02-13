@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Valentine's Day</title>
   <style>
     body {
@@ -18,154 +18,173 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-  // 1. Scene
-  const scene = new THREE.Scene();
+/* ======================
+   BASIC SETUP
+====================== */
+const scene = new THREE.Scene();
 
-let targetPosition = null;
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.set(0, 3, 8);
+camera.lookAt(0, 1, 0);
 
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
- // Night sky sphere
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
+controls.enablePan = false;
+
+/* ======================
+   SKY
+====================== */
 const skyGeometry = new THREE.SphereGeometry(100, 32, 32);
 const skyMaterial = new THREE.MeshBasicMaterial({
   color: 0x0a0a1a,
   side: THREE.BackSide
 });
-const sky = new THREE.Mesh(skyGeometry, skyMaterial);
-scene.add(sky);
+scene.add(new THREE.Mesh(skyGeometry, skyMaterial));
 
-  // 2. Camera
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.set(0, 3, 8);
-  camera.lookAt(0, 1, 0);
-  // 3. Renderer
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-const clickableObjects = [];
-
-  // 4. Controls (Google Maps style)
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableZoom = false;
-  controls.enablePan = false;
-
-  // 5. Lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-scene.add(ambientLight);
+/* ======================
+   LIGHTING
+====================== */
+scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(5, 10, 5);
 scene.add(directionalLight);
 
-// Floor
-const floorGeometry = new THREE.PlaneGeometry(50, 50);
-const floorMaterial = new THREE.MeshStandardMaterial({
-  color: 0x444444,
-  side: THREE.DoubleSide
-});
-
-const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.rotation.x = -Math.PI / 2; // lay it flat
-floor.position.y = 0;
+/* ======================
+   FLOOR
+====================== */
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(50, 50),
+  new THREE.MeshStandardMaterial({ color: 0x444444, side: THREE.DoubleSide })
+);
+floor.rotation.x = -Math.PI / 2;
 scene.add(floor);
 
-// 6. Table (placeholder)
-const tableGeometry = new THREE.BoxGeometry(3, 0.3, 2);
-const tableMaterial = new THREE.MeshStandardMaterial({ color: 0x3b2a1a });
-const table = new THREE.Mesh(tableGeometry, tableMaterial);
+/* ======================
+   TABLE
+====================== */
+const table = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 0.3, 2),
+  new THREE.MeshStandardMaterial({ color: 0x3b2a1a })
+);
+table.position.set(0, 0.15, 0);
+scene.add(table);
 
-// 67 photoframe
+/* ======================
+   INTERACTION SETUP
+====================== */
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const clickableObjects = [];
 
-const frameGeometry = new THREE.BoxGeometry(0.8, 0.6, 0.05);
-const frameMaterial = new THREE.MeshStandardMaterial({ color: 0x222222 });
-const photoFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+let focusedObject = null;
+let targetPosition = null;
 
+/* ======================
+   OBJECTS ON TABLE
+====================== */
+
+// Photo Frame
+const photoFrame = new THREE.Mesh(
+  new THREE.BoxGeometry(0.8, 0.6, 0.05),
+  new THREE.MeshStandardMaterial({ color: 0x222222 })
+);
 photoFrame.position.set(-0.8, 0.6, 0);
 scene.add(photoFrame);
 clickableObjects.push(photoFrame);
 
-// 67 letter
-
-const letterGeometry = new THREE.BoxGeometry(0.6, 0.05, 0.4);
-const letterMaterial = new THREE.MeshStandardMaterial({ color: 0xf5f5dc });
-const letter = new THREE.Mesh(letterGeometry, letterMaterial);
-
+// Letter
+const letter = new THREE.Mesh(
+  new THREE.BoxGeometry(0.6, 0.05, 0.4),
+  new THREE.MeshStandardMaterial({ color: 0xf5f5dc })
+);
 letter.position.set(0, 0.55, 0.3);
 scene.add(letter);
 clickableObjects.push(letter);
 
-
- //67 teddy
-
-const teddyGeometry = new THREE.SphereGeometry(0.25, 32, 32);
-const teddyMaterial = new THREE.MeshStandardMaterial({ color: 0xc68642 });
-const teddy = new THREE.Mesh(teddyGeometry, teddyMaterial);
-
+// Teddy
+const teddy = new THREE.Mesh(
+  new THREE.SphereGeometry(0.25, 32, 32),
+  new THREE.MeshStandardMaterial({ color: 0xc68642 })
+);
 teddy.position.set(0.9, 0.6, 0);
 scene.add(teddy);
 clickableObjects.push(teddy);
 
-// 67 ring
-
-const ringGeometry = new THREE.TorusGeometry(0.12, 0.03, 16, 100);
-const ringMaterial = new THREE.MeshStandardMaterial({ color: 0xffd700 });
-const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-
+// Ring
+const ring = new THREE.Mesh(
+  new THREE.TorusGeometry(0.12, 0.03, 16, 100),
+  new THREE.MeshStandardMaterial({ color: 0xffd700 })
+);
 ring.rotation.x = Math.PI / 2;
 ring.position.set(0.4, 0.55, -0.3);
 scene.add(ring);
 clickableObjects.push(ring);
 
-// 67 choclate
-
-const chocoGeometry = new THREE.BoxGeometry(0.5, 0.15, 0.5);
-const chocoMaterial = new THREE.MeshStandardMaterial({ color: 0x4b2e2b });
-const chocolate = new THREE.Mesh(chocoGeometry, chocoMaterial);
-
+// Chocolate
+const chocolate = new THREE.Mesh(
+  new THREE.BoxGeometry(0.5, 0.15, 0.5),
+  new THREE.MeshStandardMaterial({ color: 0x4b2e2b })
+);
 chocolate.position.set(-0.3, 0.55, -0.3);
 scene.add(chocolate);
 clickableObjects.push(chocolate);
 
-// 69 lemon
-
-const lemonGeometry = new THREE.SphereGeometry(0.15, 32, 32);
-const lemonMaterial = new THREE.MeshStandardMaterial({ color: 0xffeb3b });
-const lemon = new THREE.Mesh(lemonGeometry, lemonMaterial);
-
+// Lemon 🍋
+const lemon = new THREE.Mesh(
+  new THREE.SphereGeometry(0.15, 32, 32),
+  new THREE.MeshStandardMaterial({ color: 0xffeb3b })
+);
 lemon.scale.set(1.2, 0.8, 1);
 lemon.position.set(0.8, 0.55, 0.3);
 scene.add(lemon);
 clickableObjects.push(lemon);
 
-
-// Start far away
-table.position.set(0, 0.15, 0);
-scene.add(table);
-
-let focusedObject = null;
-
+/* ======================
+   FOCUS / UNFOCUS
+====================== */
 function focusObject(object) {
   focusedObject = object;
   targetPosition = new THREE.Vector3(0, 1.2, 0);
   controls.enabled = false;
 }
-  // Move object to center above table
-  object.position.set(0, 1.2, 0);
 
-  // Lock camera movement
-  controls.enabled = false;
+function resetFocus() {
+  focusedObject = null;
+  targetPosition = null;
+  controls.enabled = true;
 }
 
-  // 7. Animation loop
-  function animate() {
+/* ======================
+   CLICK HANDLER
+====================== */
+window.addEventListener("click", (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(clickableObjects);
+
+  if (hits.length > 0) {
+    focusObject(hits[0].object);
+  } else {
+    resetFocus(); // click empty space to exit focus
+  }
+});
+
+/* ======================
+   ANIMATION LOOP
+====================== */
+function animate() {
   requestAnimationFrame(animate);
 
   if (focusedObject && targetPosition) {
@@ -175,38 +194,16 @@ function focusObject(object) {
 
   renderer.render(scene, camera);
 }
-  // 8. Handle resize
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+animate();
 
-window.addEventListener('click', (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(clickableObjects);
-
-  if (intersects.length > 0) {
-    const clickedObject = intersects[0].object;
-    focusObject(clickedObject);
-  }
+/* ======================
+   RESIZE
+====================== */
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
-
-window.addEventListener('click', (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(clickableObjects);
-
-  if (intersects.length > 0) {
-    focusObject(intersects[0].object);
-  }
-});
-
 </script>
 
 </body>
