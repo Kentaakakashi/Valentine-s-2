@@ -1,232 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 7: Kiss Day - 7 Days of Love</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Kiss Day 💋</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd6e0, #f7c6ff);
+  color: #4a2c3a;
+  overflow: hidden;
+  transition: background 1s ease;
+}
+
+/* ---------- INTRO ---------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #ffd6e0, #f4b6c2);
+  z-index: 10;
+  animation: fadeIn 1.5s ease;
+}
+
+.intro h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.intro p {
+  max-width: 420px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.intro button {
+  margin-top: 35px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  background: #ff9fbf;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ---------- MAIN UI ---------- */
+.app {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.app.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+}
+
+/* ---------- KISS TYPES ---------- */
+.kiss-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.kiss-types button {
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255,255,255,0.7);
+  cursor: pointer;
+}
+
+.kiss-types button.active {
+  background: #ffb3c6;
+}
+
+/* ---------- KISS BUTTON ---------- */
+.kiss-btn {
+  margin: 30px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: radial-gradient(circle, #ffb6c1, #ff8fab);
+  transition: transform 0.2s;
+}
+
+.kiss-btn:active {
+  transform: scale(0.95);
+}
+
+/* ---------- AUDIO PLAYER ---------- */
+.audio-section {
+  margin-top: 40px;
+}
+
+.audio-section h3 {
+  margin-bottom: 8px;
+}
+
+audio {
+  width: 100%;
+}
+
+/* ---------- KISS MODE ---------- */
+.kiss-mode {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 20;
+  color: white;
+}
+
+.kiss-text {
+  font-size: 2rem;
+  opacity: 0;
+  animation: floatText 3s ease forwards;
+}
+
+@keyframes floatText {
+  0% { opacity: 0; transform: translateY(20px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
 </head>
-<body class="kiss-day">
-    <!-- Animated Background -->
-    <div class="floating-hearts"></div>
-    <div class="sparkles"></div>
 
-    <!-- Back Button -->
-    <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Back to Journey
-    </a>
+<body>
 
-    <!-- Main Content -->
-    <div class="page-container">
-        <div class="day-header">
-            <div class="day-icon-large">💋</div>
-            <h1>Kiss Day</h1>
-            <p class="day-subtitle">Day 7 - February 13</p>
-            <p class="day-tagline">Seal our love with every kiss</p>
-        </div>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <h1>Kiss Day 💋</h1>
+  <p>
+    This page isn’t loud.<br>
+    It won’t rush you.<br><br>
+    But if you stay…<br>
+    something might happen.
+  </p>
+  <button onclick="enter()">Continue</button>
+</div>
 
-        <!-- Kiss Meter -->
-        <div class="kiss-section">
-            <h2><i class="fas fa-kiss-wink-heart"></i> Kiss Meter</h2>
-            <p class="section-subtitle">Tap to send kisses and fill our love meter</p>
+<!-- KISS MODE -->
+<div class="kiss-mode" id="kissMode">
+  <div class="kiss-text" id="kissText"></div>
+</div>
 
-            <div class="kiss-meter">
-                <button class="kiss-button" id="kissButton">
-                    <span class="kiss-icon">💋</span>
-                    <span class="kiss-label">Send a Kiss</span>
-                </button>
+<!-- MAIN APP -->
+<div class="app" id="app">
+  <div class="container">
 
-                <div class="kiss-stats">
-                    <div class="kiss-stat">
-                        <span class="stat-title">Kisses Sent</span>
-                        <span class="stat-value" id="kissCount">0</span>
-                    </div>
-                    <div class="kiss-stat">
-                        <span class="stat-title">Love Level</span>
-                        <span class="stat-value" id="loveLevel">0%</span>
-                    </div>
-                    <div class="kiss-stat">
-                        <span class="stat-title">Sweetness</span>
-                        <span class="stat-value" id="sweetnessLevel">Soft</span>
-                    </div>
-                </div>
+    <h2>Choose the kiss</h2>
 
-                <div class="love-meter">
-                    <div class="love-meter-fill" id="loveMeterFill"></div>
-                </div>
-
-                <div class="love-note" id="loveNote">
-                    One kiss at a time, our love grows brighter.
-                </div>
-            </div>
-        </div>
-
-        <!-- Kiss Collection -->
-        <div class="kiss-collection-section">
-            <h2><i class="fas fa-gift"></i> Kiss Collection</h2>
-            <p class="section-subtitle">Collect different kinds of kisses and unlock sweet notes</p>
-
-            <div class="kiss-collector" id="kissCollector">
-                <button class="kiss-item" data-kiss="forehead">😘</button>
-                <button class="kiss-item" data-kiss="cheek">😚</button>
-                <button class="kiss-item" data-kiss="hand">💋</button>
-                <button class="kiss-item" data-kiss="surprise">😗</button>
-                <button class="kiss-item" data-kiss="goodnight">🌙</button>
-                <button class="kiss-item" data-kiss="goodmorning">☀️</button>
-                <button class="kiss-item" data-kiss="forever">💞</button>
-                <button class="kiss-item" data-kiss="magic">✨</button>
-            </div>
-
-            <div class="kiss-message" id="kissMessage">
-                Pick a kiss to reveal a message.
-            </div>
-
-            <div class="kiss-progress">
-                <span class="progress-label">Kisses Collected</span>
-                <span class="progress-value"><span id="kissCollected">0</span>/8</span>
-            </div>
-        </div>
-
-        <!-- Kiss Moments -->
-        <div class="kiss-moments-section">
-            <h2><i class="fas fa-heart"></i> Kiss Moments</h2>
-            <p class="section-subtitle">Write down our most unforgettable kiss memories</p>
-
-            <div class="kiss-moments">
-                <div class="moment-card">
-                    <div class="moment-icon">🌆</div>
-                    <h3>First Kiss</h3>
-                    <p>The moment time slowed down and hearts spoke louder than words.</p>
-                </div>
-                <div class="moment-card">
-                    <div class="moment-icon">🌧️</div>
-                    <h3>Rain Kiss</h3>
-                    <p>A little rain, a lot of love, and a kiss that felt like home.</p>
-                </div>
-                <div class="moment-card">
-                    <div class="moment-icon">🎆</div>
-                    <h3>Celebration Kiss</h3>
-                    <p>Fireworks in the sky, fireworks in our hearts.</p>
-                </div>
-                <div class="moment-card">
-                    <div class="moment-icon">🌙</div>
-                    <h3>Goodnight Kiss</h3>
-                    <p>The sweetest way to end every day together.</p>
-                </div>
-            </div>
-        </div>
+    <div class="kiss-types">
+      <button onclick="selectKiss('soft')" class="active">💋 Soft</button>
+      <button onclick="selectKiss('quick')">😚 Quick</button>
+      <button onclick="selectKiss('playful')">😘 Playful</button>
+      <button onclick="selectKiss('forehead')">😌 Forehead</button>
+      <button onclick="selectKiss('goodnight')">😴 Goodnight</button>
+      <button onclick="selectKiss('french')">🔥 French</button>
     </div>
 
-    <!-- Navigation -->
-    <nav class="page-nav">
-        <a href="hug-day.html"><i class="fas fa-arrow-left"></i> Previous: Hug Day</a>
-        <a href="valentine.html" class="next-day">Next: Valentine's Day <i class="fas fa-arrow-right"></i></a>
-    </nav>
+    <button class="kiss-btn" id="kissBtn">lean in 💋</button>
 
-    <!-- Audio -->
-    <audio id="pageMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-soulful-kiss-642.mp3" type="audio/mpeg">
-    </audio>
+    <div class="audio-section">
+      <h3>A voice from me 💌</h3>
+      <audio controls src="assets/sounds/voice.mp3"></audio>
+    </div>
 
-    <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const kissButton = document.getElementById('kissButton');
-            const kissCount = document.getElementById('kissCount');
-            const loveLevel = document.getElementById('loveLevel');
-            const sweetnessLevel = document.getElementById('sweetnessLevel');
-            const loveMeterFill = document.getElementById('loveMeterFill');
-            const loveNote = document.getElementById('loveNote');
-            const kissCollected = document.getElementById('kissCollected');
-            const kissMessage = document.getElementById('kissMessage');
-            const kissItems = document.querySelectorAll('.kiss-item');
+  </div>
+</div>
 
-            let kissTotal = 0;
-            let collected = 0;
-            const collectedSet = new Set();
+<script>
+const intro = document.getElementById("intro");
+const app = document.getElementById("app");
+const kissBtn = document.getElementById("kissBtn");
+const kissMode = document.getElementById("kissMode");
+const kissText = document.getElementById("kissText");
+const audioPlayer = document.querySelector("audio");
 
-            const kissMessages = {
-                forehead: 'A gentle kiss that says: I will always protect your heart.',
-                cheek: 'Soft and sweet, like the way you make me smile.',
-                hand: 'A kiss to honor every promise I keep for you.',
-                surprise: 'Unexpected kisses are the best kind of magic.',
-                goodnight: 'A kiss to tuck you into the sweetest dreams.',
-                goodmorning: 'A kiss to start the day with us on your mind.',
-                forever: 'A kiss that whispers: I choose you every day.',
-                magic: 'A kiss that makes the world sparkle a little brighter.'
-            };
+let kissType = "soft";
 
-            const sweetnessLabels = [
-                'Soft',
-                'Warm',
-                'Dreamy',
-                'Sparkly',
-                'Endless'
-            ];
+const kissData = {
+  soft: {
+    bg: "linear-gradient(135deg, #ffb6c1, #ffd1dc)",
+    text: ["stay", "that was soft"],
+    sound: "assets/sounds/soft-kiss.mp3"
+  },
+  quick: {
+    bg: "linear-gradient(135deg, #ff8fab, #ffc2d1)",
+    text: ["again?", "that was fast"],
+    sound: "assets/sounds/quick-kiss.mp3"
+  },
+  playful: {
+    bg: "linear-gradient(135deg, #ff9aa2, #ffb7b2)",
+    text: ["you’re trouble", "hey"],
+    sound: "assets/sounds/playful-kiss.mp3"
+  },
+  forehead: {
+    bg: "linear-gradient(135deg, #f6eac2, #e3d5ff)",
+    text: ["right here", "safe"],
+    sound: "assets/sounds/forehead-kiss.mp3"
+  },
+  goodnight: {
+    bg: "linear-gradient(135deg, #3a2d4f, #1f1b2e)",
+    text: ["sweet dreams", "rest"],
+    sound: "assets/sounds/goodnight-kiss.mp3"
+  },
+  french: {
+    bg: "linear-gradient(135deg, #6d0f28, #b1123f)",
+    text: ["slow down", "yeah…"],
+    pre: "assets/sounds/french-pre.mp3",
+    sound: "assets/sounds/french-kiss.mp3"
+  }
+};
 
-            function updateMeter() {
-                const level = Math.min(100, kissTotal * 5);
-                loveMeterFill.style.width = `${level}%`;
-                loveLevel.textContent = `${level}%`;
+function enter() {
+  intro.style.display = "none";
+  app.classList.add("show");
+}
 
-                const labelIndex = Math.min(sweetnessLabels.length - 1, Math.floor(level / 25));
-                sweetnessLevel.textContent = sweetnessLabels[labelIndex];
+function selectKiss(type) {
+  kissType = type;
+  document.querySelectorAll(".kiss-types button")
+    .forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+}
 
-                if (level >= 100) {
-                    loveNote.textContent = 'Love level maxed out! Your kisses are pure magic. 💖';
-                } else if (level >= 60) {
-                    loveNote.textContent = 'Our love is glowing brighter with every kiss.';
-                } else if (level >= 30) {
-                    loveNote.textContent = 'Each kiss adds more warmth to our story.';
-                } else {
-                    loveNote.textContent = 'One kiss at a time, our love grows brighter.';
-                }
-            }
+kissBtn.addEventListener("click", () => {
+  audioPlayer.pause();
 
-            function createFloatingKiss() {
-                const kiss = document.createElement('div');
-                kiss.className = 'floating-kiss';
-                kiss.textContent = '💋';
-                kiss.style.left = `${Math.random() * 80 + 10}%`;
-                kiss.style.top = `${Math.random() * 20 + 60}%`;
-                document.body.appendChild(kiss);
+  const data = kissData[kissType];
+  document.body.style.background = data.bg;
+  kissText.textContent = data.text[Math.floor(Math.random() * data.text.length)];
 
-                setTimeout(() => {
-                    kiss.remove();
-                }, 1500);
-            }
+  app.style.display = "none";
+  kissMode.style.display = "flex";
 
-            kissButton.addEventListener('click', function() {
-                kissTotal += 1;
-                kissCount.textContent = kissTotal;
-                updateMeter();
-                createFloatingKiss();
+  if (kissType === "french") {
+    const pre = new Audio(data.pre);
+    pre.play();
+    pre.onended = () => new Audio(data.sound).play();
+  } else {
+    new Audio(data.sound).play();
+  }
 
-                if (window.VDay && VDay.saveProgress) {
-                    VDay.saveProgress(7, `kiss-${kissTotal}`);
-                }
-            });
+  setTimeout(() => {
+    kissMode.style.display = "none";
+    app.style.display = "block";
+  }, kissType === "french" ? 5000 : 3000);
+});
+</script>
 
-            kissItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const key = this.dataset.kiss;
-                    kissMessage.textContent = kissMessages[key] || 'A kiss to remind you how loved you are.';
-
-                    if (!collectedSet.has(key)) {
-                        collectedSet.add(key);
-                        collected += 1;
-                        kissCollected.textContent = collected;
-                        this.classList.add('collected');
-                    }
-                });
-            });
-
-            updateMeter();
-        });
-    </script>
 </body>
 </html>
