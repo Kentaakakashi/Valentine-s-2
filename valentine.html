@@ -63,13 +63,6 @@ floor.rotation.x = -Math.PI / 2; // lay it flat
 floor.position.y = 0;
 scene.add(floor);
 
-  // 6. Test object (a cube)
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshStandardMaterial({ color: 0xff4d88 });
-  const cube = new THREE.Mesh(geometry, material);
-cube.position.y = 0.5;
-  scene.add(cube);
-
   // 7. Animation loop
   function animate() {
     requestAnimationFrame(animate);
