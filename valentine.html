@@ -168,14 +168,13 @@ function focusObject(object) {
   function animate() {
   requestAnimationFrame(animate);
 
-  if (focusedObject) {
+  if (focusedObject && targetPosition) {
+    focusedObject.position.lerp(targetPosition, 0.08);
     focusedObject.rotation.y += 0.01;
   }
 
   renderer.render(scene, camera);
 }
-animate();
-
   // 8. Handle resize
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
