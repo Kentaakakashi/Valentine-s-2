@@ -45,6 +45,11 @@ scene.add(sky);
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+const clickableObjects = [];
+
   // 4. Controls (Google Maps style)
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableZoom = false;
@@ -83,6 +88,7 @@ const photoFrame = new THREE.Mesh(frameGeometry, frameMaterial);
 
 photoFrame.position.set(-0.8, 0.6, 0);
 scene.add(photoFrame);
+clickableObjects.push(photoFrame);
 
 // 67 letter
 
@@ -92,6 +98,8 @@ const letter = new THREE.Mesh(letterGeometry, letterMaterial);
 
 letter.position.set(0, 0.55, 0.3);
 scene.add(letter);
+clickableObjects.push(letter);
+
 
  //67 teddy
 
@@ -101,6 +109,7 @@ const teddy = new THREE.Mesh(teddyGeometry, teddyMaterial);
 
 teddy.position.set(0.9, 0.6, 0);
 scene.add(teddy);
+clickableObjects.push(teddy);
 
 // 67 ring
 
@@ -111,6 +120,7 @@ const ring = new THREE.Mesh(ringGeometry, ringMaterial);
 ring.rotation.x = Math.PI / 2;
 ring.position.set(0.4, 0.55, -0.3);
 scene.add(ring);
+clickableObjects.push(ring);
 
 // 67 choclate
 
@@ -120,6 +130,7 @@ const chocolate = new THREE.Mesh(chocoGeometry, chocoMaterial);
 
 chocolate.position.set(-0.3, 0.55, -0.3);
 scene.add(chocolate);
+clickableObjects.push(chocolate);
 
 // 69 lemon
 
@@ -130,11 +141,24 @@ const lemon = new THREE.Mesh(lemonGeometry, lemonMaterial);
 lemon.scale.set(1.2, 0.8, 1);
 lemon.position.set(0.8, 0.55, 0.3);
 scene.add(lemon);
+clickableObjects.push(lemon);
 
 
 // Start far away
 table.position.set(0, 0.15, 0);
 scene.add(table);
+
+let focusedObject = null;
+
+function focusObject(object) {
+  focusedObject = object;
+
+  // Move object to center above table
+  object.position.set(0, 1.2, 0);
+
+  // Lock camera movement
+  controls.enabled = false;
+}
 
   // 7. Animation loop
   function animate() {
@@ -151,6 +175,19 @@ animate();
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
+
+window.addEventListener('click', (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(clickableObjects);
+
+  if (intersects.length > 0) {
+    const clickedObject = intersects[0].object;
+    focusObject(clickedObject);
+  }
+});
 </script>
 
 </body>
