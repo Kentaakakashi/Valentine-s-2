@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kiss · day · mood</title>
+  <title>kiss · after dark</title>
   <style>
     * {
       margin: 0;
@@ -12,14 +12,27 @@
     }
 
     body {
-      background: #0b0004;
-      color: #ffe7f0;
+      background: #0a0005;
+      color: #ffeaf2;
       font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
       overflow-x: hidden;
       line-height: 1.5;
     }
 
-    /* smooth blurred overlay base */
+    /* ——— cinematic atmosphere ——— */
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
+      pointer-events: none;
+      z-index: 2000;
+      opacity: 0.25;
+      mix-blend-mode: overlay;
+    }
+
     .section {
       min-height: 100vh;
       display: flex;
@@ -35,134 +48,130 @@
       display: none !important;
     }
 
-    /* ————— CINEMATIC INTRO ————— */
+    /* ————— INTRO : velvet noir ————— */
     #intro {
-      background: radial-gradient(circle at 30% 40%, #330014 0%, #000000 90%);
+      background: radial-gradient(circle at 70% 20%, #2b0018 0%, #020001 90%);
       text-align: center;
-      animation: slowPulse 12s infinite alternate;
-    }
-
-    @keyframes slowPulse {
-      0% { background-size: 100% 100%; }
-      100% { background-size: 140% 140%; }
     }
 
     .intro-content {
-      max-width: 700px;
-      filter: drop-shadow(0 0 30px #ff1a4c);
+      max-width: 800px;
+      filter: drop-shadow(0 0 60px #ff004c);
+      animation: breath 8s infinite alternate;
+    }
+
+    @keyframes breath {
+      0% { transform: scale(1); filter: drop-shadow(0 0 30px #ff3366); }
+      100% { transform: scale(1.02); filter: drop-shadow(0 0 70px #ff0066); }
     }
 
     .intro-title {
-      font-size: clamp(2.2rem, 12vw, 5rem);
-      font-weight: 500;
-      letter-spacing: 6px;
+      font-size: clamp(2.5rem, 14vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 12px;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
-      animation: glitch 3s infinite;
-      text-shadow: 0 0 10px #ff4d8c, 0 0 30px #b3002d;
+      animation: glitch 4s infinite;
+      text-shadow: 0 0 15px #ff4d8c, 0 0 60px #b3002d;
     }
 
     @keyframes glitch {
       0%, 100% { transform: skew(0deg, 0deg); opacity: 1; }
-      95% { transform: skew(5deg, 2deg); opacity: 0.9; text-shadow: 4px 0 #ff00aa, -4px 0 #00e0ff; }
-      96% { transform: skew(-5deg, -1deg); }
+      95% { transform: skew(8deg, 2deg); opacity: 0.8; text-shadow: 6px 0 #ff00aa, -6px 0 #00e0ff; }
+      96% { transform: skew(-6deg, -1deg); }
     }
 
     .intro-sub {
-      font-size: 1.4rem;
-      font-weight: 300;
+      font-size: 1.5rem;
+      font-weight: 200;
       margin-bottom: 3rem;
       backdrop-filter: blur(2px);
-      animation: fadeIn 2s;
+      color: #ffc0cb;
     }
 
     .enter-btn {
-      background: rgba(255, 40, 90, 0.2);
+      background: rgba(30, 0, 10, 0.5);
       border: 2px solid #ff3d6c;
       color: #ffb0c3;
-      font-size: 1.8rem;
-      padding: 1rem 3.5rem;
-      border-radius: 60px;
-      backdrop-filter: blur(8px);
+      font-size: 2rem;
+      padding: 1rem 4rem;
+      border-radius: 80px;
+      backdrop-filter: blur(15px);
       cursor: pointer;
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 0 30px #ff1455;
-      letter-spacing: 4px;
+      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 50px #ff1455;
+      letter-spacing: 6px;
+      font-weight: 200;
     }
 
     .enter-btn:hover {
       background: #ff2a5e;
       color: #fff;
-      box-shadow: 0 0 70px #ff2a5e;
-      transform: scale(1.07);
+      box-shadow: 0 0 100px #ff2a5e;
+      transform: scale(1.1);
       border-color: #ffd0dc;
     }
 
-    /* ————— KISS PLAYGROUND ————— */
+    /* ————— KISS PLAYGROUND : lip print ————— */
     #kissButtons {
-      background: #120007;
-      background-image: radial-gradient(circle at 70% 20%, #440022 0%, #0a0004 80%);
+      background: #130008;
+      background-image: radial-gradient(circle at 30% 80%, #440022 0%, #000000 90%);
       justify-content: flex-start;
       padding-top: 15vh;
     }
 
     .section-title {
-      font-size: 3rem;
-      font-weight: 300;
+      font-size: 3.2rem;
+      font-weight: 200;
       margin-bottom: 3rem;
-      border-bottom: 1px solid #ff4d6d;
+      border-bottom: 2px solid #ff4d6d;
       display: inline-block;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 8px;
-      animation: softGlow 3s infinite alternate;
-    }
-
-    @keyframes softGlow {
-      from { text-shadow: 0 0 5px #ff99bb; }
-      to { text-shadow: 0 0 25px #ff3b6f; }
+      letter-spacing: 12px;
+      text-shadow: 0 0 25px #ff3b6f;
     }
 
     .kiss-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.5rem;
-      max-width: 800px;
+      gap: 2rem;
+      max-width: 900px;
     }
 
     .kiss-btn {
       background: transparent;
-      border: 1.5px solid #ff3f6b;
+      border: 1.8px solid #ff3f6b;
       color: #ffb6c1;
-      padding: 1.2rem 2.5rem;
-      font-size: 1.5rem;
-      border-radius: 40px;
+      padding: 1.2rem 2.8rem;
+      font-size: 1.8rem;
+      border-radius: 50px;
       cursor: pointer;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       transition: all 0.3s;
-      box-shadow: 0 10px 20px rgba(255, 20, 80, 0.2);
-      font-weight: 300;
-      letter-spacing: 2px;
+      box-shadow: 0 20px 30px rgba(255, 20, 80, 0.3);
+      font-weight: 200;
+      letter-spacing: 4px;
       flex: 0 1 auto;
-      min-width: 160px;
+      min-width: 200px;
       position: relative;
       overflow: hidden;
     }
 
-    .kiss-btn::before {
-      content: '';
+    .kiss-btn::after {
+      content: '❤️';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
+      left: -30px;
+      top: -10px;
+      opacity: 0;
+      transition: 0.4s;
+      font-size: 1.5rem;
     }
 
-    .kiss-btn:hover::before {
-      left: 100%;
+    .kiss-btn:hover::after {
+      left: 10px;
+      opacity: 0.6;
     }
 
     .kiss-btn:hover {
@@ -170,16 +179,16 @@
       color: #fff;
       border-color: #ffa6c0;
       transform: scale(1.1) translateY(-5px);
-      box-shadow: 0 20px 30px #f005;
+      box-shadow: 0 30px 40px #f005;
     }
 
     .french-btn {
       border-color: #b3005e;
       color: #ffb3d9;
-      box-shadow: 0 0 25px #c1005c;
+      box-shadow: 0 0 35px #c1005c;
     }
 
-    /* ————— KISS OVERLAY (immersive) ————— */
+    /* ————— KISS OVERLAY (full bleed) ————— */
     #kissOverlay {
       position: fixed;
       inset: 0;
@@ -187,116 +196,189 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      backdrop-filter: blur(14px) brightness(0.6);
-      -webkit-backdrop-filter: blur(14px) brightness(0.6);
-      animation: overlayAppear 0.4s ease-out;
+      z-index: 3000;
+      backdrop-filter: blur(20px) brightness(0.4);
+      -webkit-backdrop-filter: blur(20px) brightness(0.4);
+      animation: overlayGlow 0.5s ease-out;
     }
 
-    @keyframes overlayAppear {
+    @keyframes overlayGlow {
       0% { opacity: 0; backdrop-filter: blur(0); }
-      100% { opacity: 1; backdrop-filter: blur(14px) brightness(0.6); }
+      100% { opacity: 1; backdrop-filter: blur(20px) brightness(0.4); }
     }
 
     #kissText {
-      font-size: 5rem;
-      font-weight: 200;
-      color: #fff0f5;
-      text-shadow: 0 0 40px #ff0066, 0 0 120px #ffbbcc;
-      animation: kissFloat 3s infinite alternate ease-in-out;
-      transform-origin: center;
-      white-space: nowrap;
-      padding: 1rem 3rem;
-      border: 2px solid #ff99bb55;
+      font-size: 5.5rem;
+      font-weight: 100;
+      color: #ffeef5;
+      text-shadow: 0 0 60px #ff0066, 0 0 150px #ff99bb;
+      animation: kissSway 3s infinite alternate;
+      padding: 1.5rem 4rem;
+      border: 3px solid #ff99bb55;
       border-radius: 200px;
-      backdrop-filter: blur(6px);
-      background: #0a000430;
+      backdrop-filter: blur(10px);
+      background: #0a000440;
+      white-space: nowrap;
     }
 
-    @keyframes kissFloat {
-      0% { transform: translateY(0) scale(1); filter: hue-rotate(0deg); }
-      100% { transform: translateY(-50px) scale(1.1); filter: hue-rotate(10deg) drop-shadow(0 0 30px #ff4080); }
+    @keyframes kissSway {
+      0% { transform: translateY(0) rotate(0deg); letter-spacing: 4px; }
+      100% { transform: translateY(-40px) rotate(1deg); letter-spacing: 12px; text-shadow: 0 0 80px #ff80b3; }
     }
 
-    /* ————— AUDIO STORY (intimate space) ————— */
+    /* ————— CUSTOM AUDIO PLAYER : VINYL DREAMS ————— */
     #audioSection {
-      background: #050002;
+      background: #0b0006;
+      background: linear-gradient(145deg, #1a0010 0%, #030002 100%);
       border-top: 3px solid #a00040;
-      box-shadow: inset 0 0 150px #1a000d;
-      min-height: 90vh;
+      box-shadow: inset 0 0 150px #2b0012;
       position: relative;
     }
 
-    #audioSection::after {
-      content: '💋';
-      font-size: 15vw;
-      position: absolute;
-      bottom: 5%;
-      right: 2%;
-      opacity: 0.03;
-      pointer-events: none;
-      transform: rotate(-10deg);
-    }
-
     .story-player {
-      background: rgba(20, 0, 10, 0.6);
-      backdrop-filter: blur(16px);
-      border-radius: 80px 80px 30px 30px;
-      padding: 2.5rem 3rem;
+      background: rgba(15, 0, 8, 0.6);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 60px 60px 40px 40px;
+      padding: 3rem 3rem 4rem;
       border: 1px solid #a02b50;
-      box-shadow: 0 40px 80px #200008;
-      max-width: 650px;
+      box-shadow: 0 50px 100px #200008, 0 0 0 2px #ff336622 inset;
+      max-width: 700px;
       width: 100%;
+      position: relative;
+      z-index: 10;
     }
 
     .story-player h2 {
-      font-size: 2.5rem;
-      font-weight: 300;
-      letter-spacing: 6px;
+      font-size: 3.2rem;
+      font-weight: 200;
+      letter-spacing: 12px;
       color: #ffb0cc;
+      text-shadow: 0 0 20px #ff99bb;
     }
 
     .story-player p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: #ffc0cb;
-      margin: 1rem 0 2rem;
+      margin: 0.5rem 0 2.5rem;
       font-style: italic;
+      opacity: 0.9;
     }
 
-    audio {
-      width: 100%;
-      filter: sepia(100%) saturate(400%) hue-rotate(290deg) brightness(0.9);
-      outline: none;
-      border-radius: 50px;
-      margin-bottom: 2rem;
+    /* custom player */
+    .custom-player {
+      background: #230012;
+      border-radius: 160px 160px 60px 60px;
+      padding: 2rem 2rem 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #ff4d6e;
+      box-shadow: 0 20px 30px #00000077, 0 0 30px #ff1a4c inset;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    /* custom styling for audio (works in webkit) */
-    audio::-webkit-media-controls-panel {
-      background-color: #33001a;
-      border-radius: 50px;
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
+    .play-pause {
+      background: #ff2a5e;
+      border: none;
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      font-size: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 0 40px #ff0066;
+      line-height: 1;
+    }
+
+    .play-pause:hover {
+      transform: scale(1.1);
+      background: #ff477b;
+    }
+
+    .time-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ffb6c1;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      font-weight: 200;
+    }
+
+    .time-bar {
+      flex: 1;
+      height: 6px;
+      background: #3d0022;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      min-width: 150px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff99bb, #ff3355);
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 20px #ff4d6d;
+    }
+
+    .time-display {
+      font-family: monospace;
+      background: #00000055;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #ff7799;
+    }
+
+    .volume-slider {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: #ff99bb;
+      margin-left: auto;
+    }
+
+    .volume-slider input {
+      width: 100px;
+      accent-color: #ff2a5e;
+      background: #1e000b;
+    }
+
+    /* choices inside custom player */
     .choice-buttons {
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
       justify-content: center;
-      margin-top: 1.5rem;
+      margin: 1rem 0 0.5rem;
     }
 
     .choice-btn {
       background: transparent;
       border: 2px solid #ff4d88;
       color: #ffc0d5;
-      font-size: 2rem;
-      padding: 0.8rem 2.8rem;
-      border-radius: 60px;
+      font-size: 2.4rem;
+      padding: 0.7rem 3rem;
+      border-radius: 80px;
       cursor: pointer;
       transition: 0.3s;
-      min-width: 140px;
+      min-width: 160px;
       backdrop-filter: blur(10px);
-      font-weight: 300;
-      letter-spacing: 4px;
+      font-weight: 200;
+      letter-spacing: 6px;
     }
 
     .choice-btn:hover {
@@ -304,16 +386,37 @@
       color: #fff;
       border-color: #ffb3c6;
       transform: scale(1.1);
-      box-shadow: 0 0 50px #ff3b6f;
+      box-shadow: 0 0 60px #ff3b6f;
     }
 
     .locked {
-      opacity: 0.25;
+      opacity: 0.2;
       pointer-events: none;
-      filter: grayscale(0.8);
+      filter: grayscale(1);
     }
 
-    /* floating hearts / mood animation */
+    /* vinyl animation */
+    .vinyl-decoration {
+      position: absolute;
+      bottom: -40px;
+      right: 20px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #330018, #0f0008);
+      border: 8px double #ff4d6d55;
+      box-shadow: 0 0 80px #ff004c, inset 0 0 60px #ff99bb;
+      animation: spin 12s infinite linear;
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* floating embers */
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -321,45 +424,46 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 50;
+      z-index: 100;
     }
 
     .heart {
       position: absolute;
-      font-size: 1.4rem;
-      opacity: 0.5;
-      color: #ff3f6b;
-      animation: rise 10s infinite linear;
+      font-size: 1.6rem;
+      opacity: 0.3;
+      color: #ff4d8c;
+      animation: rise 12s infinite linear;
       user-select: none;
     }
 
     @keyframes rise {
-      0% { transform: translateY(110vh) rotate(0deg); opacity: 0.1; }
-      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0.7; }
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.5; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
     }
 
-    /* responsive */
-    @media (max-width: 550px) {
-      .kiss-btn { min-width: 130px; font-size: 1.2rem; }
-      .choice-btn { font-size: 1.5rem; padding: 0.6rem 1.8rem; }
-      #kissText { font-size: 2.5rem; white-space: normal; }
+    @media (max-width: 600px) {
+      .kiss-btn { min-width: 150px; font-size: 1.4rem; }
+      .player-controls { flex-direction: column; align-items: stretch; }
+      .volume-slider { margin-left: 0; }
+      #kissText { font-size: 2.8rem; white-space: normal; }
     }
   </style>
 </head>
 <body>
-  <!-- atmospheric floating hearts (just for mood) -->
+  <div class="noise"></div>
   <div class="floating-hearts" id="heartContainer"></div>
 
-  <!-- INTRO : cinematic -->
+  <!-- INTRO -->
   <section id="intro" class="section">
     <div class="intro-content">
-      <h1 class="intro-title">not all kisses are the same</h1>
-      <p class="intro-sub">some are playful. some are dangerous.<br>some… you never forget.</p>
-      <button class="enter-btn" onclick="startPage()">➤ feel it</button>
+      <h1 class="intro-title">kiss me like you'll never forget</h1>
+      <p class="intro-sub">some kisses are play. some are ember. some… never leave.</p>
+      <button class="enter-btn" onclick="startPage()">enter</button>
     </div>
   </section>
 
-  <!-- KISS BUTTONS : playful exploration -->
+  <!-- KISS BUTTONS -->
   <section id="kissButtons" class="section hidden">
     <h2 class="section-title">steal a kiss</h2>
     <div class="kiss-grid">
@@ -367,205 +471,254 @@
       <button class="kiss-btn" onclick="playKiss('forehead')">forehead</button>
       <button class="kiss-btn" onclick="playKiss('nose')">nose</button>
       <button class="kiss-btn" onclick="playKiss('hand')">hand</button>
-      <button class="kiss-btn french-btn" onclick="playFrench()">french 😈</button>
+      <button class="kiss-btn french-btn" onclick="playFrench()">french</button>
     </div>
-    <p style="margin-top: 60px; opacity:0.6; font-size:1.1rem">each kiss leaves a trace...</p>
+    <p style="margin-top: 70px; opacity:0.5; letter-spacing: 6px;">each kiss · a flicker</p>
   </section>
 
-  <!-- AUDIO STORY : intimate space -->
+  <!-- AUDIO STORY : CUSTOM PLAYER -->
   <section id="audioSection" class="section">
     <div class="story-player">
       <h2>✦ deeper ✦</h2>
-      <p>this is not a sound effect — it's my voice.</p>
-      <audio id="storyAudio" controls></audio>
-      <div class="choice-buttons hidden" id="choices">
-        <button class="choice-btn" onclick="choose('yes')">yes</button>
-        <button class="choice-btn" onclick="choose('no')">no</button>
+      <p>my voice · your choice</p>
+
+      <!-- custom audio player -->
+      <div class="custom-player">
+        <div class="player-controls">
+          <button class="play-pause" id="playPauseBtn">▶</button>
+          <div class="time-container">
+            <span class="time-display" id="currentTime">0:00</span>
+            <div class="time-bar" id="timeBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time-display" id="durationTime">0:00</span>
+          </div>
+          <div class="volume-slider">
+            <span>🔊</span>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="0.7">
+          </div>
+        </div>
+        <div class="choice-buttons hidden" id="choices">
+          <button class="choice-btn" onclick="choose('yes')">yes</button>
+          <button class="choice-btn" onclick="choose('no')">no</button>
+        </div>
       </div>
+
+      <div class="vinyl-decoration"></div>
     </div>
   </section>
 
-  <!-- KISS OVERLAY (immersive moment) -->
+  <!-- KISS OVERLAY -->
   <div id="kissOverlay">
     <div id="kissText"></div>
   </div>
 
   <script>
     (function() {
-      // ---- create floating hearts (ambient) ----
+      // ambient hearts
       const heartContainer = document.getElementById('heartContainer');
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 24; i++) {
         let heart = document.createElement('div');
         heart.className = 'heart';
-        heart.innerHTML = '❤️‍🔥';
+        heart.innerHTML = i % 3 === 0 ? '❤️' : (i % 3 === 1 ? '❤️‍🔥' : '💋');
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDelay = Math.random() * 12 + 's';
-        heart.style.fontSize = (0.8 + Math.random() * 1.8) + 'rem';
+        heart.style.animationDelay = Math.random() * 10 + 's';
+        heart.style.fontSize = (0.9 + Math.random() * 1.8) + 'rem';
         heart.style.opacity = 0.2 + Math.random() * 0.4;
         heartContainer.appendChild(heart);
       }
 
-      // ---- DOM elements ----
+      // DOM elements
       const overlay = document.getElementById('kissOverlay');
       const kissText = document.getElementById('kissText');
-      const audio = document.getElementById('storyAudio');
-      const choicesDiv = document.getElementById('choices');
       const introSec = document.getElementById('intro');
       const kissSec = document.getElementById('kissButtons');
+      const choicesDiv = document.getElementById('choices');
 
-      // Audio story logic (extended with mood)
-      let stage = 0;            // 0 = first audio, 1 = after first yes, etc.
-      let finalLock = false;    // permanent lock after final yes
+      // audio element (hidden)
+      const audio = new Audio();
+      audio.src = "assets/sounds/audio1.mp3";  // placeholder
 
-      // set initial audio source (placeholder path)
-      audio.src = "assets/sounds/audio1.mp3";   // ensure file exists or replace with a dummy text
+      // custom player elements
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const currentTimeSpan = document.getElementById('currentTime');
+      const durationTimeSpan = document.getElementById('durationTime');
+      const timeBar = document.getElementById('timeBar');
+      const progressFill = document.getElementById('progressFill');
+      const volumeControl = document.getElementById('volumeControl');
 
-      // when audio ends, show choices (unless locked)
-      audio.addEventListener('ended', () => {
-        if (finalLock) {
-          // after final ending, no choices – just stay beautiful
-          return;
-        }
-        if (!choicesDiv.classList.contains('hidden')) return; 
-        // show choices only if not locked
-        choicesDiv.classList.remove('hidden');
+      let stage = 0;
+      let finalLock = false;
+
+      // ---- custom player logic ----
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+      }
+
+      function updatePlayerUI() {
+        currentTimeSpan.textContent = formatTime(audio.currentTime);
+        durationTimeSpan.textContent = formatTime(audio.duration);
+        const percent = (audio.currentTime / (audio.duration || 1)) * 100;
+        progressFill.style.width = percent + '%';
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        durationTimeSpan.textContent = formatTime(audio.duration);
       });
 
-      // choice handler (respects consent)
+      audio.addEventListener('timeupdate', updatePlayerUI);
+
+      audio.addEventListener('ended', () => {
+        playPauseBtn.textContent = '▶';
+        if (!finalLock && !choicesDiv.classList.contains('hidden')) {
+          // choices already visible? sometimes hidden
+        }
+        if (!finalLock) {
+          choicesDiv.classList.remove('hidden');
+        }
+      });
+
+      playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().catch(e => console.log('play fail (no file?)'));
+          playPauseBtn.textContent = '⏸';
+        } else {
+          audio.pause();
+          playPauseBtn.textContent = '▶';
+        }
+      });
+
+      timeBar.addEventListener('click', (e) => {
+        const rect = timeBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percentage = clickX / width;
+        if (audio.duration) {
+          audio.currentTime = percentage * audio.duration;
+        }
+      });
+
+      volumeControl.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+      });
+
+      // ---- story choices ----
       window.choose = function(answer) {
         if (finalLock) return;
 
-        choicesDiv.classList.add('hidden');  // hide buttons immediately
+        choicesDiv.classList.add('hidden');
 
-        // mood-based backgrounds / soft changes
         if (answer === 'no') {
-          document.body.style.backgroundColor = '#140008';
+          document.body.style.backgroundColor = '#0f0006';
         } else {
-          document.body.style.backgroundColor = '#1f0010';
+          document.body.style.backgroundColor = '#1f0012';
         }
 
-        // branching paths (based on stage, using placeholder audio files)
         if (stage === 0 && answer === 'no') {
-          audio.src = "assets/sounds/no1.mp3";   // soft rejection
-          finalLock = true;                       // path ends
-        } 
-        else if (stage === 0 && answer === 'yes') {
-          audio.src = "assets/sounds/yes1.mp3";   // deeper intimacy
-          stage = 1;
-        } 
-        else if (stage === 1 && answer === 'no') {
-          audio.src = "assets/sounds/no2.mp3";    // gentle exit
+          audio.src = "assets/sounds/no1.mp3";
           finalLock = true;
-        } 
-        else if (stage === 1 && answer === 'yes') {
-          audio.src = "assets/sounds/yes2.mp3";    // final — one-time moment
-          finalLock = true;                          // permanently lock after this
-          // add a subtle visual cue that this was the last
-          kissText.innerText = '❤️'; 
+        } else if (stage === 0 && answer === 'yes') {
+          audio.src = "assets/sounds/yes1.mp3";
+          stage = 1;
+        } else if (stage === 1 && answer === 'no') {
+          audio.src = "assets/sounds/no2.mp3";
+          finalLock = true;
+        } else if (stage === 1 && answer === 'yes') {
+          audio.src = "assets/sounds/yes2.mp3";
+          finalLock = true;
+          // final visual bloom
           setTimeout(() => {
-            if (overlay.style.display !== 'flex') {
-              overlay.style.display = 'flex';
-              overlay.style.background = 'radial-gradient(circle at center, #3d0015, #000)';
-              kissText.innerText = 'the kiss that stays';
-              kissText.style.fontSize = '3rem';
-              setTimeout(() => { overlay.style.display = 'none'; }, 2500);
-            }
-          }, 600);
+            overlay.style.display = 'flex';
+            overlay.style.background = 'radial-gradient(circle at center, #5f0029, #000)';
+            kissText.textContent = 'the kiss that stays';
+            kissText.style.fontSize = '4rem';
+            setTimeout(() => { overlay.style.display = 'none'; }, 2800);
+          }, 500);
         }
 
-        // apply locked class to audio if final
         if (finalLock) {
           audio.classList.add('locked');
-          // optional final message appears briefly
         } else {
           audio.classList.remove('locked');
         }
 
-        // play the chosen audio
-        audio.play().catch(e => console.log('audio play prevented (expected if no files)', e));
+        audio.load();
+        audio.play().catch(e => console.log('audio play prevented (missing files)'));
+        playPauseBtn.textContent = '⏸';
       };
 
-      // ---- start page transition ----
+      // ---- intro ----
       window.startPage = function() {
         introSec.classList.add('hidden');
         kissSec.classList.remove('hidden');
-        // small animation: scroll smoothly into kiss section
         kissSec.scrollIntoView({ behavior: 'smooth' });
       };
 
-      // ---- KISS functions ----
+      // ---- kiss effects ----
       window.playKiss = function(type) {
-        // simulate different backgrounds for each kiss type
         let gradient = '';
-        switch(type) {
-          case 'cheek': gradient = 'linear-gradient(145deg, #33001a, #12000b)'; break;
-          case 'forehead': gradient = 'linear-gradient(120deg, #1f0024, #10000c)'; break;
-          case 'nose': gradient = 'linear-gradient(160deg, #280017, #0d0009)'; break;
-          case 'hand': gradient = 'linear-gradient(95deg, #390021, #140010)'; break;
-          default: gradient = '#1f0015';
-        }
-
+        if (type === 'cheek') gradient = 'linear-gradient(135deg, #440022, #13000c)';
+        else if (type === 'forehead') gradient = 'linear-gradient(105deg, #2f0025, #0e000b)';
+        else if (type === 'nose') gradient = 'linear-gradient(170deg, #3b0025, #080004)';
+        else if (type === 'hand') gradient = 'linear-gradient(90deg, #52002b, #140010)';
+        else gradient = '#1f0015';
         showOverlay(type + ' kiss', `assets/sounds/${type}.mp3`, gradient);
       };
 
       window.playFrench = function() {
-        // tease first
         const tease = new Audio("assets/sounds/french_tease.mp3");
-        tease.play().catch(e=>{}); 
-        // after tease (approx 0.8s), show french overlay
+        tease.play().catch(e=>{});
         setTimeout(() => {
-          showOverlay('french kiss …', "assets/sounds/french.mp3", 'radial-gradient(circle at 30% 40%, #5f002b, #15000a)');
+          showOverlay('french kiss …', "assets/sounds/french.mp3", 'radial-gradient(circle at 30% 40%, #80003b, #1e000b)');
         }, 700);
       };
 
       function showOverlay(msg, soundSrc, bgStyle) {
         overlay.style.display = 'flex';
-        overlay.style.background = bgStyle;  // custom gradient
+        overlay.style.background = bgStyle;
         kissText.textContent = msg;
 
         const sfx = new Audio(soundSrc);
-        sfx.play().catch(e => console.warn('audio file missing, but mood remains'));
+        sfx.play().catch(e => console.warn('audio missing, but mood stays'));
 
         sfx.onended = () => {
-          // smooth hide with fade
-          overlay.style.transition = 'opacity 0.4s';
+          overlay.style.transition = 'opacity 0.5s';
           overlay.style.opacity = '0';
           setTimeout(() => {
             overlay.style.display = 'none';
-            overlay.style.opacity = '1'; // reset
-          }, 400);
+            overlay.style.opacity = '1';
+          }, 500);
         };
       }
 
-      // extra: add subtle heart pulse on button click
-      const allButtons = document.querySelectorAll('button');
-      allButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          let heartEm = document.createElement('span');
-          heartEm.innerHTML = '❤️';
-          heartEm.style.position = 'fixed';
-          heartEm.style.left = e.clientX + 'px';
-          heartEm.style.top = e.clientY + 'px';
-          heartEm.style.fontSize = '2rem';
-          heartEm.style.pointerEvents = 'none';
-          heartEm.style.zIndex = '2000';
-          heartEm.style.animation = 'rise 1s forwards';
-          heartEm.style.opacity = '0.8';
-          document.body.appendChild(heartEm);
-          setTimeout(() => heartEm.remove(), 900);
+      // heart burst on any button click
+      document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          for (let i=0; i<4; i++) {
+            let h = document.createElement('span');
+            h.innerHTML = '❤️';
+            h.style.position = 'fixed';
+            h.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+            h.style.top = (e.clientY + (Math.random()-0.5)*60) + 'px';
+            h.style.fontSize = '2rem';
+            h.style.pointerEvents = 'none';
+            h.style.zIndex = '5000';
+            h.style.animation = 'rise 1s forwards';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 900);
+          }
         });
       });
 
-      // small fix: if overlay is hidden early
-      window.showOverlay = showOverlay; // for global access
-
-      // when any kiss is clicked, also a tiny vibration effect (if supported)
+      // store globally for inline handlers
+      window.showOverlay = showOverlay;
     })();
   </script>
-
-  <!-- note: audio files should be placed in assets/sounds/
-       but the page still works visually without them.
-       for full effect, add .mp3 files: cheek, forehead, nose, hand,
-       french_tease, french, audio1, no1, yes1, no2, yes2  (or change paths) -->
+  <!-- note: audio files should be placed in assets/sounds/ 
+       (cheek.mp3, forehead.mp3, nose.mp3, hand.mp3, french_tease.mp3, french.mp3,
+        audio1.mp3, no1.mp3, yes1.mp3, no2.mp3, yes2.mp3) -->
 </body>
 </html>
