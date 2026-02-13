@@ -75,17 +75,71 @@ const tableGeometry = new THREE.BoxGeometry(3, 0.3, 2);
 const tableMaterial = new THREE.MeshStandardMaterial({ color: 0x3b2a1a });
 const table = new THREE.Mesh(tableGeometry, tableMaterial);
 
+// 67 photoframe
+
+const frameGeometry = new THREE.BoxGeometry(0.8, 0.6, 0.05);
+const frameMaterial = new THREE.MeshStandardMaterial({ color: 0x222222 });
+const photoFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+
+photoFrame.position.set(-0.8, 0.6, 0);
+scene.add(photoFrame);
+
+// 67 letter
+
+const letterGeometry = new THREE.BoxGeometry(0.6, 0.05, 0.4);
+const letterMaterial = new THREE.MeshStandardMaterial({ color: 0xf5f5dc });
+const letter = new THREE.Mesh(letterGeometry, letterMaterial);
+
+letter.position.set(0, 0.55, 0.3);
+scene.add(letter);
+
+ //67 teddy
+
+const teddyGeometry = new THREE.SphereGeometry(0.25, 32, 32);
+const teddyMaterial = new THREE.MeshStandardMaterial({ color: 0xc68642 });
+const teddy = new THREE.Mesh(teddyGeometry, teddyMaterial);
+
+teddy.position.set(0.9, 0.6, 0);
+scene.add(teddy);
+
+// 67 ring
+
+const ringGeometry = new THREE.TorusGeometry(0.12, 0.03, 16, 100);
+const ringMaterial = new THREE.MeshStandardMaterial({ color: 0xffd700 });
+const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+
+ring.rotation.x = Math.PI / 2;
+ring.position.set(0.4, 0.55, -0.3);
+scene.add(ring);
+
+// 67 choclate
+
+const chocoGeometry = new THREE.BoxGeometry(0.5, 0.15, 0.5);
+const chocoMaterial = new THREE.MeshStandardMaterial({ color: 0x4b2e2b });
+const chocolate = new THREE.Mesh(chocoGeometry, chocoMaterial);
+
+chocolate.position.set(-0.3, 0.55, -0.3);
+scene.add(chocolate);
+
+// 69 lemon
+
+const lemonGeometry = new THREE.SphereGeometry(0.15, 32, 32);
+const lemonMaterial = new THREE.MeshStandardMaterial({ color: 0xffeb3b });
+const lemon = new THREE.Mesh(lemonGeometry, lemonMaterial);
+
+lemon.scale.set(1.2, 0.8, 1);
+lemon.position.set(0.8, 0.55, 0.3);
+scene.add(lemon);
+
+
 // Start far away
-table.position.set(0, 0.15, -10);
+table.position.set(0, 0.15, 0);
 scene.add(table);
 
   // 7. Animation loop
   function animate() {
   requestAnimationFrame(animate);
 
-  if (table.position.z < 0) {
-    table.position.z += 0.05;
-  }
 
   renderer.render(scene, camera);
 }
