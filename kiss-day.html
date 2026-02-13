@@ -1,248 +1,747 @@
-<script>
-(function() {
-  // --- ensure heart container exists (fix white screen) ---
-  let heartContainer = document.getElementById('heartContainer');
-  if (!heartContainer) {
-    heartContainer = document.createElement('div');
-    heartContainer.className = 'floating-hearts';
-    heartContainer.id = 'heartContainer';
-    document.body.appendChild(heartContainer);
-  }
-
-  // ambient hearts (now safe)
-  for (let i = 0; i < 24; i++) {
-    let heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerHTML = i % 3 === 0 ? '❤️' : (i % 3 === 1 ? '❤️‍🔥' : '💋');
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.animationDelay = Math.random() * 10 + 's';
-    heart.style.fontSize = (0.9 + Math.random() * 1.8) + 'rem';
-    heart.style.opacity = 0.2 + Math.random() * 0.4;
-    heartContainer.appendChild(heart);
-  }
-
-  // DOM elements – check they exist (if missing, log but don't crash)
-  const overlay = document.getElementById('kissOverlay');
-  const kissText = document.getElementById('kissText');
-  const introSec = document.getElementById('intro');
-  const kissSec = document.getElementById('kissButtons');
-  const choicesDiv = document.getElementById('choices');
-  const customPlayerDiv = document.getElementById('customPlayer');
-  const floatingMessageDiv = document.getElementById('floatingMessage');
-  const storyPlayer = document.getElementById('storyPlayer');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const currentTimeSpan = document.getElementById('currentTime');
-  const durationTimeSpan = document.getElementById('durationTime');
-  const timeBar = document.getElementById('timeBar');
-  const progressFill = document.getElementById('progressFill');
-  const volumeControl = document.getElementById('volumeControl');
-
-  // If any critical player element is missing, we can't initialise the audio section.
-  // But the page should still show the intro and kiss buttons.
-  if (!overlay || !kissText || !introSec || !kissSec) {
-    console.error('Essential DOM elements missing – page structure may be incomplete.');
-  }
-
-  // audio element
-  const audio = new Audio();
-  audio.src = "assets/sounds/audio1.mp3";
-
-  let stage = 0;
-  let finalLock = false;
-  let overlayTimeout = null;
-
-  // --- helper: show temporary message (for audio errors) ---
-  function showToast(msg) {
-    const toast = document.createElement('div');
-    toast.textContent = msg;
-    toast.style.position = 'fixed';
-    toast.style.bottom = '30px';
-    toast.style.left = '50%';
-    toast.style.transform = 'translateX(-50%)';
-    toast.style.background = '#ff3366';
-    toast.style.color = 'white';
-    toast.style.padding = '12px 24px';
-    toast.style.borderRadius = '50px';
-    toast.style.zIndex = '10000';
-    toast.style.fontSize = '1.2rem';
-    toast.style.boxShadow = '0 0 30px #ff0066';
-    toast.style.backdropFilter = 'blur(10px)';
-    toast.style.border = '1px solid #ff99bb';
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-  }
-
-  // --- safe play function with error handling ---
-  function safePlay(audioObj, fallbackMsg) {
-    audioObj.play().catch(err => {
-      console.warn('Audio play failed:', err, 'for', audioObj.src);
-      showToast(fallbackMsg || '💋 audio missing (but kiss still there)');
-    });
-  }
-
-  // ---- custom player logic (only if elements exist) ----
-  if (playPauseBtn && currentTimeSpan && durationTimeSpan && timeBar && progressFill && volumeControl) {
-    function formatTime(seconds) {
-      if (isNaN(seconds)) return '0:00';
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kiss · after dark</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    function updatePlayerUI() {
-      currentTimeSpan.textContent = formatTime(audio.currentTime);
-      durationTimeSpan.textContent = formatTime(audio.duration);
-      const percent = (audio.currentTime / (audio.duration || 1)) * 100;
-      progressFill.style.width = percent + '%';
+    body {
+      background: #0a0005;
+      color: #ffeaf2;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
     }
 
-    audio.addEventListener('loadedmetadata', () => {
-      durationTimeSpan.textContent = formatTime(audio.duration);
-    });
+    /* noise overlay */
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
+      pointer-events: none;
+      z-index: 2000;
+      opacity: 0.25;
+      mix-blend-mode: overlay;
+    }
 
-    audio.addEventListener('timeupdate', updatePlayerUI);
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      transition: opacity 0.6s ease;
+    }
 
-    audio.addEventListener('ended', () => {
-      playPauseBtn.textContent = '▶';
-      if (!finalLock && customPlayerDiv && !customPlayerDiv.classList.contains('hidden')) {
-        if (choicesDiv) choicesDiv.classList.remove('hidden');
+    .hidden {
+      display: none !important;
+    }
+
+    /* ————— INTRO ————— */
+    #intro {
+      background: radial-gradient(circle at 70% 20%, #2b0018 0%, #020001 90%);
+      text-align: center;
+    }
+
+    .intro-content {
+      max-width: 800px;
+      filter: drop-shadow(0 0 60px #ff004c);
+      animation: breath 8s infinite alternate;
+    }
+
+    @keyframes breath {
+      0% { transform: scale(1); filter: drop-shadow(0 0 30px #ff3366); }
+      100% { transform: scale(1.02); filter: drop-shadow(0 0 70px #ff0066); }
+    }
+
+    .intro-title {
+      font-size: clamp(2.5rem, 14vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 12px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: glitch 4s infinite;
+      text-shadow: 0 0 15px #ff4d8c, 0 0 60px #b3002d;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: skew(0deg, 0deg); opacity: 1; }
+      95% { transform: skew(8deg, 2deg); opacity: 0.8; text-shadow: 6px 0 #ff00aa, -6px 0 #00e0ff; }
+      96% { transform: skew(-6deg, -1deg); }
+    }
+
+    .intro-sub {
+      font-size: 1.5rem;
+      font-weight: 200;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(2px);
+      color: #ffc0cb;
+    }
+
+    .enter-btn {
+      background: rgba(30, 0, 10, 0.5);
+      border: 2px solid #ff3d6c;
+      color: #ffb0c3;
+      font-size: 2rem;
+      padding: 1rem 4rem;
+      border-radius: 80px;
+      backdrop-filter: blur(15px);
+      cursor: pointer;
+      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 50px #ff1455;
+      letter-spacing: 6px;
+      font-weight: 200;
+    }
+
+    .enter-btn:hover {
+      background: #ff2a5e;
+      color: #fff;
+      box-shadow: 0 0 100px #ff2a5e;
+      transform: scale(1.1);
+      border-color: #ffd0dc;
+    }
+
+    /* ————— KISS BUTTONS (custom) ————— */
+    #kissButtons {
+      background: #130008;
+      background-image: radial-gradient(circle at 30% 80%, #440022 0%, #000000 90%);
+      justify-content: flex-start;
+      padding-top: 15vh;
+    }
+
+    .section-title {
+      font-size: 3.2rem;
+      font-weight: 200;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid #ff4d6d;
+      display: inline-block;
+      padding-bottom: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 12px;
+      text-shadow: 0 0 25px #ff3b6f;
+    }
+
+    .kiss-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 900px;
+    }
+
+    .kiss-btn {
+      background: transparent;
+      border: 1.8px solid #ff3f6b;
+      color: #ffb6c1;
+      padding: 1.2rem 2.8rem;
+      font-size: 1.8rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(15px);
+      transition: all 0.3s;
+      box-shadow: 0 20px 30px rgba(255, 20, 80, 0.3);
+      font-weight: 200;
+      letter-spacing: 4px;
+      flex: 0 1 auto;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kiss-btn::after {
+      content: '❤️';
+      position: absolute;
+      left: -30px;
+      top: -10px;
+      opacity: 0;
+      transition: 0.4s;
+      font-size: 1.5rem;
+    }
+
+    .kiss-btn:hover::after {
+      left: 10px;
+      opacity: 0.6;
+    }
+
+    .kiss-btn:hover {
+      background: #ff1f4f;
+      color: #fff;
+      border-color: #ffa6c0;
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 30px 40px #f005;
+    }
+
+    .french-btn {
+      border-color: #b3005e;
+      color: #ffb3d9;
+      box-shadow: 0 0 35px #c1005c;
+    }
+
+    /* ————— KISS OVERLAY (with linger) ————— */
+    #kissOverlay {
+      position: fixed;
+      inset: 0;
+      background: center / cover no-repeat;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      backdrop-filter: blur(20px) brightness(0.4);
+      -webkit-backdrop-filter: blur(20px) brightness(0.4);
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    #kissText {
+      font-size: 5.5rem;
+      font-weight: 100;
+      color: #ffeef5;
+      text-shadow: 0 0 60px #ff0066, 0 0 150px #ff99bb;
+      animation: kissSway 3s infinite alternate;
+      padding: 1.5rem 4rem;
+      border: 3px solid #ff99bb55;
+      border-radius: 200px;
+      backdrop-filter: blur(10px);
+      background: #0a000440;
+      white-space: nowrap;
+    }
+
+    @keyframes kissSway {
+      0% { transform: translateY(0) rotate(0deg); letter-spacing: 4px; }
+      100% { transform: translateY(-40px) rotate(1deg); letter-spacing: 12px; text-shadow: 0 0 80px #ff80b3; }
+    }
+
+    /* ————— CUSTOM AUDIO PLAYER ————— */
+    #audioSection {
+      background: #0b0006;
+      background: linear-gradient(145deg, #1a0010 0%, #030002 100%);
+      border-top: 3px solid #a00040;
+      box-shadow: inset 0 0 150px #2b0012;
+      position: relative;
+    }
+
+    .story-player {
+      background: rgba(15, 0, 8, 0.6);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 60px 60px 40px 40px;
+      padding: 3rem 3rem 4rem;
+      border: 1px solid #a02b50;
+      box-shadow: 0 50px 100px #200008, 0 0 0 2px #ff336622 inset;
+      max-width: 700px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .story-player h2 {
+      font-size: 3.2rem;
+      font-weight: 200;
+      letter-spacing: 12px;
+      color: #ffb0cc;
+      text-shadow: 0 0 20px #ff99bb;
+    }
+
+    .story-player p {
+      font-size: 1.4rem;
+      color: #ffc0cb;
+      margin: 0.5rem 0 2.5rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    /* custom player */
+    .custom-player {
+      background: #230012;
+      border-radius: 160px 160px 60px 60px;
+      padding: 2rem 2rem 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #ff4d6e;
+      box-shadow: 0 20px 30px #00000077, 0 0 30px #ff1a4c inset;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: opacity 0.4s;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .play-pause {
+      background: #ff2a5e;
+      border: none;
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      font-size: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 0 40px #ff0066;
+      line-height: 1;
+    }
+
+    .play-pause:hover {
+      transform: scale(1.1);
+      background: #ff477b;
+    }
+
+    .time-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ffb6c1;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      font-weight: 200;
+      flex: 1;
+    }
+
+    .time-bar {
+      flex: 1;
+      height: 6px;
+      background: #3d0022;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      min-width: 150px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff99bb, #ff3355);
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 20px #ff4d6d;
+    }
+
+    .time-display {
+      font-family: monospace;
+      background: #00000055;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #ff7799;
+    }
+
+    .volume-slider {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: #ff99bb;
+      margin-left: auto;
+    }
+
+    .volume-slider input {
+      width: 100px;
+      accent-color: #ff2a5e;
+      background: #1e000b;
+    }
+
+    .choice-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .choice-btn {
+      background: transparent;
+      border: 2px solid #ff4d88;
+      color: #ffc0d5;
+      font-size: 2.4rem;
+      padding: 0.7rem 3rem;
+      border-radius: 80px;
+      cursor: pointer;
+      transition: 0.3s;
+      min-width: 160px;
+      backdrop-filter: blur(10px);
+      font-weight: 200;
+      letter-spacing: 6px;
+    }
+
+    .choice-btn:hover {
+      background: #ff1f5a;
+      color: #fff;
+      border-color: #ffb3c6;
+      transform: scale(1.1);
+      box-shadow: 0 0 60px #ff3b6f;
+    }
+
+    .locked {
+      opacity: 0.2;
+      pointer-events: none;
+      filter: grayscale(1);
+    }
+
+    /* floating message */
+    .floating-message {
+      font-size: 4rem;
+      font-weight: 200;
+      color: #ffc0cb;
+      text-shadow: 0 0 40px #ff1a4c;
+      animation: floatMessage 4s infinite alternate ease-in-out;
+      text-align: center;
+      margin-top: 2rem;
+      letter-spacing: 6px;
+    }
+
+    @keyframes floatMessage {
+      0% { transform: translateY(0); opacity: 0.8; }
+      100% { transform: translateY(-40px); opacity: 1; text-shadow: 0 0 70px #ff80b3; }
+    }
+
+    .vinyl-decoration {
+      position: absolute;
+      bottom: -40px;
+      right: 20px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #330018, #0f0008);
+      border: 8px double #ff4d6d55;
+      box-shadow: 0 0 80px #ff004c, inset 0 0 60px #ff99bb;
+      animation: spin 12s infinite linear;
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.6rem;
+      opacity: 0.3;
+      color: #ff4d8c;
+      animation: rise 12s infinite linear;
+      user-select: none;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.5; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .kiss-btn { min-width: 150px; font-size: 1.4rem; }
+      .player-controls { flex-direction: column; align-items: stretch; }
+      .volume-slider { margin-left: 0; }
+      #kissText { font-size: 2.8rem; white-space: normal; }
+      .floating-message { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="floating-hearts" id="heartContainer"></div>
+
+  <!-- INTRO -->
+  <section id="intro" class="section">
+    <div class="intro-content">
+      <h1 class="intro-title">kiss me like you'll never forget</h1>
+      <p class="intro-sub">some kisses are play. some are ember. some… never leave.</p>
+      <button class="enter-btn" onclick="startPage()">enter</button>
+    </div>
+  </section>
+
+  <!-- KISS BUTTONS (custom types) -->
+  <section id="kissButtons" class="section hidden">
+    <h2 class="section-title">steal a kiss</h2>
+    <div class="kiss-grid">
+      <button class="kiss-btn" onclick="playKiss('soft')">soft</button>
+      <button class="kiss-btn" onclick="playKiss('quick')">quick</button>
+      <button class="kiss-btn" onclick="playKiss('playful')">playful</button>
+      <button class="kiss-btn french-btn" onclick="playFrench()">french</button>
+    </div>
+    <p style="margin-top: 70px; opacity:0.5; letter-spacing: 6px;">each kiss · a flicker</p>
+  </section>
+
+  <!-- AUDIO STORY : CUSTOM PLAYER + FLOATING MESSAGE -->
+  <section id="audioSection" class="section">
+    <div class="story-player" id="storyPlayer">
+      <h2>✦ deeper ✦</h2>
+      <p>my voice · your choice</p>
+
+      <!-- custom player (will be hidden on final no) -->
+      <div class="custom-player" id="customPlayer">
+        <div class="player-controls">
+          <button class="play-pause" id="playPauseBtn">▶</button>
+          <div class="time-container">
+            <span class="time-display" id="currentTime">0:00</span>
+            <div class="time-bar" id="timeBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time-display" id="durationTime">0:00</span>
+          </div>
+          <div class="volume-slider">
+            <span>🔊</span>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="0.7">
+          </div>
+        </div>
+        <div class="choice-buttons hidden" id="choices">
+          <button class="choice-btn" onclick="choose('yes')">yes</button>
+          <button class="choice-btn" onclick="choose('no')">no</button>
+        </div>
+      </div>
+
+      <!-- floating message (hidden initially) -->
+      <div id="floatingMessage" class="floating-message hidden">happy kiss day my bujji</div>
+      <div class="vinyl-decoration"></div>
+    </div>
+  </section>
+
+  <!-- KISS OVERLAY -->
+  <div id="kissOverlay">
+    <div id="kissText"></div>
+  </div>
+
+  <script>
+    (function() {
+      // ambient hearts
+      const heartContainer = document.getElementById('heartContainer');
+      for (let i = 0; i < 24; i++) {
+        let heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = i % 3 === 0 ? '❤️' : (i % 3 === 1 ? '❤️‍🔥' : '💋');
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 10 + 's';
+        heart.style.fontSize = (0.9 + Math.random() * 1.8) + 'rem';
+        heart.style.opacity = 0.2 + Math.random() * 0.4;
+        heartContainer.appendChild(heart);
       }
-    });
 
-    playPauseBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        safePlay(audio, 'audio file not found – check path');
-        playPauseBtn.textContent = '⏸';
-      } else {
-        audio.pause();
+      // DOM elements
+      const overlay = document.getElementById('kissOverlay');
+      const kissText = document.getElementById('kissText');
+      const introSec = document.getElementById('intro');
+      const kissSec = document.getElementById('kissButtons');
+      const choicesDiv = document.getElementById('choices');
+      const customPlayerDiv = document.getElementById('customPlayer');
+      const floatingMessageDiv = document.getElementById('floatingMessage');
+      const storyPlayer = document.getElementById('storyPlayer');
+
+      // audio element (hidden)
+      const audio = new Audio();
+      audio.src = "assets/sounds/audio1.mp3";  // initial voice note
+
+      // custom player elements
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const currentTimeSpan = document.getElementById('currentTime');
+      const durationTimeSpan = document.getElementById('durationTime');
+      const timeBar = document.getElementById('timeBar');
+      const progressFill = document.getElementById('progressFill');
+      const volumeControl = document.getElementById('volumeControl');
+
+      let stage = 0;               // 0: after audio1, 1: after first yes
+      let finalLock = false;       // if true, no more choices
+      let overlayTimeout = null;   // for kiss overlay linger
+
+      // ---- custom player logic ----
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+      }
+
+      function updatePlayerUI() {
+        currentTimeSpan.textContent = formatTime(audio.currentTime);
+        durationTimeSpan.textContent = formatTime(audio.duration);
+        const percent = (audio.currentTime / (audio.duration || 1)) * 100;
+        progressFill.style.width = percent + '%';
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        durationTimeSpan.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', updatePlayerUI);
+
+      audio.addEventListener('ended', () => {
         playPauseBtn.textContent = '▶';
-      }
-    });
+        // show choices only if not locked and player is visible (not hidden by final no)
+        if (!finalLock && !customPlayerDiv.classList.contains('hidden')) {
+          choicesDiv.classList.remove('hidden');
+        }
+      });
 
-    timeBar.addEventListener('click', (e) => {
-      const rect = timeBar.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const width = rect.width;
-      const percentage = clickX / width;
-      if (audio.duration) {
-        audio.currentTime = percentage * audio.duration;
-      }
-    });
+      playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().catch(e => console.log('play fail (no file?)'));
+          playPauseBtn.textContent = '⏸';
+        } else {
+          audio.pause();
+          playPauseBtn.textContent = '▶';
+        }
+      });
 
-    volumeControl.addEventListener('input', (e) => {
-      audio.volume = e.target.value;
-    });
-  } else {
-    console.warn('Custom player elements missing – audio player will not work.');
-  }
+      timeBar.addEventListener('click', (e) => {
+        const rect = timeBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percentage = clickX / width;
+        if (audio.duration) {
+          audio.currentTime = percentage * audio.duration;
+        }
+      });
 
-  // ---- story choices ----
-  window.choose = function(answer) {
-    if (finalLock) return;
-    if (choicesDiv) choicesDiv.classList.add('hidden');
+      volumeControl.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+      });
 
-    if (stage === 0) {
-      if (answer === 'no') {
-        audio.src = "assets/sounds/no1.mp3";
-        finalLock = true;
-        audio.load();
-        safePlay(audio, 'no1.mp3 missing');
-        if (playPauseBtn) playPauseBtn.textContent = '⏸';
-      } else {
-        audio.src = "assets/sounds/yes1.mp3";
-        stage = 1;
-        audio.load();
-        safePlay(audio, 'yes1.mp3 missing');
-        if (playPauseBtn) playPauseBtn.textContent = '⏸';
-      }
-    } else if (stage === 1) {
-      if (answer === 'yes') {
-        audio.src = "assets/sounds/yes2.mp3";
-        finalLock = true;
-        audio.load();
-        safePlay(audio, 'yes2.mp3 missing');
-        if (playPauseBtn) playPauseBtn.textContent = '⏸';
-      } else {
-        if (customPlayerDiv) customPlayerDiv.classList.add('hidden');
-        if (floatingMessageDiv) floatingMessageDiv.classList.remove('hidden');
-        finalLock = true;
-        audio.pause();
-        if (playPauseBtn) playPauseBtn.textContent = '▶';
-      }
-    }
-  };
+      // ---- story choices (revised) ----
+      window.choose = function(answer) {
+        if (finalLock) return;
 
-  // ---- intro ----
-  window.startPage = function() {
-    if (introSec && kissSec) {
-      introSec.classList.add('hidden');
-      kissSec.classList.remove('hidden');
-      kissSec.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+        choicesDiv.classList.add('hidden');  // hide buttons immediately
 
-  // ---- kiss effects ----
-  window.playKiss = function(type) {
-    let gradient = '';
-    if (type === 'soft') gradient = 'linear-gradient(145deg, #440022, #13000c)';
-    else if (type === 'quick') gradient = 'linear-gradient(105deg, #2f0025, #0e000b)';
-    else if (type === 'playful') gradient = 'linear-gradient(170deg, #3b0025, #080004)';
-    else gradient = '#1f0015';
-    showOverlay(type + ' kiss', `assets/sounds/${type}.mp3`, gradient);
-  };
+        // Stage 0: after audio1
+        if (stage === 0) {
+          if (answer === 'no') {
+            // first no: play no1.mp3 and lock
+            audio.src = "assets/sounds/no1.mp3";
+            finalLock = true;
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+          } else { // yes
+            audio.src = "assets/sounds/yes1.mp3";
+            stage = 1; // move to next stage
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+          }
+        }
+        // Stage 1: after first yes
+        else if (stage === 1) {
+          if (answer === 'yes') {
+            // second yes: play yes2.mp3 and lock permanently
+            audio.src = "assets/sounds/yes2.mp3";
+            finalLock = true;
+            audio.load();
+            audio.play().catch(e => console.log('audio missing'));
+            playPauseBtn.textContent = '⏸';
+            // after yes2 ends, no further choices (locked)
+          } else { // no
+            // second no: hide player, show floating message, no audio
+            customPlayerDiv.classList.add('hidden');
+            floatingMessageDiv.classList.remove('hidden');
+            finalLock = true; // lock everything
+            // optional: pause any playing audio
+            audio.pause();
+            playPauseBtn.textContent = '▶';
+          }
+        }
+      };
 
-  window.playFrench = function() {
-    const tease = new Audio("assets/sounds/french_tease.mp3");
-    safePlay(tease, 'french_tease.mp3 missing (tease)');
-    setTimeout(() => {
-      showOverlay('french kiss …', "assets/sounds/french.mp3", 'radial-gradient(circle at 30% 40%, #80003b, #1e000b)');
-    }, 700);
-  };
+      // ---- intro ----
+      window.startPage = function() {
+        introSec.classList.add('hidden');
+        kissSec.classList.remove('hidden');
+        kissSec.scrollIntoView({ behavior: 'smooth' });
+      };
 
-  function showOverlay(msg, soundSrc, bgStyle) {
-    if (!overlay || !kissText) return;
-    if (overlayTimeout) clearTimeout(overlayTimeout);
+      // ---- kiss effects with 3-second linger ----
+      window.playKiss = function(type) {
+        let gradient = '';
+        if (type === 'soft') gradient = 'linear-gradient(145deg, #440022, #13000c)';
+        else if (type === 'quick') gradient = 'linear-gradient(105deg, #2f0025, #0e000b)';
+        else if (type === 'playful') gradient = 'linear-gradient(170deg, #3b0025, #080004)';
+        else gradient = '#1f0015';
+        showOverlay(type + ' kiss', `assets/sounds/${type}.mp3`, gradient);
+      };
 
-    overlay.style.display = 'flex';
-    overlay.style.opacity = '1';
-    overlay.style.background = bgStyle;
-    kissText.textContent = msg;
-
-    const sfx = new Audio(soundSrc);
-    safePlay(sfx, `${soundSrc} not found`);
-
-    sfx.onended = () => {
-      overlayTimeout = setTimeout(() => {
-        overlay.style.transition = 'opacity 0.5s';
-        overlay.style.opacity = '0';
+      window.playFrench = function() {
+        const tease = new Audio("assets/sounds/french_tease.mp3");
+        tease.play().catch(e=>{});
         setTimeout(() => {
-          overlay.style.display = 'none';
-          overlay.style.opacity = '1';
-          overlay.style.transition = '';
-        }, 500);
-      }, 3000);
-    };
-  }
+          showOverlay('french kiss …', "assets/sounds/french.mp3", 'radial-gradient(circle at 30% 40%, #80003b, #1e000b)');
+        }, 700);
+      };
 
-  // heart burst on any button click
-  document.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      for (let i = 0; i < 4; i++) {
-        let h = document.createElement('span');
-        h.innerHTML = '❤️';
-        h.style.position = 'fixed';
-        h.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
-        h.style.top = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
-        h.style.fontSize = '2rem';
-        h.style.pointerEvents = 'none';
-        h.style.zIndex = '5000';
-        h.style.animation = 'rise 1s forwards';
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 900);
+      function showOverlay(msg, soundSrc, bgStyle) {
+        // clear any pending hide timeout
+        if (overlayTimeout) clearTimeout(overlayTimeout);
+
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.style.background = bgStyle;
+        kissText.textContent = msg;
+
+        const sfx = new Audio(soundSrc);
+        sfx.play().catch(e => console.warn('audio missing, but mood stays'));
+
+        sfx.onended = () => {
+          // keep overlay for 3 more seconds, then fade out
+          overlayTimeout = setTimeout(() => {
+            overlay.style.transition = 'opacity 0.5s';
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+              overlay.style.display = 'none';
+              overlay.style.opacity = '1'; // reset for next time
+              overlay.style.transition = '';
+            }, 500);
+          }, 3000);
+        };
       }
-    });
-  });
 
-  window.showOverlay = showOverlay;
-})();
-</script>
+      // heart burst on any button click
+      document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          for (let i=0; i<4; i++) {
+            let h = document.createElement('span');
+            h.innerHTML = '❤️';
+            h.style.position = 'fixed';
+            h.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+            h.style.top = (e.clientY + (Math.random()-0.5)*60) + 'px';
+            h.style.fontSize = '2rem';
+            h.style.pointerEvents = 'none';
+            h.style.zIndex = '5000';
+            h.style.animation = 'rise 1s forwards';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 900);
+          }
+        });
+      });
+
+      // expose functions globally
+      window.showOverlay = showOverlay;
+    })();
+  </script>
+  <!-- audio files expected:
+       assets/sounds/soft.mp3, quick.mp3, playful.mp3, french_tease.mp3, french.mp3,
+       audio1.mp3, no1.mp3, yes1.mp3, yes2.mp3 -->
+</body>
+</html>
