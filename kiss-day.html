@@ -1,7 +1,15 @@
 <script>
 (function() {
-  // ambient hearts (unchanged, keep your existing code)
-  const heartContainer = document.getElementById('heartContainer');
+  // --- ensure heart container exists (fix white screen) ---
+  let heartContainer = document.getElementById('heartContainer');
+  if (!heartContainer) {
+    heartContainer = document.createElement('div');
+    heartContainer.className = 'floating-hearts';
+    heartContainer.id = 'heartContainer';
+    document.body.appendChild(heartContainer);
+  }
+
+  // ambient hearts (now safe)
   for (let i = 0; i < 24; i++) {
     let heart = document.createElement('div');
     heart.className = 'heart';
@@ -13,7 +21,7 @@
     heartContainer.appendChild(heart);
   }
 
-  // DOM elements
+  // DOM elements – check they exist (if missing, log but don't crash)
   const overlay = document.getElementById('kissOverlay');
   const kissText = document.getElementById('kissText');
   const introSec = document.getElementById('intro');
@@ -22,12 +30,6 @@
   const customPlayerDiv = document.getElementById('customPlayer');
   const floatingMessageDiv = document.getElementById('floatingMessage');
   const storyPlayer = document.getElementById('storyPlayer');
-
-  // audio element (hidden)
-  const audio = new Audio();
-  audio.src = "assets/sounds/audio1.mp3";  // initial voice note
-
-  // custom player elements
   const playPauseBtn = document.getElementById('playPauseBtn');
   const currentTimeSpan = document.getElementById('currentTime');
   const durationTimeSpan = document.getElementById('durationTime');
@@ -35,9 +37,19 @@
   const progressFill = document.getElementById('progressFill');
   const volumeControl = document.getElementById('volumeControl');
 
-  let stage = 0;               // 0: after audio1, 1: after first yes
-  let finalLock = false;       // if true, no more choices
-  let overlayTimeout = null;   // for kiss overlay linger
+  // If any critical player element is missing, we can't initialise the audio section.
+  // But the page should still show the intro and kiss buttons.
+  if (!overlay || !kissText || !introSec || !kissSec) {
+    console.error('Essential DOM elements missing – page structure may be incomplete.');
+  }
+
+  // audio element
+  const audio = new Audio();
+  audio.src = "assets/sounds/audio1.mp3";
+
+  let stage = 0;
+  let finalLock = false;
+  let overlayTimeout = null;
 
   // --- helper: show temporary message (for audio errors) ---
   function showToast(msg) {
@@ -68,111 +80,108 @@
     });
   }
 
-  // ---- custom player logic ----
-  function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  function updatePlayerUI() {
-    currentTimeSpan.textContent = formatTime(audio.currentTime);
-    durationTimeSpan.textContent = formatTime(audio.duration);
-    const percent = (audio.currentTime / (audio.duration || 1)) * 100;
-    progressFill.style.width = percent + '%';
-  }
-
-  audio.addEventListener('loadedmetadata', () => {
-    durationTimeSpan.textContent = formatTime(audio.duration);
-  });
-
-  audio.addEventListener('timeupdate', updatePlayerUI);
-
-  audio.addEventListener('ended', () => {
-    playPauseBtn.textContent = '▶';
-    if (!finalLock && !customPlayerDiv.classList.contains('hidden')) {
-      choicesDiv.classList.remove('hidden');
+  // ---- custom player logic (only if elements exist) ----
+  if (playPauseBtn && currentTimeSpan && durationTimeSpan && timeBar && progressFill && volumeControl) {
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
     }
-  });
 
-  playPauseBtn.addEventListener('click', () => {
-    if (audio.paused) {
-      safePlay(audio, 'audio file not found – check path');
-      playPauseBtn.textContent = '⏸';
-    } else {
-      audio.pause();
+    function updatePlayerUI() {
+      currentTimeSpan.textContent = formatTime(audio.currentTime);
+      durationTimeSpan.textContent = formatTime(audio.duration);
+      const percent = (audio.currentTime / (audio.duration || 1)) * 100;
+      progressFill.style.width = percent + '%';
+    }
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationTimeSpan.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', updatePlayerUI);
+
+    audio.addEventListener('ended', () => {
       playPauseBtn.textContent = '▶';
-    }
-  });
+      if (!finalLock && customPlayerDiv && !customPlayerDiv.classList.contains('hidden')) {
+        if (choicesDiv) choicesDiv.classList.remove('hidden');
+      }
+    });
 
-  timeBar.addEventListener('click', (e) => {
-    const rect = timeBar.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const percentage = clickX / width;
-    if (audio.duration) {
-      audio.currentTime = percentage * audio.duration;
-    }
-  });
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        safePlay(audio, 'audio file not found – check path');
+        playPauseBtn.textContent = '⏸';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    });
 
-  volumeControl.addEventListener('input', (e) => {
-    audio.volume = e.target.value;
-  });
+    timeBar.addEventListener('click', (e) => {
+      const rect = timeBar.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const percentage = clickX / width;
+      if (audio.duration) {
+        audio.currentTime = percentage * audio.duration;
+      }
+    });
 
-  // ---- story choices (revised) ----
+    volumeControl.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+  } else {
+    console.warn('Custom player elements missing – audio player will not work.');
+  }
+
+  // ---- story choices ----
   window.choose = function(answer) {
     if (finalLock) return;
+    if (choicesDiv) choicesDiv.classList.add('hidden');
 
-    choicesDiv.classList.add('hidden');  // hide buttons immediately
-
-    // Stage 0: after audio1
     if (stage === 0) {
       if (answer === 'no') {
-        // first no: play no1.mp3 and lock
         audio.src = "assets/sounds/no1.mp3";
         finalLock = true;
         audio.load();
         safePlay(audio, 'no1.mp3 missing');
-        playPauseBtn.textContent = '⏸';
-      } else { // yes
+        if (playPauseBtn) playPauseBtn.textContent = '⏸';
+      } else {
         audio.src = "assets/sounds/yes1.mp3";
-        stage = 1; // move to next stage
+        stage = 1;
         audio.load();
         safePlay(audio, 'yes1.mp3 missing');
-        playPauseBtn.textContent = '⏸';
+        if (playPauseBtn) playPauseBtn.textContent = '⏸';
       }
-    }
-    // Stage 1: after first yes
-    else if (stage === 1) {
+    } else if (stage === 1) {
       if (answer === 'yes') {
-        // second yes: play yes2.mp3 and lock permanently
         audio.src = "assets/sounds/yes2.mp3";
         finalLock = true;
         audio.load();
         safePlay(audio, 'yes2.mp3 missing');
-        playPauseBtn.textContent = '⏸';
-        // after yes2 ends, no further choices (locked)
-      } else { // no
-        // second no: hide player, show floating message, no audio
-        customPlayerDiv.classList.add('hidden');
-        floatingMessageDiv.classList.remove('hidden');
-        finalLock = true; // lock everything
-        // optional: pause any playing audio
+        if (playPauseBtn) playPauseBtn.textContent = '⏸';
+      } else {
+        if (customPlayerDiv) customPlayerDiv.classList.add('hidden');
+        if (floatingMessageDiv) floatingMessageDiv.classList.remove('hidden');
+        finalLock = true;
         audio.pause();
-        playPauseBtn.textContent = '▶';
+        if (playPauseBtn) playPauseBtn.textContent = '▶';
       }
     }
   };
 
   // ---- intro ----
   window.startPage = function() {
-    introSec.classList.add('hidden');
-    kissSec.classList.remove('hidden');
-    kissSec.scrollIntoView({ behavior: 'smooth' });
+    if (introSec && kissSec) {
+      introSec.classList.add('hidden');
+      kissSec.classList.remove('hidden');
+      kissSec.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  // ---- kiss effects with 3-second linger ----
+  // ---- kiss effects ----
   window.playKiss = function(type) {
     let gradient = '';
     if (type === 'soft') gradient = 'linear-gradient(145deg, #440022, #13000c)';
@@ -191,7 +200,7 @@
   };
 
   function showOverlay(msg, soundSrc, bgStyle) {
-    // clear any pending hide timeout
+    if (!overlay || !kissText) return;
     if (overlayTimeout) clearTimeout(overlayTimeout);
 
     overlay.style.display = 'flex';
@@ -203,13 +212,12 @@
     safePlay(sfx, `${soundSrc} not found`);
 
     sfx.onended = () => {
-      // keep overlay for 3 more seconds, then fade out
       overlayTimeout = setTimeout(() => {
         overlay.style.transition = 'opacity 0.5s';
         overlay.style.opacity = '0';
         setTimeout(() => {
           overlay.style.display = 'none';
-          overlay.style.opacity = '1'; // reset for next time
+          overlay.style.opacity = '1';
           overlay.style.transition = '';
         }, 500);
       }, 3000);
@@ -219,12 +227,12 @@
   // heart burst on any button click
   document.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      for (let i=0; i<4; i++) {
+      for (let i = 0; i < 4; i++) {
         let h = document.createElement('span');
         h.innerHTML = '❤️';
         h.style.position = 'fixed';
-        h.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
-        h.style.top = (e.clientY + (Math.random()-0.5)*60) + 'px';
+        h.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
+        h.style.top = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
         h.style.fontSize = '2rem';
         h.style.pointerEvents = 'none';
         h.style.zIndex = '5000';
@@ -235,7 +243,6 @@
     });
   });
 
-  // expose functions globally
   window.showOverlay = showOverlay;
 })();
 </script>
