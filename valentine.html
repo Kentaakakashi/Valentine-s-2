@@ -56,7 +56,7 @@ scene.add(sky);
   document.body.appendChild(renderer.domElement);
 
   // 4. Controls (Google Maps style)
-  // const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableZoom = false;
   controls.enablePan = false;
 
