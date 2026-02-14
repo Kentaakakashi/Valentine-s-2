@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>for kavimitha ❤️</title>
+    <title>for kavimitha • valentine</title>
+    <!-- Google Fonts for elegant design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,30 +15,50 @@
             box-sizing: border-box;
         }
 
-        /* liquid background animation */
+        /* liquid background animation (softer pastel romantic) */
         body {
-            font-family: 'Segoe UI', 'Helvetica', cursive, sans-serif;
-            background: linear-gradient(124deg, #ff6b6b, #f06595, #cc5de8, #845ef7, #5c7cff, #6c9eff, #7bc9ff, #9ad0f5, #a3e0c7, #fff6b0);
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(124deg, #f9c7d3, #f7b7c9, #f9b8c4, #fbb9c0, #fdccbf, #fed9bf, #fee0c7, #ffe6d5, #fbedf0, #f8e3ef);
             background-size: 400% 400%;
-            animation: liquidGradient 16s ease infinite;
+            animation: liquidGradient 18s ease infinite;
             min-height: 100vh;
             margin: 0;
-            color: white;
+            color: #3b2b2b;
             transition: overflow 0.3s;
+            position: relative;
         }
 
         @keyframes liquidGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 40%; }
+            50% { background-position: 100% 60%; }
+            100% { background-position: 0% 40%; }
         }
 
-        /* lock scroll until story finishes */
-        body.locked {
-            overflow: hidden;
+        /* floating hearts decoration */
+        .floating-heart {
+            position: fixed;
+            font-size: 1.8rem;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 10s infinite ease-in-out;
+            color: #fff0f3;
+            text-shadow: 0 0 5px rgba(255, 180, 200, 0.8);
         }
 
-        /* main sections */
+        .heart1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .heart2 { bottom: 15%; right: 7%; animation-delay: 2s; font-size: 2.5rem; }
+        .heart3 { top: 25%; right: 12%; animation-delay: 4s; }
+        .heart4 { bottom: 30%; left: 8%; animation-delay: 1s; font-size: 2rem; }
+        .heart5 { top: 70%; left: 15%; animation-delay: 5s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(8deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* main container for story with glass effect */
         .story-section {
             height: 100vh;
             width: 100%;
@@ -43,40 +67,53 @@
             align-items: center;
             text-align: center;
             padding: 1rem;
+            position: relative;
+            z-index: 10;
         }
 
         .story-container {
             max-width: 1000px;
             width: 100%;
-            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 60px 20px 60px 20px;
+            padding: 2.5rem 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 200, 220, 0.5) inset;
+            transition: all 0.4s;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            font-weight: 700;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            font-size: clamp(1.8rem, 6vw, 3.5rem);
-            line-height: 1.4;
-            transition: all 0.3s;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(255, 240, 245, 0.8);
+            font-size: clamp(1.7rem, 5vw, 3.2rem);
+            line-height: 1.5;
+            color: #2d1f1f;
+            font-family: 'Dancing Script', cursive; /* romantic script for main story */
         }
 
-        /* base text style */
-        .story-text, .push-container span {
-            display: inline-block;
-            text-align: center;
-            word-break: break-word;
-            backface-visibility: hidden;
-            -webkit-font-smoothing: antialiased;
+        /* for long paragraphs we use a mix */
+        .story-container .story-text,
+        .story-container .push-container span {
+            font-family: inherit;
         }
 
-        /* glow animation */
+        /* additional serif for the final paragraph to be legible */
+        .final-paragraph {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        /* glow effect more dreamy */
         .glow {
-            animation: softGlow 2.2s infinite alternate ease-in-out;
+            animation: softGlow 3s infinite alternate ease-in-out;
         }
 
         @keyframes softGlow {
-            0% { text-shadow: 0 0 5px #fff, 0 0 15px #ffb6c1, 0 0 25px #ff9eb5; }
-            100% { text-shadow: 0 0 20px #fff, 0 0 35px #ff80a5, 0 0 50px #ff4d6d; }
+            0% { text-shadow: 0 0 8px #ffeef2, 0 0 18px #ffc1cc, 0 0 28px #ffa5b9; }
+            100% { text-shadow: 0 0 18px #fff0f5, 0 0 32px #ff9eb5, 0 0 55px #ff708d; }
         }
 
         /* fade animations */
@@ -85,7 +122,7 @@
         }
 
         @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(50px); }
+            0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
@@ -95,22 +132,26 @@
 
         @keyframes fadeOutUp {
             0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-60px); }
+            100% { opacity: 0; transform: translateY(-50px); }
         }
 
-        /* push effect container */
+        /* push container */
         .push-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 0.4rem 0.9rem;
+            gap: 0.5rem 1.2rem;
             transition: all 0.7s ease;
         }
 
         .push-container span {
             transition: transform 0.7s ease, opacity 0.7s ease;
             will-change: transform, opacity;
+            background: rgba(255,255,240,0.15);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
         }
 
         .push-container .part2 {
@@ -118,233 +159,249 @@
         }
 
         .push-container.push-active .part1 {
-            transform: translateX(-25px);
+            transform: translateX(-30px);
         }
 
         .push-container.push-active .part2 {
             opacity: 1;
         }
 
-        /* final paragraph styling */
+        /* final paragraph styles */
         .final-paragraph {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.3rem 0.7rem;
+            background: rgba(255,255,255,0.15);
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
         }
 
         .final-paragraph .part2 {
             transition: opacity 1.2s ease;
             opacity: 0;
+            font-style: italic;
         }
 
         .final-paragraph.reveal-second .part2 {
             opacity: 1;
         }
 
-        /* hidden sections (video & gift) */
+        /* video & gift sections (glass) */
         .video-section, .gift-section {
             display: none;
             width: 100%;
             padding: 4rem 2rem;
             text-align: center;
-            backdrop-filter: blur(3px);
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 40px 40px 0 0;
-            margin-top: 2rem;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 60px 60px 0 0;
+            margin-top: 3rem;
+            box-shadow: 0 -20px 40px rgba(255, 200, 220, 0.3);
+            border-top: 3px solid rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 15;
         }
 
         .video-section h2, .gift-section h2 {
-            font-size: 2.7rem;
+            font-size: 3rem;
             margin-bottom: 2rem;
-            text-shadow: 0 0 20px hotpink;
+            text-shadow: 0 0 25px #fff0f5;
+            font-family: 'Dancing Script', cursive;
+            color: #3a2222;
             letter-spacing: 2px;
+            background: rgba(255,255,250,0.3);
+            display: inline-block;
+            padding: 0.5rem 2.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
         }
 
         video {
             max-width: 90%;
             width: 800px;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,255,255,0.3);
+            border-radius: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 5px rgba(255,240,245,0.8);
             transition: transform 0.3s;
+            background: #ffeef2;
         }
 
         video:hover {
-            transform: scale(1.01);
+            transform: scale(1.02) rotate(0.5deg);
         }
 
         /* gift button */
         .gift-button {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            border: none;
-            color: white;
-            font-size: 2.2rem;
+            background: rgba(255, 220, 230, 0.7);
+            backdrop-filter: blur(12px);
+            border: 3px solid white;
+            color: #3b1e2b;
+            font-size: 2.5rem;
             font-weight: bold;
-            padding: 1.3rem 3.5rem;
-            border-radius: 60px;
+            padding: 1.2rem 3.5rem;
+            border-radius: 80px;
             cursor: pointer;
-            box-shadow: 0 0 30px #ff4d6d, 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 40px #ffb6c1, 0 15px 30px rgba(90, 40, 50, 0.3);
             transition: all 0.3s;
-            border: 3px solid rgba(255,255,255,0.6);
             margin: 2rem 0;
             letter-spacing: 3px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 0 rgba(255,255,255,0.5);
         }
 
         .gift-button:hover {
-            transform: scale(1.1) rotate(1deg);
-            box-shadow: 0 0 60px #ffb6c1, 0 15px 30px black;
-            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            transform: scale(1.12) rotate(-1deg);
+            box-shadow: 0 0 70px #ffe2e9, 0 20px 40px #b3747e;
+            background: rgba(255, 200, 215, 0.9);
+            border-color: #ffeef2;
         }
 
-        .gift-button:active {
-            transform: scale(0.95);
-        }
-
-        /* small note */
         .footnote {
-            color: rgba(255,255,240,0.8);
-            font-size: 1.2rem;
-            margin-top: 2rem;
+            color: #3f2c2c;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            background: rgba(255,255,255,0.3);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            backdrop-filter: blur(3px);
+        }
+
+        /* lock body scroll until unlock */
+        body.locked {
+            overflow: hidden;
         }
 
         /* responsive adjustments */
         @media (max-width: 600px) {
-            .push-container.push-active .part1 {
-                transform: translateX(-10px);
-            }
             .story-container {
-                font-size: 1.7rem;
+                padding: 1.8rem 1.2rem;
+                border-radius: 40px 10px 40px 10px;
+            }
+            .push-container.push-active .part1 {
+                transform: translateX(-15px);
             }
             .gift-button {
                 font-size: 1.8rem;
                 padding: 1rem 2rem;
             }
+            .video-section h2, .gift-section h2 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
 <body class="locked">
-    <!-- STORY SECTION (fullscreen animated text) -->
+    <!-- romantic floating hearts -->
+    <div class="floating-heart heart1">❤️</div>
+    <div class="floating-heart heart2">🌸</div>
+    <div class="floating-heart heart3">❤️</div>
+    <div class="floating-heart heart4">🌸</div>
+    <div class="floating-heart heart5">❤️</div>
+
+    <!-- STORY SECTION (glass container) -->
     <section class="story-section">
         <div class="story-container" id="storyContainer"></div>
     </section>
 
-    <!-- VIDEO SECTION (hidden until unlock) -->
+    <!-- VIDEO SECTION (hidden initially) -->
     <section class="video-section" id="videoSection">
-        <h2>✨ my edit for you ✨</h2>
-        <!-- replace src with your actual video file or embed -->
-        <video controls poster="https://via.placeholder.com/800x400/ff9eb5/ffffff?text=click+play+kavimitha">
-            <source src="your-edit.mp4" type="video/mp4">
-            Your browser does not support the video tag. 
-            <!-- fallback: if video not available, show message -->
+        <h2>✨ my edit, made for you ✨</h2>
+        <!-- video path: assets/edit.mp4 -->
+        <video controls poster="https://via.placeholder.com/800x400/ffd9e6/ffb6c1?text=❤️+kavimitha+❤️">
+            <source src="assets/edit.mp4" type="video/mp4">
+            <!-- fallback message if video not found -->
+            Your browser does not support the video tag. But the gift awaits below ↓
         </video>
-        <p style="margin-top: 1.5rem; font-size: 1.5rem; text-shadow: 0 0 8px white;">❤️  watch till the end  ❤️</p>
+        <p style="margin-top: 1.5rem; font-size: 1.8rem; font-family: 'Dancing Script', cursive; text-shadow: 0 0 8px white;">❤️  play and feel the love  ❤️</p>
     </section>
 
     <!-- GIFT SECTION (secret button) -->
     <section class="gift-section" id="giftSection">
-        <h2>🎁 a secret gift 🎁</h2>
+        <h2>🎁 a secret wrapped with care 🎁</h2>
         <button class="gift-button" id="giftButton">🔮 open your gift 🔮</button>
-        <p class="footnote">(click the magic button → discord server)</p>
+        <p class="footnote">(click the magic button → your special discord server)</p>
     </section>
 
     <script>
         (function() {
-            // ---------- DOM elements ----------
             const storyContainer = document.getElementById('storyContainer');
             const videoSection = document.getElementById('videoSection');
             const giftSection = document.getElementById('giftSection');
             const giftButton = document.getElementById('giftButton');
             const body = document.body;
 
-            // ---------- helper: clear container ----------
+            // helper: clear container
             function clearContainer() {
                 storyContainer.innerHTML = '';
             }
 
-            // ---------- delay promise ----------
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-            // ---------- unlock page (show video & gift, allow scroll) ----------
+            // unlock page: enable scroll, show video & gift sections
             function unlockPage() {
-                body.classList.remove('locked');           // enable scrolling
+                body.classList.remove('locked');
                 videoSection.style.display = 'block';
                 giftSection.style.display = 'block';
-                // optional smooth scroll to video after a tiny moment
                 setTimeout(() => {
                     videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 600);
+                }, 400);
             }
 
-            // ---------- set discord link (change this to your actual invite) ----------
-            const DISCORD_INVITE = 'https://discord.gg/your-gift-here';  // <-- REPLACE WITH REAL LINK
+            // DISCORD LINK (replace with your actual invite)
+            const DISCORD_INVITE = 'https://discord.gg/your-gift-here';  // <-- CHANGE THIS
 
             giftButton.addEventListener('click', () => {
-                window.open(DISCORD_INVITE, '_blank');   // opens discord server
+                window.open(DISCORD_INVITE, '_blank');
             });
 
-            // ---------- main story sequence ----------
+            // ---------- story sequence ----------
             async function startStory() {
-                // first: wait 5 seconds with only background
-                await delay(5000);
+                await delay(5000); // 5s liquid background only
 
-                // 1) "Hi kavimitha..." fade in, stay, fade out
+                // 1) Hi kavimitha...
                 await showFadeInOut('Hi kavimitha...', 5000);
 
-                // 2) wait 3s (already included in showFadeInOut returns after fadeOut + 3s)
-                // but we've built the wait into the function, so just call next
-
-                // 3) "To be honest, i have no idea what to say..."
+                // 2) To be honest, i have no idea what to say...
                 await showFadeInOut('To be honest, i have no idea what to say...', 5000);
 
-                // 4) push effect: "You know..." + "the chances ... 0.3%...."
+                // 3) push effect: "You know..." + "the chances of us meeting ... 0.3%...."
                 await showPushEffect('You know...', 'the chances of us meeting each other is said to be 0.3%....', 5000);
 
-                // 5) "Thats as rare as being blindfolded ... 997 of it does nothing"
+                // 4) rare buttons paragraph
                 await showFadeInOut('Thats as rare as being blindfolded and placed in front of 1000 buttons, 3 of it gets us together and 997 of it does nothing', 5000);
 
-                // 6) "And us exactly pressing the 3 button"
+                // 5) And us exactly pressing the 3 button
                 await showFadeInOut('And us exactly pressing the 3 button', 5000);
 
-                // 7) final paragraph: "You see... (pause) you changed my life a lot, and i mean it." -> stays, then unlock
+                // 6) final paragraph: "You see... (pause) you changed my life a lot, and i mean it." -> stays & unlocks
                 await showFinalParagraph();
-
-                // after final paragraph finishes appearing, unlock
-                // (unlock is called inside showFinalParagraph after second part fades in)
             }
 
-            // ---------- standard fadeIn + stay + fadeOut + 3s wait ----------
+            // standard fadeIn + stay + fadeOut + 3s wait
             async function showFadeInOut(text, stayMs) {
                 clearContainer();
 
-                // create main text div
                 const textDiv = document.createElement('div');
                 textDiv.className = 'story-text fade-in-from-below glow';
                 textDiv.textContent = text;
                 storyContainer.appendChild(textDiv);
 
-                // stay for requested time
                 await delay(stayMs);
 
-                // remove glow, fade out upward
                 textDiv.classList.remove('glow');
                 textDiv.classList.add('fade-out-up');
 
-                // wait for fade out (1.2s)
                 await delay(1200);
-
-                // remove from DOM
                 clearContainer();
-
-                // wait 3 seconds before next step
                 await delay(3000);
             }
 
-            // ---------- push effect: part1 + part2 appear, then both fade out + 3s wait ----------
+            // push effect
             async function showPushEffect(part1Text, part2Text, stayMs) {
                 clearContainer();
 
-                // create push container
                 const pushDiv = document.createElement('div');
                 pushDiv.className = 'push-container';
 
@@ -353,39 +410,34 @@
                 span1.textContent = part1Text;
 
                 const span2 = document.createElement('span');
-                span2.className = 'part2';   // initially opacity 0
+                span2.className = 'part2';
                 span2.textContent = part2Text;
 
                 pushDiv.appendChild(span1);
                 pushDiv.appendChild(span2);
                 storyContainer.appendChild(pushDiv);
 
-                // trigger push animation after a tiny paint
                 await delay(50);
                 pushDiv.classList.add('push-active');
-                // also give glow to part2 after it appears (optional)
-                await delay(700); // let push animation finish
-                span2.classList.add('glow'); // now it glows too
+                await delay(700);
+                span2.classList.add('glow');
 
-                // stay with both visible
                 await delay(stayMs);
 
-                // fade both out: remove glow, add fade-out-up to both spans
                 span1.classList.remove('glow');
                 span2.classList.remove('glow');
                 span1.classList.add('fade-out-up');
                 span2.classList.add('fade-out-up');
 
-                await delay(1200); // wait for fade out
+                await delay(1200);
                 clearContainer();
-                await delay(3000); // 3s pause
+                await delay(3000);
             }
 
-            // ---------- final paragraph: "You see..." + pause + "you changed my life..." + unlock ----------
+            // final paragraph with unlock
             async function showFinalParagraph() {
                 clearContainer();
 
-                // create a wrapper for final paragraph
                 const finalDiv = document.createElement('div');
                 finalDiv.className = 'story-text final-paragraph';
 
@@ -394,44 +446,32 @@
                 part1.textContent = 'You see...';
 
                 const part2 = document.createElement('span');
-                part2.className = 'part2';   // will become visible later
+                part2.className = 'part2';
                 part2.textContent = 'you changed my life a lot, and i mean it.';
 
                 finalDiv.appendChild(part1);
                 finalDiv.appendChild(part2);
                 storyContainer.appendChild(finalDiv);
 
-                // short pause before second part fades in (a little pause)
+                // a little pause, then second part fades in
                 await delay(1800);
-
-                // reveal second part with smooth opacity (defined in CSS)
                 finalDiv.classList.add('reveal-second');
-                part2.classList.add('glow');  // start glowing when visible
+                part2.classList.add('glow');
 
-                // wait for second part to fade in (1.2s transition)
                 await delay(1200);
 
-                // NOW the paragraph is fully visible. unlock the page!
+                // now unlock the page (paragraph remains visible)
                 unlockPage();
-
-                // note: we do NOT clear the paragraph, it stays as top content.
             }
 
-            // ---------- start the magic when page loads ----------
+            // start when loaded
             window.addEventListener('load', () => {
-                // small delay to ensure background is liquidy
-                startStory().catch(err => console.error('story error:', err));
+                startStory().catch(console.error);
             });
-
-            // (optional) fallback in case of fast clicking: prevent any default link behaviour
-            giftButton.addEventListener('click', (e) => {
-                // we already open new tab, but keep no other action
-            });
-
         })();
     </script>
 
-    <!-- small extra design: floating hearts can be added but not necessary -->
-    <div style="position: fixed; bottom: 10px; right: 20px; opacity: 0.3; color: white; font-size: 2rem; pointer-events: none;">❤️</div>
+    <!-- tiny signature heart -->
+    <div style="position: fixed; bottom: 8px; left: 15px; opacity: 0.4; color: white; font-size: 1.2rem; z-index: 20;">with love, always ❤️</div>
 </body>
 </html>
