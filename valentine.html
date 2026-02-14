@@ -8,26 +8,101 @@
       margin: 0;
       overflow: hidden;
       background: black;
-      cursor: default;
+      font-family: "Georgia", serif;
+    }
+
+    /* LETTER UI */
+    #letterUI {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.6);
+      z-index: 10;
+    }
+
+    .letter {
+      width: 420px;
+      max-width: 90%;
+      background: #fdf6e3;
+      color: #333;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      animation: fadeUp 0.5s ease;
+    }
+
+    .letter h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .choices {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .choices button {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .yes { background: #ff4d88; color: white; }
+    .maybe { background: #ccc; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+
+<!-- LETTER OVERLAY -->
+<div id="letterUI">
+  <div class="letter">
+    <h2>My Love,</h2>
+    <p>
+      From the moment you came into my life, everything started feeling softer,
+      warmer, and more meaningful. This isn’t just a letter — it’s a promise
+      written with every heartbeat, every laugh, and every quiet moment we share.
+    </p>
+    <p>
+      No matter where life takes us, I want you beside me — today, tomorrow,
+      and in every version of the future.
+    </p>
+
+    <p style="text-align:center; font-weight:bold;">
+      Will you be my Valentine forever?
+    </p>
+
+    <div class="choices">
+      <button class="yes" id="yesBtn">Yes</button>
+      <button class="maybe" id="maybeBtn">Maybe later</button>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
 /* ======================
-   BASIC SETUP
+   BASIC 3D SETUP
 ====================== */
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 3, 8);
-camera.lookAt(0, 1, 0);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(0,3,8);
+camera.lookAt(0,1,0);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias:true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -35,197 +110,108 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.enablePan = false;
 
-/* ======================
-   SKY
-====================== */
+/* SKY */
 scene.add(new THREE.Mesh(
-  new THREE.SphereGeometry(100, 32, 32),
-  new THREE.MeshBasicMaterial({ color: 0x0a0a1a, side: THREE.BackSide })
+  new THREE.SphereGeometry(100,32,32),
+  new THREE.MeshBasicMaterial({ color:0x0a0a1a, side:THREE.BackSide })
 ));
 
-/* ======================
-   LIGHTING
-====================== */
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
+/* LIGHTS */
+const ambient = new THREE.AmbientLight(0xffffff,0.5);
+scene.add(ambient);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(5, 10, 5);
-scene.add(directionalLight);
+const dir = new THREE.DirectionalLight(0xffffff,1);
+dir.position.set(5,10,5);
+scene.add(dir);
 
-const spotlight = new THREE.SpotLight(0xffc0cb, 0);
-spotlight.position.set(0, 5, 0);
-scene.add(spotlight);
-
-/* ======================
-   FLOOR & TABLE
-====================== */
+/* FLOOR */
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(50, 50),
-  new THREE.MeshStandardMaterial({ color: 0x444444, side: THREE.DoubleSide })
+  new THREE.PlaneGeometry(50,50),
+  new THREE.MeshStandardMaterial({ color:0x444444, side:THREE.DoubleSide })
 );
-floor.rotation.x = -Math.PI / 2;
+floor.rotation.x = -Math.PI/2;
 scene.add(floor);
 
+/* TABLE */
 const table = new THREE.Mesh(
-  new THREE.BoxGeometry(3, 0.3, 2),
-  new THREE.MeshStandardMaterial({ color: 0x3b2a1a })
+  new THREE.BoxGeometry(3,0.3,2),
+  new THREE.MeshStandardMaterial({ color:0x3b2a1a })
 );
-table.position.set(0, 0.15, 0);
+table.position.set(0,0.15,0);
 scene.add(table);
 
-/* ======================
-   INTERACTION CORE
-====================== */
+/* INTERACTION */
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-const clickableObjects = [];
+const clickable = [];
 
-let focusedObject = null;
-let targetPosition = null;
-let returning = false;
-let isDragging = false;
+let focused = null;
+let targetPos = null;
 
-/* ======================
-   HELPER
-====================== */
-function makeClickable(mesh) {
-  mesh.userData.originalPosition = mesh.position.clone();
-  mesh.userData.originalRotation = mesh.rotation.clone();
-  clickableObjects.push(mesh);
-}
-
-/* ======================
-   OBJECTS
-====================== */
-function addBox(size, color, pos) {
-  const mesh = new THREE.Mesh(
+/* OBJECTS */
+function addBox(size,color,pos,isLetter=false){
+  const m = new THREE.Mesh(
     new THREE.BoxGeometry(...size),
     new THREE.MeshStandardMaterial({ color })
   );
-  mesh.position.copy(pos);
-  scene.add(mesh);
-  makeClickable(mesh);
-  return mesh;
+  m.position.copy(pos);
+  m.userData.original = pos.clone();
+  m.userData.isLetter = isLetter;
+  scene.add(m);
+  clickable.push(m);
+  return m;
 }
 
-addBox([0.8,0.6,0.05], 0x222222, new THREE.Vector3(-0.8,0.6,0)); // photo
-addBox([0.6,0.05,0.4], 0xf5f5dc, new THREE.Vector3(0,0.55,0.3)); // letter
-addBox([0.5,0.15,0.5], 0x4b2e2b, new THREE.Vector3(-0.3,0.55,-0.3)); // chocolate
+addBox([0.8,0.6,0.05],0x222222,new THREE.Vector3(-0.8,0.6,0));
+const letter = addBox([0.6,0.05,0.4],0xf5f5dc,new THREE.Vector3(0,0.55,0.3),true);
+addBox([0.5,0.15,0.5],0x4b2e2b,new THREE.Vector3(-0.3,0.55,-0.3));
 
-const teddy = new THREE.Mesh(
-  new THREE.SphereGeometry(0.25,32,32),
-  new THREE.MeshStandardMaterial({ color: 0xc68642 })
-);
-teddy.position.set(0.9,0.6,0);
-scene.add(teddy);
-makeClickable(teddy);
+/* CLICK */
+window.addEventListener("click",(e)=>{
+  mouse.x = (e.clientX/window.innerWidth)*2-1;
+  mouse.y = -(e.clientY/window.innerHeight)*2+1;
+  raycaster.setFromCamera(mouse,camera);
 
-const ring = new THREE.Mesh(
-  new THREE.TorusGeometry(0.12,0.03,16,100),
-  new THREE.MeshStandardMaterial({ color: 0xffd700 })
-);
-ring.rotation.x = Math.PI/2;
-ring.position.set(0.4,0.55,-0.3);
-scene.add(ring);
-makeClickable(ring);
+  const hits = raycaster.intersectObjects(clickable);
+  if(hits.length){
+    focused = hits[0].object;
+    targetPos = new THREE.Vector3(0,1.2,0);
+    controls.enabled = false;
 
-const lemon = new THREE.Mesh(
-  new THREE.SphereGeometry(0.15,32,32),
-  new THREE.MeshStandardMaterial({ color: 0xffeb3b })
-);
-lemon.scale.set(1.2,0.8,1);
-lemon.position.set(0.8,0.55,0.3);
-scene.add(lemon);
-makeClickable(lemon);
-
-/* ======================
-   FOCUS / RETURN
-====================== */
-function focusObject(obj) {
-  focusedObject = obj;
-  targetPosition = new THREE.Vector3(0, 1.2, 0);
-  returning = false;
-  controls.enabled = false;
-  spotlight.target = obj;
-  spotlight.intensity = 1;
-  ambientLight.intensity = 0.2;
-}
-
-function returnObject() {
-  if (!focusedObject) return;
-  targetPosition = focusedObject.userData.originalPosition.clone();
-  returning = true;
-  spotlight.intensity = 0;
-  ambientLight.intensity = 0.5;
-}
-
-/* ======================
-   INPUT
-====================== */
-window.addEventListener("mousedown", () => isDragging = true);
-window.addEventListener("mouseup", () => isDragging = false);
-
-window.addEventListener("mousemove", (e) => {
-  if (focusedObject && isDragging && !returning) {
-    focusedObject.rotation.y += e.movementX * 0.01;
-    focusedObject.rotation.x += e.movementY * 0.01;
-  }
-
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  document.body.style.cursor =
-    raycaster.intersectObjects(clickableObjects).length ? "pointer" : "default";
-});
-
-window.addEventListener("click", (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-
-  const hits = raycaster.intersectObjects(clickableObjects);
-
-  if (hits.length > 0) {
-    focusObject(hits[0].object);
-  } else {
-    returnObject();
-  }
-});
-
-/* ======================
-   ANIMATION LOOP
-====================== */
-function animate() {
-  requestAnimationFrame(animate);
-
-  if (focusedObject && targetPosition) {
-    focusedObject.position.lerp(targetPosition, 0.08);
-
-    if (returning) {
-      focusedObject.rotation.x += (focusedObject.userData.originalRotation.x - focusedObject.rotation.x) * 0.08;
-      focusedObject.rotation.y += (focusedObject.userData.originalRotation.y - focusedObject.rotation.y) * 0.08;
-
-      if (focusedObject.position.distanceTo(targetPosition) < 0.01) {
-        focusedObject = null;
-        targetPosition = null;
-        returning = false;
-        controls.enabled = true;
-      }
+    if(focused.userData.isLetter){
+      document.getElementById("letterUI").style.display="flex";
     }
+  } else {
+    focused = null;
+    targetPos = null;
+    controls.enabled = true;
+    document.getElementById("letterUI").style.display="none";
   }
+});
 
-  renderer.render(scene, camera);
+/* LETTER BUTTONS */
+document.getElementById("yesBtn").onclick = ()=>{
+  document.querySelector(".letter").innerHTML = "<h2>❤️</h2><p>You just made me the happiest person alive.</p>";
+};
+
+document.getElementById("maybeBtn").onclick = ()=>{
+  document.querySelector(".letter").innerHTML = "<h2>🙂</h2><p>I’ll wait. Always.</p>";
+};
+
+/* LOOP */
+function animate(){
+  requestAnimationFrame(animate);
+  if(focused && targetPos){
+    focused.position.lerp(targetPos,0.08);
+  }
+  renderer.render(scene,camera);
 }
 animate();
 
-/* ======================
-   RESIZE
-====================== */
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+window.addEventListener("resize",()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth,window.innerHeight);
 });
 </script>
 
