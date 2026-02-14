@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Valentine's Day</title>
   <style>
     body {
@@ -98,20 +98,20 @@ function makeClickable(mesh) {
 /* ======================
    OBJECTS
 ====================== */
-function addBox(size, color, x, y, z) {
-  const m = new THREE.Mesh(
+function addBox(size, color, pos) {
+  const mesh = new THREE.Mesh(
     new THREE.BoxGeometry(...size),
     new THREE.MeshStandardMaterial({ color })
   );
-  m.position.set(x, y, z);
-  scene.add(m);
-  makeClickable(m);
-  return m;
+  mesh.position.copy(pos);
+  scene.add(mesh);
+  makeClickable(mesh);
+  return mesh;
 }
 
-addBox([0.8,0.6,0.05], 0x222222, -0.8,0.6,0); // photo
-addBox([0.6,0.05,0.4], 0xf5f5dc, 0,0.55,0.3); // letter
-addBox([0.5,0.15,0.5], 0x4b2e2b, -0.3,0.55,-0.3); // chocolate
+addBox([0.8,0.6,0.05], 0x222222, new THREE.Vector3(-0.8,0.6,0)); // photo
+addBox([0.6,0.05,0.4], 0xf5f5dc, new THREE.Vector3(0,0.55,0.3)); // letter
+addBox([0.5,0.15,0.5], 0x4b2e2b, new THREE.Vector3(-0.3,0.55,-0.3)); // chocolate
 
 const teddy = new THREE.Mesh(
   new THREE.SphereGeometry(0.25,32,32),
@@ -140,7 +140,7 @@ scene.add(lemon);
 makeClickable(lemon);
 
 /* ======================
-   FOCUS / RETURN LOGIC
+   FOCUS / RETURN
 ====================== */
 function focusObject(obj) {
   focusedObject = obj;
@@ -149,7 +149,7 @@ function focusObject(obj) {
   controls.enabled = false;
   spotlight.target = obj;
   spotlight.intensity = 1;
-  ambientLight.intensity = 0.2; // NEW: dim world
+  ambientLight.intensity = 0.2;
 }
 
 function returnObject() {
@@ -161,7 +161,7 @@ function returnObject() {
 }
 
 /* ======================
-   MOUSE
+   INPUT
 ====================== */
 window.addEventListener("mousedown", () => isDragging = true);
 window.addEventListener("mouseup", () => isDragging = false);
@@ -171,9 +171,7 @@ window.addEventListener("mousemove", (e) => {
     focusedObject.rotation.y += e.movementX * 0.01;
     focusedObject.rotation.x += e.movementY * 0.01;
   }
-});
 
-window.addEventListener("mousemove", (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
@@ -181,8 +179,16 @@ window.addEventListener("mousemove", (e) => {
     raycaster.intersectObjects(clickableObjects).length ? "pointer" : "default";
 });
 
-window.addEventListener("click", () => {
-  if (focusedObject) {
+window.addEventListener("click", (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+
+  const hits = raycaster.intersectObjects(clickableObjects);
+
+  if (hits.length > 0) {
+    focusObject(hits[0].object);
+  } else {
     returnObject();
   }
 });
