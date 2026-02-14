@@ -1,285 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Valentine’s Day 💗</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+}
 
-    body {
-      margin: 0;
-      background: linear-gradient(135deg, #ff7eb3, #ff758c, #c77dff);
-      color: #fff;
-      overflow-x: hidden;
-    }
+/* LIQUID GRADIENT BACKGROUND */
+body {
+  background: linear-gradient(270deg, #ff5f9e, #7f5cff, #ff9a8b);
+  background-size: 600% 600%;
+  animation: gradientFlow 10s ease infinite;
+}
 
-    section {
-      padding: 80px 20px;
-      text-align: center;
-    }
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    h1, h2 {
-      margin-bottom: 20px;
-    }
+/* TEXT CONTAINER */
+#stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
 
-    p {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
-    }
+.text {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 2s ease;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255,255,255,0.6);
+  max-width: 80%;
+}
 
-    button {
-      background: #fff;
-      color: #ff5f9e;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    }
+.hide-up {
+  opacity: 0;
+  transform: translateY(-40px);
+}
 
-    /* INTRO */
-    #intro {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+/* CONTINUATION */
+.row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
 
-    /* GRID */
-    #moments {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(6px);
-    }
+/* UNLOCKED CONTENT */
+#content {
+  margin-top: 100vh;
+  padding: 80px 20px;
+  text-align: center;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
+video {
+  max-width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
 
-    .card {
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
-      padding: 30px 15px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
+.gift {
+  margin-top: 80px;
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .emoji {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-    /* MODAL */
-    #modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .modal-box {
-      background: #fff;
-      color: #333;
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .modal-box button {
-      margin-top: 20px;
-    }
-
-    /* LETTER */
-    #letter {
-      background: rgba(255,255,255,0.15);
-    }
-
-    .letter-box {
-      background: #fff;
-      color: #333;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 40px;
-      border-radius: 20px;
-      text-align: left;
-    }
-
-    .choices {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .choices button {
-      margin: 10px;
-    }
-
-    /* GIFT */
-    #gift {
-      background: rgba(0,0,0,0.2);
-    }
-
-    /* END */
-    #end {
-      opacity: 0.85;
-    }
-  </style>
+.gift button {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: white;
+  color: #ff5f9e;
+}
+</style>
 </head>
+
 <body>
 
-<!-- INTRO -->
-<section id="intro">
-  <h1>Hey you 💗</h1>
-  <p>I made this just for you.  
-     Take your time. No rush.</p>
-  <button onclick="scrollToSection('moments')">Come closer 💕</button>
-</section>
+<div id="stage"></div>
 
-<!-- MOMENTS -->
-<section id="moments">
-  <h2>Little things that remind me of you</h2>
+<div id="content">
+  <h2>Take your time.</h2>
 
-  <div class="grid">
-    <div class="card" onclick="openModal('🧸', 'Even when I can’t be there, I hope you feel held.')">
-      <div class="emoji">🧸</div>
-      Teddy
-    </div>
+  <!-- VIDEO -->
+  <video controls>
+    <source src="assets/video/edit.mp4" type="video/mp4">
+  </video>
 
-    <div class="card" onclick="openModal('📸', 'One day this won’t just be in our heads.')">
-      <div class="emoji">📸</div>
-      Photo Frame
-    </div>
-
-    <div class="card" onclick="openModal('💍', 'A promise. Not pressure.')">
-      <div class="emoji">💍</div>
-      Ring
-    </div>
-
-    <div class="card" onclick="openModal('🍫', 'Sweet, but sometimes chaotic.')">
-      <div class="emoji">🍫</div>
-      Chocolate
-    </div>
-
-    <div class="card" onclick="openModal('🍋', 'Yeah. You know why this is here.')">
-      <div class="emoji">🍋</div>
-      Lemon
-    </div>
-
-    <div class="card" onclick="scrollToSection('letter')">
-      <div class="emoji">💌</div>
-      Letter
-    </div>
-  </div>
-</section>
-
-<!-- LETTER -->
-<section id="letter">
-  <h2>For you</h2>
-
-  <div class="letter-box">
-    <p>
-      I don’t know how to perfectly put this into words,  
-      but I know how you make me feel.
-    </p>
-
-    <p>
-      You make ordinary days feel softer.  
-      You make me want to try harder.  
-      And somehow, even from a screen away,  
-      you feel close.
-    </p>
-
-    <p>
-      This isn’t about one day.  
-      It’s about choosing you — again and again —  
-      in small ways, every day.
-    </p>
-
-    <p>
-      So I just want to ask…
-    </p>
-
-    <div class="choices">
-      <button onclick="sayYes()">💖 Yes</button>
-      <button onclick="sayMaybe()">😳 Maybe later</button>
-    </div>
-  </div>
-</section>
-
-<!-- GIFT -->
-<section id="gift">
-  <h2>🎁 One last thing</h2>
-  <p>I hid something for you.  
-     It’s not here — but it’s meant for you.</p>
-
-  <button onclick="openGift()">Open the gift 💗</button>
-</section>
-
-<!-- END -->
-<section id="end">
-  <p>This page isn’t going anywhere.</p>
-  <p>Neither am I.</p>
-</section>
-
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-box">
-    <h2 id="modal-emoji"></h2>
-    <p id="modal-text"></p>
-    <button onclick="closeModal()">Close</button>
+  <!-- GIFT -->
+  <div class="gift">
+    <h2>🎁 One last thing</h2>
+    <p>I left something for you.</p>
+    <button onclick="openGift()">Open it</button>
   </div>
 </div>
 
 <script>
-  function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-  }
+const stage = document.getElementById("stage");
 
-  function openModal(emoji, text) {
-    document.getElementById("modal-emoji").innerText = emoji;
-    document.getElementById("modal-text").innerText = text;
-    document.getElementById("modal").style.display = "flex";
-  }
+function showText(text, duration = 5000) {
+  return new Promise(resolve => {
+    const el = document.createElement("div");
+    el.className = "text";
+    el.innerText = text;
+    stage.appendChild(el);
 
-  function closeModal() {
-    document.getElementById("modal").style.display = "none";
-  }
+    requestAnimationFrame(() => el.classList.add("show"));
 
-  function sayYes() {
-    alert("That made me smile. A lot.");
-    scrollToSection("gift");
-  }
+    setTimeout(() => {
+      el.classList.remove("show");
+      el.classList.add("hide-up");
+      setTimeout(() => {
+        stage.removeChild(el);
+        resolve();
+      }, 2000);
+    }, duration);
+  });
+}
 
-  function sayMaybe() {
-    alert("That’s okay. I’m still here.");
-  }
+function continuation(leftText, rightText) {
+  return new Promise(resolve => {
+    const row = document.createElement("div");
+    row.className = "text row show";
 
-  function openGift() {
-    window.open("https://discord.gg/q3Ve4CKbYX", "_blank");
-  }
+    const left = document.createElement("span");
+    left.innerText = leftText;
+
+    const right = document.createElement("span");
+    right.innerText = rightText;
+    right.style.opacity = 0;
+
+    row.appendChild(left);
+    row.appendChild(right);
+    stage.appendChild(row);
+
+    setTimeout(() => {
+      left.style.transform = "translateX(-20px)";
+      right.style.opacity = 1;
+    }, 1500);
+
+    setTimeout(() => {
+      row.classList.add("hide-up");
+      setTimeout(() => {
+        stage.removeChild(row);
+        resolve();
+      }, 2000);
+    }, 6000);
+  });
+}
+
+async function sequence() {
+  await new Promise(r => setTimeout(r, 5000));
+
+  await showText("Hi Kavimitha...");
+  await new Promise(r => setTimeout(r, 3000));
+
+  await showText("To be honest, I have no idea what to say...");
+  await new Promise(r => setTimeout(r, 3000));
+
+  await continuation(
+    "You know...",
+    "the chances of us meeting each other is said to be 0.3%..."
+  );
+
+  await showText(
+    "That’s as rare as being blindfolded in front of 1000 buttons, where only 3 of them bring us together."
+  );
+
+  await showText("And somehow, we pressed those 3.");
+
+  // FINAL PARAGRAPH
+  const final = document.createElement("div");
+  final.className = "text show";
+  final.innerText = "You see...";
+  stage.appendChild(final);
+
+  setTimeout(() => {
+    final.innerText =
+      "You changed my life a lot, and I mean it. In ways I didn’t even realize until you were already part of it.";
+  }, 2000);
+
+  setTimeout(() => {
+    document.body.style.overflowY = "auto";
+  }, 6000);
+}
+
+sequence();
+
+function openGift() {
+  window.open("https://discord.gg/YOUR_INVITE_CODE", "_blank");
+}
 </script>
 
 </body>
