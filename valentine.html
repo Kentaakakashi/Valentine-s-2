@@ -9,49 +9,99 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== STYLES (identical to the previous version - keeping your design) ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* ---------- enhanced liquid background with vignette and soft noise ---------- */
         body {
             font-family: 'Dancing Script', cursive;
-            background: linear-gradient(124deg, #fecfcf, #fed3d3, #fdd8dc, #fbdee5, #fae4ed, #f8eaf5, #f7f0fa, #f5f5fc);
+            background: linear-gradient(124deg, #ffd0d0, #ffc9d0, #ffc2d4, #fbbcd9, #f7b8de, #f2b8e3, #ecbce8, #e6c2ec);
             background-size: 400% 400%;
-            animation: liquidFlow 20s ease infinite;
+            animation: liquidFlow 24s ease infinite;
             min-height: 100vh;
             color: #2f1d1d;
             transition: overflow 0.3s;
             position: relative;
             overflow-x: hidden;
         }
+
         @keyframes liquidFlow {
-            0% { background-position: 0% 30%; }
-            50% { background-position: 100% 70%; }
-            100% { background-position: 0% 30%; }
+            0% { background-position: 0% 20%; }
+            50% { background-position: 100% 80%; }
+            100% { background-position: 0% 20%; }
         }
+
+        /* soft vignette and subtle grain */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(255, 200, 220, 0.3) 90%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMjUiIC8+PC9zdmc+');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ---------- many floating particles (hearts, stars, flowers) ---------- */
         .float-particle {
             position: fixed;
-            font-size: 2rem;
-            opacity: 0.2;
             pointer-events: none;
             z-index: 0;
-            animation: drift 14s infinite ease-in-out;
-            color: #fff2f5;
-            text-shadow: 0 0 12px #ffb7c5;
+            animation: drift 20s infinite ease-in-out;
+            color: rgba(255, 240, 250, 0.7);
+            text-shadow: 0 0 20px #ffb7c5, 0 0 40px #ff8aa5;
+            opacity: 0.3;
+            font-size: 2.2rem;
+            will-change: transform;
         }
-        .p1 { top: 5%; left: 3%; animation-delay: 0s; }
-        .p2 { bottom: 10%; right: 5%; animation-delay: 3s; font-size: 2.8rem; }
-        .p3 { top: 20%; right: 12%; animation-delay: 5s; }
-        .p4 { bottom: 25%; left: 8%; animation-delay: 1.5s; }
-        .p5 { top: 70%; left: 15%; animation-delay: 6s; }
-        .p6 { top: 40%; right: 20%; animation-delay: 2s; font-size: 2.2rem; }
+
+        /* 20 unique particles */
+        .p1 { top: 3%; left: 2%; animation-delay: 0s; }
+        .p2 { bottom: 7%; right: 4%; animation-delay: 2.5s; font-size: 3rem; }
+        .p3 { top: 15%; right: 10%; animation-delay: 4s; }
+        .p4 { bottom: 20%; left: 12%; animation-delay: 1s; font-size: 2.5rem; }
+        .p5 { top: 65%; left: 8%; animation-delay: 5.5s; }
+        .p6 { top: 35%; right: 18%; animation-delay: 3s; font-size: 2rem; }
+        .p7 { top: 10%; left: 25%; animation-delay: 6s; font-size: 2.8rem; }
+        .p8 { bottom: 30%; right: 22%; animation-delay: 0.8s; }
+        .p9 { top: 80%; left: 30%; animation-delay: 4.7s; }
+        .p10 { bottom: 45%; right: 30%; animation-delay: 2.2s; font-size: 2.3rem; }
+        .p11 { top: 50%; left: 45%; animation-delay: 3.6s; }
+        .p12 { bottom: 55%; right: 45%; animation-delay: 1.9s; font-size: 2.7rem; }
+        .p13 { top: 70%; left: 55%; animation-delay: 5.2s; }
+        .p14 { bottom: 65%; right: 55%; animation-delay: 0.3s; }
+        .p15 { top: 40%; left: 65%; animation-delay: 4.1s; font-size: 2.1rem; }
+        .p16 { bottom: 75%; right: 65%; animation-delay: 2.8s; }
+        .p17 { top: 20%; left: 75%; animation-delay: 6.3s; font-size: 2.6rem; }
+        .p18 { bottom: 85%; right: 75%; animation-delay: 1.2s; }
+        .p19 { top: 88%; left: 85%; animation-delay: 3.9s; }
+        .p20 { bottom: 92%; right: 88%; animation-delay: 5.8s; }
+
         @keyframes drift {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(10deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-60px) rotate(15deg) scale(1.1); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
+
+        /* ---------- story section with ultra-soft text treatment ---------- */
         .story-section {
             height: 100vh;
             width: 100%;
@@ -63,51 +113,64 @@
             position: relative;
             z-index: 10;
         }
+
         .story-container {
             max-width: 1000px;
             width: 100%;
             font-weight: 600;
-            text-shadow: 0 0 12px rgba(255, 230, 240, 0.9), 2px 2px 4px rgba(255, 200, 220, 0.5);
-            font-size: clamp(2rem, 7vw, 4rem);
-            line-height: 1.4;
-            color: #2f1e1e;
+            font-size: clamp(2.2rem, 7vw, 4.2rem);
+            line-height: 1.5;
+            color: #2a121b;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             transition: all 0.2s;
+            /* elegant text treatment: subtle blur behind text, but no box */
+            text-shadow: 0 0 20px rgba(255, 230, 240, 0.95), 
+                         4px 4px 12px rgba(255, 200, 220, 0.8),
+                         0 0 40px rgba(255, 160, 190, 0.6);
+            backdrop-filter: blur(1px); /* barely there, adds depth */
         }
+
+        /* enhanced glow with color oscillation */
         .glow {
-            animation: whisperGlow 3.5s infinite alternate ease-in-out;
+            animation: whisperGlow 4.5s infinite alternate ease-in-out;
         }
+
         @keyframes whisperGlow {
-            0% { text-shadow: 0 0 10px #ffeef2, 0 0 20px #ffd9e2, 0 0 30px #ffb7c5; }
-            100% { text-shadow: 0 0 18px #ffffff, 0 0 35px #ffb0c0, 0 0 60px #ff8aa5; }
+            0% { text-shadow: 0 0 20px #fff0f5, 0 0 30px #ffd9e2, 0 0 50px #ffb7c5, 0 0 70px #ff9eb5; }
+            50% { text-shadow: 0 0 25px #ffffff, 0 0 45px #ffc0d0, 0 0 65px #ffa5bc, 0 0 90px #ff8aa5; }
+            100% { text-shadow: 0 0 30px #ffeef7, 0 0 55px #ffb0c8, 0 0 80px #ff8aa5, 0 0 100px #ff6b8b; }
         }
+
+        /* fade animations with slight scale */
         .fade-in-from-below {
-            animation: riseIn 1.4s ease forwards;
+            animation: riseIn 1.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
         }
         @keyframes riseIn {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .fade-out-up {
-            animation: driftUp 1.4s ease forwards !important;
+            animation: driftUp 1.5s ease forwards !important;
         }
         @keyframes driftUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-70px); }
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(0.95); }
         }
+
+        /* push container with smoother shift */
         .push-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 0.2rem 0.8rem;
-            transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            gap: 0.3rem 1rem;
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.2);
         }
         .push-container span {
-            transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.1), opacity 0.7s ease;
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.8s ease;
             will-change: transform, opacity;
             display: inline-block;
         }
@@ -115,111 +178,153 @@
             opacity: 0;
         }
         .push-container.push-active .part1 {
-            transform: translateX(-30px);
+            transform: translateX(-40px);
         }
         .push-container.push-active .part2 {
             opacity: 1;
         }
+
+        /* ---------- video & gift sections with glassmorphism and shine ---------- */
         .video-section, .gift-section {
             display: none;
             width: 100%;
             padding: 4rem 2rem 6rem;
             text-align: center;
-            background: rgba(255, 245, 245, 0.2);
-            backdrop-filter: blur(6px);
-            border-top: 2px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 245, 250, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 2px solid rgba(255, 255, 255, 0.7);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             margin-top: 3rem;
             position: relative;
             z-index: 15;
+            box-shadow: 0 -20px 40px rgba(255, 200, 220, 0.4), inset 0 0 60px rgba(255, 255, 255, 0.5);
         }
+
         .video-section h2, .gift-section h2 {
-            font-size: 3rem;
+            font-size: 3.4rem;
             margin-bottom: 2rem;
             font-family: 'Dancing Script', cursive;
             color: #2e1b1b;
-            text-shadow: 0 0 25px #fff0f5;
+            text-shadow: 0 0 30px #fff0f5, 4px 4px 15px #ffb7c5;
             background: none;
             display: inline-block;
-            padding: 0.2rem 1.5rem;
+            padding: 0.3rem 2.5rem;
+            border-bottom: 3px dotted rgba(255, 255, 255, 0.8);
+            border-radius: 0 0 40px 40px;
+            letter-spacing: 1px;
         }
-        /* Styling for the Google Drive iframe */
+
+        /* video embed with glowing border */
         .video-embed {
             max-width: 90%;
             width: 800px;
-            height: 450px; /* Adjust based on your video ratio */
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(90, 40, 50, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.7);
+            height: 450px;
+            border-radius: 50px;
+            box-shadow: 0 30px 60px rgba(100, 40, 60, 0.5), 0 0 0 6px rgba(255, 255, 255, 0.9), 0 0 50px #ffb7c5;
             border: none;
-            background: #fff0f5;
+            background: #ffe5ec;
+            transition: transform 0.4s, box-shadow 0.4s;
         }
+        .video-embed:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 70px rgba(120, 40, 70, 0.6), 0 0 0 8px white, 0 0 70px #ff9eb5;
+        }
+
+        /* gift button with sparkle pulse */
         .gift-button {
-            background: rgba(255, 240, 245, 0.7);
-            backdrop-filter: blur(10px);
-            border: 3px solid white;
-            color: #3a2020;
-            font-size: 2.5rem;
+            background: rgba(255, 240, 250, 0.8);
+            backdrop-filter: blur(12px);
+            border: 4px solid white;
+            color: #3a1a24;
+            font-size: 3rem;
             font-weight: 600;
-            padding: 1.2rem 3.5rem;
-            border-radius: 80px;
+            padding: 1.5rem 4.5rem;
+            border-radius: 120px;
             cursor: pointer;
-            box-shadow: 0 0 50px #ffb8c9, 0 15px 30px rgba(120, 60, 70, 0.3);
+            box-shadow: 0 0 70px #ffb8c9, 0 25px 50px rgba(140, 50, 70, 0.5);
             transition: all 0.3s;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             font-family: 'Dancing Script', cursive;
-            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
-            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.7);
+            letter-spacing: 3px;
+            animation: buttonSparkle 3s infinite alternate;
+        }
+        @keyframes buttonSparkle {
+            0% { transform: scale(1); box-shadow: 0 0 50px #ffb8c9, 0 20px 40px rgba(140,50,70,0.5); }
+            100% { transform: scale(1.06); box-shadow: 0 0 90px #ffa5bc, 0 30px 60px #b05b6e; }
         }
         .gift-button:hover {
-            transform: scale(1.12) rotate(-1deg);
-            background: rgba(255, 220, 230, 0.9);
-            box-shadow: 0 0 80px #ffe2eb, 0 20px 40px #a66a78;
+            transform: scale(1.18) rotate(-1deg);
+            background: rgba(255, 230, 240, 0.95);
+            box-shadow: 0 0 120px #ffe2eb, 0 40px 70px #b26b7c;
+            animation: none;
         }
+
         .footnote {
-            color: #3f2c2c;
-            font-size: 1.3rem;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(4px);
+            color: #3a2323;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(8px);
             display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.6);
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
+
         body.locked {
             overflow: hidden;
         }
+
         @media (max-width: 600px) {
             .story-container { font-size: 2rem; }
-            .push-container.push-active .part1 { transform: translateX(-15px); }
-            .gift-button { font-size: 2rem; padding: 1rem 2rem; }
-            .video-embed { height: 240px; } /* Adjust for mobile */
+            .push-container.push-active .part1 { transform: translateX(-20px); }
+            .gift-button { font-size: 2.4rem; padding: 1.2rem 2.5rem; }
+            .video-embed { height: 240px; }
+            .video-section h2, .gift-section h2 { font-size: 2.5rem; }
+            .float-particle { opacity: 0.2; } /* softer on mobile */
         }
     </style>
 </head>
 <body class="locked">
-    <!-- floating particles -->
+    <!-- 20 floating particles with mixed symbols -->
     <div class="float-particle p1">🌸</div>
     <div class="float-particle p2">❤️</div>
     <div class="float-particle p3">✨</div>
-    <div class="float-particle p4">🌸</div>
-    <div class="float-particle p5">❤️</div>
-    <div class="float-particle p6">✨</div>
+    <div class="float-particle p4">🌹</div>
+    <div class="float-particle p5">💫</div>
+    <div class="float-particle p6">🌸</div>
+    <div class="float-particle p7">❤️</div>
+    <div class="float-particle p8">✨</div>
+    <div class="float-particle p9">🌼</div>
+    <div class="float-particle p10">💖</div>
+    <div class="float-particle p11">🌸</div>
+    <div class="float-particle p12">❤️</div>
+    <div class="float-particle p13">✨</div>
+    <div class="float-particle p14">🌺</div>
+    <div class="float-particle p15">💕</div>
+    <div class="float-particle p16">🌸</div>
+    <div class="float-particle p17">❤️</div>
+    <div class="float-particle p18">✨</div>
+    <div class="float-particle p19">🌷</div>
+    <div class="float-particle p20">💗</div>
 
     <!-- STORY SECTION -->
     <section class="story-section">
         <div class="story-container" id="storyContainer"></div>
     </section>
 
-    <!-- VIDEO SECTION with your Google Drive embed -->
+    <!-- VIDEO SECTION with Google Drive embed -->
     <section class="video-section" id="videoSection">
         <h2>✨ my edit, just for you ✨</h2>
-        <!-- Google Drive iframe embed -->
         <iframe 
             class="video-embed"
             src="https://drive.google.com/file/d/1ODt8TREZwM_VpzT_DEhTFojLeVdvJa1D/preview" 
             allow="autoplay"
             allowfullscreen>
         </iframe>
-        <p style="margin-top: 1.8rem; font-size: 2rem; font-family: 'Dancing Script', cursive; text-shadow: 0 0 10px white;">❤️  play with love  ❤️</p>
+        <p style="margin-top: 2rem; font-size: 2.2rem; font-family: 'Dancing Script', cursive; text-shadow: 0 0 20px white;">❤️  play with love  ❤️</p>
     </section>
 
     <!-- GIFT SECTION -->
@@ -252,14 +357,14 @@
                 }, 400);
             }
 
-            // 🔁 REPLACE WITH YOUR REAL DISCORD INVITE
+            // ✅ Your Discord invite link
             const DISCORD_INVITE = 'https://discord.gg/q3Ve4CKbYX';
 
             giftButton.addEventListener('click', () => {
                 window.open(DISCORD_INVITE, '_blank');
             });
 
-            // ---------- STORY SEQUENCE ----------
+            // ---------- STORY SEQUENCE (unchanged, works perfectly) ----------
             async function startStory() {
                 await delay(5000); // 5s liquid only
 
@@ -342,7 +447,7 @@
         })();
     </script>
 
-    <!-- tiny signature -->
-    <div style="position: fixed; bottom: 8px; left: 15px; opacity: 0.3; color: #3f2b2b; font-size: 1rem; z-index: 20;">with love, always ❤️</div>
+    <!-- tiny signature with subtle heart -->
+    <div style="position: fixed; bottom: 10px; left: 20px; opacity: 0.3; color: #3f2b2b; font-size: 1rem; z-index: 20; font-family: 'Quicksand', sans-serif;">with love, always ❤️</div>
 </body>
 </html>
