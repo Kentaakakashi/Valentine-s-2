@@ -1,216 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Valentine</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for kavimitha ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-  font-family: "Segoe UI", sans-serif;
-  color: white;
-}
+        /* liquid background animation */
+        body {
+            font-family: 'Segoe UI', 'Helvetica', cursive, sans-serif;
+            background: linear-gradient(124deg, #ff6b6b, #f06595, #cc5de8, #845ef7, #5c7cff, #6c9eff, #7bc9ff, #9ad0f5, #a3e0c7, #fff6b0);
+            background-size: 400% 400%;
+            animation: liquidGradient 16s ease infinite;
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+            transition: overflow 0.3s;
+        }
 
-/* LIQUID GRADIENT BACKGROUND */
-body {
-  background: linear-gradient(270deg, #ff5f9e, #7f5cff, #ff9a8b);
-  background-size: 600% 600%;
-  animation: gradientFlow 10s ease infinite;
-}
+        @keyframes liquidGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        /* lock scroll until story finishes */
+        body.locked {
+            overflow: hidden;
+        }
 
-/* TEXT CONTAINER */
-#stage {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
+        /* main sections */
+        .story-section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
 
-.text {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 2s ease;
-  text-align: center;
-  text-shadow: 0 0 20px rgba(255,255,255,0.6);
-  max-width: 80%;
-}
+        .story-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            line-height: 1.4;
+            transition: all 0.3s;
+        }
 
-.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+        /* base text style */
+        .story-text, .push-container span {
+            display: inline-block;
+            text-align: center;
+            word-break: break-word;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-.hide-up {
-  opacity: 0;
-  transform: translateY(-40px);
-}
+        /* glow animation */
+        .glow {
+            animation: softGlow 2.2s infinite alternate ease-in-out;
+        }
 
-/* CONTINUATION */
-.row {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 5px #fff, 0 0 15px #ffb6c1, 0 0 25px #ff9eb5; }
+            100% { text-shadow: 0 0 20px #fff, 0 0 35px #ff80a5, 0 0 50px #ff4d6d; }
+        }
 
-/* UNLOCKED CONTENT */
-#content {
-  margin-top: 100vh;
-  padding: 80px 20px;
-  text-align: center;
-}
+        /* fade animations */
+        .fade-in-from-below {
+            animation: fadeInUp 1.2s ease forwards;
+        }
 
-video {
-  max-width: 90%;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-.gift {
-  margin-top: 80px;
-}
+        .fade-out-up {
+            animation: fadeOutUp 1.2s ease forwards !important;
+        }
 
-.gift button {
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  background: white;
-  color: #ff5f9e;
-}
-</style>
+        @keyframes fadeOutUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-60px); }
+        }
+
+        /* push effect container */
+        .push-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem 0.9rem;
+            transition: all 0.7s ease;
+        }
+
+        .push-container span {
+            transition: transform 0.7s ease, opacity 0.7s ease;
+            will-change: transform, opacity;
+        }
+
+        .push-container .part2 {
+            opacity: 0;
+        }
+
+        .push-container.push-active .part1 {
+            transform: translateX(-25px);
+        }
+
+        .push-container.push-active .part2 {
+            opacity: 1;
+        }
+
+        /* final paragraph styling */
+        .final-paragraph {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.3rem 0.7rem;
+        }
+
+        .final-paragraph .part2 {
+            transition: opacity 1.2s ease;
+            opacity: 0;
+        }
+
+        .final-paragraph.reveal-second .part2 {
+            opacity: 1;
+        }
+
+        /* hidden sections (video & gift) */
+        .video-section, .gift-section {
+            display: none;
+            width: 100%;
+            padding: 4rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 40px 40px 0 0;
+            margin-top: 2rem;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-section h2, .gift-section h2 {
+            font-size: 2.7rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px hotpink;
+            letter-spacing: 2px;
+        }
+
+        video {
+            max-width: 90%;
+            width: 800px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,255,255,0.3);
+            transition: transform 0.3s;
+        }
+
+        video:hover {
+            transform: scale(1.01);
+        }
+
+        /* gift button */
+        .gift-button {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            padding: 1.3rem 3.5rem;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff4d6d, 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            border: 3px solid rgba(255,255,255,0.6);
+            margin: 2rem 0;
+            letter-spacing: 3px;
+        }
+
+        .gift-button:hover {
+            transform: scale(1.1) rotate(1deg);
+            box-shadow: 0 0 60px #ffb6c1, 0 15px 30px black;
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        }
+
+        .gift-button:active {
+            transform: scale(0.95);
+        }
+
+        /* small note */
+        .footnote {
+            color: rgba(255,255,240,0.8);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        /* responsive adjustments */
+        @media (max-width: 600px) {
+            .push-container.push-active .part1 {
+                transform: translateX(-10px);
+            }
+            .story-container {
+                font-size: 1.7rem;
+            }
+            .gift-button {
+                font-size: 1.8rem;
+                padding: 1rem 2rem;
+            }
+        }
+    </style>
 </head>
+<body class="locked">
+    <!-- STORY SECTION (fullscreen animated text) -->
+    <section class="story-section">
+        <div class="story-container" id="storyContainer"></div>
+    </section>
 
-<body>
+    <!-- VIDEO SECTION (hidden until unlock) -->
+    <section class="video-section" id="videoSection">
+        <h2>✨ my edit for you ✨</h2>
+        <!-- replace src with your actual video file or embed -->
+        <video controls poster="https://via.placeholder.com/800x400/ff9eb5/ffffff?text=click+play+kavimitha">
+            <source src="your-edit.mp4" type="video/mp4">
+            Your browser does not support the video tag. 
+            <!-- fallback: if video not available, show message -->
+        </video>
+        <p style="margin-top: 1.5rem; font-size: 1.5rem; text-shadow: 0 0 8px white;">❤️  watch till the end  ❤️</p>
+    </section>
 
-<div id="stage"></div>
+    <!-- GIFT SECTION (secret button) -->
+    <section class="gift-section" id="giftSection">
+        <h2>🎁 a secret gift 🎁</h2>
+        <button class="gift-button" id="giftButton">🔮 open your gift 🔮</button>
+        <p class="footnote">(click the magic button → discord server)</p>
+    </section>
 
-<div id="content">
-  <h2>Take your time.</h2>
+    <script>
+        (function() {
+            // ---------- DOM elements ----------
+            const storyContainer = document.getElementById('storyContainer');
+            const videoSection = document.getElementById('videoSection');
+            const giftSection = document.getElementById('giftSection');
+            const giftButton = document.getElementById('giftButton');
+            const body = document.body;
 
-  <!-- VIDEO -->
-  <video controls>
-    <source src="assets/video/edit.mp4" type="video/mp4">
-  </video>
+            // ---------- helper: clear container ----------
+            function clearContainer() {
+                storyContainer.innerHTML = '';
+            }
 
-  <!-- GIFT -->
-  <div class="gift">
-    <h2>🎁 One last thing</h2>
-    <p>I left something for you.</p>
-    <button onclick="openGift()">Open it</button>
-  </div>
-</div>
+            // ---------- delay promise ----------
+            const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-<script>
-const stage = document.getElementById("stage");
+            // ---------- unlock page (show video & gift, allow scroll) ----------
+            function unlockPage() {
+                body.classList.remove('locked');           // enable scrolling
+                videoSection.style.display = 'block';
+                giftSection.style.display = 'block';
+                // optional smooth scroll to video after a tiny moment
+                setTimeout(() => {
+                    videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 600);
+            }
 
-function showText(text, duration = 5000) {
-  return new Promise(resolve => {
-    const el = document.createElement("div");
-    el.className = "text";
-    el.innerText = text;
-    stage.appendChild(el);
+            // ---------- set discord link (change this to your actual invite) ----------
+            const DISCORD_INVITE = 'https://discord.gg/your-gift-here';  // <-- REPLACE WITH REAL LINK
 
-    requestAnimationFrame(() => el.classList.add("show"));
+            giftButton.addEventListener('click', () => {
+                window.open(DISCORD_INVITE, '_blank');   // opens discord server
+            });
 
-    setTimeout(() => {
-      el.classList.remove("show");
-      el.classList.add("hide-up");
-      setTimeout(() => {
-        stage.removeChild(el);
-        resolve();
-      }, 2000);
-    }, duration);
-  });
-}
+            // ---------- main story sequence ----------
+            async function startStory() {
+                // first: wait 5 seconds with only background
+                await delay(5000);
 
-function continuation(leftText, rightText) {
-  return new Promise(resolve => {
-    const row = document.createElement("div");
-    row.className = "text row show";
+                // 1) "Hi kavimitha..." fade in, stay, fade out
+                await showFadeInOut('Hi kavimitha...', 5000);
 
-    const left = document.createElement("span");
-    left.innerText = leftText;
+                // 2) wait 3s (already included in showFadeInOut returns after fadeOut + 3s)
+                // but we've built the wait into the function, so just call next
 
-    const right = document.createElement("span");
-    right.innerText = rightText;
-    right.style.opacity = 0;
+                // 3) "To be honest, i have no idea what to say..."
+                await showFadeInOut('To be honest, i have no idea what to say...', 5000);
 
-    row.appendChild(left);
-    row.appendChild(right);
-    stage.appendChild(row);
+                // 4) push effect: "You know..." + "the chances ... 0.3%...."
+                await showPushEffect('You know...', 'the chances of us meeting each other is said to be 0.3%....', 5000);
 
-    setTimeout(() => {
-      left.style.transform = "translateX(-20px)";
-      right.style.opacity = 1;
-    }, 1500);
+                // 5) "Thats as rare as being blindfolded ... 997 of it does nothing"
+                await showFadeInOut('Thats as rare as being blindfolded and placed in front of 1000 buttons, 3 of it gets us together and 997 of it does nothing', 5000);
 
-    setTimeout(() => {
-      row.classList.add("hide-up");
-      setTimeout(() => {
-        stage.removeChild(row);
-        resolve();
-      }, 2000);
-    }, 6000);
-  });
-}
+                // 6) "And us exactly pressing the 3 button"
+                await showFadeInOut('And us exactly pressing the 3 button', 5000);
 
-async function sequence() {
-  await new Promise(r => setTimeout(r, 5000));
+                // 7) final paragraph: "You see... (pause) you changed my life a lot, and i mean it." -> stays, then unlock
+                await showFinalParagraph();
 
-  await showText("Hi Kavimitha...");
-  await new Promise(r => setTimeout(r, 3000));
+                // after final paragraph finishes appearing, unlock
+                // (unlock is called inside showFinalParagraph after second part fades in)
+            }
 
-  await showText("To be honest, I have no idea what to say...");
-  await new Promise(r => setTimeout(r, 3000));
+            // ---------- standard fadeIn + stay + fadeOut + 3s wait ----------
+            async function showFadeInOut(text, stayMs) {
+                clearContainer();
 
-  await continuation(
-    "You know...",
-    "the chances of us meeting each other is said to be 0.3%..."
-  );
+                // create main text div
+                const textDiv = document.createElement('div');
+                textDiv.className = 'story-text fade-in-from-below glow';
+                textDiv.textContent = text;
+                storyContainer.appendChild(textDiv);
 
-  await showText(
-    "That’s as rare as being blindfolded in front of 1000 buttons, where only 3 of them bring us together."
-  );
+                // stay for requested time
+                await delay(stayMs);
 
-  await showText("And somehow, we pressed those 3.");
+                // remove glow, fade out upward
+                textDiv.classList.remove('glow');
+                textDiv.classList.add('fade-out-up');
 
-  // FINAL PARAGRAPH
-  const final = document.createElement("div");
-  final.className = "text show";
-  final.innerText = "You see...";
-  stage.appendChild(final);
+                // wait for fade out (1.2s)
+                await delay(1200);
 
-  setTimeout(() => {
-    final.innerText =
-      "You changed my life a lot, and I mean it. In ways I didn’t even realize until you were already part of it.";
-  }, 2000);
+                // remove from DOM
+                clearContainer();
 
-  setTimeout(() => {
-    document.body.style.overflowY = "auto";
-  }, 6000);
-}
+                // wait 3 seconds before next step
+                await delay(3000);
+            }
 
-sequence();
+            // ---------- push effect: part1 + part2 appear, then both fade out + 3s wait ----------
+            async function showPushEffect(part1Text, part2Text, stayMs) {
+                clearContainer();
 
-function openGift() {
-  window.open("https://discord.gg/YOUR_INVITE_CODE", "_blank");
-}
-</script>
+                // create push container
+                const pushDiv = document.createElement('div');
+                pushDiv.className = 'push-container';
 
+                const span1 = document.createElement('span');
+                span1.className = 'part1 glow';
+                span1.textContent = part1Text;
+
+                const span2 = document.createElement('span');
+                span2.className = 'part2';   // initially opacity 0
+                span2.textContent = part2Text;
+
+                pushDiv.appendChild(span1);
+                pushDiv.appendChild(span2);
+                storyContainer.appendChild(pushDiv);
+
+                // trigger push animation after a tiny paint
+                await delay(50);
+                pushDiv.classList.add('push-active');
+                // also give glow to part2 after it appears (optional)
+                await delay(700); // let push animation finish
+                span2.classList.add('glow'); // now it glows too
+
+                // stay with both visible
+                await delay(stayMs);
+
+                // fade both out: remove glow, add fade-out-up to both spans
+                span1.classList.remove('glow');
+                span2.classList.remove('glow');
+                span1.classList.add('fade-out-up');
+                span2.classList.add('fade-out-up');
+
+                await delay(1200); // wait for fade out
+                clearContainer();
+                await delay(3000); // 3s pause
+            }
+
+            // ---------- final paragraph: "You see..." + pause + "you changed my life..." + unlock ----------
+            async function showFinalParagraph() {
+                clearContainer();
+
+                // create a wrapper for final paragraph
+                const finalDiv = document.createElement('div');
+                finalDiv.className = 'story-text final-paragraph';
+
+                const part1 = document.createElement('span');
+                part1.className = 'part1 glow';
+                part1.textContent = 'You see...';
+
+                const part2 = document.createElement('span');
+                part2.className = 'part2';   // will become visible later
+                part2.textContent = 'you changed my life a lot, and i mean it.';
+
+                finalDiv.appendChild(part1);
+                finalDiv.appendChild(part2);
+                storyContainer.appendChild(finalDiv);
+
+                // short pause before second part fades in (a little pause)
+                await delay(1800);
+
+                // reveal second part with smooth opacity (defined in CSS)
+                finalDiv.classList.add('reveal-second');
+                part2.classList.add('glow');  // start glowing when visible
+
+                // wait for second part to fade in (1.2s transition)
+                await delay(1200);
+
+                // NOW the paragraph is fully visible. unlock the page!
+                unlockPage();
+
+                // note: we do NOT clear the paragraph, it stays as top content.
+            }
+
+            // ---------- start the magic when page loads ----------
+            window.addEventListener('load', () => {
+                // small delay to ensure background is liquidy
+                startStory().catch(err => console.error('story error:', err));
+            });
+
+            // (optional) fallback in case of fast clicking: prevent any default link behaviour
+            giftButton.addEventListener('click', (e) => {
+                // we already open new tab, but keep no other action
+            });
+
+        })();
+    </script>
+
+    <!-- small extra design: floating hearts can be added but not necessary -->
+    <div style="position: fixed; bottom: 10px; right: 20px; opacity: 0.3; color: white; font-size: 2rem; pointer-events: none;">❤️</div>
 </body>
 </html>
