@@ -4,415 +4,438 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7 Days of Love - Valentine's Journey</title>
-    <!-- Keep original CSS links for structure, but we'll override with new design -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        /* ---------- NEW CUTE SAKURA THEME (overrides previous styles) ---------- */
+        /* ---------- ENHANCED VISUALS & INTRO ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             overflow-x: hidden;
-            background: #ffe6f0;  /* soft pink base */
+            background: #1a0b1a; /* deep base for contrast */
         }
-
         .journey-container {
             position: relative;
             min-height: 100vh;
-            background: linear-gradient(145deg, #fff0f5 0%, #ffe4ec 100%);
+            background: linear-gradient(145deg, #ffd9e6 0%, #ffb3c6 50%, #ff99bb 100%);
             font-family: 'Poppins', sans-serif;
-            padding: 20px 20px 100px; /* bottom space for nav */
+            padding: 20px 20px 100px;
             opacity: 0;
-            animation: fadeInContent 1.5s ease forwards;
-            animation-delay: 3s; /* wait for intro to finish */
+            animation: fadeInMain 1.8s ease forwards;
+            animation-delay: 3.2s; /* after intro */
         }
-
-        @keyframes fadeInContent {
+        @keyframes fadeInMain {
             to { opacity: 1; }
         }
 
-        /* ---------- INTRO OVERLAY ---------- */
+        /* ---------- INTRO OVERLAY (ELEGANT) ---------- */
         #introOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 220, 240, 0.85);
-            backdrop-filter: blur(5px);
+            background: rgba(26, 11, 26, 0.75);
+            backdrop-filter: blur(12px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            animation: fadeOutIntro 2s ease forwards;
-            animation-delay: 2.8s;
-            pointer-events: none; /* allow clicks to pass through after fade */
+            animation: introFadeOut 2.5s ease forwards;
+            animation-delay: 3s;
+            pointer-events: none;
         }
-
-        @keyframes fadeOutIntro {
+        @keyframes introFadeOut {
             0% { opacity: 1; }
             70% { opacity: 1; }
             100% { opacity: 0; visibility: hidden; }
         }
-
         .intro-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: #b3406c;
-            text-shadow: 2px 2px 10px rgba(255, 200, 220, 0.8);
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: #ffe6f0;
+            text-shadow: 0 0 20px #ff99bb, 0 0 40px #ff4d6d;
             opacity: 0;
-            transform: translateY(30px);
-            animation: windyFadeIn 2s ease forwards;
+            transform: scale(0.9) translateY(30px);
+            animation: softReveal 1.2s ease forwards;
         }
-
         .intro-text:nth-child(1) {
-            animation-delay: 0.5s;
+            animation-delay: 0.4s;
         }
-
         .intro-text:nth-child(2) {
-            font-size: 3.5rem;
+            font-size: 4rem;
             animation-delay: 1.8s;
-            margin-top: 20px;
-            color: #d94f7c;
+            color: #ffccdd;
+        }
+        @keyframes softReveal {
+            0% { opacity: 0; transform: scale(0.9) translateY(30px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
 
-        @keyframes windyFadeIn {
-            0% { opacity: 0; transform: translateY(30px) rotate(-2deg); }
-            30% { opacity: 1; transform: translateY(0) rotate(1deg); }
-            70% { opacity: 1; transform: translateY(0) rotate(0deg); }
-            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
-        }
-
-        /* ---------- SAKURA PETALS (falling animation) ---------- */
-        .sakura-petals {
+        /* ---------- FLOATING ELEMENTS (HEARTS, SPARKLES, SAKURA) ---------- */
+        .floating-hearts, .sparkles, .sakura-petals {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1500;
+            z-index: 10;
         }
-
+        .heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.4);
+            font-size: 2rem;
+            animation: floatHeart 12s linear infinite;
+            text-shadow: 0 0 15px #ff99bb;
+        }
+        .heart::before {
+            content: "❤️";
+        }
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff9e6;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffd966;
+            animation: sparkleTwinkle 4s ease-in-out infinite;
+        }
         .petal {
             position: absolute;
-            background-color: #ffb7c5;
-            width: 20px;
-            height: 20px;
+            background: #ffb7c5;
+            width: 22px;
+            height: 22px;
             border-radius: 150% 0 150% 0;
-            opacity: 0.6;
-            filter: drop-shadow(0 0 5px #ff9eb5);
-            animation: fall linear infinite;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 8px #ff9eb5);
+            animation: fallSakura 14s linear infinite;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+        /* Animations */
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.2; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes sparkleTwinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        @keyframes fallSakura {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.6; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
         }
 
-        /* multiple petals with random sizes, left positions, delays */
-        .petal:nth-child(1) { left: 10%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: -2s; }
-        .petal:nth-child(2) { left: 20%; width: 25px; height: 25px; animation-duration: 12s; animation-delay: -5s; }
-        .petal:nth-child(3) { left: 35%; width: 18px; height: 18px; animation-duration: 8s; animation-delay: -1s; }
-        .petal:nth-child(4) { left: 50%; width: 22px; height: 22px; animation-duration: 14s; animation-delay: -7s; }
-        .petal:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-duration: 9s; animation-delay: -3s; }
-        .petal:nth-child(6) { left: 80%; width: 28px; height: 28px; animation-duration: 11s; animation-delay: -4s; }
-        .petal:nth-child(7) { left: 95%; width: 16px; height: 16px; animation-duration: 13s; animation-delay: -6s; }
-        .petal:nth-child(8) { left: 5%; width: 24px; height: 24px; animation-duration: 10s; animation-delay: -8s; }
-        .petal:nth-child(9) { left: 45%; width: 19px; height: 19px; animation-duration: 15s; animation-delay: -2.5s; }
-        .petal:nth-child(10) { left: 70%; width: 21px; height: 21px; animation-duration: 8.5s; animation-delay: -1.2s; }
+        /* Generate many floating elements with random positions/delays */
+        .floating-hearts .heart:nth-child(1) { left: 5%; animation-duration: 14s; animation-delay: -2s; }
+        .floating-hearts .heart:nth-child(2) { left: 15%; animation-duration: 11s; animation-delay: -5s; }
+        .floating-hearts .heart:nth-child(3) { left: 25%; animation-duration: 16s; animation-delay: -1s; }
+        .floating-hearts .heart:nth-child(4) { left: 35%; animation-duration: 13s; animation-delay: -7s; }
+        .floating-hearts .heart:nth-child(5) { left: 45%; animation-duration: 18s; animation-delay: -3s; }
+        .floating-hearts .heart:nth-child(6) { left: 55%; animation-duration: 12s; animation-delay: -9s; }
+        .floating-hearts .heart:nth-child(7) { left: 65%; animation-duration: 15s; animation-delay: -4s; }
+        .floating-hearts .heart:nth-child(8) { left: 75%; animation-duration: 17s; animation-delay: -6s; }
+        .floating-hearts .heart:nth-child(9) { left: 85%; animation-duration: 19s; animation-delay: -8s; }
+        .floating-hearts .heart:nth-child(10) { left: 95%; animation-duration: 20s; animation-delay: -10s; }
 
-        /* ---------- MAIN CONTENT CUSTOMIZATION ---------- */
+        .sparkles .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0.2s; }
+        .sparkles .sparkle:nth-child(2) { top: 50%; left: 30%; animation-delay: 1.5s; }
+        .sparkles .sparkle:nth-child(3) { top: 80%; left: 60%; animation-delay: 0.7s; }
+        .sparkles .sparkle:nth-child(4) { top: 30%; left: 80%; animation-delay: 2.3s; }
+        .sparkles .sparkle:nth-child(5) { top: 70%; left: 20%; animation-delay: 0.9s; }
+        .sparkles .sparkle:nth-child(6) { top: 10%; left: 50%; animation-delay: 1.8s; }
+        .sparkles .sparkle:nth-child(7) { top: 40%; left: 90%; animation-delay: 0.4s; }
+        .sparkles .sparkle:nth-child(8) { top: 90%; left: 40%; animation-delay: 2.7s; }
+
+        .sakura-petals .petal:nth-child(1) { left: 2%; width: 18px; height: 18px; animation-duration: 12s; animation-delay: -1s; }
+        .sakura-petals .petal:nth-child(2) { left: 18%; width: 24px; height: 24px; animation-duration: 15s; animation-delay: -4s; }
+        .sakura-petals .petal:nth-child(3) { left: 32%; width: 20px; height: 20px; animation-duration: 10s; animation-delay: -2s; }
+        .sakura-petals .petal:nth-child(4) { left: 48%; width: 28px; height: 28px; animation-duration: 18s; animation-delay: -6s; }
+        .sakura-petals .petal:nth-child(5) { left: 62%; width: 22px; height: 22px; animation-duration: 14s; animation-delay: -3s; }
+        .sakura-petals .petal:nth-child(6) { left: 78%; width: 26px; height: 26px; animation-duration: 16s; animation-delay: -5s; }
+        .sakura-petals .petal:nth-child(7) { left: 92%; width: 19px; height: 19px; animation-duration: 13s; animation-delay: -7s; }
+
+        /* ---------- MAIN CONTENT (GLASSMORPHISM, BOLD) ---------- */
+        .journey-intro {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 60px 60px 30px 30px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
         .heart-beat i {
-            color: #ff4d6d;
-            font-size: 3rem;
-            filter: drop-shadow(0 0 15px #ffb3c6);
+            color: #ff1a4f;
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px #ffb3c6);
             animation: heartbeat 1.2s infinite;
         }
 
         .title {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: #a63b5b;
-            text-shadow: 2px 2px 0 #ffc2d1;
+            font-size: 4.8rem;
+            color: #59001f;
+            text-shadow: 4px 4px 0 #ffb3c6, 0 0 30px #ff4d6d;
             margin-top: 10px;
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            color: #7c4f5c;
+            font-size: 1.6rem;
+            color: #4a1e2f;
+            font-weight: 600;
             letter-spacing: 2px;
-            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #ffccdd;
         }
 
         .glowing-message {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: #c4496f;
-            text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff8da1;
-            animation: softGlow 3s infinite;
-            margin: 10px 0 20px;
+            font-size: 3.2rem;
+            color: #ff1a4f;
+            text-shadow: 0 0 15px #ffb3c6, 0 0 30px #ff4d6d, 0 0 45px #ff1a4f;
+            animation: intenseGlow 2s infinite alternate;
+            margin: 15px 0 25px;
         }
-
-        @keyframes softGlow {
-            0% { text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff8da1; }
-            50% { text-shadow: 0 0 20px #ffb6c1, 0 0 40px #ff6f91; }
-            100% { text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff8da1; }
+        @keyframes intenseGlow {
+            from { text-shadow: 0 0 20px #ffb3c6, 0 0 40px #ff4d6d, 0 0 60px #ff1a4f; }
+            to { text-shadow: 0 0 30px #ffccdd, 0 0 60px #ff80aa, 0 0 90px #ff4d6d; }
         }
 
         .intro-text {
-            font-size: 1.1rem;
-            color: #6d4b5c;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(4px);
-            padding: 15px 25px;
-            border-radius: 60px;
+            font-size: 1.2rem;
+            color: #2f1420;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 18px 30px;
+            border-radius: 80px;
             display: inline-block;
-            margin: 10px auto 30px;
-            box-shadow: 0 4px 10px rgba(255, 150, 180, 0.2);
+            margin: 15px auto 30px;
+            box-shadow: 0 10px 20px rgba(255, 100, 150, 0.3);
+            font-weight: 500;
+            border: 2px solid white;
         }
 
-        /* day cards - cute rounded design */
+        /* Day cards - 3D, rich */
         .journey-calendar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 20px;
             margin: 40px 0;
-            padding: 0 10px;
         }
 
         .day-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 30px;
+            background: rgba(255, 240, 245, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
             padding: 20px 10px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(255, 140, 170, 0.25);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 25px rgba(200, 60, 100, 0.4), 0 5px 0 #b34d6e, 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            transform: translateY(0);
         }
-
         .day-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(255, 100, 150, 0.4);
-            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(255, 80, 130, 0.6), 0 7px 0 #b34d6e;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .day-number {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #b3446c;
-            background: #ffe2ed;
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 40px;
-            margin-bottom: 10px;
-        }
-
-        .day-icon {
-            font-size: 2.8rem;
-            margin: 10px 0 5px;
-            filter: drop-shadow(0 4px 4px #ffb8c9);
-        }
-
-        .day-name {
+            background: #ffb3c6;
+            color: #59001f;
             font-weight: 700;
-            color: #912f53;
-            font-size: 1.1rem;
-        }
-
-        .day-date {
-            font-size: 0.9rem;
-            color: #a65977;
-            margin: 5px 0 10px;
-        }
-
-        .day-link {
+            padding: 6px 15px;
+            border-radius: 50px;
             display: inline-block;
-            background: #ff99bb;
+            margin-bottom: 12px;
+            border: 2px solid white;
+        }
+        .day-icon {
+            font-size: 3.2rem;
+            filter: drop-shadow(0 8px 6px #ff99bb);
+        }
+        .day-name {
+            font-weight: 800;
+            color: #8f2e51;
+            font-size: 1.2rem;
+        }
+        .day-date {
+            color: #a1375b;
+            margin: 8px 0 12px;
+            font-weight: 600;
+        }
+        .day-link {
+            background: #ff4d6d;
             color: white;
-            text-decoration: none;
             padding: 8px 20px;
             border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 0 #b34d6e;
-            transition: all 0.2s;
-            border: 1px solid #ffccdd;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 5px 0 #9f3d55;
+            transition: 0.1s;
+            border: 2px solid #ffe2f0;
         }
-
         .day-link:hover {
-            background: #ff80aa;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #b34d6e;
-        }
-
-        /* valentine button */
-        .journey-buttons {
-            margin: 30px 0;
+            background: #ff3355;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #9f3d55;
         }
 
         .btn-valentine {
-            background: #ff4d6d;
+            background: #ff1a4f;
             color: white;
-            font-size: 1.5rem;
-            padding: 15px 40px;
-            border-radius: 60px;
+            font-size: 2rem;
+            padding: 18px 45px;
+            border-radius: 80px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 10px 0 #a13e55, 0 10px 20px rgba(255, 70, 120, 0.5);
-            transition: 0.1s ease;
+            box-shadow: 0 15px 0 #9f2b4b, 0 20px 30px rgba(255, 50, 100, 0.5);
+            transition: 0.1s;
             display: inline-block;
-            border: 2px solid #ffe2f0;
+            border: 3px solid #ffccdd;
             font-family: 'Dancing Script', cursive;
+            margin: 20px 0;
         }
-
         .btn-valentine:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 13px 0 #a13e55, 0 15px 25px rgba(255, 70, 120, 0.6);
-        }
-
-        /* music player */
-        .music-player {
-            margin: 30px 0 20px;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 0 #9f2b4b, 0 25px 35px rgba(255, 50, 100, 0.6);
         }
 
         .music-btn {
-            background: #ffe4f0;
-            border: 2px solid #ff9ebb;
-            color: #b3476a;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            background: #ffe6f0;
+            border: 3px solid #ff80aa;
+            color: #b81b4b;
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-size: 1.4rem;
             cursor: pointer;
-            box-shadow: 0 5px 0 #e6b0c2;
+            box-shadow: 0 7px 0 #d98ba8;
             transition: 0.1s;
+            font-weight: 600;
         }
-
         .music-btn:hover {
             background: #ffd5e6;
-            transform: translateY(-2px);
-            box-shadow: 0 7px 0 #e6b0c2;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 0 #d98ba8;
         }
 
-        /* navigation bar */
+        /* Navigation - floating bottom bar with glow */
         .journey-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 240, 245, 0.7);
-            backdrop-filter: blur(15px);
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            background: rgba(255, 220, 235, 0.7);
+            backdrop-filter: blur(20px);
             display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-top: 2px solid #ffb6c1;
-            box-shadow: 0 -5px 20px rgba(255, 150, 180, 0.3);
+            gap: 12px;
+            padding: 12px 25px;
+            border-radius: 80px;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.4);
             z-index: 1000;
         }
-
         .nav-item {
-            color: #b34d6e;
-            font-size: 1.5rem;
+            color: #a13053;
+            font-size: 1.6rem;
             transition: 0.2s;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
+            border: 2px solid transparent;
         }
-
         .nav-item:hover {
-            background: #ffb6c1;
-            color: white;
-            transform: translateY(-5px);
-        }
-
-        .nav-item.active {
             background: #ff99bb;
             color: white;
-            box-shadow: 0 4px 0 #b34d6e;
+            transform: translateY(-8px) scale(1.1);
+            border-color: white;
+        }
+        .nav-item.active {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 6px 0 #9f2b4b;
         }
 
-        /* progress bar */
         .journey-progress {
             margin: 30px auto 20px;
-            max-width: 400px;
+            max-width: 500px;
         }
-
         .progress-bar {
-            height: 20px;
-            background: #ffd9e6;
+            height: 24px;
+            background: #ffccdd;
             border-radius: 30px;
             overflow: hidden;
-            border: 2px solid white;
+            border: 3px solid white;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
-
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ff8aae, #ff4d6d);
+            background: linear-gradient(90deg, #ff80aa, #ff1a4f);
             border-radius: 30px;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 5px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
-
         .progress-fill::after {
             content: "❤️";
-            position: absolute;
-            right: 5px;
-            top: -2px;
-            font-size: 16px;
+            margin-left: 5px;
         }
-
         .progress-text {
-            color: #8f4b62;
+            color: #4a1e2f;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 12px;
+            font-size: 1.2rem;
         }
 
-        /* hide old background elements */
-        .floating-hearts, .sparkles {
-            display: none;
+        /* Remove old background if any */
+        .floating-hearts, .sparkles, .sakura-petals {
+            display: block; /* they are now our rich background */
         }
     </style>
 </head>
 <body>
-    <!-- Intro overlay with sakura and windy text -->
+    <!-- Intro overlay -->
     <div id="introOverlay">
         <div class="intro-text">so youre here...</div>
         <div class="intro-text">come in 💕</div>
     </div>
 
-    <!-- Falling sakura petals (visible during and after intro) -->
+    <!-- Floating visual elements (hearts, sparkles, sakura) -->
+    <div class="floating-hearts">
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div>
+    </div>
+    <div class="sparkles">
+        <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+        <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+    </div>
     <div class="sakura-petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div>
     </div>
 
-    <!-- Main content (same structure but redesigned) -->
+    <!-- Main content -->
     <div class="journey-container">
-        <!-- Animated Background (replaced by sakura, but keep divs hidden) -->
-        <div class="floating-hearts"></div>
-        <div class="sparkles"></div>
-        
-        <!-- Main Content -->
         <div class="journey-intro animate__animated animate__fadeIn">
             <div class="heart-beat">
                 <i class="fas fa-heart"></i>
@@ -421,7 +444,6 @@
             <h1 class="title">7 Days of Love</h1>
             <p class="subtitle">A Journey to Valentine's Day</p>
             
-            <!-- Glowing message (unchanged) -->
             <div class="glowing-message">Its happening... 💝</div>
             
             <p class="intro-text">
@@ -429,7 +451,7 @@
                 Let's begin this magical journey together...
             </p>
             
-            <!-- Journey Calendar (same day cards) -->
+            <!-- Journey Calendar -->
             <div class="journey-calendar">
                 <div class="day-card active" data-day="1">
                     <div class="day-number">Day 1</div>
@@ -438,7 +460,6 @@
                     <div class="day-date">Feb 7</div>
                     <a href="#" class="day-link" onclick="openPage('rose-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="2">
                     <div class="day-number">Day 2</div>
                     <div class="day-icon">💍</div>
@@ -446,15 +467,13 @@
                     <div class="day-date">Feb 8</div>
                     <a href="#" class="day-link" onclick="openPage('propose-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="3">
                     <div class="day-number">Day 3</div>
                     <div class="day-icon">🍫</div>
                     <div class="day-name">Chocolate Day</div>
                     <div class="day-date">Feb 9</div>
-                   <a href="#" class="day-link" onclick="openPage('chocolate-day')">Enter</a>
+                    <a href="#" class="day-link" onclick="openPage('chocolate-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="4">
                     <div class="day-number">Day 4</div>
                     <div class="day-icon">🧸</div>
@@ -462,7 +481,6 @@
                     <div class="day-date">Feb 10</div>
                     <a href="#" class="day-link" onclick="openPage('teddy-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="5">
                     <div class="day-number">Day 5</div>
                     <div class="day-icon">🤝</div>
@@ -470,7 +488,6 @@
                     <div class="day-date">Feb 11</div>
                     <a href="#" class="day-link" onclick="openPage('promise-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="6">
                     <div class="day-number">Day 6</div>
                     <div class="day-icon">🤗</div>
@@ -478,7 +495,6 @@
                     <div class="day-date">Feb 12</div>
                     <a href="#" class="day-link" onclick="openPage('hug-day')">Enter</a>
                 </div>
-                
                 <div class="day-card" data-day="7">
                     <div class="day-number">Day 7</div>
                     <div class="day-icon">💋</div>
@@ -489,7 +505,6 @@
             </div>
             
             <div class="journey-buttons">
-                <!-- Fixed Valentine button -->
                 <a href="#" class="btn-valentine" onclick="openPage('valentine')">Valentine's Day 💕</a>
             </div>
             
@@ -503,7 +518,6 @@
             </div>
         </div>
         
-        <!-- Navigation -->
         <nav class="journey-nav">
             <a href="#" class="nav-item active"><i class="fas fa-home"></i></a>
             <a href="rose-day.html" class="nav-item"><i class="fas fa-rose"></i></a>
@@ -515,10 +529,9 @@
             <a href="kiss-day.html" class="nav-item"><i class="fas fa-kiss-wink-heart"></i></a>
         </nav>
         
-        <!-- Progress Bar -->
         <div class="journey-progress">
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 14%"></div>
+                <div class="progress-fill" style="width: 14%">14%</div>
             </div>
             <div class="progress-text">Journey Progress: <span>14%</span></div>
         </div>
@@ -538,27 +551,21 @@ const pageDays = {
 };
 
 function openPage(page) {
-  // Special page – always open
   if (page === "apology") {
     window.location.href = "apology.html";
     return;
   }
-
   const now = new Date();
-  const month = now.getMonth(); // Feb = 1
+  const month = now.getMonth();
   const today = now.getDate();
-
-  // Only allow in February
   if (month !== 1) {
     alert("⏳ Valentine week hasn’t started yet 💖");
     return;
   }
-
   if (today < pageDays[page]) {
     alert("⏳ Not yet! Come back on Feb " + pageDays[page] + " 💕");
     return;
   }
-
   window.location.href = page + ".html";
 }
 </script>
