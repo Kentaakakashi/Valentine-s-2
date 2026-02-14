@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Glowing text style - blends with existing theme */
+        .glowing-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff3366;
+            text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff6699, 0 0 30px #ff3366, 0 0 40px #ff0066;
+            animation: glowPulse 2s ease-in-out infinite;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+        @keyframes glowPulse {
+            0% { opacity: 0.9; text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff6699, 0 0 30px #ff3366; }
+            50% { opacity: 1; text-shadow: 0 0 20px #ffb3d9, 0 0 30px #ff4d88, 0 0 40px #ff1a66, 0 0 50px #ff0066; }
+            100% { opacity: 0.9; text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff6699, 0 0 30px #ff3366; }
+        }
+    </style>
 </head>
 <body>
     <div class="journey-container">
@@ -25,22 +42,8 @@
             <h1 class="title">7 Days of Love</h1>
             <p class="subtitle">A Journey to Valentine's Day</p>
             
-            <div class="countdown-container">
-                <div class="countdown">
-                    <div class="countdown-item">
-                        <span id="days">7</span>
-                        <div class="countdown-label">Days</div>
-                    </div>
-                    <div class="countdown-item">
-                        <span id="hours">00</span>
-                        <div class="countdown-label">Hours</div>
-                    </div>
-                    <div class="countdown-item">
-                        <span id="minutes">00</span>
-                        <div class="countdown-label">Minutes</div>
-                    </div>
-                </div>
-            </div>
+            <!-- Replaced countdown with glowing message -->
+            <div class="glowing-message">Its happening... 💝</div>
             
             <p class="intro-text">
                 Each day unlocks a new chapter of our love story.<br>
@@ -107,10 +110,9 @@
             </div>
             
             <div class="journey-buttons">
-                <a href="#" class="btn-valentine" onclick="openPage('valentine')">
-                <a href="apology.html" class="btn-apology">
-                    <i class="fas fa-hand-holding-heart"></i> Special Message
-                </a>
+                <!-- Fixed Valentine button: added label -->
+                <a href="#" class="btn-valentine" onclick="openPage('valentine')">Valentine's Day 💕</a>
+                <!-- Removed the entire Special Message / apology button -->
             </div>
             
             <div class="music-player">
@@ -182,6 +184,5 @@ function openPage(page) {
   window.location.href = page + ".html";
 }
 </script>
-</body>
 </body>
 </html>
